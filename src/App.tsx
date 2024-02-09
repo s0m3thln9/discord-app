@@ -3,7 +3,6 @@ import { createGlobalStyle } from 'styled-components'
 import WhitneyMedium from './fonts/whitney-medium.otf'
 import WhitneySemibold from './fonts/whitney-semibold.otf'
 import WhitneyBold from './fonts/whitney-bold.otf'
-import Theme from './theme/theme.tsx'
 
 const GlobalStyles = createGlobalStyle`
     @font-face {
@@ -23,26 +22,26 @@ const GlobalStyles = createGlobalStyle`
         src: url(${WhitneyBold}) format('otf');
         font-weight: 700;
     }
+	
+	body {
+        font-family: Whitney, sans-serif;
+	}
 
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
         border: 0;
-        font-weight: inherit;
-        font-style: inherit;
-        font-family: inherit;
-        font-size: 100%;
-        vertical-align: baseline;
+		outline: 0;
     }
 `
 
 function App() {
 	return (
-		<Theme>
-			<GlobalStyles/>
+		<>
+			<GlobalStyles />
 			<Authorization />
-		</Theme>
+		</>
 	)
 }
 
