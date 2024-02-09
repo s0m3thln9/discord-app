@@ -3,8 +3,7 @@ import styled from 'styled-components'
 const StyledBackground = styled.div`
     width: 100vw;
     height: 100vh;
-    background: url("/public/img/auth-background.jpg") no-repeat;
-    background-size: cover;
+    background: url("/public/img/auth-background.jpg");
 `
 
 const Authorization = () => {
