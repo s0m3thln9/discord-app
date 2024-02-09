@@ -3,11 +3,8 @@ import styled from 'styled-components'
 const StyledBackground = styled.div`
     width: 100vw;
     height: 100vh;
-    background: url("/public/img/auth-background.jpg");
-`
-
-const StyledH = styled.h2`
-    font-family: 'Whitney';
+    background: url("/public/img/auth-background.jpg") no-repeat;
+    background-size: cover;
 `
 
 const Authorization = () => {
@@ -15,7 +12,7 @@ const Authorization = () => {
 		<StyledBackground>
 			<main>
 				<div>
-					<StyledH>С возвращением</StyledH>
+					<h2>С возвращением</h2>
 					<p>Мы так рады видеть вас снова!</p>
 					<form action="">
 						<label htmlFor="">Адрес электронной почты</label>
@@ -28,7 +25,7 @@ const Authorization = () => {
 					</form>
 				</div>
 				<div>
-					<img src="/public/img/qr-code.png" style={{height: '172px'}} alt="" />
+					<img src="/public/img/qr-code.png" alt="" />
 					<h2>Войти с помощью QR-кода</h2>
 					<p>Отсканируйте код с помощью <span>мобильного приложения Discord</span>, чтобы сразу же войти в систему.</p>
 				</div>
