@@ -7,12 +7,23 @@ const StyledBackground = styled.div`
     background-size: cover;
 `
 
+const StyledTitle = styled.h2`
+    font-family: Whitney, sans-serif;
+`
+
+const StyledMain = styled.main`
+    width: 784px;
+    border-radius: 5px;
+	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+    background: ${({ theme }) => theme.colors.mainBackground};
+`
+
 const Authorization = () => {
 	return (
 		<StyledBackground>
-			<main>
+			<StyledMain>
 				<div>
-					<h2>С возвращением</h2>
+					<StyledTitle>С возвращением</StyledTitle>
 					<p>Мы так рады видеть вас снова!</p>
 					<form action="">
 						<label htmlFor="">Адрес электронной почты</label>
@@ -26,10 +37,11 @@ const Authorization = () => {
 				</div>
 				<div>
 					<img src="/public/img/qr-code.png" alt="" />
-					<h2>Войти с помощью QR-кода</h2>
-					<p>Отсканируйте код с помощью <span>мобильного приложения Discord</span>, чтобы сразу же войти в систему.</p>
+					<StyledTitle>Войти с помощью QR-кода</StyledTitle>
+					<p>Отсканируйте код с помощью <span>мобильного приложения Discord</span>, чтобы сразу же войти в
+						систему.</p>
 				</div>
-			</main>
+			</StyledMain>
 		</StyledBackground>
 	)
 }
