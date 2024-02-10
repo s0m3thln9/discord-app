@@ -129,7 +129,7 @@ const Authorization = () => {
 						<Input value={data.email} onChange={e => setData({...data, email: e.target.value})} id={'email'} type={'email'} />
 						<Input value={data.password} onChange={e => setData({...data, password: e.target.value})} id={'password'} type={'password'} />
 						<p><Link to="/">Forgot your password?</Link></p>
-						<Button>Log in</Button>
+						<Button>Login</Button>
 						<p>Need an account? <Link
 							to="">Register</Link></p>
 					</StyledForm>
