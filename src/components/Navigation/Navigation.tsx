@@ -47,7 +47,7 @@ const Navigation = () => {
 		<StyledNavigation>
 			<ul>
 				<li>
-					<Link to={'#'}>
+					<Link to={'/'}>
 						<DSLogo />
 					</Link>
 				</li>
