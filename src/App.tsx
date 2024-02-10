@@ -3,6 +3,8 @@ import { createGlobalStyle } from 'styled-components'
 import WhitneyMedium from './fonts/whitney-medium.otf'
 import WhitneySemibold from './fonts/whitney-semibold.otf'
 import WhitneyBold from './fonts/whitney-bold.otf'
+import { Route, Routes } from 'react-router-dom'
+import { Main } from './components/Main/Main.tsx'
 
 const GlobalStyles = createGlobalStyle`
     @font-face {
@@ -56,7 +58,10 @@ function App() {
 	return (
 		<>
 			<GlobalStyles />
-			<Authorization />
+			<Routes>
+				<Route path={'/'} element={<Main />} />
+				<Route path={'/login'} element={<Authorization />} />
+			</Routes>
 		</>
 	)
 }
