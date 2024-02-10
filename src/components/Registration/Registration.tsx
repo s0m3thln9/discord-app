@@ -129,29 +129,26 @@ const Authorization = () => {
 	return (
 		<StyledBackground>
 			<main>
-				<StyledWelcomeBlock>
-					<img src="/public/img/discord-logo.svg" alt="" />
-					<h2>Welcome back!</h2>
-					<p>We're so excited to see you again!</p>
-					<StyledForm onSubmit={handleSubmit}>
-						<Input value={data.email} label={'EMAIL'}
-								onChange={e => setData({ ...data, email: e.target.value })} id={'email'}
-								type={'email'} />
-						<Input value={data.password} label={'PASSWORD'}
-								onChange={e => setData({ ...data, password: e.target.value })} id={'password'}
-								type={'password'} />
-						<p><Link to="/">Forgot your password?</Link></p>
-						<Button>Login</Button>
-						<p>Need an account? <Link
-							to="">Register</Link></p>
-					</StyledForm>
-				</StyledWelcomeBlock>
-				<StyledQRBlock>
-					<img src="/public/img/qr-code.png" alt="" />
-					<h2>Log in with QR Code</h2>
-					<p>Scan this with the <strong>Discord mobile app</strong> to log in
-						instantly.</p>
-				</StyledQRBlock>
+				<h2>Create an account</h2>
+				<StyledForm>
+					<Input value={data.email} label={'EMAIL'} onChange={e => setData({ ...data, email: e.target.value })} id={'email'}
+							type={'email'} />
+					<Input value={data.email} label={'DISPLAY NAME'} onChange={e => setData({ ...data, email: e.target.value })} id={'email'}
+							type={'email'} />
+					<Input value={data.email} label={'USERNAME'} onChange={e => setData({ ...data, email: e.target.value })} id={'email'}
+							type={'email'} />
+					<Input value={data.email} label={'PASSWORD'} onChange={e => setData({ ...data, email: e.target.value })} id={'email'}
+							type={'email'} />
+					<Input value={data.email} label={'DATE OF BIRTH'} onChange={e => setData({ ...data, email: e.target.value })} id={'email'}
+							type={'email'} />
+					<Chexbox>
+						<input type="checkbox" />
+						<span></span>
+					</Chexbox>
+					<Button>Continue</Button>
+					<p>By registering, you agree to Discord's <Link to={}>Terms of Service</Link> and <Link to={}>Privacy Policy</Link>.</p>
+					<Link to={}>Already have an account?</Link>
+				</StyledForm>
 			</main>
 		</StyledBackground>
 	)
