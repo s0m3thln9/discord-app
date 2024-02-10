@@ -61,13 +61,6 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 		}
 	}
 
-	AuthContext = createContext<TAuthProvider>({
-		user: null,
-		login,
-		logout,
-		isAuth,
-		register,
-	})
 
 	useEffect(() => {
 		const jwt = Cookies.get('jwt')
@@ -93,6 +86,15 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 				})
 		}
 	}, [pathname, navigate])
+
+
+	AuthContext = createContext<TAuthProvider>({
+		user: null,
+		login,
+		logout,
+		isAuth,
+		register,
+	})
 
 	return <AuthContext.Provider value={{ user, login, logout, isAuth, register }}>{children}</AuthContext.Provider>
 }

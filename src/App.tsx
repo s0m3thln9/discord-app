@@ -1,4 +1,4 @@
-import Authorization from './components/Authorization.tsx'
+import Authorization from './components/Authorization/Authorization.tsx'
 import { createGlobalStyle } from 'styled-components'
 import WhitneyMedium from './fonts/whitney-medium.otf'
 import WhitneySemibold from './fonts/whitney-semibold.otf'
@@ -31,9 +31,25 @@ const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        border: 0;
-		outline: 0;
     }
+	
+	input, button {
+		outline: none;
+		border: none;
+		background: none;
+		font-size: 1rem;
+	}
+	
+	a {
+		text-decoration: none;
+		color: #00a8fc;
+		a:hover {
+            text-decoration: underline;
+		}
+	}
+	a:hover {
+		text-decoration: underline;
+	}
 `
 
 function App() {
