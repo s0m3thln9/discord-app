@@ -4,6 +4,7 @@ import { useAuth } from '../../providers/auth-provider/AuthProvider.tsx'
 import Input from '../UI/Input/Input.tsx'
 import { Link } from 'react-router-dom'
 import Button from '../UI/Button/Button.tsx'
+import Checkbox from '../UI/Checkbox/Checkbox.tsx'
 
 const StyledBackground = styled.div`
     width: 100%;
@@ -12,107 +13,47 @@ const StyledBackground = styled.div`
     background-size: cover;
     display: grid;
     place-content: center;
-
     main {
-        width: 49rem;
+        width: 30rem;
         border-radius: 0.3125rem;
         box-shadow: 0 1.125rem 6.25rem 0 rgba(0, 0, 0, 0.2);
         background: ${({ theme }) => theme.colors.mainBackground};
         padding: 2rem;
         display: grid;
-        grid-template-columns: 1.725fr 1fr;
         justify-content: space-between;
-        @media (max-width: 830px) {
-            grid-template-columns: 100%;
-            width: 30rem;
-        }
-        @media (max-width: 485px) {
-            padding: 1.25rem 1rem;
-            width: 100vw;
-            height: 100svh;
-            border-radius: 0;
-        }
+       
+		h2 {
+            font-size: 1.5rem;
+            line-height: 1.25;
+            font-weight: 600;
+            color: ${({ theme }) => theme.colors.title};
+            text-align: center;
+		}
     }
 `
 
-const StyledWelcomeBlock = styled.div`
-    display: grid;
-    justify-items: center;
-    @media (max-width: 485px) {
-        align-content: start;
-        width: auto;
-        height: 100%;
-    }
-
-    & > img {
-        display: none;
-        margin-bottom: 1rem;
-        @media (max-width: 485px) {
-            display: block;
-        }
-    }
-
-    & > h2 {
-        font-size: 1.5rem;
-        line-height: 1.25;
-        font-weight: 600;
-        color: ${({ theme }) => theme.colors.title};
-        text-align: center;
-    }
-
-    & > p {
-        margin-top: 0.5rem;
-        line-height: 1.25;
-        font-weight: 500;
-        color: ${({ theme }) => theme.colors.text};
-        text-align: center;
-    }
-`
 
 const StyledForm = styled.form`
     width: 100%;
     margin-top: 1.25rem;
-
     button {
         margin-top: 1.25rem;
     }
-
     p {
         margin-top: 0.5rem;
-        font-size: 0.875rem;
+        font-size: 0.75rem;
         font-weight: 500;
         color: ${({ theme }) => theme.colors.subText};
-    }
-`
-
-const StyledQRBlock = styled.div`
-    margin-left: 4.125rem;
-    display: grid;
-    justify-items: center;
-    @media (max-width: 830px) {
-        display: none;
-    }
-
-    p {
-        margin-top: 0.5rem;
-        line-height: 1.25;
-        font-weight: 500;
-        color: ${({ theme }) => theme.colors.text};
-        text-align: center;
-    }
-
-    h2 {
-        margin-top: 2rem;
-        font-size: 1.5rem;
-        line-height: 1.25;
-        font-weight: 600;
-        color: ${({ theme }) => theme.colors.title};
-        text-align: center;
+		&:last-child {
+            font-size: 0.875rem;
+            margin-top: 1.25rem;
+		}
     }
 `
 
 
-const Authorization = () => {
+
+const Registration = () => {
 
 	const [data, setData] = useState({
 		email: '',
@@ -141,17 +82,14 @@ const Authorization = () => {
 							type={'email'} />
 					<Input value={data.email} label={'DATE OF BIRTH'} onChange={e => setData({ ...data, email: e.target.value })} id={'email'}
 							type={'email'} />
-					<Chexbox>
-						<input type="checkbox" />
-						<span></span>
-					</Chexbox>
+					<Checkbox label={'(Optional) It\'s okay to send me emails with Discord updates, tips, and special offers. You can opt out at any time.'}/>
 					<Button>Continue</Button>
-					<p>By registering, you agree to Discord's <Link to={}>Terms of Service</Link> and <Link to={}>Privacy Policy</Link>.</p>
-					<Link to={}>Already have an account?</Link>
+					<p>By registering, you agree to Discord's <Link to={'/'}>Terms of Service</Link> and <Link to={'/'}>Privacy Policy</Link>.</p>
+					<p><Link to={'/'}>Already have an account?</Link></p>
 				</StyledForm>
 			</main>
 		</StyledBackground>
 	)
 }
 
-export default Authorization
+export default Registration

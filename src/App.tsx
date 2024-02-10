@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components'
 import WhitneyMedium from './fonts/whitney-medium.otf'
 import WhitneySemibold from './fonts/whitney-semibold.otf'
 import WhitneyBold from './fonts/whitney-bold.otf'
+import Registration from './components/Registration/Registration.tsx'
 
 const GlobalStyles = createGlobalStyle`
     @font-face {
@@ -56,7 +57,8 @@ function App() {
 	return (
 		<>
 			<GlobalStyles />
-			<Authorization />
+			{/*<Authorization />*/}
+			<Registration />
 		</>
 	)
 }

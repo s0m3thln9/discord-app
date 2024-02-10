@@ -13,6 +13,7 @@ const theme = {
 		buttonHoverBackground: '#505bdb',
 		buttonColor: '#fff',
 		link: '#00a8fc',
+		checkboxBorder: '#80848e',
 	},
 }
 
