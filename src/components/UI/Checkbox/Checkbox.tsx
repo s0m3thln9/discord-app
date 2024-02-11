@@ -1,13 +1,14 @@
 import styled from 'styled-components'
+import { ReactNode } from 'react'
 
 const StyledCheckbox = styled.label`
     position: relative;
     display: inline-flex;
-    margin-top: 0.5rem;
-	
+    margin-top: 1rem;
+	cursor: pointer;
     input {
         position: absolute;
-        opacity: 0;
+        display: none;
 
         & + span {
             padding-left: 2rem;
@@ -41,10 +42,15 @@ const StyledCheckbox = styled.label`
     }
 `
 
-const Checkbox = ({ label }) => {
+type Props = {
+	id: string
+	label: string | ReactNode
+}
+
+const Checkbox = ({ id, label }: Props) => {
 	return (
-		<StyledCheckbox htmlFor={'checkbox'}>
-			<input type="checkbox" id={'checkbox'} />
+		<StyledCheckbox htmlFor={id}>
+			<input type="checkbox" id={id} />
 			<span>{label}</span>
 		</StyledCheckbox>
 	)

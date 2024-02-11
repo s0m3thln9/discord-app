@@ -9,7 +9,7 @@ const StyledButton = styled.button`
     padding: 0.125rem 1rem;
     font-weight: 500;
     border-radius: 0.1875rem;
-    background: ${({ theme }) => theme.colors.buttonBackground};
+    background: ${({ theme }) => theme.colors.primary};
     color: ${({ theme }) => theme.colors.buttonColor};
 	transition: .4s;
 	cursor: pointer;

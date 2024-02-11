@@ -28,7 +28,7 @@ const StyledInputContainer = styled.div`
         padding: 0.625rem;
         font-weight: 500;
         border-radius: 0.1875rem;
-        background: ${({ theme }) => theme.colors.inputBackground};
+        background: ${({ theme }) => theme.colors.background1};
         color: ${({ theme }) => theme.colors.inputColor};
     }
 `
@@ -36,7 +36,7 @@ const StyledInputContainer = styled.div`
 
 type Props = {
 	id: string,
-	type: 'email' | 'password',
+	type: 'email' | 'password' | 'text',
 	required: boolean,
 	value: string,
 	label: string,

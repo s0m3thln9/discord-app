@@ -22,13 +22,13 @@ type PrismaUser = {
 	birthdayYear: number
 	birthdayMonth: string
 	birthdayDay: number
+	password: string
 	userImage: string | null
 	createdAt: string
 	updatedAt: string
-	password: string
 }
 
-export type RegisterUserData = Omit<PrismaUser, 'id' | 'createdAt' | 'updatedAt'>
+export type RegisterUserData = Omit<PrismaUser, 'id' | 'userImage' | 'createdAt' | 'updatedAt'>
 
 export type User = Omit<PrismaUser, 'password'>
 

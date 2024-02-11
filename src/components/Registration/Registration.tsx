@@ -1,11 +1,13 @@
 import styled from 'styled-components'
-import React, { FormEvent, useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { useAuth } from '../../providers/auth-provider/AuthProvider.tsx'
 import Input from '../UI/Input/Input.tsx'
 import { Link } from 'react-router-dom'
 import Button from '../UI/Button/Button.tsx'
 import Checkbox from '../UI/Checkbox/Checkbox.tsx'
 import Select from '../UI/Select/Select.tsx'
+import { RegisterUserData } from '../../types/AuthProvider.ts'
+import { days, months, years } from './data.ts'
 
 const StyledBackground = styled.div`
     user-select: none;
@@ -50,7 +52,7 @@ const StyledForm = styled.form`
         font-weight: 500;
         color: ${({ theme }) => theme.colors.subText};
 
-        &:last-child {
+        &.have-acc {
             font-size: 0.875rem;
             margin-top: 1.25rem;
         }
@@ -82,50 +84,65 @@ const StyledForm = styled.form`
 
 const Registration = () => {
 
-	const [data, setData] = useState({
+	const [data, setData] = useState<RegisterUserData>({
 		email: '',
+		showname: '',
+		username: '',
 		password: '',
+		birthdayYear: 0,
+		birthdayMonth: '',
+		birthdayDay: 0,
 	})
 
-	const { login } = useAuth()
+	const { register } = useAuth()
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault()
-		await login(data)
+		await register(data)
 	}
 
 	return (
 		<StyledBackground>
 			<main>
 				<h2>Create an account</h2>
-				<StyledForm>
+				<StyledForm onSubmit={handleSubmit}>
 					<Input required={true} value={data.email} label={'EMAIL'}
 						   onChange={e => setData({ ...data, email: e.target.value })} id={'email'}
 						   type={'email'} />
-					<Input value={data.email} label={'DISPLAY NAME'}
-						   onChange={e => setData({ ...data, email: e.target.value })} id={'email'}
-						   type={'email'} />
-					<Input required={true} value={data.email} label={'USERNAME'}
-						   onChange={e => setData({ ...data, email: e.target.value })} id={'email'}
-						   type={'email'} />
-					<Input required={true} value={data.email} label={'PASSWORD'}
-						   onChange={e => setData({ ...data, email: e.target.value })} id={'email'}
-						   type={'email'} />
+					<Input required={true} value={data.showname} label={'DISPLAY NAME'}
+						   onChange={e => setData({ ...data, showname: e.target.value })} id={'showname'}
+						   type={'text'} />
+					<Input required={true} value={data.username} label={'USERNAME'}
+						   onChange={e => setData({ ...data, username: e.target.value })} id={'username'}
+						   type={'text'} />
+					<Input required={true} value={data.password} label={'PASSWORD'}
+						   onChange={e => setData({ ...data, password: e.target.value })} id={'password'}
+						   type={'password'} />
 					<label className={'label'}>DATE OF BIRTH</label>
 					<div className={'selects-container'}>
-						<Select initialItem={'Month'}
-								items={['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']} />
-						<Select initialItem={'Day'}
-								items={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']} />
-						<Select initialItem={'Year'}
-								items={['2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014', '2013', '2012', '2011', '2010', '2009', '2008', '2007', '2006', '2005', '2004', '2003', '2002', '2001', '2000', '1999', '1998', '1997', '1996', '1995', '1994', '1993', '1992', '1991', '1990']} />
+						<Select initialValue={'Month'} onSelect={value => {
+							setData({ ...data, birthdayMonth: value })
+						}}
+								items={months} value={data.birthdayMonth} />
+						<Select initialValue={'Day'} onSelect={value => {
+							setData({ ...data, birthdayDay: parseInt(value) })
+						}}
+								items={days} value={data.birthdayDay} />
+						<Select initialValue={'Year'} onSelect={value => {
+							setData({ ...data, birthdayYear: parseInt(value) })
+						}}
+								items={years} value={data.birthdayYear} />
 					</div>
-					<Checkbox
-						label={'(Optional) It\'s okay to send me emails with Discord updates, tips, and special offers. You can opt out at any time.'} />
+					<Checkbox id={'offers'}
+							  label={'(Optional) It\'s okay to send me emails with Discord updates, tips, and special offers. You can opt out at any time.'} />
 					<Button>Continue</Button>
-					<p>By registering, you agree to Discord's <Link to={'/'}>Terms of Service</Link> and <Link to={'/'}>Privacy
-						Policy</Link>.</p>
-					<p><Link to={'/'}>Already have an account?</Link></p>
+					<Checkbox id={'terms'}
+							  label={
+									<p>By registering, you agree to Discord's <Link to={'/'}>Terms of
+								  Service</Link> and <Link to={'/'}>Privacy
+								  Policy</Link>.</p>
+								} />
+					<p className={'have-acc'}><Link to={'/login'}>Already have an account?</Link></p>
 				</StyledForm>
 			</main>
 		</StyledBackground>

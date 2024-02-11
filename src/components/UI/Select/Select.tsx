@@ -1,13 +1,19 @@
 import styled from 'styled-components'
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { Arrow } from '../../../../public/svgs.tsx'
 
-const StyledSelect = styled.div`
+type StyledProps = {
+	open: boolean
+	ref: React.MutableRefObject<HTMLDivElement | null>
+}
+
+const StyledSelect = styled.div<StyledProps>`
     width: 8rem;
     position: relative;
-
-    .select-button {
+    cursor: pointer;
+	.select-button {
         overflow: hidden;
-        border-radius: 0.25rem;
+        border-radius: 0.125rem;
         height: 2.5rem;
         display: flex;
         align-items: center;
@@ -22,10 +28,8 @@ const StyledSelect = styled.div`
             margin-top: 0;
         }
 
-        img {
-            transform: ${({ $isContentShown }) => $isContentShown ? 'rotate(180deg)' : 'none'};
-            width: 20px;
-            cursor: pointer;
+        svg {
+            transform: ${({ open }) => open ? 'rotate(180deg)' : 'none'};
         }
     }
 
@@ -43,7 +47,16 @@ const StyledSelect = styled.div`
         background: #2b2d31;
         width: 100%;
 
-        .select-item {
+        &::-webkit-scrollbar {
+            width: .5rem;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: #1e1f22;
+            border-radius: 99rem;
+            border: .15rem solid #2b2c31;
+        }
+		
+        option {
             width: 100%;
             height: 2.5rem;
             display: flex;
@@ -59,17 +72,25 @@ const StyledSelect = styled.div`
     }
 `
 
-const Select = ({ initialItem, items }) => {
 
-	const [isContentShown, setIsContentShown] = useState(false)
-	const [selectedItem, setSelectedItem] = useState(initialItem)
+type Props = {
+	initialValue: string
+	items: string[]
+	value: string | number
+	onSelect: (value: string) => void
+}
 
-	const ref = useRef()
+const Select = ({ initialValue, items, value, onSelect }: Props) => {
+
+	const [isOpen, setIsOpen] = useState(false)
+
+	const ref = useRef<HTMLDivElement | null>(null)
 
 	useEffect(() => {
-		const handleClickAway = (event) => {
-			if (ref.current.contains(event.target)) return;
-			setIsContentShown(false)
+		const handleClickAway = (event: MouseEvent) => {
+			if (!ref.current?.contains(event.target as Node)) {
+				setIsOpen(false)
+			}
 		}
 
 		document.addEventListener('mousedown', handleClickAway)
@@ -77,23 +98,21 @@ const Select = ({ initialItem, items }) => {
 		return () => document.removeEventListener('mousedown', handleClickAway)
 	}, [])
 
-	const handleItemClick = (event) => {
-		setSelectedItem(event.target.innerText)
-		setIsContentShown(false)
-		event.target.parentNode.previousSibling.children[0].style.color = '#b5bac1'
-	}
-
-	const handleButtonClick = (event) => {
-		setIsContentShown(prev => !prev)
+	const handleSelect = (e: React.MouseEvent<HTMLOptionElement, MouseEvent>) => {
+		onSelect(e.currentTarget.value)
+		console.log(e)
+		setIsOpen(false)
 	}
 
 	return (
-		<StyledSelect $isContentShown={isContentShown} ref={ref}>
-			<div onClick={handleButtonClick} className={'select-button'}><p>{selectedItem}</p> <img
-				src="/public/img/arrow.svg" alt="arrow" /></div>
-			{isContentShown && <div className={'select-content'}>
+		<StyledSelect open={isOpen} ref={ref}>
+			<div onClick={() => setIsOpen(isOpen => !isOpen)} className={'select-button'}>
+				<p>{value || initialValue}</p>
+				<Arrow />
+			</div>
+			{isOpen && <div className={'select-content'}>
 				{items.map(item => (
-					<div key={item} onClick={handleItemClick} className={'select-item'}>{item}</div>
+					<option key={item} value={item} onClick={handleSelect}>{item}</option>
 				))}
 			</div>}
 		</StyledSelect>

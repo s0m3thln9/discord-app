@@ -4,6 +4,7 @@ import { useAuth } from '../../providers/auth-provider/AuthProvider.tsx'
 import Input from '../UI/Input/Input.tsx'
 import { Link } from 'react-router-dom'
 import Button from '../UI/Button/Button.tsx'
+import { DSLogoText } from '../../../public/svgs.tsx'
 
 const StyledBackground = styled.div`
     width: 100%;
@@ -44,7 +45,7 @@ const StyledWelcomeBlock = styled.div`
         height: 100%;
     }
 
-    & > img {
+    & > svg {
         display: none;
         margin-bottom: 1rem;
         @media (max-width: 485px) {
@@ -130,20 +131,20 @@ const Authorization = () => {
 		<StyledBackground>
 			<main>
 				<StyledWelcomeBlock>
-					<img src="/public/img/discord-logo.svg" alt="" />
+					<DSLogoText />
 					<h2>Welcome back!</h2>
 					<p>We're so excited to see you again!</p>
 					<StyledForm onSubmit={handleSubmit}>
-						<Input value={data.email} label={'EMAIL'}
-								onChange={e => setData({ ...data, email: e.target.value })} id={'email'}
-								type={'email'} />
-						<Input value={data.password} label={'PASSWORD'}
-								onChange={e => setData({ ...data, password: e.target.value })} id={'password'}
-								type={'password'} />
+						<Input value={data.email} label={'EMAIL'} required={true}
+							   onChange={e => setData({ ...data, email: e.target.value })} id={'email'}
+							   type={'email'} />
+						<Input value={data.password} label={'PASSWORD'} required={true}
+							   onChange={e => setData({ ...data, password: e.target.value })} id={'password'}
+							   type={'password'} />
 						<p><Link to="/">Forgot your password?</Link></p>
 						<Button>Login</Button>
 						<p>Need an account? <Link
-							to="">Register</Link></p>
+							to="/register">Register</Link></p>
 					</StyledForm>
 				</StyledWelcomeBlock>
 				<StyledQRBlock>
