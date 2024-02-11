@@ -6,6 +6,7 @@ const StyledInputContainer = styled.div`
     &:not(:first-child) {
         margin-top: 1.25rem;
     }
+
     label {
         font-size: 0.75rem;
         line-height: 1.3;
@@ -13,12 +14,14 @@ const StyledInputContainer = styled.div`
         text-transform: uppercase;
         letter-spacing: .02em;
         color: ${({ theme }) => theme.colors.text};
+
         &::after {
             content: ' *';
             color: #f23f42;
         }
     }
-	input {
+
+    input {
         margin-top: 0.5rem;
         width: 100%;
         height: 2.5rem;
@@ -27,23 +30,25 @@ const StyledInputContainer = styled.div`
         border-radius: 0.1875rem;
         background: ${({ theme }) => theme.colors.inputBackground};
         color: ${({ theme }) => theme.colors.inputColor};
-	}
+    }
 `
 
 
 type Props = {
-	id: string
-	type: 'email' | 'password'
+	id: string,
+	type: 'email' | 'password',
+	required: boolean,
 	value: string,
-	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+	label: string,
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
 
-const Input = ({id, type, value, onChange}: Props) => {
+const Input = ({ id, type, required, value, label, onChange }: Props) => {
 	return (
 		<StyledInputContainer>
-			<label htmlFor={id}>EMAIL</label>
-			<input required id={id} type={type} value={value} onChange={onChange} />
+			<label htmlFor={id}>{label}</label>
+			<input required={required} id={id} type={type} value={value} onChange={onChange} />
 		</StyledInputContainer>
 	)
 }
