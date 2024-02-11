@@ -1,14 +1,17 @@
 import Navigation from '../Navigation/Navigation.tsx'
 import styled from 'styled-components'
+import Content from '../Content/Content.tsx'
 
-const StyledMain = styled.main`
-	background: #313238;
+const Container = styled.div`
+	background: ${({ theme }) => theme.colors.mainBackground};
+	display: flex;
 `
 
 export const Main = () => {
 	return (
-		<StyledMain>
+		<Container>
 			<Navigation />
-		</StyledMain>
+			<Content />
+		</Container>
 	)
 }

@@ -3,7 +3,8 @@
 import { Context, createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import {
-	GetUserWithCredentials, GetUserWithJwtResponse,
+	GetUserWithCredentials,
+	GetUserWithJwtResponse,
 	LoginUserData,
 	RegisterResponse,
 	RegisterUserData,
@@ -11,7 +12,6 @@ import {
 	User,
 } from '../../types/AuthProvider.ts'
 import { useNavigate } from 'react-router-dom'
-
 
 export let AuthContext: Context<TAuthProvider>
 
@@ -61,8 +61,6 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 		}
 	}
 
-console.log(pathname)
-
 	useEffect(() => {
 		const jwt = Cookies.get('jwt')
 
@@ -87,7 +85,6 @@ console.log(pathname)
 				})
 		}
 	}, [pathname, navigate])
-
 
 	AuthContext = createContext<TAuthProvider>({
 		user: null,
