@@ -35,19 +35,20 @@ const StyledInputContainer = styled.div`
 
 
 type Props = {
-	id: string
-	type: 'email' | 'password'
+	id: string,
+	type: 'email' | 'password',
+	required: boolean,
 	value: string,
 	label: string,
-	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
 
-const Input = ({ id, type, value, label, onChange }: Props) => {
+const Input = ({ id, type, required, value, label, onChange }: Props) => {
 	return (
 		<StyledInputContainer>
 			<label htmlFor={id}>{label}</label>
-			<input required id={id} type={type} value={value} onChange={onChange} />
+			<input required={required} id={id} type={type} value={value} onChange={onChange} />
 		</StyledInputContainer>
 	)
 }
