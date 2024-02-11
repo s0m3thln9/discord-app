@@ -61,11 +61,12 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 		}
 	}
 
+console.log(pathname)
 
 	useEffect(() => {
 		const jwt = Cookies.get('jwt')
 
-		if (!jwt && pathname !== '/register') {
+		if (!jwt && pathname !== 'http://localhost:5173/register') {
 			navigate('/login')
 		}
 		if (jwt) {
