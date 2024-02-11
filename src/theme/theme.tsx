@@ -14,8 +14,12 @@ const theme = {
 		buttonColor: '#fff',
 		link: '#00a8fc',
 		checkboxBorder: '#80848e',
+		green360: '#3BA55D',
+		tooltipBg: '#1b1b1e'
 	},
 }
+
+export type ThemeCols = typeof theme
 
 const Theme = ({ children }: { children: ReactNode }) => {
 	return (

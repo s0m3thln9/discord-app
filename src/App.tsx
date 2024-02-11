@@ -53,6 +53,16 @@ const GlobalStyles = createGlobalStyle`
 	a:hover {
 		text-decoration: underline;
 	}
+	
+	li {
+		list-style: none;
+	}
+
+	.tooltip-container:hover {
+		.tooltip {
+			z-index: 1;
+		}
+	}
 `
 
 function App() {
