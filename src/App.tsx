@@ -66,6 +66,10 @@ const GlobalStyles = createGlobalStyle`
 	.tooltip-container:hover .tooltip {
 		z-index: 1;
 	}
+	svg {
+		fill: #949ba4;
+		stroke-width: 1.5;
+	}
 `
 
 function App() {

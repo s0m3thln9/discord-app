@@ -20,6 +20,7 @@ const theme = {
 		link: '#00a8fc',
 		checkboxBorder: '#80848e',
 		green360: '#3BA55D',
+		online: '#00b35e',
 	},
 }
 

@@ -97,7 +97,7 @@ const Navigation = () => {
 			<ul>
 				<List $newMessages={0} className={'tooltip-container'}>
 					<Link to={'/'}>
-						<DSLogo />
+						<DSLogo height={24} width={24} />
 					</Link>
 					<Tooltip
 						text={'Direct Messages'}
