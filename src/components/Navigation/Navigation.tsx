@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { Compas, DSLogo, Plus } from '../../../public/svgs.tsx'
+import { Compass, DSLogo, Plus } from '../../../public/svgs.tsx'
 import Tooltip from '../UI/Tooltip/Tooltip.tsx'
 
 const StyledNavigation = styled.nav`
@@ -108,7 +108,7 @@ const Navigation = () => {
 				<List className={'separator'} $newMessages={0}></List>
 				<List className={'action-btn tooltip-container'} $newMessages={0}>
 					<Link to={'/'}>
-						<Plus />
+						<Plus width={16} height={16} />
 					</Link>
 					<Tooltip
 						text={'Add a Server'}
@@ -118,7 +118,7 @@ const Navigation = () => {
 				</List>
 				<List className={'action-btn tooltip-container'} $newMessages={0}>
 					<Link to={'/'}>
-						<Compas />
+						<Compass />
 					</Link>
 					<Tooltip
 						text={'Explore Discoverable Servers'}

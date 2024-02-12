@@ -28,6 +28,7 @@ const GlobalStyles = createGlobalStyle`
 	
 	body {
         font-family: Whitney, sans-serif;
+		color: #f2f3f5;
 	}
 
     * {
@@ -41,6 +42,10 @@ const GlobalStyles = createGlobalStyle`
 		border: none;
 		background: none;
 		font-size: 1rem;
+	}
+	
+	button {
+		cursor: pointer ;
 	}
 	
 	a {
@@ -58,10 +63,8 @@ const GlobalStyles = createGlobalStyle`
 		list-style: none;
 	}
 
-	.tooltip-container:hover {
-		.tooltip {
-			z-index: 1;
-		}
+	.tooltip-container:hover .tooltip {
+		z-index: 1;
 	}
 `
 
