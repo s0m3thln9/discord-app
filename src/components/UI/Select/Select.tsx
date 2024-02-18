@@ -7,71 +7,6 @@ type StyledProps = {
 	ref: React.MutableRefObject<HTMLDivElement | null>
 }
 
-const StyledSelect = styled.div<StyledProps>`
-    width: 8rem;
-    position: relative;
-    cursor: pointer;
-	.select-button {
-        overflow: hidden;
-        border-radius: 0.125rem;
-        height: 2.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: #1e1f22;
-        color: #949ba4;
-        padding: 0.125rem 0.5rem;
-
-        p {
-            color: #949ba4;
-            font-size: 1rem;
-            margin-top: 0;
-        }
-
-        svg {
-            transform: ${({ open }) => open ? 'rotate(180deg)' : 'none'};
-        }
-    }
-
-    .select-content {
-        box-shadow: 0 0 1rem 0.25rem rgba(0, 0, 0, 0.2);
-        overflow-y: scroll;
-        border: 1px #1e1f22 solid;
-        height: 14rem;
-        position: absolute;
-        border-radius: 0.25rem;
-        color: #b5bac1;
-        top: 0;
-        transform: translateY(-100%);
-        left: 0;
-        background: #2b2d31;
-        width: 100%;
-
-        &::-webkit-scrollbar {
-            width: .5rem;
-        }
-        &::-webkit-scrollbar-thumb {
-            background: #1e1f22;
-            border-radius: 99rem;
-            border: .15rem solid #2b2c31;
-        }
-		
-        option {
-            width: 100%;
-            height: 2.5rem;
-            display: flex;
-            align-items: center;
-            padding: 0.125rem 0.5rem;
-            cursor: pointer;
-
-            &:hover {
-                background: #35373c;
-                color: #dbdee1;
-            }
-        }
-    }
-`
-
 
 type Props = {
 	initialValue: string
@@ -100,22 +35,21 @@ const Select = ({ initialValue, items, value, onSelect }: Props) => {
 
 	const handleSelect = (e: React.MouseEvent<HTMLOptionElement, MouseEvent>) => {
 		onSelect(e.currentTarget.value)
-		console.log(e)
 		setIsOpen(false)
 	}
 
 	return (
-		<StyledSelect open={isOpen} ref={ref}>
-			<div onClick={() => setIsOpen(isOpen => !isOpen)} className={'select-button'}>
+		<div className={'w-32 relative cursor-pointer'} open={isOpen} ref={ref}>
+			<div className={'overflow-hidden rounded-sm h-10 flex items-center justify-between bg-[#1e1f22] text-[#949ba4] py-0.5 px-2'} onClick={() => setIsOpen(isOpen => !isOpen)} >
 				<p>{value || initialValue}</p>
 				<Arrow />
 			</div>
-			{isOpen && <div className={'select-content'}>
+			{isOpen && <div className={'overflow-y-scroll shadow-select border border-[#1e1f22] absolute h-56 rounded-[0.25rem] bg-[#2b2d31] w-full text-[#b5bac1] top-0 left-0 -translate-y-full scr'}>
 				{items.map(item => (
-					<option key={item} value={item} onClick={handleSelect}>{item}</option>
+					<option className={'w-full h-10 flex items-center py-0.5 px-2 cursor-pointer hover:bg-[#35373c] hover:text-[#dbdee1]'} key={item} value={item} onClick={handleSelect}>{item}</option>
 				))}
 			</div>}
-		</StyledSelect>
+		</div>
 	)
 }
 

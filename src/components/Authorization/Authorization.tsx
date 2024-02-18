@@ -1,117 +1,8 @@
-import styled from 'styled-components'
 import { FormEvent, useState } from 'react'
 import { useAuth } from '../../providers/auth-provider/AuthProvider.tsx'
-import Input from '../UI/Input/Input.tsx'
 import { Link } from 'react-router-dom'
 import Button from '../UI/Button/Button.tsx'
 import { DSLogoText } from '../../../public/svgs.tsx'
-
-const StyledBackground = styled.div`
-    width: 100%;
-    height: 100svh;
-    background: url("/img/auth-background.jpg") no-repeat;
-    background-size: cover;
-    display: grid;
-    place-content: center;
-
-    main {
-        width: 49rem;
-        border-radius: 0.3125rem;
-        box-shadow: 0 1.125rem 6.25rem 0 rgba(0, 0, 0, 0.2);
-        background: ${({ theme }) => theme.colors.mainBackground};
-        padding: 2rem;
-        display: grid;
-        grid-template-columns: 1.725fr 1fr;
-        justify-content: space-between;
-        @media (max-width: 830px) {
-            grid-template-columns: 100%;
-            width: 30rem;
-        }
-        @media (max-width: 485px) {
-            padding: 1.25rem 1rem;
-            width: 100vw;
-            height: 100svh;
-            border-radius: 0;
-        }
-    }
-`
-
-const StyledWelcomeBlock = styled.div`
-    display: grid;
-    justify-items: center;
-    @media (max-width: 485px) {
-        align-content: start;
-        width: auto;
-        height: 100%;
-    }
-
-    & > svg {
-        display: none;
-        margin-bottom: 1rem;
-        @media (max-width: 485px) {
-            display: block;
-        }
-    }
-
-    & > h2 {
-        font-size: 1.5rem;
-        line-height: 1.25;
-        font-weight: 600;
-        color: ${({ theme }) => theme.colors.title};
-        text-align: center;
-    }
-
-    & > p {
-        margin-top: 0.5rem;
-        line-height: 1.25;
-        font-weight: 500;
-        color: ${({ theme }) => theme.colors.text};
-        text-align: center;
-    }
-`
-
-const StyledForm = styled.form`
-    width: 100%;
-    margin-top: 1.25rem;
-
-    button {
-        margin-top: 1.25rem;
-    }
-
-    p {
-        margin-top: 0.5rem;
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: ${({ theme }) => theme.colors.subText};
-    }
-`
-
-const StyledQRBlock = styled.div`
-    margin-left: 4.125rem;
-    display: grid;
-    justify-items: center;
-    @media (max-width: 830px) {
-        display: none;
-    }
-
-    p {
-        margin-top: 0.5rem;
-        line-height: 1.25;
-        font-weight: 500;
-        color: ${({ theme }) => theme.colors.text};
-        text-align: center;
-    }
-
-    h2 {
-        margin-top: 2rem;
-        font-size: 1.5rem;
-        line-height: 1.25;
-        font-weight: 600;
-        color: ${({ theme }) => theme.colors.title};
-        text-align: center;
-    }
-`
-
 
 const Authorization = () => {
 
@@ -128,33 +19,45 @@ const Authorization = () => {
 	}
 
 	return (
-		<StyledBackground>
-			<main>
-				<StyledWelcomeBlock>
-					<DSLogoText />
-					<h2>Welcome back!</h2>
-					<p>We're so excited to see you again!</p>
-					<StyledForm onSubmit={handleSubmit}>
-						<Input value={data.email} label={'EMAIL'} required={true}
-							   onChange={e => setData({ ...data, email: e.target.value })} id={'email'}
-							   type={'email'} />
-						<Input value={data.password} label={'PASSWORD'} required={true}
-							   onChange={e => setData({ ...data, password: e.target.value })} id={'password'}
-							   type={'password'} />
-						<p><Link to="/">Forgot your password?</Link></p>
-						<Button>Login</Button>
-						<p>Need an account? <Link
+		<div
+			className={'w-full h-svh bg-[url("/img/auth-background.jpg")] bg-no-repeat bg-cover grid place-content-center'}>
+			<main
+				className={'w-[49rem] gap-16 rounded-[0.3125rem] shadow-div bg-[#313338] p-8 grid grid-cols-[1.725fr_1fr] justify-between max-lg:grid-cols-[100%] max-lg:w-[30rem] max-sm:py-5 max-sm:px-4 max-sm:w-[100vw] max-sm:h-svh max-sm:rounded-none'}>
+				<div className={'grid justify-items-center max-sm:content-start max-sm:w-auto max-sm:h-full'}>
+					<DSLogoText classes={'hidden mb-4 max-sm:block'} />
+					<h2 className={'text-2xl font-semibold text-center text-[#f2f3f5]'}>Welcome back!</h2>
+					<p className={'mt-2 font-medium text-center text-[#b5bac1]'}>We're so excited to see you again!</p>
+					<form className={'w-full mt-5'} onSubmit={handleSubmit}>
+						<label className={'text-xs font-bold uppercase tracking-wide text-[#b5bac1]'}
+							   htmlFor="email">display name</label>
+						<input
+							className={'outline-0 mt-2 w-full h-10 p-[0.625rem] font-medium rounded-[0.1875rem] bg-[#1e1f22] text-[#dbdee1]'}
+							value={data.email} label={'EMAIL'} required={true}
+							onChange={e => setData({ ...data, email: e.target.value })} id={'email'}
+							type={'email'} />
+						<label className={'text-xs font-bold uppercase tracking-wide text-[#b5bac1]'}
+							   htmlFor="password">display name</label>
+						<input
+							className={'outline-0 mt-2 w-full h-10 p-[0.625rem] font-medium rounded-[0.1875rem] bg-[#1e1f22] text-[#dbdee1]'}
+							value={data.password} label={'PASSWORD'} required={true}
+							onChange={e => setData({ ...data, password: e.target.value })} id={'password'}
+							type={'password'} />
+						<p className={'mt-2 font-medium text-sm text-[#949ba4]'}><Link to="/">Forgot your
+							password?</Link></p>
+						<Button classes={'mt-5'}>Login</Button>
+						<p className={'mt-2 font-medium text-sm text-[#949ba4]'}>Need an account? <Link
 							to="/register">Register</Link></p>
-					</StyledForm>
-				</StyledWelcomeBlock>
-				<StyledQRBlock>
+					</form>
+				</div>
+				<div className={'grid place-items-center max-lg:hidden'}>
 					<img src="/public/img/qr-code.png" alt="" />
-					<h2>Log in with QR Code</h2>
-					<p>Scan this with the <strong>Discord mobile app</strong> to log in
+					<h2 className={'mt-8 text-2xl font-semibold text-center text-[#f2f3f5]'}>Log in with QR Code</h2>
+					<p className={'mt-2 font-medium text-center text-[#b5bac1]'}>Scan this with the <strong>Discord
+						mobile app</strong> to log in
 						instantly.</p>
-				</StyledQRBlock>
+				</div>
 			</main>
-		</StyledBackground>
+		</div>
 	)
 }
 

@@ -1,58 +1,20 @@
-import styled from 'styled-components'
 import { ReactNode } from 'react'
-
-const StyledCheckbox = styled.label`
-    position: relative;
-    display: inline-flex;
-    margin-top: 1rem;
-	cursor: pointer;
-    input {
-        position: absolute;
-        display: none;
-
-        & + span {
-            padding-left: 2rem;
-            font-size: 0.75rem;
-            color: ${({ theme }) => theme.colors.subText};
-        }
-
-        & + span::before {
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            margin-right: 0.5rem;
-            box-sizing: border-box;
-            content: '';
-            display: inline-block;
-            width: 1.5rem;
-            height: 1.5rem;
-            flex-shrink: 0;
-            flex-grow: 0;
-            border: 1px solid #80848e;
-            border-radius: 0.375rem;
-            background-repeat: no-repeat;
-            background-position: center center;
-        }
-
-        &:checked + span::before {
-            background-color: #5865f2;
-            background-image: url("/public/img/checkbox.svg");
-        }
-    }
-`
 
 type Props = {
 	id: string
 	label: string | ReactNode
+	classes: string
 }
 
-const Checkbox = ({ id, label }: Props) => {
+const Checkbox = ({ id, label, classes }: Props) => {
 	return (
-		<StyledCheckbox htmlFor={id}>
-			<input type="checkbox" id={id} />
-			<span>{label}</span>
-		</StyledCheckbox>
+		<label className={`relative inline-flex cursor-pointer ${classes}`} htmlFor={id}>
+			<input className={'absolute hidden peer'} type="checkbox" id={id} />
+			<span
+				className={'pl-8 text-xs text-[#949ba4] before:absolute before:content-[""] before:left-0 before:top-1/2 before:-translate-y-1/2 before:mr-2 before:inline-block before:rounded-md before:w-6 before:h-6 before:shrink-0 before:grow-0 before:border before:border-[#80848e] before:bg-no-repeat before:bg-center peer-checked:before:bg-[#5865f2] peer-checked:before:bg-[url("/public/img/checkbox.svg")]'}>
+				{label}
+			</span>
+		</label>
 	)
 }
 
