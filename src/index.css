@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: Whitney, sans-serif;
+}
+
+a {
+    color: #00a8fc;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+div::-webkit-scrollbar {
+    width: .5rem;
+}
+
+div::-webkit-scrollbar-thumb {
+    background: #1e1f22;
+    border-radius: 99rem;
+    border: .15rem solid #2b2c31;
+}
