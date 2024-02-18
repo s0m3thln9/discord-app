@@ -1,4 +1,3 @@
-
 import { ErrorMessage, SuccessMessage } from './Messages.ts'
 
 export type LoginUserData = {
@@ -24,11 +23,14 @@ type PrismaUser = {
 	birthdayDay: number
 	password: string
 	userImage: string | null
+	color: 'orange' | 'red' | 'green' | 'blue' | 'yellow'
+	textStatus: string
+	onlineStatus: 'offline' | 'online' | 'idle' | 'doNotDisturb'
 	createdAt: string
 	updatedAt: string
 }
 
-export type RegisterUserData = Omit<PrismaUser, 'id' | 'userImage' | 'createdAt' | 'updatedAt'>
+export type RegisterUserData = Omit<PrismaUser, 'id' | 'userImage' | 'color' | 'status' | 'createdAt' | 'updatedAt'>
 
 export type User = Omit<PrismaUser, 'password'>
 
