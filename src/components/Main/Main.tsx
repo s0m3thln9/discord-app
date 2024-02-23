@@ -1,17 +1,11 @@
 import Navigation from '../Navigation/Navigation.tsx'
-import styled from 'styled-components'
 import Content from '../Content/Content.tsx'
-
-const Container = styled.div`
-	background: ${({ theme }) => theme.colors.mainBackground};
-	display: flex;
-`
 
 export const Main = () => {
 	return (
-		<Container>
+		<main className={'flex justify-center bg-[#313338]'}>
 			<Navigation />
 			<Content />
-		</Container>
+		</main>
 	)
 }

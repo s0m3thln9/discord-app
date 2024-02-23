@@ -23,3 +23,13 @@ div::-webkit-scrollbar-thumb {
     border-radius: 99rem;
     border: .15rem solid #2b2c31;
 }
+
+@layer components {
+    .navbar-item {
+        @apply mt-2 w-12 h-12 rounded-[50%] grid place-items-center bg-[#313338] relative cursor-pointer
+        transition-all ease-in-out duration-200
+        hover:rounded-2xl hover:bg-[#3BA55D]
+        before:h-2 before:w-2 before:bg-[#f2f3f5] before:rounded before:absolute before:left-[-1rem] before:transition-all before:ease-linear before:duration-200 before:translate-x-[-0.25rem]
+        hover:before:h-6 hover:before:translate-x-0
+    }
+}

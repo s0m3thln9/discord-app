@@ -8,9 +8,7 @@ function Providers({ children }: { children: ReactNode }) {
 	return (
 		<BrowserRouter>
 			<Provider store={store}>
-				<AuthProvider>
-					{children}
-				</AuthProvider>
+				<AuthProvider>{children}</AuthProvider>
 			</Provider>
 		</BrowserRouter>
 	)
