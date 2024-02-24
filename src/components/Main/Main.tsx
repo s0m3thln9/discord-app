@@ -3,7 +3,7 @@ import Content from '../Content/Content.tsx'
 
 export const Main = () => {
 	return (
-		<main className={'flex justify-center bg-[#313338]'}>
+		<main className={'flex bg-[#313338]'}>
 			<Navigation />
 			<Content />
 		</main>
