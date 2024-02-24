@@ -2,8 +2,8 @@ import TextButton from '../UI/Button/TextButton.tsx'
 import { Link } from 'react-router-dom'
 import { Close, DSLogo, DSNitro, Friends, Headphones, Mic, Plus, Settings, Shop } from '../../../public/svgs.tsx'
 import Tooltip from '../UI/Tooltip/Tooltip.tsx'
-import { useAuth } from '../../providers/auth-provider/AuthProvider.tsx'
 import SecondaryButton from '../UI/SecondaryButton/SecondaryButton.tsx'
+import { useAppSelector } from '../../hooks/typedHooks.ts'
 
 type Channel = {
 	id: number
@@ -17,7 +17,9 @@ type Channel = {
 const Content = () => {
 	const pathname = window.location.href
 
-	const { user } = useAuth()
+	//const { user } = useAuth()
+
+	const user = useAppSelector(state => state.auth.user)
 
 	const channels: Channel[] = [
 		{
@@ -33,86 +35,6 @@ const Content = () => {
 			image: '../../../public/img/testUserImage.webp',
 			name: 'Lolexxxx',
 			type: 'user',
-			color: 'orange',
-			status: 'online',
-		},
-		{
-			id: 3,
-			image: null,
-			name: 'Smth, Lolexxxx',
-			type: 'group',
-			color: 'orange',
-			status: 'online',
-		},
-		{
-			id: 4,
-			image: null,
-			name: 'Smth, Lolexxxx',
-			type: 'group',
-			color: 'orange',
-			status: 'online',
-		},
-		{
-			id: 5,
-			image: null,
-			name: 'Smth, Lolexxxx',
-			type: 'group',
-			color: 'orange',
-			status: 'online',
-		},
-		{
-			id: 6,
-			image: null,
-			name: 'Smth, Lolexxxx',
-			type: 'group',
-			color: 'orange',
-			status: 'online',
-		},
-		{
-			id: 7,
-			image: null,
-			name: 'Smth, Lolexxxx',
-			type: 'group',
-			color: 'orange',
-			status: 'online',
-		},
-		{
-			id: 8,
-			image: null,
-			name: 'Smth, Lolexxxx',
-			type: 'group',
-			color: 'orange',
-			status: 'online',
-		},
-		{
-			id: 9,
-			image: null,
-			name: 'Smth, Lolexxxx',
-			type: 'group',
-			color: 'orange',
-			status: 'online',
-		},
-		{
-			id: 10,
-			image: null,
-			name: 'Smth, Lolexxxx',
-			type: 'group',
-			color: 'orange',
-			status: 'online',
-		},
-		{
-			id: 11,
-			image: null,
-			name: 'Smth, Lolexxxx',
-			type: 'group',
-			color: 'orange',
-			status: 'online',
-		},
-		{
-			id: 12,
-			image: null,
-			name: 'Smth, Lolexxxx',
-			type: 'group',
 			color: 'orange',
 			status: 'online',
 		},

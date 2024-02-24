@@ -6,11 +6,9 @@ export type LoginUserData = {
 }
 
 export type TAuthProvider = {
-	user: User | null
 	login: (userData: LoginUserData) => Promise<void>
 	register: (userData: RegisterUserData) => Promise<void>
 	logout: () => void
-	isAuth: boolean
 }
 
 type PrismaUser = {

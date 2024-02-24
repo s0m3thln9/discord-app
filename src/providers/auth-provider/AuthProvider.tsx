@@ -1,6 +1,6 @@
 'use client'
 
-import { Context, createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import { Context, createContext, ReactNode, useContext, useEffect } from 'react'
 import Cookies from 'js-cookie'
 import {
 	GetUserWithCredentials,
@@ -9,18 +9,17 @@ import {
 	RegisterResponse,
 	RegisterUserData,
 	TAuthProvider,
-	User,
 } from '../../types/AuthProvider.ts'
 import { useNavigate } from 'react-router-dom'
+import { useAppDispatch } from '../../hooks/typedHooks.ts'
+import { authUser, logOut } from '../../store/slices/authUserSlice.ts'
 
 export let AuthContext: Context<TAuthProvider>
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-	const [user, setUser] = useState<User | null>(null)
-	const [isAuth, setIsAuth] = useState(false)
-
 	const pathname = window.location.href
 	const navigate = useNavigate()
+	const dispatch = useAppDispatch()
 
 	const login = async (userData: LoginUserData) => {
 		const response = await fetch(`http://localhost:5555/login`, {
@@ -34,15 +33,14 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 		const data: GetUserWithCredentials = await response.json()
 		console.log(data)
 		if (data.success && data.payload) {
-			setUser(data.payload.user)
-			setIsAuth(true)
+			dispatch(authUser(data.payload.user))
 			navigate('/')
 		}
 	}
 
 	const logout = () => {
 		Cookies.remove('jwt')
-		setIsAuth(false)
+		dispatch(logOut())
 		navigate('/login')
 	}
 
@@ -75,26 +73,21 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 				.then(response => response.json())
 				.then((data: GetUserWithJwtResponse) => {
 					if (data.success && data.payload) {
-						setIsAuth(true)
-						setUser(data.payload.user)
+						dispatch(authUser(data.payload.user))
 					} else {
-						Cookies.remove('jwt')
-						setIsAuth(false)
-						navigate('/login')
+						logout()
 					}
 				})
 		}
 	}, [pathname, navigate])
 
 	AuthContext = createContext<TAuthProvider>({
-		user: null,
 		login,
 		logout,
-		isAuth,
 		register,
 	})
 
-	return <AuthContext.Provider value={{ user, login, logout, isAuth, register }}>{children}</AuthContext.Provider>
+	return <AuthContext.Provider value={{ login, logout, register }}>{children}</AuthContext.Provider>
 }
 
 export default AuthProvider
