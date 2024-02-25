@@ -17,7 +17,7 @@ const Registration = () => {
 
 	const [data, setData] = useState<RegisterUserData>({
 		email: '',
-		showname: '',
+		displayName: '',
 		username: '',
 		password: '',
 		birthdayYear: 0,

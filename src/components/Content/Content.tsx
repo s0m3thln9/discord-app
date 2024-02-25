@@ -3,49 +3,42 @@ import { Link } from 'react-router-dom'
 import { Close, DSLogo, DSNitro, Friends, Headphones, Mic, Plus, Settings, Shop } from '../../../public/svgs.tsx'
 import Tooltip from '../UI/Tooltip/Tooltip.tsx'
 import SecondaryButton from '../UI/SecondaryButton/SecondaryButton.tsx'
-import { useAppSelector } from '../../hooks/typedHooks.ts'
-
-type Channel = {
-	id: number
-	image: string | null
-	name: string
-	type: 'user' | 'group'
-	color: 'orange' | 'red' | 'green' | 'blue' | 'yellow'
-	status: 'offline' | 'online' | 'idle' | 'doNotDisturb'
-}
+import { useAppDispatch, useAppSelector } from '../../hooks/typedHooks.ts'
+import { useGetFriendsQuery, useGetGroupsQuery } from '../../api/api.ts'
+import { addFriends } from '../../store/slices/friendsSlice.ts'
+import { useEffect } from 'react'
+import { addFriendsToChannels, addGroupsToChannels } from '../../store/slices/chatsSlice.ts'
+import { addGroups } from '../../store/slices/groupsSlice.ts'
 
 const Content = () => {
-	const pathname = window.location.href
+	const friends = useAppSelector(state => state.friends.friends)
+	const groups = useAppSelector(state => state.groups.groups)
 
-	//const { user } = useAuth()
+	const friendsQuery = useGetFriendsQuery()
+	const groupsQuery = useGetGroupsQuery()
 
+	const dispatch = useAppDispatch()
+	useEffect(() => {
+		if (!friendsQuery.isLoading && friendsQuery.data) {
+			dispatch(addFriends(friendsQuery.data))
+			dispatch(addFriendsToChannels(friends))
+		}
+		if (!groupsQuery.isLoading && groupsQuery.data) {
+			dispatch(addGroups(groupsQuery.data))
+			dispatch(addGroupsToChannels(groups))
+		}
+	}, [friends])
+
+	const channels = useAppSelector(state => state.chats.channels)
 	const user = useAppSelector(state => state.auth.user)
-
-	const channels: Channel[] = [
-		{
-			id: 1,
-			image: '../../../public/img/testUserImage.webp',
-			name: 'Smth',
-			type: 'user',
-			color: 'orange',
-			status: 'offline',
-		},
-		{
-			id: 2,
-			image: '../../../public/img/testUserImage.webp',
-			name: 'Lolexxxx',
-			type: 'user',
-			color: 'orange',
-			status: 'online',
-		},
-	]
+	const pathname = window.location.href
 
 	return (
 		<aside className={'bg-[#2b2c31]'}>
 			<section className={'border-b-[1px] border-[#202225] h-12 pt-2.5 p-2.5'}>
 				<TextButton>Find or start a conversation</TextButton>
 			</section>
-			<div className={'h-[calc(100svh-6.25rem)] w-60 overflow-y-scroll overflow-x-visible pb-2.5'}>
+			<div className={'h-[calc(100svh-6.25rem)] w-60 overflow-y-scroll overflow-x-hidden pb-2.5'}>
 				<section className={'pt-2.5 pl-2.5 pr-0.5'}>
 					<nav>
 						<ul>
@@ -146,10 +139,10 @@ const Content = () => {
 											{channel.type === 'user' ? (
 												<div
 													className={`status-indicator ${
-														channel.status === 'offline'
+														channel.onlineStatus === 'offline'
 															? 'bg-[#949ba4] before:flex before:h-[0.3rem] before:w-[0.3rem] ' +
 																'before:rounded-full'
-															: channel.status === 'online'
+															: channel.onlineStatus === 'online'
 																? 'bg-[#00b35e]'
 																: ''
 													} absolute bottom-[-0.125rem] right-[-0.125rem] 
@@ -157,7 +150,7 @@ const Content = () => {
 														 before:bg-[#2b2c31] group-hover:before:bg-[#35373c] group/tooltip`}
 												>
 													<Tooltip
-														text={`${channel.status[0].toUpperCase()}${channel.status.substring(1)}`}
+														text={`${channel.onlineStatus[0].toUpperCase()}${channel.onlineStatus.substring(1)}`}
 														position={{ vertical: 'top', horizontal: 'center' }}
 														space={{ vertical: '0', horizontal: '0' }}
 													/>
@@ -182,7 +175,7 @@ const Content = () => {
 					'px-2 py-[0.3125rem] flex items-center justify-between bg-[#232428] h-[3.25rem] text-sm group'
 				}
 			>
-				<div className="user-info rounded py-0 px-0.5 flex items-center w-[55%] hover:bg-[#35373c] h-full group">
+				<div className="user-info rounded py-0 px-0.5 flex items-center w-[55%] hover:bg-[#35373c] h-full group/user">
 					<div className="user-info-image-container relative">
 						{user?.userImage ? (
 							<img src={user?.userImage} alt="" />
@@ -203,12 +196,12 @@ const Content = () => {
 										? 'bg-[#00b35e]'
 										: ''
 							} absolute bottom-[-0.125rem] right-[-0.125rem] 
-														w-4 h-4 rounded-full flex items-center justify-center border-[0.225rem] border-[#232428] group-hover:border-[#35373c] tooltip-container
-														 before:bg-[#2b2c31] group-hover:before:bg-[#35373c]`}
+														w-4 h-4 rounded-full flex items-center justify-center border-[0.225rem] border-[#232428] group-hover/user:border-[#35373c] tooltip-container
+														 before:bg-[#2b2c31] group-hover/user:before:bg-[#35373c]`}
 						></div>
 					</div>
 					<div className="title leading-4 grow flex flex-col	justify-between ml-2 w-0">
-						<p className={'text-[#f2f3f5] cursor-default'}>{user?.showname}</p>
+						<p className={'text-[#f2f3f5] cursor-default'}>{user?.displayName}</p>
 						<div className={'h-4 overflow-hidden text-xs text-[#c7c9cb] cursor-default'}>
 							<p
 								className={

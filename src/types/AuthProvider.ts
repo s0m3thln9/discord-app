@@ -14,7 +14,7 @@ export type TAuthProvider = {
 type PrismaUser = {
 	id: number
 	email: string
-	showname: string
+	displayName: string
 	username: string
 	birthdayYear: number
 	birthdayMonth: string
@@ -35,13 +35,15 @@ export type RegisterUserData = Omit<
 
 export type User = Omit<PrismaUser, 'password'>
 
+export type PublicUser = Omit<User, 'email' | 'updatedAt'>
+
 export type GetUserWithJwtResponse =
 	| SuccessMessage<'Successfully got user', { user: User }>
 	| ErrorMessage<GetUsersWithJwtErrorMessages>
 
 export type GetUsersWithJwtErrorMessages = 'Unauthorized' | 'No user with your data'
 
-export type GetUserWithCredentials =
+export type GetUserWithCredentialsResponse =
 	| SuccessMessage<'Authorized', { user: User }>
 	| ErrorMessage<GetUserWithCredentialsErrorMessages>
 
