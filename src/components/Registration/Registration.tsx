@@ -1,31 +1,29 @@
-import { useState } from 'react'
 import { useAuth } from '../../providers/auth-provider/AuthProvider.tsx'
 import { Link } from 'react-router-dom'
 import Button from '../UI/Button/Button.tsx'
 import Checkbox from '../UI/Checkbox/Checkbox.tsx'
-import { RegisterUserData } from '../../types/AuthProvider.ts'
-import { useForm } from 'react-hook-form'
+import { days, months, years } from './data.ts'
+import { Controller, useForm } from 'react-hook-form'
+import Select from 'react-select'
 
 const Registration = () => {
 	const {
 		register,
 		handleSubmit,
+		control,
+		getValues,
 		formState: { errors },
-	} = useForm()
-
-	const [data, setData] = useState<RegisterUserData>({
-		email: '',
-		showname: '',
-		username: '',
-		password: '',
-		birthdayYear: 0,
-		birthdayMonth: '',
-		birthdayDay: 0,
-	})
+	} = useForm({ mode: 'onChange' })
 
 	const { register: reg } = useAuth()
 
 	const onSubmit = async () => {
+		const data = {
+			...getValues(),
+			birthdayMonth: String(getValues().birthdayMonth.value),
+			birthdayDay: parseInt(getValues().birthdayDay.value),
+			birthdayYear: parseInt(getValues().birthdayYear.value),
+		}
 		await reg(data)
 	}
 
@@ -40,12 +38,11 @@ const Registration = () => {
 				<form className={'w-full mt-5'} onSubmit={handleSubmit(onSubmit)}>
 					<div>
 						<label
-							className={'text-xs font-bold uppercase tracking-wide text-[#b5bac1]'}
-							$error={errors.email}
+							className={`text-xs font-bold uppercase tracking-wide ${errors.email ? `text-[#fa777c]` : 'text-[#b5bac1]'}`}
 							htmlFor="email"
 						>
 							email{' '}
-							<span className={'normal-case text-[#f23f42]'}>
+							<span className={`normal-case ${errors.email ? 'text-[#fa777c]' : 'text-[#f23f42]'}`}>
 								{errors.email ? '- ' + errors.email.message : '*'}
 							</span>
 						</label>
@@ -67,49 +64,63 @@ const Registration = () => {
 						</label>
 						<input
 							className={
-								'outline-0 mt-2 w-full h-10 p-2.5 font-medium rounded-[0.1875rem] bg-[#1e1f22] text-[#dbdee1] mb-5'
+								'outline-0 mt-2 w-full h-10 p-2.5 font-medium rounded-[0.1875rem] bg-[#1e1f22] text-[#dbdee1] mb-5 peer'
 							}
 							type="text"
 							id="displayName"
 							{...register('displayName')}
 						/>
-						<p className={'text-sm text-[#dbdee1] transition-[.3s] mt-0 pb-0 h-0 opacity-0'}>
+						<div
+							className={`tracking-tight text-sm font-medium text-[#dbdee1] duration-300 mt-0 pb-0 h-0 opacity-0 peer-focus:-mt-3 peer-focus:pb-10 peer-focus:opacity-100`}
+						>
 							This is how others see you. You can use special characters and emoji.
-						</p>
+						</div>
 					</div>
 					<div>
 						<label
-							className={'text-xs font-bold uppercase tracking-wide text-[#b5bac1]'}
-							$error={errors.userName}
-							htmlFor="userName"
+							className={`text-xs font-bold uppercase tracking-wide ${errors.username ? 'text-[#fa777c]' : 'text-[#b5bac1]'}`}
+							htmlFor="username"
 						>
 							username{' '}
-							<span className={'normal-case text-[#f23f42]'}>
-								{errors.userName ? '- ' + errors.userName.message : '*'}
+							<span className={`normal-case ${errors.username ? 'text-[#fa777c]' : 'text-[#f23f42]'}`}>
+								{errors.username ? '- ' + errors.username.message : '*'}
 							</span>
 						</label>
 						<input
 							className={
-								'outline-0 mt-2 w-full h-10 p-2.5 font-medium rounded-[0.1875rem] bg-[#1e1f22] text-[#dbdee1] mb-5'
+								'outline-0 mt-2 w-full h-10 p-2.5 font-medium rounded-[0.1875rem] bg-[#1e1f22] text-[#dbdee1] mb-5 peer'
 							}
 							type="text"
-							id="userName"
-							{...register('userName', { required: 'Required' })}
-							onFocus={() => document.querySelector('.help')?.classList.add('focus')}
-							onBlur={() => document.querySelector('.help')?.classList.remove('focus')}
+							id="username"
+							{...register('username', {
+								required: 'Required',
+								pattern: {
+									value: /^[a-z0-9_.]+$/,
+									message: 'Username can only use letters, numbers, underscores and periods',
+								},
+								minLength: {
+									value: 2,
+									message: 'Must be between 2 and 32 in length',
+								},
+								maxLength: {
+									value: 32,
+									message: 'Must be between 2 and 32 in length',
+								},
+							})}
 						/>
-						<p className={'text-sm text-[#dbdee1] transition-[.3s] mt-0 pb-0 h-0 opacity-0'}>
+						<div
+							className={`tracking-tight text-sm font-medium text-[#dbdee1] duration-300 mt-0 pb-0 h-0 opacity-0 peer-focus:-mt-3 peer-focus:pb-10 peer-focus:opacity-100`}
+						>
 							Please only use numbers, letters, underscores _, or periods.
-						</p>
+						</div>
 					</div>
 					<div>
 						<label
-							className={'text-xs font-bold uppercase tracking-wide text-[#b5bac1]'}
-							$error={errors.password}
+							className={`text-xs font-bold uppercase tracking-wide ${errors.password ? 'text-[#fa777c]' : 'text-[#b5bac1]'}`}
 							htmlFor="password"
 						>
 							password{' '}
-							<span className={'normal-case text-[#f23f42]'}>
+							<span className={`normal-case ${errors.password ? 'text-[#fa777c]' : 'text-[#f23f42]'}`}>
 								{errors.password ? '- ' + errors.password.message : '*'}
 							</span>
 						</label>
@@ -119,17 +130,90 @@ const Registration = () => {
 							}
 							type="password"
 							id="password"
-							{...register('password', { required: 'Required' })}
+							{...register('password', {
+								required: 'Required',
+								minLength: {
+									value: 8,
+									message: 'Must be at least 8 characters long',
+								},
+								maxLength: {
+									value: 72,
+									message: 'Must be 72 or fewer in length',
+								},
+								pattern: {
+									value: /^(?=.*[0-9])(?=.*[a-z])(?!.* ).{8,72}$/,
+									message: 'Password is too weak or common to use',
+								},
+							})}
 						/>
 					</div>
 					<div>
 						<label
-							className={'text-xs font-bold uppercase tracking-wide text-[#b5bac1]'}
+							className={`text-xs font-bold uppercase tracking-wide ${errors.birthdayMonth || errors.birthdayDay || errors.birthdayYear ? 'text-[#fa777c]' : 'text-[#b5bac1]'}`}
 							htmlFor="dateOfBirth"
 						>
-							date of birth
+							date of birth{' '}
+							<span
+								className={`normal-case ${errors.birthdayMonth || errors.birthdayDay || errors.birthdayYear ? 'text-[#fa777c]' : 'text-[#f23f42]'}`}
+							>
+								{errors.birthdayMonth || errors.birthdayDay || errors.birthdayYear
+									? '- ' +
+										(errors.birthdayMonth?.message ||
+											errors.birthdayDay?.message ||
+											errors.birthdayYear?.message)
+									: '*'}
+							</span>
 						</label>
-						<div className="flex mt-2 justify-between"></div>
+						<div className="flex mt-2 justify-between">
+							<Controller
+								name={'birthdayMonth'}
+								control={control}
+								rules={{
+									required: 'Required',
+								}}
+								render={({ field }) => (
+									<Select
+										{...field}
+										options={months}
+										placeholder={'Month'}
+										classNamePrefix={'custom-select'}
+										maxMenuHeight={224}
+									/>
+								)}
+							/>
+							<Controller
+								name={'birthdayDay'}
+								control={control}
+								rules={{
+									required: 'Required',
+								}}
+								render={({ field }) => (
+									<Select
+										{...field}
+										options={days}
+										placeholder={'Day'}
+										classNamePrefix={'custom-select'}
+										maxMenuHeight={224}
+									/>
+								)}
+							/>
+							<Controller
+								name={'birthdayYear'}
+								control={control}
+								rules={{
+									required: 'Required',
+								}}
+								render={({ field }) => (
+									<Select
+										{...field}
+										options={years}
+										placeholder={'Year'}
+										classNamePrefix={'custom-select'}
+										maxMenuHeight={224}
+									/>
+								)}
+							/>
+						</div>
 					</div>
 					<Checkbox
 						classes={'mt-4'}
