@@ -3,9 +3,7 @@ import { useAuth } from '../../providers/auth-provider/AuthProvider.tsx'
 import { Link } from 'react-router-dom'
 import Button from '../UI/Button/Button.tsx'
 import Checkbox from '../UI/Checkbox/Checkbox.tsx'
-import Select from '../UI/Select/Select.tsx'
 import { RegisterUserData } from '../../types/AuthProvider.ts'
-import { days, months, years } from './data.ts'
 import { useForm } from 'react-hook-form'
 
 const Registration = () => {
@@ -17,7 +15,7 @@ const Registration = () => {
 
 	const [data, setData] = useState<RegisterUserData>({
 		email: '',
-		displayName: '',
+		showname: '',
 		username: '',
 		password: '',
 		birthdayYear: 0,
@@ -131,32 +129,7 @@ const Registration = () => {
 						>
 							date of birth
 						</label>
-						<div className="flex mt-2 justify-between">
-							<Select
-								initialValue={'Month'}
-								onSelect={value => {
-									setData({ ...data, birthdayMonth: value })
-								}}
-								items={months}
-								value={data.birthdayMonth}
-							/>
-							<Select
-								initialValue={'Day'}
-								onSelect={value => {
-									setData({ ...data, birthdayDay: value })
-								}}
-								items={days}
-								value={data.birthdayDay}
-							/>
-							<Select
-								initialValue={'Year'}
-								onSelect={value => {
-									setData({ ...data, birthdayYear: value })
-								}}
-								items={years}
-								value={data.birthdayYear}
-							/>
-						</div>
+						<div className="flex mt-2 justify-between"></div>
 					</div>
 					<Checkbox
 						classes={'mt-4'}
