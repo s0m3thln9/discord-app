@@ -119,11 +119,11 @@ const Content = () => {
 	]
 
 	return (
-		<aside className={'bg-[#2b2c31] w-60'}>
+		<aside className={'bg-[#2b2c31]'}>
 			<section className={'border-b-[1px] border-[#202225] h-12 pt-2.5 p-2.5'}>
 				<TextButton>Find or start a conversation</TextButton>
 			</section>
-			<div className={'h-[calc(100svh-6.25rem)] w-60 overflow-y-scroll overflow-x-hidden pb-2.5'}>
+			<div className={'h-[calc(100svh-6.25rem)] w-60 overflow-y-scroll overflow-x-visible pb-2.5'}>
 				<section className={'pt-2.5 pl-2.5 pr-0.5'}>
 					<nav>
 						<ul>
@@ -181,16 +181,16 @@ const Content = () => {
 				</section>
 				<section className={'direct-messages pt-2.5 pl-2.5 pr-0.5 pb-0'}>
 					<div className={'group flex items-center justify-between px-2'}>
-						<h4 className={'group-hover:text-[#dbdee1] text-[#949ba4] uppercase text-xs'}>
+						<h4 className={'group-hover:text-[#dbdee1] text-[#949ba4] uppercase text-xs  cursor-default'}>
 							Direct Messages
 						</h4>
-						<div className="flex items-center justify-center w-4 h-4 cursor-pointer relative group tooltip-container">
+						<div className="flex items-center justify-center w-4 h-4 cursor-pointer relative group group/tooltip">
 							<Plus className={'h-2 w-2 group-hover:fill-[#dbdee1] fill-[#949ba4]'} />
-							<Tooltip
+							{/*<Tooltip
 								text={'Create DM'}
 								position={{ vertical: 'top', horizontal: 'center' }}
 								space={{ vertical: '0', horizontal: '0' }}
-							/>
+							/>*/}
 						</div>
 					</div>
 					<ul className={'mt-1'}>
@@ -232,7 +232,7 @@ const Content = () => {
 																: ''
 													} absolute bottom-[-0.125rem] right-[-0.125rem] 
 														w-4 h-4 rounded-full flex items-center justify-center border-[0.225rem] border-[#2b2c31] group-hover:border-[#35373c] tooltip-container
-														 before:bg-[#2b2c31] group-hover:before:bg-[#35373c] `}
+														 before:bg-[#2b2c31] group-hover:before:bg-[#35373c] group/tooltip`}
 												>
 													<Tooltip
 														text={`${channel.status[0].toUpperCase()}${channel.status.substring(1)}`}
@@ -257,7 +257,7 @@ const Content = () => {
 			</div>
 			<section
 				className={
-					'user-panel px-2 py-[0.3125rem] flex items-center justify-between bg-[#232428] h-[3.25rem] text-sm group'
+					'px-2 py-[0.3125rem] flex items-center justify-between bg-[#232428] h-[3.25rem] text-sm group'
 				}
 			>
 				<div className="user-info rounded py-0 px-0.5 flex items-center w-[55%] hover:bg-[#35373c] h-full group">
@@ -282,32 +282,41 @@ const Content = () => {
 										: ''
 							} absolute bottom-[-0.125rem] right-[-0.125rem] 
 														w-4 h-4 rounded-full flex items-center justify-center border-[0.225rem] border-[#232428] group-hover:border-[#35373c] tooltip-container
-														 before:bg-[#2b2c31] group-hover:before:bg-[#35373c] `}
+														 before:bg-[#2b2c31] group-hover:before:bg-[#35373c]`}
 						></div>
 					</div>
 					<div className="title leading-4 grow flex flex-col	justify-between ml-2 w-0">
-						<p className={'text-[#f2f3f5]'}>{user?.showname}</p>
-						<div className={'h-4 overflow-hidden text-xs text-[#c7c9cb]'}>
+						<p className={'text-[#f2f3f5] cursor-default'}>{user?.showname}</p>
+						<div className={'h-4 overflow-hidden text-xs text-[#c7c9cb] cursor-default'}>
 							<p
 								className={
-									'status-text overflow-hidden text-ellipsis whitespace-nowrap group-hover:-translate-y-4'
+									'overflow-hidden text-ellipsis whitespace-nowrap transition-all group-hover:-translate-y-4 '
 								}
 							>
 								{user?.textStatus}
 							</p>
-							<p>{user?.username}</p>
+							<p
+								className={
+									'overflow-hidden text-ellipsis whitespace-nowrap transition-all group-hover:-translate-y-4'
+								}
+							>
+								{user?.username}
+							</p>
 						</div>
 					</div>
 				</div>
 				<div className={'flex'}>
-					<SecondaryButton className={'group'}>
+					<SecondaryButton className={'relative group group/tooltip'}>
 						<Mic className={'fill-[#b0b6be] group-hover:fill-[#bbbfc5]'} />
+						<Tooltip text={'Mute'} position={{ vertical: 'top', horizontal: 'center' }} />
 					</SecondaryButton>
-					<SecondaryButton className={'group'}>
+					<SecondaryButton className={'relative group group/tooltip'}>
 						<Headphones className={'fill-[#b0b6be] group-hover:fill-[#bbbfc5]'} />
+						<Tooltip text={'Deafen'} position={{ vertical: 'top', horizontal: 'center' }} />
 					</SecondaryButton>
-					<SecondaryButton className={'group'}>
+					<SecondaryButton className={'relative group group/tooltip'}>
 						<Settings className={'fill-[#b0b6be] group-hover:fill-[#bbbfc5]'} />
+						<Tooltip text={'User Settings'} position={{ vertical: 'top', horizontal: 'center' }} />
 					</SecondaryButton>
 				</div>
 			</section>
