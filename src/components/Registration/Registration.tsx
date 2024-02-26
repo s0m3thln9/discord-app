@@ -116,6 +116,7 @@ const Registration = () => {
 								render={({ field }) => (
 									<Select {...field}
 											options={months}
+											noOptionsMessage={obj => 'No results found'}
 											placeholder={'Month'}
 											classNamePrefix={'custom-select'}
 											maxMenuHeight={224}
