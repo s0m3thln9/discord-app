@@ -11,15 +11,21 @@ a {
     color: #00a8fc;
 }
 
+input {
+    outline: none;
+}
+
 a:hover {
     text-decoration: underline;
 }
 
-div::-webkit-scrollbar {
+div::-webkit-scrollbar,
+ul::-webkit-scrollbar {
     width: .5rem;
 }
 
-div::-webkit-scrollbar-thumb {
+div::-webkit-scrollbar-thumb,
+ul::-webkit-scrollbar-thumb {
     background: #1e1f22;
     border-radius: 99rem;
     border: .15rem solid #2b2c31;

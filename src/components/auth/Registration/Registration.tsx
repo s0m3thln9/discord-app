@@ -1,10 +1,11 @@
-import { useAuth } from '../../providers/auth-provider/AuthProvider.tsx'
+import { useAuth } from '../../../providers/auth-provider/AuthProvider.tsx'
 import { Link } from 'react-router-dom'
-import Button from '../UI/Button/Button.tsx'
-import Checkbox from '../UI/Checkbox/Checkbox.tsx'
+import Button from '../../UI/Button/Button.tsx'
+import Checkbox from '../../UI/Checkbox/Checkbox.tsx'
 import { days, months, years } from './data.ts'
 import { Controller, useForm } from 'react-hook-form'
 import Select from 'react-select'
+import { RegisterUserData } from '../../../types/AuthProvider.ts'
 
 const Registration = () => {
 	const {
@@ -24,7 +25,7 @@ const Registration = () => {
 			birthdayDay: parseInt(getValues().birthdayDay.value),
 			birthdayYear: parseInt(getValues().birthdayYear.value),
 		}
-		await reg(data)
+		await reg(data as RegisterUserData)
 	}
 
 	return (
@@ -223,16 +224,10 @@ const Registration = () => {
 						}
 					/>
 					<Button classes={'mt-5'}>Continue</Button>
-					<Checkbox
-						classes={'mt-4'}
-						id={'terms'}
-						label={
-							<p>
-								By registering, you agree to Discord's <Link to={'/'}>Terms of Service</Link> and{' '}
-								<Link to={'/'}>Privacy Policy</Link>.
-							</p>
-						}
-					/>
+					<p className={'text-xs text-[#949ba4] mt-4'}>
+						By registering, you agree to Discord's <Link to={'/'}>Terms of Service</Link> and{' '}
+						<Link to={'/'}>Privacy Policy</Link>.
+					</p>
 					<p className={'have-acc mt-5 text-sm font-medium text-[#949ba4] '}>
 						<Link to={'/login'}>Already have an account?</Link>
 					</p>

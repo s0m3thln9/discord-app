@@ -9,6 +9,7 @@ export type Channel = {
 	type: 'user' | 'group'
 	color: 'orange' | 'red' | 'green' | 'blue' | 'yellow'
 	onlineStatus: 'offline' | 'online' | 'idle' | 'doNotDisturb' | 'group'
+	members: number | null
 }
 
 type InitialState = {
@@ -25,28 +26,34 @@ export const chatsSlice = createSlice({
 	reducers: {
 		addFriendsToChannels: (state, action: PayloadAction<PublicUser[]>) => {
 			const friends = action.payload
-			friends.forEach(friends => {
-				state.channels.push({
-					id: friends.id,
-					image: friends.userImage,
-					name: friends.displayName,
-					type: 'user',
-					color: friends.color,
-					onlineStatus: friends.onlineStatus,
-				})
+			friends.forEach(friend => {
+				if (!state.channels.find(channel => channel.id === friend.id && channel.type === 'user')) {
+					state.channels.push({
+						id: friend.id,
+						image: friend.userImage,
+						name: friend.displayName,
+						type: 'user',
+						color: friend.color,
+						onlineStatus: friend.onlineStatus,
+						members: null,
+					})
+				}
 			})
 		},
 		addGroupsToChannels: (state, action: PayloadAction<Group[]>) => {
 			const groups = action.payload
 			groups.forEach(group => {
-				state.channels.push({
-					id: group.id,
-					image: group.image,
-					name: group.name,
-					type: 'group',
-					color: group.color,
-					onlineStatus: 'group',
-				})
+				if (!state.channels.find(channel => channel.id === group.id && channel.type === 'group')) {
+					state.channels.push({
+						id: group.id,
+						image: group.image,
+						name: group.name,
+						type: 'group',
+						color: group.color,
+						onlineStatus: 'group',
+						members: group.members,
+					})
+				}
 			})
 		},
 	},

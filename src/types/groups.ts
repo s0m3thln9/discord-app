@@ -7,6 +7,7 @@ export type Group = {
 	color: 'orange' | 'red' | 'green' | 'blue' | 'yellow'
 	createdAt: Date
 	updatedAt: Date
+	members: number
 }
 
 export type GetGroupsResponse =
