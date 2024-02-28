@@ -15,7 +15,7 @@ const FriendsList = () => {
 			</h2>
 			<ul className={'grow overflow-y-scroll'}>
 				{friends.map(friend => (
-					<FriendItem friend={friend} />
+					<FriendItem friend={friend} key={friend.id} />
 				))}
 			</ul>
 		</section>
