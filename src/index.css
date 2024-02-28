@@ -117,4 +117,9 @@ ul::-webkit-scrollbar-thumb {
     color: #ffffff !important;
 }
 
+.custom-select__menu-notice {
+    padding: 0.25rem 0.25rem !important;
+}
+
+
 
