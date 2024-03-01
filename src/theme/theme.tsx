@@ -1,6 +1,3 @@
-import { ThemeProvider } from 'styled-components'
-import { ReactNode } from 'react'
-
 const theme = {
 	colors: {
 		mainBackground: '#313338',
@@ -23,11 +20,3 @@ const theme = {
 		online: '#00b35e',
 	},
 }
-
-export type ThemeCols = typeof theme
-
-const Theme = ({ children }: { children: ReactNode }) => {
-	return <ThemeProvider theme={theme}>{children}</ThemeProvider>
-}
-
-export default Theme

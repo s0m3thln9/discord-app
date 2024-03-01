@@ -20,6 +20,11 @@ export default {
 				div: '0 0.125rem 0.625rem 0 rgba(0, 0, 0, 0.2)',
 			},
 		},
+		colors: {
+			sidebar: '#2b2c31',
+			hover: '#35373c',
+			'user-info': '#232428',
+		},
 	},
 	plugins: [],
 }

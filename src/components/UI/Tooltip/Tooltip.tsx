@@ -11,15 +11,13 @@ type Props = {
 	className?: string
 }
 
-const Tooltip = ({ text, position, space, className }: Props) => {
+const Tooltip = ({ text, position, /*space, */ className }: Props) => {
 	/*if (space?.horizontal && space?.horizontal[0] !== '-' && space?.horizontal[0] !== '+') {
 		space.horizontal = `+${space?.horizontal}`
 	}
 	if (space?.vertical && space?.vertical[0] !== '-' && space?.vertical[0] !== '+') {
 		space.vertical = `+${space?.vertical}`
 	}*/
-
-	console.log(space)
 
 	/*const positionClasses = `absolute bg-[#1b1b1e] text-[#f2f3f5] z-10 w-fit rounded shadow-lg ${
 		position.vertical === 'top'
