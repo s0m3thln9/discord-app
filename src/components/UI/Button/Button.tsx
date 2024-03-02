@@ -1,18 +1,27 @@
-import { ReactNode } from 'react'
+import { ButtonHTMLAttributes, ReactNode } from 'react'
+import { cva, VariantProps } from 'class-variance-authority'
+import { cn } from '../../../utils/cn'
 
-type Props = {
-	classes: string
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
 	children: ReactNode
 }
 
-const Button = ({ classes, children }: Props) => {
-	return (
-		<button
-			className={`w-full h-11 flex items-center justify-center py-0.5 px-4 font-medium rounded-[0.1875rem] bg-[#5865f2] text-[#fff] transition-[.4s] cursor-pointer hover:bg-[#505bdb] ${classes}`}
-		>
-			{children}
-		</button>
-	)
+const Button = ({ children, variant, className }: Props) => {
+	return <button className={cn(buttonVariants({ variant, className }))}>{children}</button>
 }
+
+const buttonVariants = cva('flex items-center justify-center hover:bg-[#393c41] rounded', {
+	variants: {
+		variant: {
+			primary:
+				'w-full h-11 px-4 font-medium rounded-[0.1875rem] bg-[#5865f2] text-[#fff] transition-[.4s] cursor-pointer py-0.5 hover:bg-[#505bdb]',
+			secondary: 'h-8 w-8',
+			text: 'px-2 text-[#949ba4] w-full text-start leading-5 hover:text-[#dbdee1]',
+			icon: 'h-9 w-9 rounded-full bg-[#2b2d31] group-hover:bg-[#1e1f22] group/iconBtn',
+			ghost: '',
+			active: 'px-2 text-[#949ba4] w-full text-start leading-5 bg-[#43444b] text-[#fff]',
+		},
+	},
+})
 
 export default Button

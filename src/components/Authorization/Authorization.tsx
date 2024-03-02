@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Button from '../UI/Button/Button.tsx'
 import { DSLogoText } from '../../../public/svgs.tsx'
 import { useForm } from 'react-hook-form'
+import { RegisterUserData } from '../../types/AuthProvider.ts'
 import Input from '../UI/Input/Input.tsx'
 
 const Authorization = () => {
@@ -20,7 +21,7 @@ const Authorization = () => {
 
 	const onSubmit = async () => {
 		const data = { ...getValues() }
-		await login(data)
+		await login(data as RegisterUserData)
 	}
 
 	return (
@@ -78,8 +79,10 @@ const Authorization = () => {
 						<p className={'mt-2 font-medium text-sm text-[#949ba4]'}>
 							<Link to="/">Forgot your password?</Link>
 						</p>
-						<Button classes={'mt-5'}>Login</Button>
-						<p className={'mt-2 font-medium text-sm text-[#949ba4]'}>
+						<Button variant={'primary'} className={'mt-5'}>
+							Login
+						</Button>
+						<p className={'mt-2 text-sm font-medium text-[#949ba4]'}>
 							Need an account? <Link to="/register">Register</Link>
 						</p>
 					</form>

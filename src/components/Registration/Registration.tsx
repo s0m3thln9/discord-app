@@ -5,6 +5,7 @@ import Checkbox from '../UI/Checkbox/Checkbox.tsx'
 import { days, months, years } from './data.ts'
 import { Controller, useForm } from 'react-hook-form'
 import Select from 'react-select'
+import { RegisterUserData } from '../../types/AuthProvider.ts'
 
 const Registration = () => {
 
@@ -27,7 +28,7 @@ const Registration = () => {
 			birthdayDay: parseInt(getValues().birthdayDay.value),
 			birthdayYear: parseInt(getValues().birthdayYear.value),
 		}
-		await reg(data)
+		await reg(data as RegisterUserData)
 	}
 
 	return (
@@ -37,7 +38,6 @@ const Registration = () => {
 					Create an account
 				</h2>
 				<form className={'w-full mt-5'} onSubmit={handleSubmit(onSubmit)}>
-
 					<div>
 						<label
 							className={`text-xs font-bold uppercase tracking-wide ${errors.email ? `text-[#fa777c]` : 'text-[#b5bac1]'}`}
@@ -125,24 +125,21 @@ const Registration = () => {
 							className={'outline-0 mt-2 w-full h-10 p-2.5 font-medium rounded-[0.1875rem] bg-[#1e1f22] text-[#dbdee1] mb-5'}
 							id="password"
 							type="password"
-							{...register(
-								'password',
-								{
-									required: 'Required',
-									minLength: {
-										value: 8,
-										message: 'Must be at least 8 characters long',
-									},
-									maxLength: {
-										value: 72,
-										message: 'Must be 72 or fewer in length',
-									},
-									pattern: {
-										value: /^(?=.*[0-9])(?=.*[a-z])(?!.* ).{8,72}$/,
-										message: 'Password is too weak or common to use',
-									},
-								}
-							)}
+							{...register('password', {
+								required: 'Required',
+								minLength: {
+									value: 8,
+									message: 'Must be at least 8 characters long',
+								},
+								maxLength: {
+									value: 72,
+									message: 'Must be 72 or fewer in length',
+								},
+								pattern: {
+									value: /^(?=.*[0-9])(?=.*[a-z])(?!.* ).{8,72}$/,
+									message: 'Password is too weak or common to use',
+								},
+							})}
 						/>
 					</div>
 					<div>
@@ -216,14 +213,13 @@ const Registration = () => {
 							"(Optional) It's okay to send me emails with Discord updates, tips, and special offers. You can opt out at any time."
 						}
 					/>
-					<Button classes={'mt-5'}>Continue</Button>
-					<Checkbox
-						classes={'mt-4'}
-						id={'terms'}
-						label={
-							<p>By registering, you agree to Discord's <Link to={'/'}>Terms of Service</Link> and <Link to={'/'}>Privacy Policy</Link>.</p>
-						}
-					/>
+					<Button variant={'primary'} className={'mt-5'}>
+						Continue
+					</Button>
+					<p className={'mt-4 text-xs text-[#949ba4]'}>
+						By registering, you agree to Discord's <Link to={'/'}>Terms of Service</Link> and{' '}
+						<Link to={'/'}>Privacy Policy</Link>.
+					</p>
 					<p className={'have-acc mt-5 text-sm font-medium text-[#949ba4] '}>
 						<Link to={'/login'}>Already have an account?</Link>
 					</p>

@@ -1,47 +1,25 @@
-import TextButton from '../../UI/Button/TextButton.tsx'
-
-type Tab = {
-	id: number
-	text: string
-	variant?: 'dark' | 'ghost' | 'green'
-	active?: true
-}
+import Button from '../../UI/Button/Button.tsx'
 
 const TabBar = () => {
-	const tabs: Tab[] = [
-		{
-			id: 1,
-			text: 'Online',
-			active: true,
-		},
-		{
-			id: 2,
-			text: 'All',
-		},
-		{
-			id: 3,
-			text: 'Pending',
-		},
-		{
-			id: 4,
-			text: 'Blocked',
-		},
-		{
-			id: 5,
-			text: 'Add Friend',
-			variant: 'green',
-		},
-	]
-
 	return (
-		<ul className={'flex before:w-[1px] before:ml-4 before:mr-2 h-6 before:bg-[#3f4147]'}>
-			{tabs.map(tab => (
-				<li key={tab.id} className={'flex mx-2'}>
-					<TextButton active={tab.active} variant={tab.variant}>
-						{tab.text}
-					</TextButton>
-				</li>
-			))}
+		<ul className={'flex h-6 before:ml-4 before:mr-2 before:w-[1px] before:bg-[#3f4147]'}>
+			<li className={'mx-2 flex'}>
+				<Button variant={'active'}>Online</Button>
+			</li>
+			<li className={'mx-2 flex'}>
+				<Button variant={'text'}>All</Button>
+			</li>
+			<li className={'mx-2 flex'}>
+				<Button variant={'text'}>Pending</Button>
+			</li>
+			<li className={'mx-2 flex'}>
+				<Button variant={'text'}>Blocked</Button>
+			</li>
+			<li className={'mx-2 flex'}>
+				<Button variant={'text'} className={'bg-[#248046] text-[#fff] hover:bg-[#248046] hover:text-[#fff]'}>
+					Add Friend
+				</Button>
+			</li>
 		</ul>
 	)
 }

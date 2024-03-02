@@ -28,18 +28,21 @@ const DirectMessages = () => {
 	}, [friends, groups])
 	const channels = useAppSelector(state => state.chats.channels)
 	return (
-		<section className={'pt-2.5 pl-2.5 pr-0.5 pb-0'}>
+		<section className={'pb-0 pl-2.5 pr-0.5 pt-2.5'}>
 			<div className={'group flex items-center justify-between px-2'}>
-				<h4 className={'group-hover:text-[#dbdee1] text-[#949ba4] uppercase text-xs  cursor-default'}>
+				<h4 className={'cursor-default text-xs uppercase text-[#949ba4]  group-hover:text-[#dbdee1]'}>
 					Direct Messages
 				</h4>
-				<div className="flex items-center justify-center w-4 h-4 cursor-pointer relative group group/tooltip">
-					<Plus className={'h-2 w-2 group-hover:fill-[#dbdee1] fill-[#949ba4]'} />
+				<div className="group flex h-4 w-4 cursor-pointer items-center justify-center">
 					<Tooltip
 						text={'Create DM'}
-						position={{ vertical: 'center', horizontal: 'left' }}
-						space={{ vertical: '0', horizontal: '0' }}
-					/>
+						vertical={'center'}
+						horizontal={'left'}
+						x={'smm'}
+						className={'flex items-center justify-center'}
+					>
+						<Plus className={'h-[0.625rem] w-[0.625rem] fill-[#949ba4] group-hover:fill-[#dbdee1]'} />
+					</Tooltip>
 				</div>
 			</div>
 			<ul className={'mt-1'}>

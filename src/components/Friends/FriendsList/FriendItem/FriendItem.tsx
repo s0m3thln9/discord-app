@@ -1,7 +1,8 @@
 import UserImage from '../../../UI/UserImage/UserImage.tsx'
-import IconButton from '../../../UI/Button/IconButton.tsx'
 import { Message, More } from '../../../../../public/svgs.tsx'
 import { PublicUser } from '../../../../types/AuthProvider.ts'
+import Tooltip from '../../../UI/Tooltip/Tooltip.tsx'
+import Button from '../../../UI/Button/Button.tsx'
 
 type Props = {
 	friend: PublicUser
@@ -12,15 +13,21 @@ const FriendItem = ({ friend }: Props) => {
 		<li key={friend.id}>
 			<div
 				className={
-					'ml-5 mr-5 hover:bg-hover flex items-center justify-between group h-[3.875rem] rounded-lg px-2.5'
+					'group ml-5 mr-2.5 flex h-[3.875rem] items-center justify-between rounded-lg px-2.5 hover:bg-hover'
 				}
 			>
 				<div className={'flex'}>
-					<UserImage image={friend.userImage || ''} color={friend.color} onlineStatus={friend.onlineStatus} />
-					<div className={'flex flex-col justify-between ml-3'}>
+					<UserImage
+						image={friend.userImage || ''}
+						color={friend.color}
+						onlineStatus={friend.onlineStatus}
+						tooltip={false}
+						bgColor={'content'}
+					/>
+					<div className={'ml-3 flex flex-col justify-between'}>
 						<p className={'leading-4 text-[#f2f3f5]'}>
 							{friend.displayName}{' '}
-							<span className={'hidden group-hover:inline-block text-[#b5bac1]'}>{friend.username}</span>
+							<span className={'hidden text-[#b5bac1] group-hover:inline-block'}>{friend.username}</span>
 						</p>
 						<p className={'text-sm leading-4 text-[#b5bac1]'}>
 							{friend.onlineStatus[0].toUpperCase()}
@@ -29,12 +36,16 @@ const FriendItem = ({ friend }: Props) => {
 					</div>
 				</div>
 				<div className={'flex'}>
-					<IconButton variant={'dark'}>
-						<Message className={'group-hover/iconBtn:fill-[#dbdee1] fill-[#b5bac1] w-5 h-5'} />
-					</IconButton>
-					<IconButton variant={'dark'} className={'ml-2'}>
-						<More className={'group-hover/iconBtn:fill-[#dbdee1] fill-[#b5bac1] w-5 h-5'} />
-					</IconButton>
+					<Tooltip text={'Message'} vertical={'top'} horizontal={'center'} y={'smm'}>
+						<Button variant={'icon'}>
+							<Message className={'h-5 w-5 fill-[#b5bac1] group-hover/iconBtn:fill-[#dbdee1]'} />
+						</Button>
+					</Tooltip>
+					<Tooltip text={'More'} vertical={'top'} horizontal={'center'} y={'smm'} className={'ml-2'}>
+						<Button variant={'icon'}>
+							<More className={'h-5 w-5 fill-[#b5bac1] group-hover/iconBtn:fill-[#dbdee1]'} />
+						</Button>
+					</Tooltip>
 				</div>
 			</div>
 		</li>

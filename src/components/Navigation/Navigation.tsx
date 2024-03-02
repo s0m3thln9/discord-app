@@ -4,50 +4,59 @@ import Tooltip from '../UI/Tooltip/Tooltip.tsx'
 
 const Navigation = () => {
 	return (
-		<nav className={'w-[4.5rem] bg-[#1e1f22] min-h-svh'}>
-			<ul className={'flex justify-center flex-col items-center pt-3'}>
-				<li className={'navbar-item mt-0 hover:bg-[#5865f2] group group/tooltip'}>
-					<Link to={'/'} className={'flex items-center'}>
-						<DSLogo height={24} width={24} />
-					</Link>
+		<nav className={'min-h-svh w-[4.5rem] shrink-0 bg-[#1e1f22]'}>
+			<ul className={'flex flex-col items-center justify-center pt-3'}>
+				<li className={'navbar-item group/tooltip group mt-0 hover:bg-[#5865f2]'}>
 					<Tooltip
 						text={'Direct Messages'}
-						position={{ vertical: 'center', horizontal: 'right' }}
-						space={{ vertical: '0', horizontal: '1rem' }}
-					/>
+						vertical={'center'}
+						horizontal={'right'}
+						x={'xl'}
+						className={'flex h-full w-full items-center'}
+					>
+						<Link to={'/'} className={'flex h-full w-full items-center justify-center'}>
+							<DSLogo height={24} width={24} />
+						</Link>
+					</Tooltip>
 				</li>
 				<li className={'separator mt-2 h-1 w-8 rounded-full bg-[#2d2f32]'}></li>
-				<li className={'action-btn navbar-item group group/tooltip'}>
-					<Link to={'/'}>
-						<Plus
-							width={16}
-							height={16}
-							className={
-								'transition-colors ease-in-out duration-200 fill-[#3BA55D] group-hover:fill-[#fff]'
-							}
-						/>
-					</Link>
+				<li className={'action-btn navbar-item group/tooltip group'}>
 					<Tooltip
 						text={'Add a Server'}
-						position={{ vertical: 'center', horizontal: 'right' }}
-						space={{ vertical: '0', horizontal: '0' }}
-					/>
+						vertical={'center'}
+						horizontal={'right'}
+						x={'xl'}
+						className={'flex h-full w-full items-center'}
+					>
+						<Link to={'/'} className={'flex h-full w-full items-center justify-center'}>
+							<Plus
+								height={16}
+								width={16}
+								className={
+									'fill-[#3BA55D] transition-colors duration-200 ease-in-out group-hover:fill-[#fff]'
+								}
+							/>
+						</Link>
+					</Tooltip>
 				</li>
-				<li className={'action-btn navbar-item group group/tooltip'}>
-					<Link to={'/'}>
-						<Compass
-							width={20}
-							height={20}
-							className={
-								'transition-colors ease-in-out duration-200 fill-[#3BA55D] group-hover:fill-[#fff]'
-							}
-						/>
-					</Link>
+				<li className={'action-btn navbar-item group/tooltip group'}>
 					<Tooltip
 						text={'Explore Discoverable Servers'}
-						position={{ vertical: 'center', horizontal: 'right' }}
-						space={{ vertical: '0', horizontal: '0' }}
-					/>
+						vertical={'center'}
+						horizontal={'right'}
+						x={'xl'}
+						className={'flex h-full w-full items-center'}
+					>
+						<Link to={'/'} className={'flex h-full w-full items-center justify-center'}>
+							<Compass
+								width={24}
+								height={24}
+								className={
+									'fill-[#3BA55D] transition-colors duration-200 ease-in-out group-hover:fill-[#fff]'
+								}
+							/>
+						</Link>
+					</Tooltip>
 				</li>
 			</ul>
 		</nav>
