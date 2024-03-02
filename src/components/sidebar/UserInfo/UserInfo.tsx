@@ -1,8 +1,8 @@
 import { Headphones, Mic, Settings } from '../../../../public/svgs.tsx'
-import SecondaryButton from '../../UI/Button/SecondaryButton.tsx'
 import Tooltip from '../../UI/Tooltip/Tooltip.tsx'
 import { useAppSelector } from '../../../hooks/typedHooks.ts'
 import UserImage from '../../UI/UserImage/UserImage.tsx'
+import Button from '../../UI/Button/Button.tsx'
 
 const UserInfo = () => {
 	const user = useAppSelector(state => state.auth.user)
@@ -12,14 +12,19 @@ const UserInfo = () => {
 	return (
 		<section
 			className={
-				'px-2 py-[0.3125rem] flex items-center justify-between bg-[#232428] h-[3.25rem] text-sm group/userInfo'
+				'group/userInfo flex h-[3.25rem] items-center justify-between bg-[#232428] px-2 py-[0.3125rem] text-sm'
 			}
 		>
-			<div className="rounded py-0 px-0.5 flex items-center w-[55%] hover:bg-[#35373c] h-full group">
-				<UserImage image={user?.userImage || ''} color={user?.color} onlineStatus={user?.onlineStatus} />
-				<div className="title leading-4 grow flex flex-col	justify-between ml-2 w-0">
-					<p className={'text-[#f2f3f5] cursor-default'}>{user?.displayName}</p>
-					<div className={'h-4 overflow-hidden text-xs text-[#c7c9cb] cursor-default'}>
+			<div className="group flex h-full w-[55%] items-center rounded px-0.5 py-0 hover:bg-[#35373c]">
+				<UserImage
+					image={user?.userImage || ''}
+					color={user?.color}
+					onlineStatus={user?.onlineStatus}
+					bgColor={'userInfo'}
+				/>
+				<div className="title ml-2 flex w-0 grow	flex-col justify-between leading-4">
+					<p className={'cursor-default text-[#f2f3f5]'}>{user?.displayName}</p>
+					<div className={'h-4 cursor-default overflow-hidden text-xs text-[#c7c9cb]'}>
 						<p
 							className={
 								'overflow-hidden text-ellipsis whitespace-nowrap transition-all group-hover/userInfo:-translate-y-4 '
@@ -38,18 +43,21 @@ const UserInfo = () => {
 				</div>
 			</div>
 			<div className={'flex'}>
-				<SecondaryButton className={'relative group group/tooltip'}>
-					<Mic className={'fill-[#b0b6be] group-hover:fill-[#bbbfc5]'} />
-					<Tooltip text={'Mute'} position={{ vertical: 'top', horizontal: 'center' }} />
-				</SecondaryButton>
-				<SecondaryButton className={'relative group group/tooltip'}>
-					<Headphones className={'fill-[#b0b6be] group-hover:fill-[#bbbfc5]'} />
-					<Tooltip text={'Deafen'} position={{ vertical: 'top', horizontal: 'center' }} />
-				</SecondaryButton>
-				<SecondaryButton className={'relative group group/tooltip'}>
-					<Settings className={'fill-[#b0b6be] group-hover:fill-[#bbbfc5]'} />
-					<Tooltip text={'User Settings'} position={{ vertical: 'top', horizontal: 'center' }} />
-				</SecondaryButton>
+				<Tooltip text={'Mute'} vertical={'top'} horizontal={'center'} y={'smm'}>
+					<Button variant={'secondary'} className={'group'}>
+						<Mic className={'fill-[#b0b6be] group-hover:fill-[#bbbfc5]'} />
+					</Button>
+				</Tooltip>
+				<Tooltip text={'Deafen'} vertical={'top'} horizontal={'center'} y={'smm'}>
+					<Button variant={'secondary'} className={'group'}>
+						<Headphones className={'fill-[#b0b6be] group-hover:fill-[#bbbfc5]'} />
+					</Button>
+				</Tooltip>
+				<Tooltip text={'User Settings'} vertical={'top'} horizontal={'center'} y={'smm'}>
+					<Button variant={'secondary'} className={'group'}>
+						<Settings className={'fill-[#b0b6be] group-hover:fill-[#bbbfc5]'} />
+					</Button>
+				</Tooltip>
 			</div>
 		</section>
 	)

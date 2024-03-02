@@ -7,11 +7,11 @@ import FriendsList from './FriendsList/FriendsList.tsx'
 const FriendsSection = () => {
 	return (
 		<main className={'grow'}>
-			<section className={'border-b-[1px] border-[#202225] h-12 pt-2.5 p-2.5 flex items-center justify-between'}>
+			<section className={'flex h-12 items-center justify-between border-b-[1px] border-[#202225] p-2.5 pt-2.5'}>
 				<div className={'flex items-center'}>
 					<div className={'flex items-center'}>
 						<Friends fill={'#80848e'} className={'mx-2'} />
-						<h2 className={'font-semibold text-[#f2f3f5] cursor-default'}>Friends</h2>
+						<h2 className={'cursor-default font-semibold text-[#f2f3f5]'}>Friends</h2>
 					</div>
 					<TabBar />
 				</div>

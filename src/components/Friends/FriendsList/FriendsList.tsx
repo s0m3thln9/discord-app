@@ -4,16 +4,16 @@ import FriendItem from './FriendItem/FriendItem.tsx'
 const FriendsList = () => {
 	const friends = useAppSelector(state => state.friends.friends)
 	return (
-		<section className={'flex flex-col grow'}>
+		<section className={'flex grow flex-col'}>
 			<input
 				type="text"
 				placeholder={'Search'}
-				className={'bg-[#1e1f22] mt-4 mr-5 ml-[1.875rem] rounded px-2 h-[1.875rem] text-[#f2f3f5]'}
+				className={'ml-[1.875rem] mr-5 mt-4 h-[1.875rem] rounded bg-[#1e1f22] px-2 text-[#f2f3f5]'}
 			/>
-			<h2 className={'mt-4 mr-5 mb-2 ml-[1.875rem] uppercase text-[#b5bac1] font-semibold text-xs'}>
+			<h2 className={'mb-2 ml-[1.875rem] mr-5 mt-4 text-xs font-semibold uppercase text-[#b5bac1]'}>
 				Online - {friends.length}
 			</h2>
-			<ul className={'grow overflow-y-scroll'}>
+			<ul className={'grow'}>
 				{friends.map(friend => (
 					<FriendItem friend={friend} key={friend.id} />
 				))}

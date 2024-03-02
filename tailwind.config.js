@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 /** @type {import('tailwindcss').Config} */
 export default {
 	mode: 'jit',
@@ -24,6 +26,7 @@ export default {
 			sidebar: '#2b2c31',
 			hover: '#35373c',
 			'user-info': '#232428',
+			content: '#313338',
 		},
 	},
 	plugins: [],

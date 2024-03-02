@@ -3,25 +3,29 @@ import StatusIndicator from '../OnlineStatusIndicator/StatusIndicator.tsx'
 
 type Props = {
 	image: string
-	onlineStatus: 'offline' | 'online' | 'idle' | 'doNotDisturb'
+	onlineStatus: 'offline' | 'online' | 'idle' | 'doNotDisturb' | 'group'
 	color: 'orange' | 'red' | 'green' | 'blue' | 'yellow'
+	tooltip?: boolean
 	className?: string
+	bgColor: 'sidebar' | 'content' | 'userInfo' | null | undefined
 }
 
-const UserImage = ({ image, onlineStatus, color, className }: Props) => {
+const UserImage = ({ image, onlineStatus, color, className, bgColor, tooltip }: Props) => {
 	return (
-		<div className={`inline-block relative ${className}`}>
+		<div className={`relative inline-block ${className ? className : ''}`}>
 			{image ? (
-				<img src={image} className={'rounded-full h-8'} alt={'user image'} />
+				<img src={image} className={'h-8 rounded-full'} alt={'user image'} />
 			) : (
 				<div
-					className={'w-8 h-8 rounded-full flex items-center justify-center shrink-0'}
+					className={'flex h-8 w-8 shrink-0 items-center justify-center rounded-full'}
 					style={{ background: color }}
 				>
 					<DSLogo width={20} height={20} />
 				</div>
 			)}
-			<StatusIndicator onlineStatus={onlineStatus || 'offline'} tooltip={false} color={'#232428'} />
+			{onlineStatus !== 'group' && (
+				<StatusIndicator onlineStatus={onlineStatus || 'offline'} color={bgColor} tooltip={tooltip} />
+			)}
 		</div>
 	)
 }
