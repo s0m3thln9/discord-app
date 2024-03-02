@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Button from '../UI/Button/Button.tsx'
 import { DSLogoText } from '../../../public/svgs.tsx'
 import { useForm } from 'react-hook-form'
+import { RegisterUserData } from '../../types/AuthProvider.ts'
 
 const Authorization = () => {
 	const {
@@ -18,7 +19,7 @@ const Authorization = () => {
 
 	const onSubmit = async () => {
 		const data = { ...getValues() }
-		await login(data)
+		await login(data as RegisterUserData)
 	}
 
 	return (

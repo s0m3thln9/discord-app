@@ -5,6 +5,7 @@ import Checkbox from '../UI/Checkbox/Checkbox.tsx'
 import { days, months, years } from './data.ts'
 import { Controller, useForm } from 'react-hook-form'
 import Select from 'react-select'
+import { RegisterUserData } from '../../types/AuthProvider.ts'
 
 const Registration = () => {
 	const {
@@ -26,7 +27,7 @@ const Registration = () => {
 			birthdayDay: parseInt(getValues().birthdayDay.value),
 			birthdayYear: parseInt(getValues().birthdayYear.value),
 		}
-		await reg(data)
+		await reg(data as RegisterUserData)
 	}
 
 	return (
