@@ -1,7 +1,7 @@
-import Authorization from './components/auth/Authorization/Authorization.tsx'
 import { Route, Routes } from 'react-router-dom'
 import { Main } from './components/Main/Main.tsx'
-import Registration from './components/auth/Registration/Registration.tsx'
+import Authorization from './components/Authorization/Authorization.tsx'
+import Registration from './components/Registration/Registration.tsx'
 
 function App() {
 	return (
