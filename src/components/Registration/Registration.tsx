@@ -37,6 +37,7 @@ const Registration = () => {
 					Create an account
 				</h2>
 				<form className={'w-full mt-5'} onSubmit={handleSubmit(onSubmit)}>
+
 					<div>
 						<label
 							className={`text-xs font-bold uppercase tracking-wide ${errors.email ? `text-[#fa777c]` : 'text-[#b5bac1]'}`}

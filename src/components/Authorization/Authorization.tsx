@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Button from '../UI/Button/Button.tsx'
 import { DSLogoText } from '../../../public/svgs.tsx'
 import { useForm } from 'react-hook-form'
+import Input from '../UI/Input/Input.tsx'
 
 const Authorization = () => {
 
@@ -37,6 +38,7 @@ const Authorization = () => {
 						className={'w-full mt-5'}
 						onSubmit={handleSubmit(onSubmit)}
 					>
+						<Input errors={errors} register={register} label={'email'} required={true}/>
 						<label
 							className={`text-xs font-bold uppercase tracking-wide ${errors.email ? `text-[#fa777c]` : 'text-[#b5bac1]'}`}
 							htmlFor="email"
