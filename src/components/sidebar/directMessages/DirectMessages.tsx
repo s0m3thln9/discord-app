@@ -30,7 +30,7 @@ const DirectMessages = () => {
 	return (
 		<section className={'pb-0 pl-2.5 pr-0.5 pt-2.5'}>
 			<div className={'group flex items-center justify-between px-2'}>
-				<h4 className={'cursor-default text-xs uppercase text-[#949ba4]  group-hover:text-[#dbdee1]'}>
+				<h4 className={'cursor-default text-xs uppercase text-[#949ba4] group-hover:text-[#dbdee1]'}>
 					Direct Messages
 				</h4>
 				<div className="group flex h-4 w-4 cursor-pointer items-center justify-center">
