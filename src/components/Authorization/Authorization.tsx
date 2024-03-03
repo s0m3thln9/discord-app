@@ -1,4 +1,4 @@
-import { useAuth } from '../../providers/auth-provider/AuthProvider.tsx'
+import { useAuth } from '../../providers/authProvider/AuthProvider.tsx'
 import { Link } from 'react-router-dom'
 import Button from '../UI/Button/Button.tsx'
 import { DSLogoText } from '../../../public/svgs.tsx'
@@ -84,7 +84,7 @@ const Authorization = () => {
 					</form>
 				</div>
 				<div className={'grid place-items-center max-lg:hidden'}>
-					<img src="/public/img/qr-code.png" alt="" />
+					<img src="/img/qr-code.png" alt="" />
 					<h2 className={'mt-8 text-center text-2xl font-semibold text-[#f2f3f5]'}>Log in with QR Code</h2>
 					<p className={'mt-2 text-center font-medium text-[#b5bac1]'}>
 						Scan this with the <strong>Discord mobile app</strong> to log in instantly.

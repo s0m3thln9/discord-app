@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import AuthProvider from './auth-provider/AuthProvider.tsx'
+import AuthProvider from './authProvider/AuthProvider.tsx'
 import { Provider } from 'react-redux'
 import { store } from '../store/store.ts'
 import { BrowserRouter } from 'react-router-dom'
