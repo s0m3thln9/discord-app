@@ -12,12 +12,12 @@ export const Main = () => {
 	return (
 		<main className={'relative h-[100svh] overflow-hidden bg-[#313338] text-[#b5bac1]'}>
 			<MainPage
-				className={`${isSettingsOpen ? 'pointer-events-none scale-95 opacity-0 ' : ''}`}
+				className={`${isSettingsOpen ? 'pointer-events-none scale-90 opacity-0 ' : ''}`}
 				toggleSettings={toggleSettings}
 			/>
 			<SettingsPage
 				toggleSettings={toggleSettings}
-				className={`${!isSettingsOpen ? 'pointer-events-none scale-105 opacity-0 ' : ''}`}
+				className={`${!isSettingsOpen ? 'pointer-events-none scale-110 opacity-0 ' : ''}`}
 			/>
 		</main>
 	)
