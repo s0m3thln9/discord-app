@@ -39,7 +39,7 @@ const RegistrationForm = () => {
 				id={'email'}
 				type={'email'}
 				label={'email'}
-				classes={'mt-2 mb-5'}
+				classes={'mb-5'}
 				required={'Required'}
 			/>
 			<Input
@@ -49,7 +49,7 @@ const RegistrationForm = () => {
 				type={'displayName'}
 				label={'display name'}
 				help={'This is how others see you. You can use special characters and emoji.'}
-				classes={'mt-2 mb-5'}
+				classes={'mb-5'}
 				required={false}
 			/>
 			<Input
@@ -59,7 +59,7 @@ const RegistrationForm = () => {
 				type={'username'}
 				label={'username'}
 				help={'Please only use numbers, letters, underscores _, or periods.'}
-				classes={'mt-2 mb-5'}
+				classes={'mb-5'}
 				required={'Required'}
 				pattern={{
 					value: /^[a-z0-9_.]+$/,
@@ -81,7 +81,7 @@ const RegistrationForm = () => {
 				type={'password'}
 				label={'password'}
 				help={false}
-				classes={'mt-2 mb-5'}
+				classes={'mb-5'}
 				required={'Required'}
 				pattern={{
 					value: /^(?=.*[0-9])(?=.*[a-z])(?!.* ).{8,72}$/,

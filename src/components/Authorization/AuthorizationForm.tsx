@@ -34,7 +34,7 @@ const AuthorizationForm = () => {
 				id={'email'}
 				type={'email'}
 				label={'email'}
-				classes={'mt-2 mb-5'}
+				classes={'mb-5'}
 				required={'Required'}
 			/>
 			<Input
@@ -43,7 +43,6 @@ const AuthorizationForm = () => {
 				id={'password'}
 				type={'password'}
 				label={'password'}
-				classes={'mt-2'}
 				required={'Required'}
 			/>
 			<p className={'mt-2 font-medium text-sm text-[#949ba4]'}>
