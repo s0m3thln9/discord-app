@@ -6,6 +6,10 @@ body {
 	font-family: 'gg sans', sans-serif;
 }
 
+* {
+    user-select: none;
+}
+
 a {
 	color: #00a8fc;
 }
@@ -36,7 +40,7 @@ ul::-webkit-scrollbar-thumb {
         transition-all duration-200 ease-in-out
         before:absolute before:left-[-1rem]
         before:h-2 before:w-2 before:translate-x-[-0.25rem] before:rounded before:bg-[transparent] before:transition-all before:duration-200 before:ease-linear hover:rounded-2xl hover:bg-[#3BA55D]
-        hover:before:bg-[#f2f3f5] hover:before:h-6 hover:before:translate-x-0;
+        hover:before:bg-white hover:before:h-6 hover:before:translate-x-0;
 	}
 }
 

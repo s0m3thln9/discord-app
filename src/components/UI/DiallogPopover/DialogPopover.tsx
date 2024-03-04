@@ -11,7 +11,7 @@ type Props = {
 const DialogPopover = ({ title, content, isOpen, setIsOpen, dangerAction }: Props) => {
 	return (
 		<div
-			className={`absolute left-1/2 top-1/2 flex h-full w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-[rgba(0,0,0,0.7)] p-4 transition duration-300
+			className={`absolute left-1/2 top-1/2 z-10 flex h-full w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-[rgba(0,0,0,0.7)] p-4 transition duration-300
 				${isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'}
 				`}
 			onClick={e => {

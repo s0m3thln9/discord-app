@@ -27,6 +27,8 @@ export default {
 			hover: '#35373c',
 			'user-info': '#232428',
 			content: '#313338',
+			'profile-bg': '#1e1f22',
+			white: '#f2f3f5',
 		},
 	},
 	plugins: [],

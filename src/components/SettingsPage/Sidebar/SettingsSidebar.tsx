@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import DialogPopover from '../../UI/DiallogPopover/DialogPopover.tsx'
 import { useAuth } from '../../../providers/authProvider/AuthProvider.tsx'
+import Headline from '../../UI/Headline/Headline.tsx'
 
 type Setting = {
 	id: number
@@ -27,7 +28,7 @@ const SettingsSidebar = ({ className }: React.HTMLAttributes<HTMLDivElement>) =>
 		list: [
 			{
 				id: 1,
-				name: 'My Accound',
+				name: 'My Account',
 			},
 			{
 				id: 2,
@@ -195,7 +196,7 @@ const SettingsSidebar = ({ className }: React.HTMLAttributes<HTMLDivElement>) =>
 const PrintMenu = ({ menu }: { menu: Menu }) => {
 	return (
 		<>
-			{menu.title && <h2 className={'px-2.5 pb-1.5 text-xs font-bold uppercase text-[#949ba4]'}>{menu.title}</h2>}
+			{menu.title && <Headline className={'px-2.5 pb-1.5'}>{menu.title}</Headline>}
 			<ul>
 				{menu.list.map(setting => (
 					<li className={'h-fit cursor-pointer'} key={setting.id}>

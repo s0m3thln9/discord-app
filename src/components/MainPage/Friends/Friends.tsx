@@ -11,7 +11,7 @@ const FriendsSection = () => {
 				<div className={'flex items-center'}>
 					<div className={'flex items-center'}>
 						<Friends fill={'#80848e'} className={'mx-2'} />
-						<h2 className={'cursor-default font-semibold text-[#f2f3f5]'}>Friends</h2>
+						<h2 className={'text-white cursor-default font-semibold'}>Friends</h2>
 					</div>
 					<TabBar />
 				</div>

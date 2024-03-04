@@ -35,7 +35,7 @@ const Authorization = () => {
 			>
 				<div className={'grid justify-items-center max-sm:h-full max-sm:w-auto max-sm:content-start'}>
 					<DSLogoText classes={'hidden mb-4 max-sm:block'} />
-					<h2 className={'text-center text-2xl font-semibold text-[#f2f3f5]'}>Welcome back!</h2>
+					<h2 className={'text-white text-center text-2xl font-semibold'}>Welcome back!</h2>
 					<p className={'mt-2 text-center font-medium text-[#b5bac1]'}>We're so excited to see you again!</p>
 					<form className={'mt-5 w-full'} onSubmit={handleSubmit(onSubmit)}>
 						<label
@@ -85,7 +85,7 @@ const Authorization = () => {
 				</div>
 				<div className={'grid place-items-center max-lg:hidden'}>
 					<img src="/img/qr-code.png" alt="" />
-					<h2 className={'mt-8 text-center text-2xl font-semibold text-[#f2f3f5]'}>Log in with QR Code</h2>
+					<h2 className={'text-white mt-8 text-center text-2xl font-semibold'}>Log in with QR Code</h2>
 					<p className={'mt-2 text-center font-medium text-[#b5bac1]'}>
 						Scan this with the <strong>Discord mobile app</strong> to log in instantly.
 					</p>

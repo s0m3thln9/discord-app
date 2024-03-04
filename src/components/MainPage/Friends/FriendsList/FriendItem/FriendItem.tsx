@@ -25,7 +25,7 @@ const FriendItem = ({ friend }: Props) => {
 						bgColor={'content'}
 					/>
 					<div className={'ml-3 flex flex-col justify-between'}>
-						<p className={'leading-4 text-[#f2f3f5]'}>
+						<p className={'text-white leading-4'}>
 							{friend.displayName}{' '}
 							<span className={'hidden text-[#b5bac1] group-hover:inline-block'}>{friend.username}</span>
 						</p>

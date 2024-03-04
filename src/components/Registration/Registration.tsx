@@ -37,7 +37,7 @@ const Registration = () => {
 			}
 		>
 			<main className={'grid w-[30rem] justify-between rounded-[0.3125rem] bg-[#313338] p-8 shadow-div'}>
-				<h2 className={'text-center text-2xl font-semibold text-[#f2f3f5]'}>Create an account</h2>
+				<h2 className={'text-white text-center text-2xl font-semibold'}>Create an account</h2>
 				<form className={'mt-5 w-full'} onSubmit={handleSubmit(onSubmit)}>
 					<div>
 						<label

@@ -27,7 +27,7 @@ const UserInfo = ({ toggleSettings }: Props) => {
 					bgColor={'userInfo'}
 				/>
 				<div className="title ml-2 flex w-0 grow	flex-col justify-between leading-4">
-					<p className={'cursor-default text-[#f2f3f5]'}>{user?.displayName}</p>
+					<p className={'text-white cursor-default'}>{user?.displayName}</p>
 					<div className={'h-4 cursor-default overflow-hidden text-xs text-[#c7c9cb]'}>
 						<p
 							className={
