@@ -60,30 +60,14 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 							<Headline>Display name</Headline>
 							<h2 className={'text-white font-regular'}>{user.displayName}</h2>
 						</div>
-						<Button
-							variant={'text'}
-							className={
-								'text-white h-8 bg-[#4e5058] px-4 transition hover:bg-[#6d6f78] hover:text-[white]'
-							}
-							onClick={() => setCurrentSetting('Profiles')}
-						>
-							Edit
-						</Button>
+						<EditBtn setCurrentSetting={setCurrentSetting} />
 					</div>
 					<div className={'mt-6 flex items-center justify-between'}>
 						<div>
 							<Headline>Username</Headline>
 							<h2 className={'text-white font-regular'}>{user.username}</h2>
 						</div>
-						<Button
-							variant={'text'}
-							className={
-								'text-white h-8 bg-[#4e5058] px-4 transition hover:bg-[#6d6f78] hover:text-[white]'
-							}
-							onClick={() => setCurrentSetting('Profiles')}
-						>
-							Edit
-						</Button>
+						<EditBtn setCurrentSetting={setCurrentSetting} />
 					</div>
 					<div className={'mt-6 flex items-center justify-between'}>
 						<div>
@@ -98,15 +82,7 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 								</span>
 							</h2>
 						</div>
-						<Button
-							variant={'text'}
-							className={
-								'text-white h-8 bg-[#4e5058] px-4 transition hover:bg-[#6d6f78] hover:text-[white]'
-							}
-							onClick={() => setCurrentSetting('Profiles')}
-						>
-							Edit
-						</Button>
+						<EditBtn setCurrentSetting={setCurrentSetting} />
 					</div>
 					<div className={'mt-6 flex items-center justify-between'}>
 						<div>
@@ -121,19 +97,23 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 								</span>
 							</h2>
 						</div>
-						<Button
-							variant={'text'}
-							className={
-								'text-white h-8 bg-[#4e5058] px-4 transition hover:bg-[#6d6f78] hover:text-[white]'
-							}
-							onClick={() => setCurrentSetting('Profiles')}
-						>
-							Edit
-						</Button>
+						<EditBtn setCurrentSetting={setCurrentSetting} />
 					</div>
 				</div>
 			</div>
 		</>
+	)
+}
+
+const EditBtn = ({ setCurrentSetting }: Props) => {
+	return (
+		<Button
+			variant={'text'}
+			className={'text-white h-8 bg-[#4e5058] px-4 transition hover:bg-[#6d6f78] hover:text-[white]'}
+			onClick={() => setCurrentSetting('Profiles')}
+		>
+			Edit
+		</Button>
 	)
 }
 
