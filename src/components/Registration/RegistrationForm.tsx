@@ -1,4 +1,4 @@
-import Input from '../UI/Input/Input.tsx'
+import FormInput from '../UI/Input/FormInput.tsx'
 import RegistrationDateSelects from './RegistrationDateSelects.tsx'
 import Checkbox from '../UI/Checkbox/Checkbox.tsx'
 import Button from '../UI/Button/Button.tsx'
@@ -14,83 +14,73 @@ const RegistrationForm = () => {
 		control,
 		getValues,
 		formState: { errors },
-	} = useForm({
+	} = useForm<RegisterUserData>({
 		mode: 'onChange',
 	})
 
 	const { register: reg } = useAuth()
 
-	const onSubmit = async () => {
-		const data = {
-			...getValues(),
-			birthdayMonth: String(getValues().birthdayMonth.value),
-			birthdayDay: parseInt(getValues().birthdayDay.value),
-			birthdayYear: parseInt(getValues().birthdayYear.value),
-		}
-		await reg(data as RegisterUserData)
-	}
+	const onSubmit = async () => await reg({ ...getValues() })
 
 	return (
 		<form className={'mt-5 w-full'} onSubmit={handleSubmit(onSubmit)}>
-			<Input
+			<FormInput
 				errors={errors}
 				register={register}
 				id={'email'}
 				type={'email'}
 				label={'email'}
-				classes={'mb-5'}
+				className={'mb-5'}
 				required={'Required'}
 			/>
-			<Input
+			<FormInput
 				errors={errors}
 				register={register}
 				id={'displayName'}
 				type={'displayName'}
 				label={'display name'}
 				help={'This is how others see you. You can use special characters and emoji.'}
-				classes={'mb-5'}
-				required={false}
+				className={'mb-5'}
 			/>
-			<Input
+			<FormInput
 				errors={errors}
 				register={register}
 				id={'username'}
 				type={'username'}
 				label={'username'}
 				help={'Please only use numbers, letters, underscores _, or periods.'}
-				classes={'mb-5'}
+				className={'mb-5'}
 				required={'Required'}
-				pattern={{
+				pat={{
 					value: /^[a-z0-9_.]+$/,
 					message: 'Username can only use letters, numbers, underscores and periods',
 				}}
-				minLength={{
+				minL={{
 					value: 2,
 					message: 'Must be between 2 and 32 in length',
 				}}
-				maxLength={{
+				maxL={{
 					value: 32,
 					message: 'Must be between 2 and 32 in length',
 				}}
 			/>
-			<Input
+			<FormInput
 				errors={errors}
 				register={register}
 				id={'password'}
 				type={'password'}
 				label={'password'}
-				help={false}
-				classes={'mb-5'}
+				className={'mb-5'}
 				required={'Required'}
-				pattern={{
+				pat={{
 					value: /^(?=.*[0-9])(?=.*[a-z])(?!.* ).{8,72}$/,
 					message: 'Password is too weak or common to use',
 				}}
-				minLength={{
+				minL={{
 					value: 8,
 					message: 'Must be at least 8 characters long',
 				}}
-				maxLength={{
+				maxL={{
 					value: 72,
 					message: 'Must be 72 or fewer in length',
 				}}

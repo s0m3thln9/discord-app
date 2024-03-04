@@ -1,4 +1,4 @@
-import Input from '../UI/Input/Input.tsx'
+import FormInput from '../UI/Input/FormInput.tsx'
 import { Link } from 'react-router-dom'
 import Button from '../UI/Button/Button.tsx'
 import { useForm } from 'react-hook-form'
@@ -24,16 +24,16 @@ const AuthorizationForm = () => {
 
 	return (
 		<form className={'mt-5 w-full'} onSubmit={handleSubmit(onSubmit)}>
-			<Input
+			<FormInput
 				errors={errors}
 				register={register}
 				id={'email'}
 				type={'email'}
 				label={'email'}
-				classes={'mb-5'}
+				className={'mb-5'}
 				required={'Required'}
 			/>
-			<Input
+			<FormInput
 				errors={errors}
 				register={register}
 				id={'password'}

@@ -24,15 +24,19 @@ type PrismaUser = {
 	color: 'orange' | 'red' | 'green' | 'blue' | 'yellow'
 	textStatus: string
 	onlineStatus: 'offline' | 'online' | 'idle' | 'doNotDisturb'
-	phoneNumber: string
 	createdAt: string
 	updatedAt: string
 }
 
-export type RegisterUserData = Omit<
-	PrismaUser,
-	'id' | 'userImage' | 'color' | 'textStatus' | 'onlineStatus' | 'status' | 'createdAt' | 'updatedAt' | 'phoneNumber'
->
+export type RegisterUserData = {
+	email: string
+	displayName: string
+	username: string
+	password: number
+	birthdayYear: number
+	birthdayMonth: string
+	birthdayDay: number
+}
 
 export type User = Omit<PrismaUser, 'password'>
 
