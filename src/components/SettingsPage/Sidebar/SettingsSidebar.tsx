@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import DialogPopover from '../../UI/DiallogPopover/DialogPopover.tsx'
 import { useAuth } from '../../../providers/authProvider/AuthProvider.tsx'
 import Headline from '../../UI/Headline/Headline.tsx'
+import { SettingList } from '../SettingsPage.tsx'
 
 type Setting = {
 	id: number
@@ -14,7 +15,12 @@ type Menu = {
 	list: Setting[]
 }
 
-const SettingsSidebar = ({ className }: React.HTMLAttributes<HTMLDivElement>) => {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+	currentSetting: SettingList
+	setCurrentSetting: (newSetting: SettingList) => void
+}
+
+const SettingsSidebar = ({ className, currentSetting, setCurrentSetting }: Props) => {
 	const { logout } = useAuth()
 
 	const [isLogoutPopoverOpen, openLogoutPopover] = useState(false)
@@ -174,12 +180,36 @@ const SettingsSidebar = ({ className }: React.HTMLAttributes<HTMLDivElement>) =>
 		<aside className={`bg-sidebar ${className}`}>
 			<div className={'flex h-svh w-full justify-end overflow-y-scroll pl-5 pr-1.5'}>
 				<div className={'h-fit w-[13.625rem] py-[3.75rem]'}>
-					<PrintMenu menu={userSettings} />
-					<PrintMenu menu={billingSettings} />
-					<PrintMenu menu={appSettings} />
-					<PrintMenu menu={activitySettings} />
-					<PrintMenu menu={alsoSettings} />
-					<PrintMenu menu={logoutSettings} />
+					<PrintMenu
+						menu={userSettings}
+						currentSetting={currentSetting}
+						setCurrentSetting={setCurrentSetting}
+					/>
+					<PrintMenu
+						menu={billingSettings}
+						currentSetting={currentSetting}
+						setCurrentSetting={setCurrentSetting}
+					/>
+					<PrintMenu
+						menu={appSettings}
+						currentSetting={currentSetting}
+						setCurrentSetting={setCurrentSetting}
+					/>
+					<PrintMenu
+						menu={activitySettings}
+						currentSetting={currentSetting}
+						setCurrentSetting={setCurrentSetting}
+					/>
+					<PrintMenu
+						menu={alsoSettings}
+						currentSetting={currentSetting}
+						setCurrentSetting={setCurrentSetting}
+					/>
+					<PrintMenu
+						menu={logoutSettings}
+						currentSetting={currentSetting}
+						setCurrentSetting={setCurrentSetting}
+					/>
 				</div>
 			</div>
 			<DialogPopover
@@ -193,17 +223,25 @@ const SettingsSidebar = ({ className }: React.HTMLAttributes<HTMLDivElement>) =>
 	)
 }
 
-const PrintMenu = ({ menu }: { menu: Menu }) => {
+type MenuProps = {
+	menu: Menu
+	currentSetting: SettingList
+	setCurrentSetting: (newSetting: SettingList) => void
+}
+
+const PrintMenu = ({ menu, currentSetting, setCurrentSetting }: MenuProps) => {
 	return (
 		<>
 			{menu.title && <Headline className={'px-2.5 pb-1.5'}>{menu.title}</Headline>}
 			<ul>
 				{menu.list.map(setting => (
-					<li className={'h-fit cursor-pointer'} key={setting.id}>
+					<li
+						className={`h-fit cursor-pointer rounded ${currentSetting === setting.name ? 'bg-hover' : ''}`}
+						key={setting.id}
+						onClick={() => setCurrentSetting(setting.name as SettingList)}
+					>
 						<span
-							className={
-								'mb-0.5 block rounded px-2.5 py-1.5 text-[#b5bac1] hover:bg-hover hover:no-underline'
-							}
+							className={`mb-0.5 block rounded px-2.5 py-1.5 text-[#b5bac1] hover:bg-hover hover:no-underline ${currentSetting === setting.name ? 'text-white' : ''}`}
 							onClick={setting?.onClick}
 						>
 							{setting.name}
