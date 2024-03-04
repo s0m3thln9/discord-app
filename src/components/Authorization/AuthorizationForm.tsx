@@ -34,7 +34,7 @@ const AuthorizationForm = () => {
 				id={'email'}
 				type={'email'}
 				label={'email'}
-				classes={'mb-5'}
+				className={'mb-5'}
 				required={'Required'}
 			/>
 			<Input
