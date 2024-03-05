@@ -2,7 +2,7 @@ import Input from '../UI/Input/Input.tsx'
 import { Link } from 'react-router-dom'
 import Button from '../UI/Button/Button.tsx'
 import { useForm } from 'react-hook-form'
-import { RegisterUserData } from '../../types/AuthProvider.ts'
+import { LoginUserData } from '../../types/AuthProvider.ts'
 import { useAuth } from '../../providers/auth-provider/AuthProvider.tsx'
 
 const AuthorizationForm = () => {
@@ -14,13 +14,13 @@ const AuthorizationForm = () => {
 		handleSubmit,
 		getValues,
 		formState: { errors },
-	} = useForm({
+	} = useForm<LoginUserData>({
 		mode: 'onChange',
 	})
 
 	const onSubmit = async () => {
 		const data = { ...getValues() }
-		await login(data as RegisterUserData)
+		await login(data)
 	}
 
 	return (
@@ -29,21 +29,27 @@ const AuthorizationForm = () => {
 			onSubmit={handleSubmit(onSubmit)}
 		>
 			<Input
-				errors={errors}
-				register={register}
+				{...register(
+					'email',
+					{ required: 'Required' },
+				)}
 				id={'email'}
 				type={'email'}
 				label={'email'}
 				className={'mb-5'}
-				required={'Required'}
+				required
+				error={errors.email}
 			/>
 			<Input
-				errors={errors}
-				register={register}
+				{...register(
+					'password',
+					{ required: 'Required' },
+				)}
 				id={'password'}
 				type={'password'}
 				label={'password'}
-				required={'Required'}
+				required
+				error={errors.password}
 			/>
 			<p className={'mt-2 font-medium text-sm text-[#949ba4]'}>
 				<Link to="/">Forgot your password?</Link>

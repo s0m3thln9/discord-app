@@ -21,70 +21,82 @@ const RegistrationForm = () => {
 
 	const { register: reg } = useAuth()
 
-	const onSubmit = async () => await reg({...getValues()})
+	const onSubmit = async () => await reg({ ...getValues() })
 
 	return (
 		<form className={'w-full mt-5'} onSubmit={handleSubmit(onSubmit)}>
 			<Input
-				errors={errors}
-				register={register}
+				{...register(
+					'email',
+					{ required: 'Required' },
+				)}
 				id={'email'}
 				type={'email'}
 				label={'email'}
 				className={'mb-5'}
-				required={'Required'}
+				required
+				error={errors.email}
 			/>
 			<Input
-				errors={errors}
-				register={register}
+				{...register('displayName')}
 				id={'displayName'}
-				type={'displayName'}
-				label={'display name'}
+				type={'text'}
+				label={'displayName'}
 				help={'This is how others see you. You can use special characters and emoji.'}
 				className={'mb-5'}
 			/>
 			<Input
-				errors={errors}
-				register={register}
+				{...register(
+					'username',
+					{
+						required: 'Required',
+						minLength: {
+							value: 2,
+							message: 'Must be between 2 and 32 in length',
+						},
+						maxLength: {
+							value: 32,
+							message: 'Must be between 2 and 32 in length',
+						},
+						pattern: {
+							value: /^[a-z0-9_.]+$/,
+							message: 'Username can only use letters, numbers, underscores and periods',
+						},
+					},
+				)}
 				id={'username'}
-				type={'username'}
+				type={'text'}
 				label={'username'}
 				help={'Please only use numbers, letters, underscores _, or periods.'}
 				className={'mb-5'}
-				required={'Required'}
-				pat={{
-					value: /^[a-z0-9_.]+$/,
-					message: 'Username can only use letters, numbers, underscores and periods',
-				}}
-				minL={{
-					value: 2,
-					message: 'Must be between 2 and 32 in length',
-				}}
-				maxL={{
-					value: 32,
-					message: 'Must be between 2 and 32 in length',
-				}}
+				required
+				error={errors.username}
 			/>
 			<Input
-				errors={errors}
-				register={register}
+				{...register(
+					'password',
+					{
+						required: 'Required',
+						minLength: {
+							value: 8,
+							message: 'Must be at least 8 characters long',
+						},
+						maxLength: {
+							value: 72,
+							message: 'Must be 72 or fewer in length',
+						},
+						pattern: {
+							value: /^(?=.*[0-9])(?=.*[a-z])(?!.* ).{8,72}$/,
+							message: 'Password is too weak or common to use',
+						},
+					},
+				)}
 				id={'password'}
 				type={'password'}
 				label={'password'}
 				className={'mb-5'}
-				required={'Required'}
-				pat={{
-					value: /^(?=.*[0-9])(?=.*[a-z])(?!.* ).{8,72}$/,
-					message: 'Password is too weak or common to use',
-				}}
-				minL={{
-					value: 8,
-					message: 'Must be at least 8 characters long',
-				}}
-				maxL={{
-					value: 72,
-					message: 'Must be 72 or fewer in length',
-				}}
+				required
+				error={errors.password}
 			/>
 			<RegistrationDateSelects errors={errors} control={control} />
 			<Checkbox
