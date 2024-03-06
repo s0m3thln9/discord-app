@@ -1,4 +1,4 @@
-import FormInput from '../UI/Input/FormInput.tsx'
+import Input from '../UI/Input/Input.tsx'
 import { Link } from 'react-router-dom'
 import Button from '../UI/Button/Button.tsx'
 import { useForm } from 'react-hook-form'
@@ -18,28 +18,28 @@ const AuthorizationForm = () => {
 	})
 
 	const onSubmit = async () => {
-		const data: LoginUserData = { ...getValues() }
+		const data = { ...getValues() }
 		await login(data)
 	}
 
 	return (
 		<form className={'mt-5 w-full'} onSubmit={handleSubmit(onSubmit)}>
-			<FormInput
-				errors={errors}
-				register={register}
+			<Input
+				{...register('email', { required: 'Required' })}
 				id={'email'}
 				type={'email'}
 				label={'email'}
 				className={'mb-5'}
-				required={'Required'}
+				required
+				error={errors.email}
 			/>
-			<FormInput
-				errors={errors}
-				register={register}
+			<Input
+				{...register('password', { required: 'Required' })}
 				id={'password'}
 				type={'password'}
 				label={'password'}
-				required={'Required'}
+				required
+				error={errors.password}
 			/>
 			<p className={'mt-2 text-sm font-medium text-[#949ba4]'}>
 				<Link to="/">Forgot your password?</Link>

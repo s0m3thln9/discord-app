@@ -1,8 +1,14 @@
-import { Controller } from 'react-hook-form'
+import { Control, Controller, FieldErrors } from 'react-hook-form'
 import Select from 'react-select'
 import { days, months, years } from './data.ts'
+import { RegisterUserData } from '../../types/AuthProvider.ts'
 
-const RegistrationDateSelects = ({ errors, control }) => {
+type Props = {
+	errors: FieldErrors
+	control: Control<RegisterUserData>
+}
+
+const RegistrationDateSelects = ({ errors, control }: Props) => {
 	return (
 		<div>
 			<label
