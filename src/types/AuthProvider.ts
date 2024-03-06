@@ -24,6 +24,7 @@ type PrismaUser = {
 	color: 'orange' | 'red' | 'green' | 'blue' | 'yellow'
 	textStatus: string
 	onlineStatus: 'offline' | 'online' | 'idle' | 'doNotDisturb'
+	phoneNumber: string
 	createdAt: string
 	updatedAt: string
 }

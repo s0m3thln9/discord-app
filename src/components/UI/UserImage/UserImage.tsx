@@ -1,7 +1,8 @@
-import { DSLogo } from '../../../../public/svgs.tsx'
+import { DSLogo, Edit } from '../../../../public/svgs.tsx'
 import StatusIndicator from '../OnlineStatusIndicator/StatusIndicator.tsx'
 import { cva, VariantProps } from 'class-variance-authority'
 import { cn } from '../../../utils/cn.ts'
+import { Dispatch, SetStateAction } from 'react'
 
 interface Props extends VariantProps<typeof userImageVariants> {
 	image: string
@@ -10,9 +11,10 @@ interface Props extends VariantProps<typeof userImageVariants> {
 	tooltip?: boolean
 	className?: string
 	bgColor: 'sidebar' | 'content' | 'userInfo' | 'profile-bg' | null | undefined
+	editable?: Dispatch<SetStateAction<boolean>>
 }
 
-const UserImage = ({ image, onlineStatus, color, className, bgColor, tooltip, size, border }: Props) => {
+const UserImage = ({ image, onlineStatus, color, className, bgColor, tooltip, size, border, editable }: Props) => {
 	return (
 		<div className={cn(userImageVariants({ size, border }), className)}>
 			{image ? (
@@ -23,6 +25,18 @@ const UserImage = ({ image, onlineStatus, color, className, bgColor, tooltip, si
 					style={{ background: color }}
 				>
 					<DSLogo width={20} height={20} />
+				</div>
+			)}
+			{editable && (
+				<div
+					className={
+						'absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center rounded-full opacity-0 backdrop-brightness-50 hover:opacity-100'
+					}
+					onClick={() => {
+						editable(true)
+					}}
+				>
+					<Edit />
 				</div>
 			)}
 			{onlineStatus !== 'group' && (

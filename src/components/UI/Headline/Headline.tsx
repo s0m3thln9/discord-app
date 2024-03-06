@@ -6,7 +6,7 @@ interface Props extends HTMLAttributes<HTMLHeadingElement> {
 }
 
 const Headline = ({ children, className }: Props) => {
-	return <h2 className={twMerge('text-xs font-bold uppercase text-[#949ba4]', className)}>{children}</h2>
+	return <h2 className={twMerge('text-xs font-bold uppercase text-[rgb(181,186,193)]', className)}>{children}</h2>
 }
 
 export default Headline

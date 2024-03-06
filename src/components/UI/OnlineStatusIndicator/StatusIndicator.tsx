@@ -26,7 +26,7 @@ const Indicator = ({ onlineStatus, color, size }: VariantProps<typeof statusIndi
 	return <div className={cn(statusIndicatorVariants({ onlineStatus, color, size }))}></div>
 }
 
-const statusIndicatorVariants = cva('absolute  rounded-full group-hover:border-hover group-hover:before:bg-hover', {
+const statusIndicatorVariants = cva('absolute z-10 rounded-full group-hover:border-hover group-hover:before:bg-hover', {
 	variants: {
 		onlineStatus: {
 			offline:

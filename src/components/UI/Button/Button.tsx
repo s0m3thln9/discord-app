@@ -23,7 +23,7 @@ const buttonVariants = cva('flex items-center justify-center hover:bg-[#393c41] 
 			text: 'px-2 text-[#949ba4] text-start leading-5 hover:text-[#dbdee1] w-fit h-fit',
 			danger: 'px-2 text-[#949ba4] text-start leading-5 hover:text-[#dbdee1] w-fit h-fit bg-[#da373c]',
 			icon: 'h-9 w-9 rounded-full bg-[#2b2d31] group-hover:bg-[#1e1f22] group/iconBtn',
-			ghost: '',
+			link: 'px-6 py-2 text-[white] hover:bg-[none] hover:underline',
 			active: 'px-2 text-[#949ba4] w-full text-start leading-5 bg-[#43444b] text-[#fff]',
 		},
 	},
