@@ -2,7 +2,7 @@ import FormInput from '../UI/Input/FormInput.tsx'
 import { Link } from 'react-router-dom'
 import Button from '../UI/Button/Button.tsx'
 import { useForm } from 'react-hook-form'
-import { RegisterUserData } from '../../types/AuthProvider.ts'
+import { LoginUserData } from '../../types/AuthProvider.ts'
 import { useAuth } from '../../providers/authProvider/AuthProvider.tsx'
 
 const AuthorizationForm = () => {
@@ -13,13 +13,13 @@ const AuthorizationForm = () => {
 		handleSubmit,
 		getValues,
 		formState: { errors },
-	} = useForm({
+	} = useForm<LoginUserData>({
 		mode: 'onChange',
 	})
 
 	const onSubmit = async () => {
-		const data = { ...getValues() }
-		await login(data as RegisterUserData)
+		const data: LoginUserData = { ...getValues() }
+		await login(data)
 	}
 
 	return (

@@ -1,12 +1,12 @@
 import Headline from '../../../UI/Headline/Headline'
-import { useAppSelector } from '../../../../hooks/typedHooks.ts'
+//import { useAppSelector } from '../../../../hooks/typedHooks.ts'
 import { useState } from 'react'
 import FormInput from '../../../UI/Input/FormInput.tsx'
 
 const Profiles = () => {
-	const user = useAppSelector(state => state.auth.user)
+	//const user = useAppSelector(state => state.auth.user)
 
-	const [displayName, setDisplayName] = useState(user?.displayName)
+	//const [displayName, setDisplayName] = useState(user?.displayName)
 	const [pronouns, setPronouns] = useState('')
 
 	return (

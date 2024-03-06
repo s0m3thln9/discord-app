@@ -1,6 +1,7 @@
-import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
+import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import { HTMLInputTypeAttribute } from 'react'
 import Input from './Input.tsx'
+import { RegisterUserData } from '../../../types/AuthProvider.ts'
 
 type MinLength = {
 	value: number
@@ -19,7 +20,7 @@ type Pattern = {
 
 type Props = {
 	errors?: FieldErrors
-	register?: UseFormRegister<FieldValues>
+	register?: UseFormRegister<RegisterUserData>
 	id: string
 	type: HTMLInputTypeAttribute
 	label?: string
