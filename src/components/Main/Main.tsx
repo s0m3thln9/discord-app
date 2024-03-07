@@ -3,7 +3,7 @@ import MainPage from '../MainPage/MainPage.tsx'
 import SettingsPage from '../SettingsPage/SettingsPage.tsx'
 
 export const Main = () => {
-	const [isSettingsOpen, openSettings] = useState(true)
+	const [isSettingsOpen, openSettings] = useState(false)
 
 	const toggleSettings = () => {
 		openSettings(isSettingsOpenPrev => !isSettingsOpenPrev)

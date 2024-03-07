@@ -1,13 +1,15 @@
 import Headline from '../../../UI/Headline/Headline'
 import { useState } from 'react'
 import Input from '../../../UI/Input/Input.tsx'
-import { useAppSelector } from '../../../../hooks/typedHooks.ts'
+import { useAppDispatch, useAppSelector } from '../../../../hooks/typedHooks.ts'
 import UserImage from '../../../UI/UserImage/UserImage.tsx'
 import Timer from '../../../UI/Timer/Timer.tsx'
 import Button from '../../../UI/Button/Button.tsx'
 import { twMerge } from 'tailwind-merge'
 import { Cross } from '../../../../../public/svgs.tsx'
 import DialogPopover from '../../../UI/DiallogPopover/DialogPopover.tsx'
+import { useUpdateUserMutation } from '../../../../api/api.ts'
+import { updateUserData } from '../../../../store/slices/authUserSlice.ts'
 
 const Profiles = () => {
 	const user = useAppSelector(state => state.auth.user)
@@ -16,6 +18,8 @@ const Profiles = () => {
 	const [pronouns, setPronouns] = useState('')
 	const [notificationSeen, setNotificationSeen] = useState(false)
 	const [changeAvatar, setChangeAvatar] = useState(false)
+	const [updateUser] = useUpdateUserMutation()
+	const dispatch = useAppDispatch()
 
 	if (!user) {
 		return null
@@ -90,7 +94,7 @@ const Profiles = () => {
 										className={'h-12 w-12'}
 									/>
 								</div>
-								<div className={'font-code ml-4'}>
+								<div className={'ml-4 font-code'}>
 									<p className={'text-sm leading-4 text-white'}>User Profile</p>
 									<p className={'text-sm leading-4'}>
 										<Timer />
@@ -129,10 +133,17 @@ const Profiles = () => {
 					<Button
 						variant={'primary'}
 						className={'w-fit bg-[#288444] hover:bg-[#206434]'}
-						onClick={() => {
-							setNotificationSeen(false)
-							setDisplayName(user.displayName)
-							setPronouns('')
+						onClick={async () => {
+							const response = await updateUser({ displayName }).unwrap()
+							if (response.success) {
+								dispatch(updateUserData({ displayName }))
+								setNotificationSeen(false)
+								setPronouns('')
+							} else {
+								setNotificationSeen(false)
+								setDisplayName(user.displayName)
+								setPronouns('')
+							}
 						}}
 					>
 						Save Changes

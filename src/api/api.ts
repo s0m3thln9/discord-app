@@ -4,10 +4,10 @@ import {
 	GetUserWithJwtResponse,
 	LoginUserData,
 	RegisterResponse,
-	RegisterUserData,
 } from '../types/AuthProvider.ts'
 import { GetFriendsResponse } from '../types/friends.ts'
 import { GetGroupsResponse } from '../types/groups.ts'
+import { RegisterUserData, UpdateUserData, UpdateUserResponse } from '../types/user.ts'
 
 export const api = createApi({
 	reducerPath: 'api',
@@ -49,6 +49,14 @@ export const api = createApi({
 				url: 'group/get',
 			}),
 		}),
+
+		updateUser: builder.mutation<UpdateUserResponse, UpdateUserData>({
+			query: updateUserData => ({
+				url: '/user/update',
+				method: 'POST',
+				body: updateUserData,
+			}),
+		}),
 	}),
 })
 
@@ -58,4 +66,5 @@ export const {
 	useLoginUserWithJwtQuery,
 	useGetFriendsQuery,
 	useGetGroupsQuery,
+	useUpdateUserMutation,
 } = api

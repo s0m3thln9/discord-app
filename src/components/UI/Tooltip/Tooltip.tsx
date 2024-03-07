@@ -10,14 +10,16 @@ interface Props extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeo
 
 const Tooltip = ({ children, text, vertical, horizontal, x, y, className, ...props }: Props) => {
 	return (
-		<div className={twMerge('group/tooltip relative h-full w-full', className)} {...props}>
-			{children}
-			<div
-				className={cn(tooltipVariations({ vertical, horizontal, x, y }))}
-				style={{ boxShadow: '0 1rem 1rem 0 rgba(0, 0, 0, 0.2)' }}
-			>
-				<div className={cn(tooltipArrowVariations({ vertical, horizontal }))}>
-					<p className={'whitespace-nowrap text-sm font-medium'}>{text}</p>
+		<div className={twMerge('', className)} {...props}>
+			<div className={twMerge('group/tooltip relative h-full w-full')}>
+				{children}
+				<div
+					className={cn(tooltipVariations({ vertical, horizontal, x, y }))}
+					style={{ boxShadow: '0 1rem 1rem 0 rgba(0, 0, 0, 0.2)' }}
+				>
+					<div className={cn(tooltipArrowVariations({ vertical, horizontal }))}>
+						<p className={'whitespace-nowrap text-sm font-medium'}>{text}</p>
+					</div>
 				</div>
 			</div>
 		</div>

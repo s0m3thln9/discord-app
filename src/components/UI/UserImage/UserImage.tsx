@@ -18,7 +18,7 @@ const UserImage = ({ image, onlineStatus, color, className, bgColor, tooltip, si
 	return (
 		<div className={cn(userImageVariants({ size, border }), className)}>
 			{image ? (
-				<img src={image} className={`rounded-full`} alt={'user image'} />
+				<img src={image} className={cn(ImageVariants({ size }))} alt={'user image'} />
 			) : (
 				<div
 					className={'flex h-8 w-8 shrink-0 items-center justify-center rounded-full'}
@@ -65,6 +65,15 @@ const userImageVariants = cva('relative inline-block', {
 	defaultVariants: {
 		size: 'md',
 		border: 'none',
+	},
+})
+
+const ImageVariants = cva('rounded-full', {
+	variants: {
+		size: {
+			md: 'h-8 w-8',
+			lg: 'h-[5rem] w-[calc(5rem+0.8rem)]',
+		},
 	},
 })
 

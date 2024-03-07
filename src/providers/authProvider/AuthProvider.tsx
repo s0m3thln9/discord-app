@@ -2,7 +2,7 @@
 
 import { Context, createContext, ReactNode, useContext, useEffect } from 'react'
 import Cookies from 'js-cookie'
-import { LoginUserData, RegisterUserData, TAuthProvider } from '../../types/AuthProvider.ts'
+import { LoginUserData, TAuthProvider } from '../../types/AuthProvider.ts'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../../hooks/typedHooks.ts'
 import { authUser, logOut } from '../../store/slices/authUserSlice.ts'
@@ -11,6 +11,7 @@ import {
 	useLoginUserWithJwtQuery,
 	useRegisterUserMutation,
 } from '../../api/api.ts'
+import { RegisterUserData } from '../../types/user.ts'
 
 export let AuthContext: Context<TAuthProvider>
 

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { User } from '../../types/AuthProvider.ts'
+import { UpdateUserData, User } from '../../types/user.ts'
 
 type InitialState = {
 	user: null | User
@@ -22,9 +22,21 @@ export const authUserSlice = createSlice({
 		logOut: state => {
 			state.isAuth = false
 		},
+		updateUserData: (state, action: PayloadAction<UpdateUserData>) => {
+			if (!state.user) {
+				state.user = null
+				return
+			}
+			state.user = {
+				...state.user,
+				id: state.user.id,
+				createdAt: state.user.createdAt,
+				...action.payload,
+			}
+		},
 	},
 })
 
-export const { authUser, logOut } = authUserSlice.actions
+export const { authUser, logOut, updateUserData } = authUserSlice.actions
 
 export default authUserSlice.reducer
