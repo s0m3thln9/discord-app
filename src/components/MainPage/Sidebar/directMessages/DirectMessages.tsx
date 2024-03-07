@@ -1,10 +1,18 @@
 import { Plus } from '../../../../../public/svgs.tsx'
 import Tooltip from '../../../UI/Tooltip/Tooltip.tsx'
 import ChatChannel from './Channel/ChatChannel.tsx'
+import { useAppSelector } from '../../../../hooks/typedHooks.ts'
+import { Channel } from '../../../../store/slices/chatsSlice.ts'
 import { getChannels } from '../../../../store/queries/getChannels.ts'
 
 const DirectMessages = () => {
-	const channels = getChannels()
+	const isAuth = useAppSelector(state => state.auth.isAuth)
+
+	let channels: Channel[] = getChannels()
+
+	if (!isAuth) {
+		return <p>Loading...</p>
+	}
 
 	return (
 		<section className={'pb-0 pl-2.5 pr-0.5 pt-2.5'}>
