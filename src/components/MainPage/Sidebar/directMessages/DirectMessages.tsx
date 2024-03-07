@@ -30,7 +30,7 @@ const DirectMessages = () => {
 			dispatch(addGroupsToChannels(groupsResponse.payload?.groups || []))
 		}
 
-		fetchData()
+		fetchData().then()
 	}, [friendsQuery, groupsQuery, dispatch])
 
 	let channels = useAppSelector(state => state.chats.channels)
