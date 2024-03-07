@@ -8,17 +8,17 @@ import Button from '../../../UI/Button/Button.tsx'
 import { twMerge } from 'tailwind-merge'
 import { Cross } from '../../../../../public/svgs.tsx'
 import DialogPopover from '../../../UI/DiallogPopover/DialogPopover.tsx'
-import { useUpdateUserMutation } from '../../../../api/api.ts'
-import { updateUserData } from '../../../../store/slices/authUserSlice.ts'
+import { useUpdateDisplayNameMutation } from '../../../../api/api.ts'
+import { updateDisplayNameD } from '../../../../store/slices/authUserSlice.ts'
 
 const Profiles = () => {
 	const user = useAppSelector(state => state.auth.user)
 
-	const [displayName, setDisplayName] = useState(user?.displayName)
+	const [displayName, setDisplayName] = useState(user?.displayName || '')
 	const [pronouns, setPronouns] = useState('')
 	const [notificationSeen, setNotificationSeen] = useState(false)
 	const [changeAvatar, setChangeAvatar] = useState(false)
-	const [updateUser] = useUpdateUserMutation()
+	const [updateDisplayName] = useUpdateDisplayNameMutation()
 	const dispatch = useAppDispatch()
 
 	if (!user) {
@@ -134,9 +134,9 @@ const Profiles = () => {
 						variant={'primary'}
 						className={'w-fit bg-[#288444] hover:bg-[#206434]'}
 						onClick={async () => {
-							const response = await updateUser({ displayName }).unwrap()
+							const response = await updateDisplayName({ displayName }).unwrap()
 							if (response.success) {
-								dispatch(updateUserData({ displayName }))
+								dispatch(updateDisplayNameD(displayName))
 								setNotificationSeen(false)
 								setPronouns('')
 							} else {

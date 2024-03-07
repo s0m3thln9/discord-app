@@ -7,7 +7,7 @@ import {
 } from '../types/AuthProvider.ts'
 import { GetFriendsResponse } from '../types/friends.ts'
 import { GetGroupsResponse } from '../types/groups.ts'
-import { RegisterUserData, UpdateUserData, UpdateUserResponse } from '../types/user.ts'
+import { RegisterUserData, UpdateDisplayNameResponse, UpdateUsernameResponse } from '../types/user.ts'
 
 export const api = createApi({
 	reducerPath: 'api',
@@ -50,11 +50,19 @@ export const api = createApi({
 			}),
 		}),
 
-		updateUser: builder.mutation<UpdateUserResponse, UpdateUserData>({
-			query: updateUserData => ({
-				url: '/user/update',
+		updateDisplayName: builder.mutation<UpdateDisplayNameResponse, { displayName: string }>({
+			query: newDisplayName => ({
+				url: '/user/updateDisplayName',
 				method: 'POST',
-				body: updateUserData,
+				body: newDisplayName,
+			}),
+		}),
+
+		updateUsername: builder.mutation<UpdateUsernameResponse, { username: string; password: string }>({
+			query: updateUsername => ({
+				url: '/user/updateUsername',
+				method: 'POST',
+				body: updateUsername,
 			}),
 		}),
 	}),
@@ -66,5 +74,6 @@ export const {
 	useLoginUserWithJwtQuery,
 	useGetFriendsQuery,
 	useGetGroupsQuery,
-	useUpdateUserMutation,
+	useUpdateDisplayNameMutation,
+	useUpdateUsernameMutation,
 } = api

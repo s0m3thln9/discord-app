@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { PublicUser } from '../../types/AuthProvider.ts'
 import { GetFriendsResponse } from '../../types/friends.ts'
+import { PublicUser } from '../../types/user.ts'
 
 type InitialState = {
 	friends: PublicUser[]

@@ -1,10 +1,15 @@
 import UserImage from '../../../../UI/UserImage/UserImage.tsx'
 import Button from '../../../../UI/Button/Button.tsx'
 import Headline from '../../../../UI/Headline/Headline.tsx'
-import React from 'react'
-import { useAppSelector } from '../../../../../hooks/typedHooks.ts'
+import { useEffect, useState } from 'react'
+import { useAppDispatch, useAppSelector } from '../../../../../hooks/typedHooks.ts'
 import { getHiddenEmail, getHiddenPhoneNumber } from '../../../../../utils/hideUserData.ts'
 import { SettingList } from '../../../SettingsPage.tsx'
+import DialogPopover from '../../../../UI/DiallogPopover/DialogPopover.tsx'
+import { Cross } from '../../../../../../public/svgs.tsx'
+import Input from '../../../../UI/Input/Input.tsx'
+import { useUpdateUsernameMutation } from '../../../../../api/api.ts'
+import { updateUsernameD } from '../../../../../store/slices/authUserSlice.ts'
 
 type Props = {
 	setCurrentSetting: (newSetting: SettingList) => void
@@ -13,8 +18,19 @@ type Props = {
 const MyAccount = ({ setCurrentSetting }: Props) => {
 	const user = useAppSelector(state => state.auth.user)
 
-	const [showPhone, setShowPhone] = React.useState(false)
-	const [showEmail, setShowEmail] = React.useState(false)
+	const [showPhone, setShowPhone] = useState(false)
+	const [showEmail, setShowEmail] = useState(false)
+	const [showEditUsernamePopover, setShowEditUsernamePopover] = useState(false)
+	const [changeUsername, setChangeUsername] = useState('')
+	const [password, setPassword] = useState('')
+	const [updateUsername] = useUpdateUsernameMutation()
+	const dispatch = useAppDispatch()
+
+	useEffect(() => {
+		if (user?.username) {
+			setChangeUsername(user.username)
+		}
+	}, [user])
 
 	if (!user) {
 		return <p>Loading...</p>
@@ -45,7 +61,7 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 						border={'profile'}
 						className={'ml-4 -translate-y-[2rem]'}
 					/>
-					<h2 className={'text-white ml-4 mt-4 h-fit text-xl font-semibold'}>{user.displayName}</h2>
+					<h2 className={'ml-4 mt-4 h-fit text-xl font-semibold text-white'}>{user.displayName}</h2>
 					<Button
 						variant={'primary'}
 						className={'ml-auto mr-4 mt-4 h-8 w-fit px-4 leading-4'}
@@ -58,21 +74,29 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 					<div className={'flex items-center justify-between'}>
 						<div>
 							<Headline>Display name</Headline>
-							<h2 className={'text-white font-regular'}>{user.displayName}</h2>
+							<h2 className={'font-regular text-white'}>{user.displayName}</h2>
 						</div>
-						<EditBtn setCurrentSetting={setCurrentSetting} />
+						<EditBtn
+							onClick={() => {
+								setCurrentSetting('Profiles')
+							}}
+						/>
 					</div>
 					<div className={'mt-6 flex items-center justify-between'}>
 						<div>
 							<Headline>Username</Headline>
-							<h2 className={'text-white font-regular'}>{user.username}</h2>
+							<h2 className={'font-regular text-white'}>{user.username}</h2>
 						</div>
-						<EditBtn setCurrentSetting={setCurrentSetting} />
+						<EditBtn
+							onClick={() => {
+								setShowEditUsernamePopover(true)
+							}}
+						/>
 					</div>
 					<div className={'mt-6 flex items-center justify-between'}>
 						<div>
 							<Headline>Email</Headline>
-							<h2 className={'text-white font-regular'}>
+							<h2 className={'font-regular text-white'}>
 								{!showEmail ? mail : user.email}
 								<span
 									className={'ml-1 text-sm text-[#00a8fc] hover:underline'}
@@ -82,12 +106,16 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 								</span>
 							</h2>
 						</div>
-						<EditBtn setCurrentSetting={setCurrentSetting} />
+						<EditBtn
+							onClick={() => {
+								setCurrentSetting('Profiles')
+							}}
+						/>
 					</div>
 					<div className={'mt-6 flex items-center justify-between'}>
 						<div>
 							<Headline>Phone number</Headline>
-							<h2 className={'text-white font-regular'}>
+							<h2 className={'font-regular text-white'}>
 								{!showPhone ? number : `+${user.phoneNumber}`}
 								<span
 									className={'ml-1 text-sm text-[#00a8fc] hover:underline'}
@@ -97,20 +125,83 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 								</span>
 							</h2>
 						</div>
-						<EditBtn setCurrentSetting={setCurrentSetting} />
+						<EditBtn
+							onClick={() => {
+								setCurrentSetting('Profiles')
+							}}
+						/>
 					</div>
 				</div>
+				<DialogPopover isOpen={showEditUsernamePopover} setIsOpen={setShowEditUsernamePopover}>
+					<div className={'relative flex items-center justify-between'}>
+						<div className={'flex grow flex-col items-center justify-center px-4 py-6 pb-0'}>
+							<h2 className={'text-md text-center text-2xl font-bold text-[white]'}>
+								Change your username
+							</h2>
+							<p>Enter a new username and your existing password.</p>
+						</div>
+						<Button
+							variant={'icon'}
+							className={'absolute right-2 top-2 m-2 bg-[transparent] hover:bg-[transparent]'}
+							onClick={() => setShowEditUsernamePopover(false)}
+						>
+							<Cross className="fill-white" />
+						</Button>
+					</div>
+					<div className={'p-4'}>
+						<Input
+							id={'username'}
+							label={'username'}
+							type={'text'}
+							value={changeUsername}
+							onChange={e => {
+								setChangeUsername(e.target.value)
+							}}
+						/>
+						<div className={'mt-3'}>
+							<Input
+								id={'password'}
+								label={'current password'}
+								type={'password'}
+								value={password}
+								onChange={e => setPassword(e.target.value)}
+							/>
+						</div>
+					</div>
+					<div className={'flex justify-end bg-sidebar p-4'}>
+						<Button variant={'link'} onClick={() => setShowEditUsernamePopover(false)}>
+							Cancel
+						</Button>
+						<Button
+							variant={'primary'}
+							className={'w-fit px-6'}
+							onClick={async () => {
+								const response = await updateUsername({ username: changeUsername, password }).unwrap()
+								if (response.success) {
+									dispatch(updateUsernameD(changeUsername))
+								}
+								setShowEditUsernamePopover(false)
+							}}
+						>
+							Done
+						</Button>
+					</div>
+				</DialogPopover>
 			</div>
 		</>
 	)
 }
 
-const EditBtn = ({ setCurrentSetting }: Props) => {
+type EditBtnProps = {
+	onClick: () => void
+}
+
+const EditBtn = ({ onClick }: EditBtnProps) => {
 	return (
 		<Button
 			variant={'text'}
-			className={'text-white h-8 bg-[#4e5058] px-4 transition hover:bg-[#6d6f78] hover:text-[white]'}
-			onClick={() => setCurrentSetting('Profiles')}
+			className={'h-8 bg-[#4e5058] px-4 text-white transition hover:bg-[#6d6f78] hover:text-[white]'}
+			onClick={onClick}
 		>
 			Edit
 		</Button>

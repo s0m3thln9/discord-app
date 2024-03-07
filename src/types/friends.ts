@@ -1,5 +1,5 @@
 import { ErrorMessage, SuccessMessage } from './Messages.ts'
-import { PublicUser } from './AuthProvider.ts'
+import { PublicUser } from './user.ts'
 
 type GetFriendsErrorMessages = 'Unauthorized'
 

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { PublicUser } from '../../types/AuthProvider.ts'
 import { Group } from '../../types/groups.ts'
+import { PublicUser } from '../../types/user.ts'
 
 export type Channel = {
 	id: number

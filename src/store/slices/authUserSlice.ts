@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { UpdateUserData, User } from '../../types/user.ts'
+import { User } from '../../types/user.ts'
 
 type InitialState = {
 	user: null | User
@@ -22,21 +22,30 @@ export const authUserSlice = createSlice({
 		logOut: state => {
 			state.isAuth = false
 		},
-		updateUserData: (state, action: PayloadAction<UpdateUserData>) => {
+		updateDisplayNameD: (state, action: PayloadAction<string>) => {
 			if (!state.user) {
 				state.user = null
 				return
 			}
 			state.user = {
 				...state.user,
-				id: state.user.id,
-				createdAt: state.user.createdAt,
-				...action.payload,
+				displayName: action.payload,
+			}
+		},
+
+		updateUsernameD: (state, action: PayloadAction<string>) => {
+			if (!state.user) {
+				state.user = null
+				return
+			}
+			state.user = {
+				...state.user,
+				username: action.payload,
 			}
 		},
 	},
 })
 
-export const { authUser, logOut, updateUserData } = authUserSlice.actions
+export const { authUser, logOut, updateUsernameD, updateDisplayNameD } = authUserSlice.actions
 
 export default authUserSlice.reducer

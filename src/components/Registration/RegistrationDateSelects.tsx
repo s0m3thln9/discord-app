@@ -1,7 +1,7 @@
 import { Control, Controller, FieldErrors } from 'react-hook-form'
 import Select from 'react-select'
 import { days, months, years } from './data.ts'
-import { RegisterUserData } from '../../types/AuthProvider.ts'
+import { RegisterUserData } from '../../types/user.ts'
 
 type Props = {
 	errors: FieldErrors
@@ -17,11 +17,17 @@ const RegistrationDateSelects = ({ errors, control }: Props) => {
 			>
 				date of birth
 				<span
-					className={`normal-case ${errors.birthdayMonth || errors.birthdayDay || errors.birthdayYear ? 'text-[#fa777c]' : 'text-[#f23f42]'}`}>
-					{errors.birthdayMonth || errors.birthdayDay || errors.birthdayYear ? ' - ' + (errors.birthdayMonth?.message || errors.birthdayDay?.message || errors.birthdayYear?.message) : ' *'}
+					className={`normal-case ${errors.birthdayMonth || errors.birthdayDay || errors.birthdayYear ? 'text-[#fa777c]' : 'text-[#f23f42]'}`}
+				>
+					{errors.birthdayMonth || errors.birthdayDay || errors.birthdayYear
+						? ' - ' +
+							(errors.birthdayMonth?.message ||
+								errors.birthdayDay?.message ||
+								errors.birthdayYear?.message)
+						: ' *'}
 				</span>
 			</label>
-			<div className="flex mt-2 justify-between">
+			<div className="mt-2 flex justify-between">
 				<Controller
 					name={'birthdayMonth'}
 					control={control}
