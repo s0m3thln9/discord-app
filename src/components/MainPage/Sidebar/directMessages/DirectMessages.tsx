@@ -1,14 +1,39 @@
 import { Plus } from '../../../../../public/svgs.tsx'
 import Tooltip from '../../../UI/Tooltip/Tooltip.tsx'
 import ChatChannel from './Channel/ChatChannel.tsx'
-import { useAppSelector } from '../../../../hooks/typedHooks.ts'
-import { Channel } from '../../../../store/slices/chatsSlice.ts'
-import { getChannels } from '../../../../store/queries/getChannels.ts'
+import { useAppDispatch, useAppSelector } from '../../../../hooks/typedHooks.ts'
+import { useGetFriendsMutation, useGetGroupsMutation } from '../../../../api/api.ts'
+import { addFriendsToChannels, addGroupsToChannels } from '../../../../store/slices/chatsSlice.ts'
+import { useEffect } from 'react'
+import { addFriends } from '../../../../store/slices/friendsSlice.ts'
+import { addGroups } from '../../../../store/slices/groupsSlice.ts'
 
 const DirectMessages = () => {
 	const isAuth = useAppSelector(state => state.auth.isAuth)
+	const [friendsQuery] = useGetFriendsMutation()
+	const [groupsQuery] = useGetGroupsMutation()
+	const dispatch = useAppDispatch()
 
-	let channels: Channel[] = getChannels()
+	useEffect(() => {
+		const fetchData = async () => {
+			const friendsResponse = await friendsQuery().unwrap()
+			const groupsResponse = await groupsQuery().unwrap()
+
+			if (!groupsResponse.success || !friendsResponse.success) {
+				return
+			}
+
+			dispatch(addFriends(friendsResponse))
+			dispatch(addGroups(groupsResponse))
+
+			dispatch(addFriendsToChannels(friendsResponse.payload?.friends || []))
+			dispatch(addGroupsToChannels(groupsResponse.payload?.groups || []))
+		}
+
+		fetchData()
+	}, [friendsQuery, groupsQuery, dispatch])
+
+	let channels = useAppSelector(state => state.chats.channels)
 
 	if (!isAuth) {
 		return <p>Loading...</p>

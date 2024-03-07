@@ -38,15 +38,17 @@ export const api = createApi({
 			}),
 		}),
 
-		getFriends: builder.query<GetFriendsResponse, void>({
+		getFriends: builder.mutation<GetFriendsResponse, void>({
 			query: () => ({
 				url: 'friends/get',
+				method: 'GET',
 			}),
 		}),
 
-		getGroups: builder.query<GetGroupsResponse, void>({
+		getGroups: builder.mutation<GetGroupsResponse, void>({
 			query: () => ({
 				url: 'group/get',
+				method: 'GET',
 			}),
 		}),
 
@@ -72,8 +74,8 @@ export const {
 	useLoginUserWithCredentialsMutation,
 	useRegisterUserMutation,
 	useLoginUserWithJwtQuery,
-	useGetFriendsQuery,
-	useGetGroupsQuery,
+	useGetFriendsMutation,
+	useGetGroupsMutation,
 	useUpdateDisplayNameMutation,
 	useUpdateUsernameMutation,
 } = api
