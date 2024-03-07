@@ -51,7 +51,7 @@ const UserImage = ({ image, onlineStatus, color, className, bgColor, tooltip, si
 	)
 }
 
-const userImageVariants = cva('relative inline-block', {
+const userImageVariants = cva('relative inline-block shrink-0', {
 	variants: {
 		size: {
 			md: 'h-8 w-8',
