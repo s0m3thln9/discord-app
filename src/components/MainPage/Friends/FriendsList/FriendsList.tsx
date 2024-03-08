@@ -1,20 +1,36 @@
 import { useAppSelector } from '../../../../hooks/typedHooks.ts'
 import FriendItem from './FriendItem/FriendItem.tsx'
+import { Filter } from '../Friends.tsx'
+import { PublicUser } from '../../../../types/user.ts'
 
-const FriendsList = () => {
+type Props = {
+	filter: Filter
+}
+
+const FriendsList = ({ filter }: Props) => {
 	const friends = useAppSelector(state => state.friends.friends)
+	let filteredFriends: PublicUser[] = []
+	switch (filter) {
+		case 'all':
+			filteredFriends = friends
+			break
+		case 'online':
+			filteredFriends = friends.filter(friend => friend.onlineStatus === 'online')
+			break
+	}
+
 	return (
 		<section className={'flex grow flex-col'}>
 			<input
 				type="text"
 				placeholder={'Search'}
-				className={'text-white ml-[1.875rem] mr-5 mt-4 h-[1.875rem] rounded bg-[#1e1f22] px-2'}
+				className={'ml-[1.875rem] mr-5 mt-4 h-[1.875rem] rounded bg-[#1e1f22] px-2 text-white'}
 			/>
 			<h2 className={'mb-2 ml-[1.875rem] mr-5 mt-4 text-xs font-semibold uppercase text-[#b5bac1]'}>
-				Online - {friends.length}
+				{`${filter[0].toUpperCase()}${filter.substring(1)}`} - {filteredFriends.length}
 			</h2>
 			<ul className={'grow'}>
-				{friends.map(friend => (
+				{filteredFriends.map(friend => (
 					<FriendItem friend={friend} key={friend.id} />
 				))}
 			</ul>
