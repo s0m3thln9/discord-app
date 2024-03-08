@@ -21,7 +21,7 @@ const AddingFriends = () => {
 						onChange={e => setUsername(e.target.value)}
 					/>
 				</div>
-				<Button variant={'primary'} className={'h-8 w-fit'}>
+				<Button variant={'primary'} className={'h-8 w-fit'} disabled={username === ''}>
 					Send Friend Request
 				</Button>
 			</div>

@@ -6,9 +6,9 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<ty
 	children: ReactNode
 }
 
-const Button = ({ children, variant, className, ...props }: Props) => {
+const Button = ({ children, variant, disabled, className, ...props }: Props) => {
 	return (
-		<button className={cn(buttonVariants({ variant, className }))} {...props}>
+		<button className={cn(buttonVariants({ variant, className }), disabled && 'opacity-50')} {...props}>
 			{children}
 		</button>
 	)

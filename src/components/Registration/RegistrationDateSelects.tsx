@@ -1,7 +1,7 @@
 import { Control, Controller, FieldErrors } from 'react-hook-form'
 import Select from 'react-select'
-import { days, months, years } from './data.ts'
 import { RegisterUserData } from '../../types/user.ts'
+import { days, months, years } from './data.ts'
 
 type Props = {
 	errors: FieldErrors

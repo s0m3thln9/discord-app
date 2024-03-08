@@ -36,7 +36,10 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 		return <p>Loading...</p>
 	}
 
-	const number = getHiddenPhoneNumber(user.phoneNumber)
+	let number = ''
+	if (user.phoneNumber) {
+		number = getHiddenPhoneNumber(user.phoneNumber)
+	}
 	const mail = getHiddenEmail(user.email)
 
 	const toggleShowPhone = () => {
@@ -112,25 +115,27 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 							}}
 						/>
 					</div>
-					<div className={'mt-6 flex items-center justify-between'}>
-						<div>
-							<Headline>Phone number</Headline>
-							<h2 className={'font-regular text-white'}>
-								{!showPhone ? number : `+${user.phoneNumber}`}
-								<span
-									className={'ml-1 text-sm text-[#00a8fc] hover:underline'}
-									onClick={toggleShowPhone}
-								>
-									{!showPhone ? 'Reveal' : 'Hide'}
-								</span>
-							</h2>
+					{user.phoneNumber && (
+						<div className={'mt-6 flex items-center justify-between'}>
+							<div>
+								<Headline>Phone number</Headline>
+								<h2 className={'font-regular text-white'}>
+									{!showPhone ? number : `+${user.phoneNumber}`}
+									<span
+										className={'ml-1 text-sm text-[#00a8fc] hover:underline'}
+										onClick={toggleShowPhone}
+									>
+										{!showPhone ? 'Reveal' : 'Hide'}
+									</span>
+								</h2>
+							</div>
+							<EditBtn
+								onClick={() => {
+									setCurrentSetting('Profiles')
+								}}
+							/>
 						</div>
-						<EditBtn
-							onClick={() => {
-								setCurrentSetting('Profiles')
-							}}
-						/>
-					</div>
+					)}
 				</div>
 				<DialogPopover isOpen={showEditUsernamePopover} setIsOpen={setShowEditUsernamePopover}>
 					<div className={'relative flex items-center justify-between'}>

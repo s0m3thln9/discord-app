@@ -2,10 +2,10 @@ import UserImage from '../../../../UI/UserImage/UserImage.tsx'
 import { Message, More } from '../../../../../../public/svgs.tsx'
 import Tooltip from '../../../../UI/Tooltip/Tooltip.tsx'
 import Button from '../../../../UI/Button/Button.tsx'
-import { PublicUser } from '../../../../../types/user.ts'
+import { UserShowableData } from '../../../../../types/user.ts'
 
 type Props = {
-	friend: PublicUser
+	friend: UserShowableData
 }
 
 const FriendItem = ({ friend }: Props) => {
@@ -23,6 +23,7 @@ const FriendItem = ({ friend }: Props) => {
 						onlineStatus={friend.onlineStatus}
 						tooltip={false}
 						bgColor={'content'}
+						size={'md'}
 					/>
 					<div className={'ml-3 flex flex-col justify-between'}>
 						<p className={'leading-4 text-white'}>

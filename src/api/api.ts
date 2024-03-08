@@ -5,7 +5,7 @@ import {
 	LoginUserData,
 	RegisterResponse,
 } from '../types/AuthProvider.ts'
-import { GetFriendsResponse } from '../types/friends.ts'
+import { GetFriendRequestsResponse, GetFriendsResponse } from '../types/friends.ts'
 import { GetGroupsResponse } from '../types/groups.ts'
 import { RegisterUserData, UpdateDisplayNameResponse, UpdateUsernameResponse } from '../types/user.ts'
 
@@ -67,6 +67,13 @@ export const api = createApi({
 				body: updateUsername,
 			}),
 		}),
+
+		getFriendRequests: builder.mutation<GetFriendRequestsResponse, void>({
+			query: () => ({
+				url: 'friends/getFriendRequests',
+				method: 'GET',
+			}),
+		}),
 	}),
 })
 
@@ -78,4 +85,5 @@ export const {
 	useGetGroupsMutation,
 	useUpdateDisplayNameMutation,
 	useUpdateUsernameMutation,
+	useGetFriendRequestsMutation,
 } = api

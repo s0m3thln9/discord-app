@@ -20,11 +20,8 @@ const UserImage = ({ image, onlineStatus, color, className, bgColor, tooltip, si
 			{image ? (
 				<img src={image} className={cn(ImageVariants({ size }))} alt={'user image'} />
 			) : (
-				<div
-					className={'flex h-8 w-8 shrink-0 items-center justify-center rounded-full'}
-					style={{ background: color }}
-				>
-					<DSLogo width={20} height={20} />
+				<div className={cn(UserImagePlaceholderVariants({ size }))} style={{ background: color }}>
+					<DSLogo width={size === 'md' ? 20 : 48} height={size === 'md' ? 20 : 48} />
 				</div>
 			)}
 			{editable && (
@@ -75,6 +72,20 @@ const ImageVariants = cva('rounded-full', {
 			lg: 'h-[5rem] w-[calc(5rem+0.8rem)]',
 		},
 	},
+	defaultVariants: {
+		size: 'md',
+	},
 })
 
+const UserImagePlaceholderVariants = cva('flex shrink-0 items-center justify-center rounded-full h-full w-full', {
+	variants: {
+		size: {
+			md: 'h-8 w-8',
+			lg: 'h-[5rem] w-[5rem]',
+		},
+	},
+	defaultVariants: {
+		size: 'md',
+	},
+})
 export default UserImage

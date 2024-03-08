@@ -25,16 +25,17 @@ const UserInfo = ({ toggleSettings }: Props) => {
 					color={user?.color}
 					onlineStatus={user?.onlineStatus}
 					bgColor={'userInfo'}
+					size={'md'}
 				/>
 				<div className="title ml-2 flex w-0 grow	flex-col justify-between leading-4">
-					<p className={'text-white cursor-default'}>{user?.displayName}</p>
+					<p className={'cursor-default text-white'}>{user?.displayName}</p>
 					<div className={'h-4 cursor-default overflow-hidden text-xs text-[#c7c9cb]'}>
 						<p
 							className={
 								'overflow-hidden text-ellipsis whitespace-nowrap transition-all group-hover/userInfo:-translate-y-4 '
 							}
 						>
-							{user?.textStatus}
+							{user?.textStatus || user?.onlineStatus}
 						</p>
 						<p
 							className={

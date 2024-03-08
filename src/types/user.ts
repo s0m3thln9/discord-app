@@ -13,7 +13,7 @@ type PrismaUser = {
 	color: 'orange' | 'red' | 'green' | 'blue' | 'yellow'
 	textStatus: string
 	onlineStatus: 'offline' | 'online' | 'idle' | 'doNotDisturb'
-	phoneNumber: string
+	phoneNumber: string | null
 	createdAt: string
 	updatedAt: string
 }
@@ -31,6 +31,8 @@ export type RegisterUserData = {
 export type User = Omit<PrismaUser, 'password'>
 
 export type PublicUser = Omit<User, 'email' | 'updatedAt'>
+
+export type UserShowableData = Omit<PrismaUser, 'email' | 'password' | 'phoneNumber' | 'updatedAt'>
 
 type UpdateUserErrorMessages = 'Unauthorized'
 
