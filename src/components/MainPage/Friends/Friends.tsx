@@ -9,7 +9,7 @@ import AddingFriends from './AddingFriends/AddingFriends.tsx'
 export type Filter = 'all' | 'online' | 'pending' | 'blocked' | 'addFriends'
 
 const FriendsSection = () => {
-	const [filter, setFilter] = useState<Filter>('addFriends')
+	const [filter, setFilter] = useState<Filter>('pending')
 	return (
 		<main className={'grow'}>
 			<section className={'flex h-12 items-center justify-between border-b-[1px] border-[#202225] p-2.5 pt-2.5'}>

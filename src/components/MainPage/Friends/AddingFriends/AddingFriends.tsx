@@ -1,8 +1,10 @@
 import Button from '../../../UI/Button/Button.tsx'
 import { useState } from 'react'
+import { useSendFriendRequestMutation } from '../../../../api/api.ts'
 
 const AddingFriends = () => {
 	const [username, setUsername] = useState('')
+	const [sendFriendRequest] = useSendFriendRequestMutation()
 	return (
 		<div className={'h-fit grow border-b-[1px] border-b-[#3f4147] px-[1.875rem] py-5'}>
 			<h2 className={'uppercase text-white'}>Add friends</h2>
@@ -21,7 +23,15 @@ const AddingFriends = () => {
 						onChange={e => setUsername(e.target.value)}
 					/>
 				</div>
-				<Button variant={'primary'} className={'h-8 w-fit'} disabled={username === ''}>
+				<Button
+					variant={'primary'}
+					className={'h-8 w-fit'}
+					disabled={username === ''}
+					onClick={async () => {
+						const response = await sendFriendRequest({ username }).unwrap()
+						console.log(response)
+					}}
+				>
 					Send Friend Request
 				</Button>
 			</div>

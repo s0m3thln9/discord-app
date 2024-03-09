@@ -21,4 +21,14 @@ export type GetFriendRequestsResponse =
 	| SuccessMessage<'Successfully got friend requests', { friendRequestsWithUsers: FriendRequestsWithUsers[] }>
 	| ErrorMessage<GetFriendsRequestsErrorMessages>
 
-export type FriendRequestsWithUsers = { sentRequests: FriendRequest; user: UserShowableData }
+export type FriendRequestsWithUsers = {
+	friendRequest: FriendRequest
+	fromUser: UserShowableData
+	toUser: UserShowableData
+}
+
+type SendRequestErrorMessages = 'Unauthorized' | "You're already friends with that user" | 'Incorrect username'
+
+export type SendFriendRequestResponse =
+	| SuccessMessage<'Friend request send', void>
+	| ErrorMessage<SendRequestErrorMessages>

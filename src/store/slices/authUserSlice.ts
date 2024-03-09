@@ -21,6 +21,7 @@ export const authUserSlice = createSlice({
 		},
 		logOut: state => {
 			state.isAuth = false
+			state.user = null
 		},
 		updateDisplayNameD: (state, action: PayloadAction<string>) => {
 			if (!state.user) {

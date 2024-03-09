@@ -5,7 +5,7 @@ import {
 	LoginUserData,
 	RegisterResponse,
 } from '../types/AuthProvider.ts'
-import { GetFriendRequestsResponse, GetFriendsResponse } from '../types/friends.ts'
+import { GetFriendRequestsResponse, GetFriendsResponse, SendFriendRequestResponse } from '../types/friends.ts'
 import { GetGroupsResponse } from '../types/groups.ts'
 import { RegisterUserData, UpdateDisplayNameResponse, UpdateUsernameResponse } from '../types/user.ts'
 
@@ -74,6 +74,22 @@ export const api = createApi({
 				method: 'GET',
 			}),
 		}),
+
+		sendFriendRequest: builder.mutation<SendFriendRequestResponse, { username: string }>({
+			query: friendUsername => ({
+				url: 'friends/sendFriendRequest',
+				method: 'POST',
+				body: friendUsername,
+			}),
+		}),
+
+		acceptFriendRequest: builder.mutation<SendFriendRequestResponse, { requestId: number }>({
+			query: requestId => ({
+				url: 'friends/acceptFriendRequest',
+				method: 'POST',
+				body: requestId,
+			}),
+		}),
 	}),
 })
 
@@ -86,4 +102,6 @@ export const {
 	useUpdateDisplayNameMutation,
 	useUpdateUsernameMutation,
 	useGetFriendRequestsMutation,
+	useSendFriendRequestMutation,
+	useAcceptFriendRequestMutation,
 } = api
