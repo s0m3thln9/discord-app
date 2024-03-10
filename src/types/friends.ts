@@ -1,5 +1,5 @@
 import { ErrorMessage, SuccessMessage } from './Messages.ts'
-import { PublicUser, UserShowableData } from './user.ts'
+import { UserShowableData, UserWithoutPassword } from './user.ts'
 
 export type FriendRequest = {
 	id: number
@@ -13,7 +13,7 @@ type GetFriendsErrorMessages = 'Unauthorized'
 
 export type GetFriendsResponse =
 	| ErrorMessage<GetFriendsErrorMessages>
-	| SuccessMessage<'Successfully got friends', { friends: PublicUser[] }>
+	| SuccessMessage<'Successfully got friends', { friends: UserWithoutPassword[] }>
 
 type GetFriendsRequestsErrorMessages = 'Unauthorized'
 

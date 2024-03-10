@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Group } from '../../types/groups.ts'
-import { PublicUser } from '../../types/user.ts'
+import { UserWithoutPassword } from '../../types/user.ts'
 
 export type Channel = {
 	id: number
@@ -24,7 +24,7 @@ export const chatsSlice = createSlice({
 	name: 'chats',
 	initialState,
 	reducers: {
-		addFriendsToChannels: (state, action: PayloadAction<PublicUser[]>) => {
+		addFriendsToChannels: (state, action: PayloadAction<UserWithoutPassword[]>) => {
 			const friends = action.payload
 			friends.forEach(friend => {
 				if (!state.channels.find(channel => channel.id === friend.id && channel.type === 'user')) {

@@ -18,7 +18,7 @@ type PrismaUser = {
 	updatedAt: string
 }
 
-export type RegisterUserData = {
+export type RegisterCredentials = {
 	email: string
 	displayName: string
 	username: string
@@ -30,7 +30,7 @@ export type RegisterUserData = {
 
 export type User = Omit<PrismaUser, 'password'>
 
-export type PublicUser = Omit<User, 'email' | 'updatedAt'>
+export type UserWithoutPassword = Omit<User, 'email' | 'updatedAt'>
 
 export type UserShowableData = Omit<PrismaUser, 'email' | 'password' | 'phoneNumber' | 'updatedAt'>
 

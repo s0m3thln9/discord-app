@@ -5,7 +5,7 @@ import Button from '../UI/Button/Button.tsx'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '../../providers/authProvider/AuthProvider.tsx'
-import { RegisterUserData } from '../../types/user.ts'
+import { RegisterCredentials } from '../../types/user.ts'
 
 const RegistrationForm = () => {
 	const {
@@ -14,7 +14,7 @@ const RegistrationForm = () => {
 		control,
 		getValues,
 		formState: { errors },
-	} = useForm<RegisterUserData>({
+	} = useForm<RegisterCredentials>({
 		mode: 'onChange',
 	})
 

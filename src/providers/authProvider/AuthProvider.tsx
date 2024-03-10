@@ -11,7 +11,7 @@ import {
 	useLoginUserWithJwtQuery,
 	useRegisterUserMutation,
 } from '../../api/api.ts'
-import { RegisterUserData } from '../../types/user.ts'
+import { RegisterCredentials } from '../../types/user.ts'
 
 export let AuthContext: Context<TAuthProvider>
 
@@ -36,7 +36,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 		navigate('/login')
 	}
 
-	const register = async (userData: RegisterUserData) => {
+	const register = async (userData: RegisterCredentials) => {
 		const data = await registerUser(userData).unwrap()
 		if (data.success) {
 			navigate('/login')

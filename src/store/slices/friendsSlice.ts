@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { GetFriendsResponse } from '../../types/friends.ts'
-import { PublicUser } from '../../types/user.ts'
+import { UserWithoutPassword } from '../../types/user.ts'
 
 type InitialState = {
-	friends: PublicUser[]
+	friends: UserWithoutPassword[]
 }
 
 const initialState: InitialState = {

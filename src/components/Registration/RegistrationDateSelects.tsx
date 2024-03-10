@@ -1,11 +1,11 @@
 import { Control, Controller, FieldErrors } from 'react-hook-form'
 import Select from 'react-select'
-import { RegisterUserData } from '../../types/user.ts'
+import { RegisterCredentials } from '../../types/user.ts'
 import { days, months, years } from './data.ts'
 
 type Props = {
 	errors: FieldErrors
-	control: Control<RegisterUserData>
+	control: Control<RegisterCredentials>
 }
 
 const RegistrationDateSelects = ({ errors, control }: Props) => {

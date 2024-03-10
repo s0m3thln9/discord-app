@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import {
-	GetUserWithCredentialsResponse,
-	GetUserWithJwtResponse,
 	LoginUserData,
+	LoginWithCredentialsResponse,
+	LoginWithJwtResponse,
 	RegisterResponse,
 } from '../types/AuthProvider.ts'
 import { GetFriendRequestsResponse, GetFriendsResponse, SendFriendRequestResponse } from '../types/friends.ts'
 import { GetGroupsResponse } from '../types/groups.ts'
-import { RegisterUserData, UpdateDisplayNameResponse, UpdateUsernameResponse } from '../types/user.ts'
+import { RegisterCredentials, UpdateDisplayNameResponse, UpdateUsernameResponse } from '../types/user.ts'
 
 export const api = createApi({
 	reducerPath: 'api',
@@ -16,15 +16,15 @@ export const api = createApi({
 		credentials: 'include',
 	}),
 	endpoints: builder => ({
-		loginUserWithCredentials: builder.mutation<GetUserWithCredentialsResponse, LoginUserData>({
+		loginUserWithCredentials: builder.mutation<LoginWithCredentialsResponse, LoginUserData>({
 			query: userData => ({
-				url: 'login',
+				url: 'login/credentials',
 				method: 'POST',
 				body: userData,
 			}),
 		}),
 
-		registerUser: builder.mutation<RegisterResponse, RegisterUserData>({
+		registerUser: builder.mutation<RegisterResponse, RegisterCredentials>({
 			query: userData => ({
 				url: 'register',
 				method: 'POST',
@@ -32,9 +32,9 @@ export const api = createApi({
 			}),
 		}),
 
-		loginUserWithJwt: builder.query<GetUserWithJwtResponse, void>({
+		loginUserWithJwt: builder.query<LoginWithJwtResponse, void>({
 			query: () => ({
-				url: 'login',
+				url: 'login/jwt',
 			}),
 		}),
 
@@ -70,14 +70,14 @@ export const api = createApi({
 
 		getFriendRequests: builder.mutation<GetFriendRequestsResponse, void>({
 			query: () => ({
-				url: 'friends/getFriendRequests',
+				url: 'friendsRequest/get',
 				method: 'GET',
 			}),
 		}),
 
 		sendFriendRequest: builder.mutation<SendFriendRequestResponse, { username: string }>({
 			query: friendUsername => ({
-				url: 'friends/sendFriendRequest',
+				url: 'friendsRequest/send',
 				method: 'POST',
 				body: friendUsername,
 			}),
@@ -85,7 +85,7 @@ export const api = createApi({
 
 		acceptFriendRequest: builder.mutation<SendFriendRequestResponse, { requestId: number }>({
 			query: requestId => ({
-				url: 'friends/acceptFriendRequest',
+				url: 'friendsRequest/accept',
 				method: 'POST',
 				body: requestId,
 			}),

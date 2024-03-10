@@ -1,5 +1,5 @@
 import { ErrorMessage, SuccessMessage } from './Messages.ts'
-import { RegisterUserData, User } from './user.ts'
+import { RegisterCredentials, UserWithoutPassword } from './user.ts'
 
 export type LoginUserData = {
 	email: string
@@ -8,24 +8,24 @@ export type LoginUserData = {
 
 export type TAuthProvider = {
 	login: (userData: LoginUserData) => Promise<void>
-	register: (userData: RegisterUserData) => Promise<void>
+	register: (userData: RegisterCredentials) => Promise<void>
 	logout: () => void
 }
 
-export type GetUserWithJwtResponse =
-	| SuccessMessage<'Successfully got user', { user: User }>
+export type LoginWithJwtResponse =
+	| SuccessMessage<'Successfully got user', { user: UserWithoutPassword }>
 	| ErrorMessage<GetUsersWithJwtErrorMessages>
 
-export type GetUsersWithJwtErrorMessages = 'Unauthorized' | 'No user with your data'
+export type GetUsersWithJwtErrorMessages = 'Unauthorized'
 
-export type GetUserWithCredentialsResponse =
-	| SuccessMessage<'Authorized', { user: User }>
+export type LoginWithCredentialsResponse =
+	| SuccessMessage<'Authorized', { user: UserWithoutPassword }>
 	| ErrorMessage<GetUserWithCredentialsErrorMessages>
 
 type GetUserWithCredentialsErrorMessages = 'Unauthorized'
 
 export type RegisterResponse =
-	| SuccessMessage<'Registration completed', undefined>
+	| SuccessMessage<'Registration completed', { user: UserWithoutPassword }>
 	| ErrorMessage<RegisterUserErrorMessages>
 
-type RegisterUserErrorMessages = 'Registration failed' | 'User with this email already exists'
+type RegisterUserErrorMessages = 'User with this email or username already exists'

@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../../../../hooks/typedHooks.ts'
 import FriendItem from './FriendItem/FriendItem.tsx'
 import { Filter } from '../Friends.tsx'
-import { PublicUser } from '../../../../types/user.ts'
+import { UserWithoutPassword } from '../../../../types/user.ts'
 import { useGetFriendRequestsMutation } from '../../../../api/api.ts'
 import { useEffect } from 'react'
 import { addFriendRequest } from '../../../../store/slices/friendRequests.ts'
@@ -29,7 +29,7 @@ const FriendsList = ({ filter }: Props) => {
 
 	const friendRequestsWithUsers = useAppSelector(state => state.friendRequests.friendRequestsWithUsers)
 
-	let filteredFriends: PublicUser[] = []
+	let filteredFriends: UserWithoutPassword[] = []
 	switch (filter) {
 		case 'all':
 			filteredFriends = friends
