@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '../../providers/authProvider/AuthProvider.tsx'
 import { RegisterCredentials } from '../../types/user.ts'
+import { useRegisterUserMutation } from '../../api/api.ts'
+import Loader from '../UI/Loader/Loader.tsx'
 
 const RegistrationForm = () => {
 	const {
@@ -18,9 +20,10 @@ const RegistrationForm = () => {
 		mode: 'onChange',
 	})
 
+	const [registerUser, { isLoading }] = useRegisterUserMutation()
 	const { register: reg } = useAuth()
 
-	const onSubmit = async () => await reg({ ...getValues() })
+	const onSubmit = async () => await reg(await registerUser({ ...getValues() }).unwrap())
 
 	return (
 		<form className={'mt-5 w-full'} onSubmit={handleSubmit(onSubmit)}>
@@ -97,7 +100,7 @@ const RegistrationForm = () => {
 				}
 			/>
 			<Button variant={'primary'} className={'mt-5'}>
-				Continue
+				{!isLoading ? 'Continue' : <Loader />}
 			</Button>
 			<p className={'mt-4 text-xs text-[#949ba4]'}>
 				By registering, you agree to Discord's <Link to={'/'}>Terms of Service</Link> and{' '}

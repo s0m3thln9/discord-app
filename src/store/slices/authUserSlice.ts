@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { User } from '../../types/user.ts'
+import { User, UserWithoutPassword } from '../../types/user.ts'
 
 type InitialState = {
-	user: null | User
+	user: null | UserWithoutPassword
 	isAuth: boolean
 }
 

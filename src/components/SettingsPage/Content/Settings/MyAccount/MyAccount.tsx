@@ -10,6 +10,8 @@ import { Cross } from '../../../../../../public/svgs.tsx'
 import Input from '../../../../UI/Input/Input.tsx'
 import { useUpdateUsernameMutation } from '../../../../../api/api.ts'
 import { updateUsernameD } from '../../../../../store/slices/authUserSlice.ts'
+import Loader from '../../../../UI/Loader/Loader.tsx'
+import { UpdateUsernameResponse } from '../../../../../types/user.ts'
 
 type Props = {
 	setCurrentSetting: (newSetting: SettingList) => void
@@ -23,8 +25,11 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 	const [showEditUsernamePopover, setShowEditUsernamePopover] = useState(false)
 	const [changeUsername, setChangeUsername] = useState('')
 	const [password, setPassword] = useState('')
-	const [updateUsername] = useUpdateUsernameMutation()
+	const [updateUsername, { isLoading }] = useUpdateUsernameMutation()
 	const dispatch = useAppDispatch()
+	const [updateUsernameServerResponse, setUpdateUsernameServerResponse] = useState<UpdateUsernameResponse | null>(
+		null,
+	)
 
 	useEffect(() => {
 		if (user?.username) {
@@ -161,6 +166,7 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 							value={changeUsername}
 							onChange={e => {
 								setChangeUsername(e.target.value)
+								setUpdateUsernameServerResponse(null)
 							}}
 						/>
 						<div className={'mt-3'}>
@@ -169,8 +175,12 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 								label={'current password'}
 								type={'password'}
 								value={password}
-								onChange={e => setPassword(e.target.value)}
+								onChange={e => {
+									setPassword(e.target.value)
+									setUpdateUsernameServerResponse(null)
+								}}
 							/>
+							<p>{!updateUsernameServerResponse?.success && updateUsernameServerResponse?.message}</p>
 						</div>
 					</div>
 					<div className={'flex justify-end bg-sidebar p-4'}>
@@ -181,14 +191,26 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 							variant={'primary'}
 							className={'w-fit px-6'}
 							onClick={async () => {
+								if (!password) {
+									setUpdateUsernameServerResponse({
+										success: false,
+										message: 'Password is required',
+									})
+									return
+								}
 								const response = await updateUsername({ username: changeUsername, password }).unwrap()
+								console.log(response)
 								if (response.success) {
 									dispatch(updateUsernameD(changeUsername))
+									setShowEditUsernamePopover(false)
+								} else {
+									setUpdateUsernameServerResponse(response)
 								}
-								setShowEditUsernamePopover(false)
+								setPassword('')
 							}}
 						>
-							Done
+							{!isLoading ? 'Done' : <Loader />}
+							{/*<Loader />*/}
 						</Button>
 					</div>
 				</DialogPopover>

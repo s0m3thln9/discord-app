@@ -4,6 +4,8 @@ import Button from '../UI/Button/Button.tsx'
 import { useForm } from 'react-hook-form'
 import { LoginUserData } from '../../types/AuthProvider.ts'
 import { useAuth } from '../../providers/authProvider/AuthProvider.tsx'
+import { useLoginUserWithCredentialsMutation } from '../../api/api.ts'
+import Loader from '../UI/Loader/Loader.tsx'
 
 const AuthorizationForm = () => {
 	const { login } = useAuth()
@@ -17,9 +19,11 @@ const AuthorizationForm = () => {
 		mode: 'onChange',
 	})
 
+	const [loginUser, { isLoading }] = useLoginUserWithCredentialsMutation()
+
 	const onSubmit = async () => {
-		const data = { ...getValues() }
-		await login(data)
+		//const data = { ...getValues() }
+		await login(await loginUser({ ...getValues() }).unwrap())
 	}
 
 	return (
@@ -45,7 +49,7 @@ const AuthorizationForm = () => {
 				<Link to="/">Forgot your password?</Link>
 			</p>
 			<Button variant={'primary'} className={'mt-5'}>
-				Login
+				{!isLoading ? 'Login' : <Loader />}
 			</Button>
 			<p className={'mt-2 text-sm font-medium text-[#949ba4]'}>
 				Need an account? <Link to="/register">Register</Link>

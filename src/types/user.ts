@@ -30,18 +30,18 @@ export type RegisterCredentials = {
 
 export type User = Omit<PrismaUser, 'password'>
 
-export type UserWithoutPassword = Omit<User, 'email' | 'updatedAt'>
+export type UserWithoutPassword = Omit<User, 'password'>
 
 export type UserShowableData = Omit<PrismaUser, 'email' | 'password' | 'phoneNumber' | 'updatedAt'>
 
 type UpdateUserErrorMessages = 'Unauthorized'
 
-type UpdateUsernameErrorMessages = 'Unauthorized' | 'Wrong password'
+type UpdateUsernameErrorMessages = 'Unauthorized' | 'Wrong password' | 'Password is required'
 
 export type UpdateDisplayNameResponse =
-	| SuccessMessage<'DisplayName successfully updated', void>
+	| SuccessMessage<'DisplayName successfully updated', { user: UserWithoutPassword }>
 	| ErrorMessage<UpdateUserErrorMessages>
 
 export type UpdateUsernameResponse =
-	| SuccessMessage<'Username successfully updated', void>
+	| SuccessMessage<'Username successfully updated', { user: UserWithoutPassword }>
 	| ErrorMessage<UpdateUsernameErrorMessages>

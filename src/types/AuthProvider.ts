@@ -1,5 +1,5 @@
 import { ErrorMessage, SuccessMessage } from './messages.ts'
-import { RegisterCredentials, UserWithoutPassword } from './user.ts'
+import { UserWithoutPassword } from './user.ts'
 
 export type LoginUserData = {
 	email: string
@@ -7,8 +7,8 @@ export type LoginUserData = {
 }
 
 export type TAuthProvider = {
-	login: (userData: LoginUserData) => Promise<void>
-	register: (userData: RegisterCredentials) => Promise<void>
+	login: (userData: LoginWithCredentialsResponse) => Promise<void>
+	register: (userData: RegisterResponse) => Promise<void>
 	logout: () => void
 }
 

@@ -2,31 +2,24 @@
 
 import { Context, createContext, ReactNode, useContext, useEffect } from 'react'
 import Cookies from 'js-cookie'
-import { LoginUserData, TAuthProvider } from '../../types/AuthProvider.ts'
+import { LoginWithCredentialsResponse, RegisterResponse, TAuthProvider } from '../../types/AuthProvider.ts'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../../hooks/typedHooks.ts'
 import { authUser, logOut } from '../../store/slices/authUserSlice.ts'
-import {
-	useLoginUserWithCredentialsMutation,
-	useLoginUserWithJwtQuery,
-	useRegisterUserMutation,
-} from '../../api/api.ts'
-import { RegisterCredentials } from '../../types/user.ts'
+import { useLoginUserWithJwtQuery } from '../../api/api.ts'
 
 export let AuthContext: Context<TAuthProvider>
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const navigate = useNavigate()
 	const dispatch = useAppDispatch()
-	const [loginUser] = useLoginUserWithCredentialsMutation()
-	const [registerUser] = useRegisterUserMutation()
 	const { data, isLoading } = useLoginUserWithJwtQuery()
 
-	const login = async (userData: LoginUserData) => {
-		const data = await loginUser(userData).unwrap()
-		if (data.success && data.payload) {
+	const login = async (response: LoginWithCredentialsResponse) => {
+		console.log(response)
+		if (response.success && response.payload) {
 			navigate('/')
-			dispatch(authUser(data.payload.user))
+			dispatch(authUser(response.payload.user))
 		}
 	}
 
@@ -36,9 +29,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 		navigate('/login')
 	}
 
-	const register = async (userData: RegisterCredentials) => {
-		const data = await registerUser(userData).unwrap()
-		if (data.success) {
+	const register = async (response: RegisterResponse) => {
+		if (response.success) {
 			navigate('/login')
 		}
 	}
