@@ -1,4 +1,4 @@
-import { ErrorMessage, SuccessMessage } from './Messages.ts'
+import { ErrorMessage, SuccessMessage } from './messages.ts'
 import { UserShowableData, UserWithoutPassword } from './user.ts'
 
 export type FriendRequest = {
@@ -27,8 +27,18 @@ export type FriendRequestsWithUsers = {
 	toUser: UserShowableData
 }
 
-type SendRequestErrorMessages = 'Unauthorized' | "You're already friends with that user" | 'Incorrect username'
+type SendRequestErrorMessages =
+	| 'Unauthorized'
+	| "You're already friends with that user"
+	| 'Incorrect username'
+	| "You can't yourself to friends"
 
 export type SendFriendRequestResponse =
-	| SuccessMessage<'Friend request send', void>
+	| SuccessMessage<'Friend request send', { friend: UserShowableData }>
 	| ErrorMessage<SendRequestErrorMessages>
+
+type DeleteFriendRequestErrorMessages = 'Unauthorized' | 'Wrong request id provided'
+
+export type DeleteFriendRequestResponse =
+	| SuccessMessage<'Request deleted successfully', { deletedRequest: FriendRequest }>
+	| ErrorMessage<DeleteFriendRequestErrorMessages>

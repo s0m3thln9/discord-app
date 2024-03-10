@@ -3,7 +3,7 @@ import Tooltip from '../../../../UI/Tooltip/Tooltip.tsx'
 import Button from '../../../../UI/Button/Button.tsx'
 import { UserShowableData } from '../../../../../types/user.ts'
 import { Accept, Cross } from '../../../../../../public/svgs.tsx'
-import { useAcceptFriendRequestMutation } from '../../../../../api/api.ts'
+import { useAcceptFriendRequestMutation, useDeleteFriendRequestMutation } from '../../../../../api/api.ts'
 
 type Props = {
 	user: Omit<UserShowableData, 'onlineStatus'> & {
@@ -14,7 +14,8 @@ type Props = {
 }
 
 const FriendRequest = ({ user, type, requestId }: Props) => {
-	const [acceptFriend] = useAcceptFriendRequestMutation()
+	const [acceptFriendRequest] = useAcceptFriendRequestMutation()
+	const [deleteFriendRequest] = useDeleteFriendRequestMutation()
 
 	return (
 		<li key={user.id}>
@@ -45,7 +46,13 @@ const FriendRequest = ({ user, type, requestId }: Props) => {
 				<div className={'flex'}>
 					{type === 'outgoing' ? (
 						<Tooltip text={'Cancel'} vertical={'top'} horizontal={'center'} y={'smm'} className={'ml-2'}>
-							<Button variant={'icon'}>
+							<Button
+								variant={'icon'}
+								onClick={async () => {
+									const response = await deleteFriendRequest({ requestId }).unwrap()
+									console.log(response)
+								}}
+							>
 								<Cross className={'h-5 w-5 fill-[#b5bac1] group-hover/iconBtn:fill-[#e43a41]'} />
 							</Button>
 						</Tooltip>
@@ -58,7 +65,7 @@ const FriendRequest = ({ user, type, requestId }: Props) => {
 								y={'smm'}
 								className={'ml-2'}
 								onClick={async () => {
-									const response = await acceptFriend({ requestId }).unwrap()
+									const response = await acceptFriendRequest({ requestId }).unwrap()
 									console.log(response)
 								}}
 							>
@@ -72,6 +79,10 @@ const FriendRequest = ({ user, type, requestId }: Props) => {
 								horizontal={'center'}
 								y={'smm'}
 								className={'ml-2'}
+								onClick={async () => {
+									const response = await deleteFriendRequest({ requestId }).unwrap()
+									console.log(response)
+								}}
 							>
 								<Button variant={'icon'}>
 									<Cross className={'h-5 w-5 fill-[#b5bac1] group-hover/iconBtn:fill-[#e43a41]'} />

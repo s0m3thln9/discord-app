@@ -1,4 +1,4 @@
-import { ErrorMessage, SuccessMessage } from './Messages.ts'
+import { ErrorMessage, SuccessMessage } from './messages.ts'
 
 type PrismaUser = {
 	id: number

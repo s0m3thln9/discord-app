@@ -5,7 +5,12 @@ import {
 	LoginWithJwtResponse,
 	RegisterResponse,
 } from '../types/AuthProvider.ts'
-import { GetFriendRequestsResponse, GetFriendsResponse, SendFriendRequestResponse } from '../types/friends.ts'
+import {
+	DeleteFriendRequestResponse,
+	GetFriendRequestsResponse,
+	GetFriendsResponse,
+	SendFriendRequestResponse,
+} from '../types/friends.ts'
 import { GetGroupsResponse } from '../types/groups.ts'
 import { RegisterCredentials, UpdateDisplayNameResponse, UpdateUsernameResponse } from '../types/user.ts'
 
@@ -90,6 +95,14 @@ export const api = createApi({
 				body: requestId,
 			}),
 		}),
+
+		deleteFriendRequest: builder.mutation<DeleteFriendRequestResponse, { requestId: number }>({
+			query: requestId => ({
+				url: 'friendsRequest/delete',
+				method: 'POST',
+				body: requestId,
+			}),
+		}),
 	}),
 })
 
@@ -104,4 +117,5 @@ export const {
 	useGetFriendRequestsMutation,
 	useSendFriendRequestMutation,
 	useAcceptFriendRequestMutation,
+	useDeleteFriendRequestMutation,
 } = api
