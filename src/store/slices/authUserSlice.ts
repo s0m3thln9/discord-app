@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { User, UserWithoutPassword } from '../../types/user.ts'
+import { UserWithoutPassword } from '../../types/user.ts'
 
 type InitialState = {
 	user: null | UserWithoutPassword
@@ -15,7 +15,7 @@ export const authUserSlice = createSlice({
 	name: 'authUser',
 	initialState,
 	reducers: {
-		authUser: (state, action: PayloadAction<User>) => {
+		authUser: (state, action: PayloadAction<UserWithoutPassword>) => {
 			state.user = action.payload
 			state.isAuth = true
 		},
