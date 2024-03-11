@@ -1,6 +1,9 @@
 import React, { forwardRef } from 'react'
 import { FieldError } from 'react-hook-form'
-interface Props extends React.PropsWithoutRef<JSX.IntrinsicElements["input"]> {
+import IntrinsicElements = React.JSX.IntrinsicElements
+import { twMerge } from 'tailwind-merge'
+import { clsx } from 'clsx'
+interface Props extends React.PropsWithoutRef<IntrinsicElements["input"]> {
 	id: string
 	label?: string
 	help?: string
@@ -12,27 +15,27 @@ const Input = forwardRef<HTMLInputElement, Props>(({ id, label, help, className,
 		<div>
 			{label &&
 				<label
-					className={`text-xs font-bold uppercase tracking-wide ${error ? 'text-[#fa777c]' : 'text-[#b5bac1]'}`}
+					className={clsx('text-xs font-bold uppercase tracking-wide text-[#b5bac1]', error && 'text-[#fa777c]')}
 					htmlFor={id}
 				>
 					{label}
 					{required &&
 						<span
-							className={`normal-case ${error ? 'text-[#fa777c]' : 'text-[#f23f42]'}`}>
+							className={clsx('normal-case text-[#f23f42]', error && 'text-[#fa777c]')}>
 							{error ? ' - ' + error.message : ' *'}
 						</span>
 					}
 				</label>
 			}
 			<input
-				className={`outline-0 w-full h-10 p-2.5 mt-2 font-medium rounded-[0.1875rem] bg-[#1e1f22] text-[#dbdee1] peer ${className}`}
+				className={twMerge('outline-0 w-full h-10 p-2.5 mt-2 font-medium rounded-[0.1875rem] bg-[#1e1f22] text-[#dbdee1] peer', className)}
 				id={id}
 				{...props}
 				ref={ref}
 			/>
 			{help &&
 				<div
-					className={`tracking-tight text-sm font-medium text-[#dbdee1] duration-300 mt-0 pb-0 h-0 opacity-0 peer-focus:-mt-3 peer-focus:pb-10 peer-focus:opacity-100`}>
+					className={'tracking-tight text-sm font-medium text-[#dbdee1] duration-300 mt-0 pb-0 h-0 opacity-0 peer-focus:-mt-3 peer-focus:pb-10 peer-focus:opacity-100'}>
 					{help}
 				</div>
 			}
