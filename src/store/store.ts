@@ -5,7 +5,7 @@ import chatsReducer from './slices/chatsSlice.ts'
 import groupsReducer from './slices/groupsSlice.ts'
 import { api } from '../api/api.ts'
 import { setupListeners } from '@reduxjs/toolkit/query/react'
-import friendRequests from './slices/friendRequests.ts'
+import friendRequests from './slices/friendRequestsSlice.ts'
 
 export const store = configureStore({
 	reducer: {

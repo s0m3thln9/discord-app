@@ -18,9 +18,17 @@ const friendRequestsSlice = createSlice({
 
 			state.friendRequestsWithUsers = action.payload.payload?.friendRequestsWithUsers || []
 		},
+
+		deleteFriendRequestAC: (state, action: PayloadAction<{ requestId: number }>) => {
+			if (!state.friendRequestsWithUsers.length) return
+
+			state.friendRequestsWithUsers = state.friendRequestsWithUsers.filter(
+				req => req.friendRequest.id !== action.payload.requestId,
+			)
+		},
 	},
 })
 
-export const { addFriendRequest } = friendRequestsSlice.actions
+export const { addFriendRequest, deleteFriendRequestAC } = friendRequestsSlice.actions
 
 export default friendRequestsSlice.reducer

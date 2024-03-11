@@ -4,6 +4,8 @@ import Button from '../../../../UI/Button/Button.tsx'
 import { UserShowableData } from '../../../../../types/user.ts'
 import { Accept, Cross } from '../../../../../../public/svgs.tsx'
 import { useAcceptFriendRequestMutation, useDeleteFriendRequestMutation } from '../../../../../api/api.ts'
+import { useDispatch } from 'react-redux'
+import { deleteFriendRequestAC } from '../../../../../store/slices/friendRequestsSlice.ts'
 
 type Props = {
 	user: Omit<UserShowableData, 'onlineStatus'> & {
@@ -16,6 +18,7 @@ type Props = {
 const FriendRequest = ({ user, type, requestId }: Props) => {
 	const [acceptFriendRequest] = useAcceptFriendRequestMutation()
 	const [deleteFriendRequest] = useDeleteFriendRequestMutation()
+	const dispatch = useDispatch()
 
 	return (
 		<li key={user.id}>
@@ -50,6 +53,7 @@ const FriendRequest = ({ user, type, requestId }: Props) => {
 								variant={'icon'}
 								onClick={async () => {
 									const response = await deleteFriendRequest({ requestId }).unwrap()
+									dispatch(deleteFriendRequestAC({ requestId }))
 									console.log(response)
 								}}
 							>
@@ -81,6 +85,7 @@ const FriendRequest = ({ user, type, requestId }: Props) => {
 								className={'ml-2'}
 								onClick={async () => {
 									const response = await deleteFriendRequest({ requestId }).unwrap()
+									dispatch(deleteFriendRequestAC({ requestId }))
 									console.log(response)
 								}}
 							>
