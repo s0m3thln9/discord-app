@@ -6,10 +6,11 @@ import UserImage from '../../../../UI/UserImage/UserImage.tsx'
 import Timer from '../../../../UI/Timer/Timer.tsx'
 import Button from '../../../../UI/Button/Button.tsx'
 import { twMerge } from 'tailwind-merge'
-import { Cross } from '../../../../../../public/svgs.tsx'
 import DialogPopover from '../../../../UI/DiallogPopover/DialogPopover.tsx'
 import { useUpdateDisplayNameMutation } from '../../../../../api/api.ts'
 import { updateDisplayNameD } from '../../../../../store/slices/authUserSlice.ts'
+import { Cross } from '../../../../../assets/svgs.tsx'
+import editingProfile from '../../../../../assets/img/editingProfile.png'
 
 const Profiles = () => {
 	const user = useAppSelector(state => state.auth.user)
@@ -88,11 +89,7 @@ const Profiles = () => {
 										'flex h-16 w-16 items-center justify-center overflow-hidden rounded-lg bg-[#4044a4]'
 									}
 								>
-									<img
-										src="../../../../../../public/img/editingProfile.png"
-										alt="editing profile"
-										className={'h-12 w-12'}
-									/>
+									<img src={editingProfile} alt="editing profile" className={'h-12 w-12'} />
 								</div>
 								<div className={'ml-4 font-code'}>
 									<p className={'text-sm leading-4 text-white'}>User Profile</p>

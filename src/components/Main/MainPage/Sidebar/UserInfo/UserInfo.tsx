@@ -1,8 +1,8 @@
-import { Headphones, Mic, Settings } from '../../../../../../public/svgs.tsx'
 import Tooltip from '../../../../UI/Tooltip/Tooltip.tsx'
 import { useAppSelector } from '../../../../../hooks/typedHooks.ts'
 import UserImage from '../../../../UI/UserImage/UserImage.tsx'
 import Button from '../../../../UI/Button/Button.tsx'
+import { Headphones, Mic, Settings } from '../../../../../assets/svgs.tsx'
 
 type Props = {
 	toggleSettings: () => void

@@ -6,12 +6,12 @@ import { useAppDispatch, useAppSelector } from '../../../../../../hooks/typedHoo
 import { getHiddenEmail, getHiddenPhoneNumber } from '../../../../../../utils/hideUserData.ts'
 import { SettingList } from '../../../SettingsPage.tsx'
 import DialogPopover from '../../../../../UI/DiallogPopover/DialogPopover.tsx'
-import { Cross } from '../../../../../../../public/svgs.tsx'
 import Input from '../../../../../UI/Input/Input.tsx'
 import { useUpdateUsernameMutation } from '../../../../../../api/api.ts'
 import { updateUsernameD } from '../../../../../../store/slices/authUserSlice.ts'
 import Loader from '../../../../../UI/Loader/Loader.tsx'
 import { UpdateUsernameResponse } from '../../../../../../types/user.ts'
+import { Cross } from '../../../../../../assets/svgs.tsx'
 
 type Props = {
 	setCurrentSetting: (newSetting: SettingList) => void

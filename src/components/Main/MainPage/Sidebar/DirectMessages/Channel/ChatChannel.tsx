@@ -1,15 +1,23 @@
 import { Link } from 'react-router-dom'
-import { Close } from '../../../../../../../public/svgs.tsx'
 import { Channel } from '../../../../../../store/slices/chatsSlice.ts'
 import UserImage from '../../../../../UI/UserImage/UserImage.tsx'
+import ContextMenu from '../../../../../UI/ContextMenu/ContextMenu.tsx'
+import { useState } from 'react'
+import { Close } from '../../../../../../assets/svgs.tsx'
 
 type Props = {
 	channel: Channel
 }
 
 const ChatChannel = ({ channel }: Props) => {
+	const [isContextMenuShon, setIsContextMenuShown] = useState(false)
+
 	return (
-		<li key={`${channel.id}${channel.type}`} className={'pt-0.5'}>
+		<li
+			key={`${channel.id}${channel.type}`}
+			className={'relative pt-0.5'}
+			onClick={() => setIsContextMenuShown(false)}
+		>
 			<Link
 				to={'/'}
 				className={
@@ -40,6 +48,9 @@ const ChatChannel = ({ channel }: Props) => {
 					<Close className={'h-3 w-3 group-hover:fill-[#dbdee1]'} />
 				</div>
 			</Link>
+			<ContextMenu isShown={isContextMenuShon} setIsShown={setIsContextMenuShown}>
+				<p>some Shit</p>
+			</ContextMenu>
 		</li>
 	)
 }

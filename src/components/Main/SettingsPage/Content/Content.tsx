@@ -1,7 +1,7 @@
-import { Cross } from '../../../../../public/svgs.tsx'
 import Button from '../../../UI/Button/Button.tsx'
 import Pages from './Pages/Pages.tsx'
 import { SettingList } from '../SettingsPage.tsx'
+import { Cross } from '../../../../assets/svgs.tsx'
 
 type Props = {
 	toggleSettings: () => void

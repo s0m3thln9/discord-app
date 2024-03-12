@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import { Compass, DSLogo, Plus } from '../../../../../public/svgs.tsx'
 import Tooltip from '../../../UI/Tooltip/Tooltip.tsx'
+import { Compass, DSLogo, Plus } from '../../../../assets/svgs.tsx'
 
 const Navigation = () => {
 	return (

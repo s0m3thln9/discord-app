@@ -1,8 +1,8 @@
-import { DSLogo, Edit } from '../../../../public/svgs.tsx'
 import StatusIndicator from '../OnlineStatusIndicator/StatusIndicator.tsx'
 import { cva, VariantProps } from 'class-variance-authority'
 import { cn } from '../../../utils/cn.ts'
 import { Dispatch, SetStateAction } from 'react'
+import { DSLogo, Edit } from '../../../assets/svgs.tsx'
 
 interface Props extends VariantProps<typeof userImageVariants> {
 	image: string

@@ -1,4 +1,3 @@
-import { Plus } from '../../../../../../public/svgs.tsx'
 import Tooltip from '../../../../UI/Tooltip/Tooltip.tsx'
 import ChatChannel from './Channel/ChatChannel.tsx'
 import { useAppDispatch, useAppSelector } from '../../../../../hooks/typedHooks.ts'
@@ -7,6 +6,7 @@ import { addFriendsToChannels, addGroupsToChannels } from '../../../../../store/
 import { useEffect } from 'react'
 import { addFriends } from '../../../../../store/slices/friendsSlice.ts'
 import { addGroups } from '../../../../../store/slices/groupsSlice.ts'
+import { Plus } from '../../../../../assets/svgs.tsx'
 
 const DirectMessages = () => {
 	const isAuth = useAppSelector(state => state.auth.isAuth)
