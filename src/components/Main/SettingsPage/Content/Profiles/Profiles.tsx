@@ -1,15 +1,15 @@
-import Headline from '../../../UI/Headline/Headline'
+import Headline from '../../../../UI/Headline/Headline.tsx'
 import { useState } from 'react'
-import Input from '../../../UI/Input/Input.tsx'
-import { useAppDispatch, useAppSelector } from '../../../../hooks/typedHooks.ts'
-import UserImage from '../../../UI/UserImage/UserImage.tsx'
-import Timer from '../../../UI/Timer/Timer.tsx'
-import Button from '../../../UI/Button/Button.tsx'
+import Input from '../../../../UI/Input/Input.tsx'
+import { useAppDispatch, useAppSelector } from '../../../../../hooks/typedHooks.ts'
+import UserImage from '../../../../UI/UserImage/UserImage.tsx'
+import Timer from '../../../../UI/Timer/Timer.tsx'
+import Button from '../../../../UI/Button/Button.tsx'
 import { twMerge } from 'tailwind-merge'
-import { Cross } from '../../../../../public/svgs.tsx'
-import DialogPopover from '../../../UI/DiallogPopover/DialogPopover.tsx'
-import { useUpdateDisplayNameMutation } from '../../../../api/api.ts'
-import { updateDisplayNameD } from '../../../../store/slices/authUserSlice.ts'
+import { Cross } from '../../../../../../public/svgs.tsx'
+import DialogPopover from '../../../../UI/DiallogPopover/DialogPopover.tsx'
+import { useUpdateDisplayNameMutation } from '../../../../../api/api.ts'
+import { updateDisplayNameD } from '../../../../../store/slices/authUserSlice.ts'
 
 const Profiles = () => {
 	const user = useAppSelector(state => state.auth.user)
@@ -89,7 +89,7 @@ const Profiles = () => {
 									}
 								>
 									<img
-										src="../../../../../public/img/editingProfile.png"
+										src="../../../../../../public/img/editingProfile.png"
 										alt="editing profile"
 										className={'h-12 w-12'}
 									/>

@@ -1,5 +1,5 @@
-import { Cross } from '../../../../public/svgs.tsx'
-import Button from '../../UI/Button/Button.tsx'
+import { Cross } from '../../../../../public/svgs.tsx'
+import Button from '../../../UI/Button/Button.tsx'
 import Pages from './Pages/Pages.tsx'
 import { SettingList } from '../SettingsPage.tsx'
 

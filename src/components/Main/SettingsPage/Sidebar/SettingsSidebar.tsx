@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import DialogPopover from '../../UI/DiallogPopover/DialogPopover.tsx'
-import { useAuth } from '../../../providers/authProvider/AuthProvider.tsx'
-import Headline from '../../UI/Headline/Headline.tsx'
+import DialogPopover from '../../../UI/DiallogPopover/DialogPopover.tsx'
+import { useAuth } from '../../../../providers/authProvider/AuthProvider.tsx'
+import Headline from '../../../UI/Headline/Headline.tsx'
 import { SettingList } from '../SettingsPage.tsx'
-import Button from '../../UI/Button/Button.tsx'
+import Button from '../../../UI/Button/Button.tsx'
 
 type Setting = {
 	id: number
