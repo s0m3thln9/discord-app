@@ -27,7 +27,7 @@ const RegistrationDateSelects = ({ errors, control }: Props) => {
 						: ' *'}
 				</span>
 			</label>
-			<div className="mt-2 flex justify-between">
+			<div className="mt-2 flex justify-between max-sm:grid max-sm:grid-cols-3 max-sm:gap-4">
 				<Controller
 					name={'birthdayMonth'}
 					control={control}

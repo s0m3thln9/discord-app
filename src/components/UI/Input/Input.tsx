@@ -12,7 +12,7 @@ interface Props extends React.PropsWithoutRef<IntrinsicElements["input"]> {
 
 const Input = forwardRef<HTMLInputElement, Props>(({ id, label, help, className, required, error, ...props }, ref) => {
 	return (
-		<div>
+		<div className={'overflow-hidden'}>
 			{label &&
 				<label
 					className={clsx('text-xs font-bold uppercase tracking-wide text-[#b5bac1]', error && 'text-[#fa777c]')}
