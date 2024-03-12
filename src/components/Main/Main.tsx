@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import MainPage from '../MainPage/MainPage.tsx'
+import MainPage from './MainPage/MainPage.tsx'
 import SettingsPage from './SettingsPage/SettingsPage.tsx'
 
 export const Main = () => {

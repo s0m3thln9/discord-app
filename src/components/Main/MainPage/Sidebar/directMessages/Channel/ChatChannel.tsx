@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { Close } from '../../../../../../public/svgs.tsx'
-import { Channel } from '../../../../../store/slices/chatsSlice.ts'
-import UserImage from '../../../../UI/UserImage/UserImage.tsx'
+import { Close } from '../../../../../../../public/svgs.tsx'
+import { Channel } from '../../../../../../store/slices/chatsSlice.ts'
+import UserImage from '../../../../../UI/UserImage/UserImage.tsx'
 
 type Props = {
 	channel: Channel

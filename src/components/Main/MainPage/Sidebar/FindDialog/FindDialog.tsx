@@ -1,4 +1,4 @@
-import Button from '../../../UI/Button/Button.tsx'
+import Button from '../../../../UI/Button/Button.tsx'
 
 const FindDialog = () => {
 	return (

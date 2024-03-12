@@ -1,11 +1,11 @@
-import { useAppDispatch, useAppSelector } from '../../../../hooks/typedHooks.ts'
+import { useAppDispatch, useAppSelector } from '../../../../../hooks/typedHooks.ts'
 import FriendItem from './FriendItem/FriendItem.tsx'
 import { Filter } from '../Friends.tsx'
-import { UserWithoutPassword } from '../../../../types/user.ts'
-import { useGetFriendRequestsMutation } from '../../../../api/api.ts'
+import { UserWithoutPassword } from '../../../../../types/user.ts'
+import { useGetFriendRequestsMutation } from '../../../../../api/api.ts'
 import { useEffect } from 'react'
-import { addFriendRequest } from '../../../../store/slices/friendRequestsSlice.ts'
-import { FriendRequestsWithUsers } from '../../../../types/friends.ts'
+import { addFriendRequest } from '../../../../../store/slices/friendRequestsSlice.ts'
+import { FriendRequestsWithUsers } from '../../../../../types/friends.ts'
 import FriendRequest from './FriendRequest/FriendRequest.tsx'
 
 type Props = {

@@ -1,8 +1,9 @@
 import React, { forwardRef } from 'react'
 import { FieldError } from 'react-hook-form'
-import IntrinsicElements = React.JSX.IntrinsicElements
 import { twMerge } from 'tailwind-merge'
 import { clsx } from 'clsx'
+import IntrinsicElements = React.JSX.IntrinsicElements
+
 interface Props extends React.PropsWithoutRef<IntrinsicElements["input"]> {
 	id: string
 	label?: string

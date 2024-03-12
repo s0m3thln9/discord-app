@@ -1,4 +1,4 @@
-import { Friends } from '../../../../public/svgs.tsx'
+import { Friends } from '../../../../../public/svgs.tsx'
 import TabBar from './TabBar/TabBar.tsx'
 import ToolBar from './ToolBar/ToolBar.tsx'
 import ActiveNow from './ActiveNow/ActiveNow.tsx'

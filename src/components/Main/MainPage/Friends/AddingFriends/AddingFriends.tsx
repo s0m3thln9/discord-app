@@ -1,7 +1,7 @@
-import Button from '../../../UI/Button/Button.tsx'
+import Button from '../../../../UI/Button/Button.tsx'
 import { useState } from 'react'
-import { useSendFriendRequestMutation } from '../../../../api/api.ts'
-import { SendFriendRequestResponse } from '../../../../types/friends.ts'
+import { useSendFriendRequestMutation } from '../../../../../api/api.ts'
+import { SendFriendRequestResponse } from '../../../../../types/friends.ts'
 import { twMerge } from 'tailwind-merge'
 import { clsx } from 'clsx'
 

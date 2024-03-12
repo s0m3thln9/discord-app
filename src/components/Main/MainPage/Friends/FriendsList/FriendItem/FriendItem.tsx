@@ -1,8 +1,8 @@
-import UserImage from '../../../../UI/UserImage/UserImage.tsx'
-import { Message, More } from '../../../../../../public/svgs.tsx'
-import Tooltip from '../../../../UI/Tooltip/Tooltip.tsx'
-import Button from '../../../../UI/Button/Button.tsx'
-import { UserShowableData } from '../../../../../types/user.ts'
+import UserImage from '../../../../../UI/UserImage/UserImage.tsx'
+import { Message, More } from '../../../../../../../public/svgs.tsx'
+import Tooltip from '../../../../../UI/Tooltip/Tooltip.tsx'
+import Button from '../../../../../UI/Button/Button.tsx'
+import { UserShowableData } from '../../../../../../types/user.ts'
 
 type Props = {
 	friend: UserShowableData

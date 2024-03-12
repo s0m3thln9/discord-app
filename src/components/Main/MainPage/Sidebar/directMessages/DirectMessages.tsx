@@ -1,12 +1,12 @@
-import { Plus } from '../../../../../public/svgs.tsx'
-import Tooltip from '../../../UI/Tooltip/Tooltip.tsx'
+import { Plus } from '../../../../../../public/svgs.tsx'
+import Tooltip from '../../../../UI/Tooltip/Tooltip.tsx'
 import ChatChannel from './Channel/ChatChannel.tsx'
-import { useAppDispatch, useAppSelector } from '../../../../hooks/typedHooks.ts'
-import { useGetFriendsMutation, useGetGroupsMutation } from '../../../../api/api.ts'
-import { addFriendsToChannels, addGroupsToChannels } from '../../../../store/slices/chatsSlice.ts'
+import { useAppDispatch, useAppSelector } from '../../../../../hooks/typedHooks.ts'
+import { useGetFriendsMutation, useGetGroupsMutation } from '../../../../../api/api.ts'
+import { addFriendsToChannels, addGroupsToChannels } from '../../../../../store/slices/chatsSlice.ts'
 import { useEffect } from 'react'
-import { addFriends } from '../../../../store/slices/friendsSlice.ts'
-import { addGroups } from '../../../../store/slices/groupsSlice.ts'
+import { addFriends } from '../../../../../store/slices/friendsSlice.ts'
+import { addGroups } from '../../../../../store/slices/groupsSlice.ts'
 
 const DirectMessages = () => {
 	const isAuth = useAppSelector(state => state.auth.isAuth)
@@ -33,7 +33,7 @@ const DirectMessages = () => {
 		fetchData().then()
 	}, [friendsQuery, groupsQuery, dispatch])
 
-	let channels = useAppSelector(state => state.chats.channels)
+	const channels = useAppSelector(state => state.chats.channels)
 
 	if (!isAuth) {
 		return <p>Loading...</p>

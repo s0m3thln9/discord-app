@@ -1,4 +1,4 @@
-import Button from '../../../UI/Button/Button.tsx'
+import Button from '../../../../UI/Button/Button.tsx'
 import { Filter } from '../Friends.tsx'
 import { twMerge } from 'tailwind-merge'
 import { clsx } from 'clsx'
