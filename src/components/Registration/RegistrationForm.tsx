@@ -8,6 +8,16 @@ import { useAuth } from '../../providers/authProvider/AuthProvider.tsx'
 import { RegisterCredentials } from '../../types/user.ts'
 import { useRegisterUserMutation } from '../../api/api.ts'
 import Loader from '../UI/Loader/Loader.tsx'
+import { OptionType } from './data.ts'
+
+export type RegisterCredentialsWithSelect = Omit<
+	RegisterCredentials,
+	'birthdayMonth' | 'birthdayDay' | 'birthdayYear'
+> & {
+	birthdayYear: OptionType
+	birthdayMonth: OptionType
+	birthdayDay: OptionType
+}
 
 const RegistrationForm = () => {
 	const {
@@ -16,14 +26,26 @@ const RegistrationForm = () => {
 		control,
 		getValues,
 		formState: { errors },
-	} = useForm<RegisterCredentials>({
+	} = useForm<RegisterCredentialsWithSelect>({
 		mode: 'onChange',
 	})
 
 	const [registerUser, { isLoading }] = useRegisterUserMutation()
 	const { register: reg } = useAuth()
 
-	const onSubmit = async () => await reg(await registerUser({ ...getValues() }).unwrap())
+	const onSubmit = async () => {
+		console.log({ ...getValues() })
+		const data: RegisterCredentialsWithSelect = { ...getValues() }
+		const formattedDate: RegisterCredentials = {
+			...data,
+			birthdayMonth: data.birthdayMonth.value,
+			birthdayYear: parseInt(data.birthdayYear.value),
+			birthdayDay: parseInt(data.birthdayDay.value),
+		}
+		const response = await registerUser(formattedDate).unwrap()
+		console.log(response)
+		await reg(response)
+	}
 
 	return (
 		<form className={'mt-5 w-full'} onSubmit={handleSubmit(onSubmit)}>

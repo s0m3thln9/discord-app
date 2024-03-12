@@ -1,8 +1,6 @@
-import { GroupBase, OptionsOrGroups } from 'react-select'
+export type OptionType = { value: string; label: string }
 
-type OptionType = { value: string; label: string }
-
-export const months: OptionsOrGroups<OptionType, GroupBase<OptionType>> = [
+export const months: OptionType[] = [
 	{ value: 'January', label: 'January' },
 	{ value: 'February', label: 'February' },
 	{ value: 'March', label: 'March' },
@@ -17,7 +15,7 @@ export const months: OptionsOrGroups<OptionType, GroupBase<OptionType>> = [
 	{ value: 'December', label: 'December' },
 ]
 
-export const days: OptionsOrGroups<OptionType, GroupBase<OptionType>> = [
+export const days: OptionType[] = [
 	{ value: '1', label: '1' },
 	{ value: '2', label: '2' },
 	{ value: '3', label: '3' },
@@ -51,7 +49,7 @@ export const days: OptionsOrGroups<OptionType, GroupBase<OptionType>> = [
 	{ value: '31', label: '31' },
 ]
 
-export const years: OptionsOrGroups<OptionType, GroupBase<OptionType>> = [
+export const years: OptionType[] = [
 	{ value: '2021', label: '2021' },
 	{ value: '2020', label: '2020' },
 	{ value: '2019', label: '2019' },
