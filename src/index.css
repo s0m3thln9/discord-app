@@ -123,3 +123,9 @@ ul::-webkit-scrollbar-thumb {
 .custom-select__menu-notice {
 	padding: 0.25rem 0.25rem !important;
 }
+
+@media not all and (min-width: 485px) {
+	.custom-select__control {
+		width: 100% !important;
+	}
+}
