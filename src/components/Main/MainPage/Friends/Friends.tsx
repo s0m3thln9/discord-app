@@ -1,10 +1,10 @@
-import { Friends } from '../../../../../public/svgs.tsx'
 import TabBar from './TabBar/TabBar.tsx'
 import ToolBar from './ToolBar/ToolBar.tsx'
 import ActiveNow from './ActiveNow/ActiveNow.tsx'
 import FriendsList from './FriendsList/FriendsList.tsx'
 import { useState } from 'react'
 import AddingFriends from './AddingFriends/AddingFriends.tsx'
+import { Friends } from '../../../../assets/svgs.tsx'
 
 export type Filter = 'all' | 'online' | 'pending' | 'blocked' | 'addFriends'
 

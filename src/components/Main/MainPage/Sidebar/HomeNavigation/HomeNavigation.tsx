@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { DSNitro, Friends, Shop } from '../../../../../../public/svgs.tsx'
+import { DSNitro, Friends, Shop } from '../../../../../assets/svgs.tsx'
 
 const HomeNavigation = () => {
 	const pathname = window.location.href

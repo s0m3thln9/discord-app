@@ -1,6 +1,6 @@
 import Tooltip from '../../../../UI/Tooltip/Tooltip.tsx'
-import { Help, Inbox, NewDMGroup } from '../../../../../../public/svgs.tsx'
 import Button from '../../../../UI/Button/Button.tsx'
+import { Help, Inbox, NewDMGroup } from '../../../../../assets/svgs.tsx'
 
 const ToolBar = () => {
 	return (

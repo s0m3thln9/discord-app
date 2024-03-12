@@ -2,10 +2,10 @@ import UserImage from '../../../../../UI/UserImage/UserImage.tsx'
 import Tooltip from '../../../../../UI/Tooltip/Tooltip.tsx'
 import Button from '../../../../../UI/Button/Button.tsx'
 import { UserShowableData } from '../../../../../../types/user.ts'
-import { Accept, Cross } from '../../../../../../../public/svgs.tsx'
 import { useAcceptFriendRequestMutation, useDeleteFriendRequestMutation } from '../../../../../../api/api.ts'
 import { useDispatch } from 'react-redux'
 import { deleteFriendRequestAC } from '../../../../../../store/slices/friendRequestsSlice.ts'
+import { Accept, Cross } from '../../../../../../assets/svgs.tsx'
 
 type Props = {
 	user: Omit<UserShowableData, 'onlineStatus'> & {
