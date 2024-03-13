@@ -7,7 +7,8 @@ import Button from '../../../UI/Button/Button.tsx'
 
 type Setting = {
 	id: number
-	name: string
+	page?: string
+	title: string
 	onClick?: () => void
 }
 
@@ -35,39 +36,48 @@ const SettingsSidebar = ({ className, currentSetting, setCurrentSetting }: Props
 		list: [
 			{
 				id: 1,
-				name: 'My Account',
+				page: 'My Account',
+				title: 'My Account',
 			},
 			{
 				id: 2,
-				name: 'Profiles',
+				page: 'Profiles',
+				title: 'Profiles',
 			},
 			{
 				id: 3,
-				name: 'Privacy & Safety',
+				page: 'Privacy & Safety',
+				title: 'Profiles,',
 			},
 			{
 				id: 4,
-				name: 'Family Center',
+				page: 'Family Center',
+				title: 'Family Center',
 			},
 			{
 				id: 5,
-				name: 'Authorized Apps',
+				page: 'Authorized Apps',
+				title: 'Authorized Apps',
 			},
 			{
 				id: 6,
-				name: 'Devices',
+				page: 'Devices',
+				title: 'Devices',
 			},
 			{
 				id: 7,
-				name: 'Connections',
+				page: 'Connections',
+				title: 'Connections',
 			},
 			{
 				id: 8,
-				name: 'Clips',
+				page: 'Clips',
+				title: 'Clips',
 			},
 			{
 				id: 9,
-				name: 'Friend Requests',
+				page: 'Friend Requests',
+				title: 'Friend Requests',
 			},
 		],
 	}
@@ -77,23 +87,28 @@ const SettingsSidebar = ({ className, currentSetting, setCurrentSetting }: Props
 		list: [
 			{
 				id: 1,
-				name: 'Nitro',
+				page: 'Nitro',
+				title: 'Nitro',
 			},
 			{
 				id: 2,
-				name: 'Server Boost',
+				page: 'Server Boost',
+				title: 'Server Boost',
 			},
 			{
 				id: 3,
-				name: 'Subscriptions',
+				page: 'Subscriptions',
+				title: 'Subscriptions',
 			},
 			{
 				id: 4,
-				name: 'Gift Inventory',
+				page: 'Gift Inventory',
+				title: 'Gift Inventory',
 			},
 			{
 				id: 5,
-				name: 'Billing',
+				page: 'Billing',
+				title: 'Billing',
 			},
 		],
 	}
@@ -103,39 +118,48 @@ const SettingsSidebar = ({ className, currentSetting, setCurrentSetting }: Props
 		list: [
 			{
 				id: 1,
-				name: 'Appearance',
+				page: 'Appearance',
+				title: 'Appearance',
 			},
 			{
 				id: 2,
-				name: 'Accessibility',
+				page: 'Accessibility',
+				title: 'Accessibility',
 			},
 			{
 				id: 3,
-				name: 'Voice & Video',
+				page: 'Voice & Video',
+				title: 'Voice & Video',
 			},
 			{
 				id: 4,
-				name: 'Chat',
+				page: 'Chat',
+				title: 'Chat',
 			},
 			{
 				id: 5,
-				name: 'Notifications',
+				page: 'Notifications',
+				title: 'Notifications',
 			},
 			{
 				id: 6,
-				name: 'Keybinds',
+				page: 'Keybinds',
+				title: 'Keybinds',
 			},
 			{
 				id: 7,
-				name: 'Language',
+				page: 'Language',
+				title: 'Language',
 			},
 			{
 				id: 8,
-				name: 'Streamer Mode',
+				page: 'Streamer Mode',
+				title: 'Streamer Mode',
 			},
 			{
 				id: 9,
-				name: 'Advanced',
+				page: 'Advanced',
+				title: 'Advanced',
 			},
 		],
 	}
@@ -145,7 +169,8 @@ const SettingsSidebar = ({ className, currentSetting, setCurrentSetting }: Props
 		list: [
 			{
 				id: 1,
-				name: 'Activity Privacy',
+				page: 'Activity Privacy',
+				title: 'Activity Privacy',
 			},
 		],
 	}
@@ -154,15 +179,18 @@ const SettingsSidebar = ({ className, currentSetting, setCurrentSetting }: Props
 		list: [
 			{
 				id: 1,
-				name: "What's new",
+				page: "What's new",
+				title: "What's new?",
 			},
 			{
 				id: 2,
-				name: 'Merch',
+				page: 'Merch',
+				title: 'Merch',
 			},
 			{
 				id: 3,
-				name: 'HypeSquad',
+				page: 'HypeSquad',
+				title: 'HypeSquad',
 			},
 		],
 	}
@@ -171,7 +199,7 @@ const SettingsSidebar = ({ className, currentSetting, setCurrentSetting }: Props
 		list: [
 			{
 				id: 1,
-				name: 'Log Out',
+				title: 'Log Out',
 				onClick: openLogoutPopoverHandler,
 			},
 		],
@@ -258,15 +286,17 @@ const PrintMenu = ({ menu, currentSetting, setCurrentSetting }: MenuProps) => {
 			<ul>
 				{menu.list.map(setting => (
 					<li
-						className={`h-fit cursor-pointer rounded ${currentSetting === setting.name ? 'bg-hover' : ''}`}
+						className={`h-fit cursor-pointer rounded ${currentSetting === setting.page ? 'bg-hover' : ''}`}
 						key={setting.id}
-						onClick={() => setCurrentSetting(setting.name as SettingList)}
+						onClick={() => {
+							setting.page ? setCurrentSetting(setting.page as SettingList) : ''
+						}}
 					>
 						<span
-							className={`mb-0.5 block rounded px-2.5 py-1.5 text-[#b5bac1] hover:bg-hover hover:no-underline ${currentSetting === setting.name ? 'text-white' : ''}`}
+							className={`mb-0.5 block rounded px-2.5 py-1.5 text-[#b5bac1] hover:bg-hover hover:no-underline ${currentSetting === setting.page ? 'text-white' : ''}`}
 							onClick={setting?.onClick}
 						>
-							{setting.name}
+							{setting.title}
 						</span>
 					</li>
 				))}

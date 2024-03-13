@@ -13,11 +13,7 @@ const ChatChannel = ({ channel }: Props) => {
 	const [isContextMenuShon, setIsContextMenuShown] = useState(false)
 
 	return (
-		<li
-			key={`${channel.id}${channel.type}`}
-			className={'relative pt-0.5'}
-			onClick={() => setIsContextMenuShown(false)}
-		>
+		<li key={`${channel.id}${channel.type}`} className={'relative pt-0.5'}>
 			<Link
 				to={'/'}
 				className={
