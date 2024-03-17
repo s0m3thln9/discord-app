@@ -21,9 +21,7 @@ const ChatInput = ({ handleSend }: Props) => {
 				setNewMessageText('')
 			}
 		}
-
 		const input = document.querySelector<HTMLInputElement>('#newMessageInput')
-
 		input?.addEventListener('keydown', handleKeyDown)
 
 		return () => {

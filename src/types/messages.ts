@@ -1,3 +1,5 @@
+import { ErrorMessage, SuccessMessage } from './responseMessages.ts'
+
 export type NewMessageBody = {
 	text: string
 	username: string
@@ -13,3 +15,13 @@ export type Message = {
 	createdAt: Date
 	updatedAt: Date
 }
+
+type SendMessageErrorMessages = 'Unauthorized'
+export type SendMessageResponse =
+	| SuccessMessage<'Message sent successfully', { message: Message }>
+	| ErrorMessage<SendMessageErrorMessages>
+
+type GetMessagesErrorMessages = 'Unauthorized'
+export type GetMessagesResponse =
+	| SuccessMessage<'Successfully got message', { messages: Message[] }>
+	| ErrorMessage<GetMessagesErrorMessages>
