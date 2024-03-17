@@ -9,6 +9,10 @@ export const Main = () => {
 		setIsSettingsOpen(isSettingsOpenPrev => !isSettingsOpenPrev)
 	}
 
+	const closeSettings = () => {
+		setIsSettingsOpen(false)
+	}
+
 	return (
 		<main className={'relative h-[100svh] overflow-hidden bg-[#313338] text-[#b5bac1]'}>
 			<MainPage
@@ -17,6 +21,7 @@ export const Main = () => {
 			/>
 			<SettingsPage
 				toggleSettings={toggleSettings}
+				closeSettings={closeSettings}
 				className={`${!isSettingsOpen ? 'pointer-events-none scale-110 opacity-0 ' : ''}`}
 			/>
 		</main>
