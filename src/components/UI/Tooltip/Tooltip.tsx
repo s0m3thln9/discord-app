@@ -27,7 +27,7 @@ const Tooltip = ({ children, text, vertical, horizontal, x, y, className, ...pro
 }
 
 const tooltipVariations = cva(
-	'absolute pointer-events-none z-10 w-fit scale-95 rounded bg-[#1b1b1e] text-white opacity-0 shadow-lg transition-all group-hover/tooltip:scale-100 group-hover/tooltip:opacity-100',
+	'absolute pointer-events-none z-10 w-fit scale-95 rounded bg-[#111214] text-white opacity-0 shadow-lg transition-all group-hover/tooltip:scale-100 group-hover/tooltip:opacity-100',
 	{
 		variants: {
 			horizontal: {
@@ -71,7 +71,7 @@ const tooltipVariations = cva(
 )
 
 const tooltipArrowVariations = cva(
-	'relative px-3 py-2 before:absolute before:bg-[#1b1b1e] before:h-2 before:w-2 before:rotate-45',
+	'relative px-3 py-2 before:absolute before:bg-[#111214] before:h-2 before:w-2 before:rotate-45',
 	{
 		variants: {
 			vertical: {

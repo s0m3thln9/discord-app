@@ -12,16 +12,17 @@ interface Props extends VariantProps<typeof userImageVariants> {
 	className?: string
 	bgColor: 'sidebar' | 'content' | 'userInfo' | 'profile-bg' | null | undefined
 	editable?: Dispatch<SetStateAction<boolean>>
+	hover?: string
 }
 
-const UserImage = ({ image, onlineStatus, color, className, bgColor, tooltip, size, border, editable }: Props) => {
+const UserImage = ({ image, onlineStatus, color, className, bgColor, tooltip, size, border, editable, hover }: Props) => {
 	return (
 		<div className={cn(userImageVariants({ size, border }), className)}>
 			{image ? (
 				<img src={image} className={cn(ImageVariants({ size }))} alt={'user image'} />
 			) : (
 				<div className={cn(UserImagePlaceholderVariants({ size }))} style={{ background: color }}>
-					<DSLogo width={size === 'md' ? 20 : 48} height={size === 'md' ? 20 : 48} />
+					<DSLogo width={size === 'sm' ? 20 : 48} height={size === 'sm' ? 20 : 48} />
 				</div>
 			)}
 			{editable && (
@@ -44,6 +45,11 @@ const UserImage = ({ image, onlineStatus, color, className, bgColor, tooltip, si
 					size={size}
 				/>
 			)}
+			{hover && (
+				<div className={'absolute left-0 top-0 flex h-full w-full cursor-pointer items-center justify-center rounded-full opacity-0 shadow-avatar hover:opacity-100'}>
+					<p className={'text-[0.625rem] font-bold uppercase text-[#fff] overflow-ellipsis whitespace-nowrap'}>{hover}</p>
+				</div>
+			)}
 		</div>
 	)
 }
@@ -51,16 +57,17 @@ const UserImage = ({ image, onlineStatus, color, className, bgColor, tooltip, si
 const userImageVariants = cva('relative inline-block shrink-0', {
 	variants: {
 		size: {
-			md: 'h-8 w-8',
-			lg: 'h-[calc(5rem+0.8rem)] w-[calc(5rem+0.8rem)]',
+			sm: 'h-8 w-8',
+			lg: 'h-[calc(5rem+0.88rem)] w-[calc(5rem+0.88rem)]',
 		},
 		border: {
 			none: '',
-			profile: 'inline-table border-[0.4rem] rounded-full border-profile-bg',
+			profile: 'inline-table border-[0.44rem] rounded-full border-profile-bg',
+			'user-info': 'inline-table border-[0.44rem] rounded-full border-user-info',
 		},
 	},
 	defaultVariants: {
-		size: 'md',
+		size: 'sm',
 		border: 'none',
 	},
 })
@@ -68,24 +75,24 @@ const userImageVariants = cva('relative inline-block shrink-0', {
 const ImageVariants = cva('rounded-full', {
 	variants: {
 		size: {
-			md: 'h-8 w-8',
-			lg: 'h-[5rem] w-[calc(5rem+0.8rem)]',
+			sm: 'h-8 w-8',
+			lg: 'h-[5rem] w-[calc(5rem+0.88rem)]',
 		},
 	},
 	defaultVariants: {
-		size: 'md',
+		size: 'sm',
 	},
 })
 
 const UserImagePlaceholderVariants = cva('flex shrink-0 items-center justify-center rounded-full h-full w-full', {
 	variants: {
 		size: {
-			md: 'h-8 w-8',
+			sm: 'h-8 w-8',
 			lg: 'h-[5rem] w-[5rem]',
 		},
 	},
 	defaultVariants: {
-		size: 'md',
+		size: 'sm',
 	},
 })
 export default UserImage

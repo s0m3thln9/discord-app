@@ -31,7 +31,7 @@ const ChatChannel = ({ channel }: Props) => {
 						onlineStatus={channel.onlineStatus}
 						tooltip={true}
 						bgColor={'sidebar'}
-						size={'md'}
+						size={'sm'}
 					/>
 					<div className={'ml-3 flex w-full grow flex-col justify-center leading-none'}>
 						<p

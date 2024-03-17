@@ -34,7 +34,7 @@ const FriendRequest = ({ user, type, requestId }: Props) => {
 						onlineStatus={'group'}
 						tooltip={false}
 						bgColor={'content'}
-						size={'md'}
+						size={'sm'}
 					/>
 					<div className={'ml-3 flex flex-col justify-between'}>
 						<p className={'leading-4 text-white'}>

@@ -3,7 +3,7 @@ import Tooltip from '../Tooltip/Tooltip.tsx'
 import { cva, VariantProps } from 'class-variance-authority'
 
 interface Props extends VariantProps<typeof statusIndicatorVariants> {
-	tooltip: boolean | undefined
+	tooltip?: boolean
 }
 
 const StatusIndicator = ({ onlineStatus, color, tooltip = false, size }: Props) => {
@@ -22,8 +22,8 @@ const StatusIndicator = ({ onlineStatus, color, tooltip = false, size }: Props) 
 	)
 }
 
-const Indicator = ({ onlineStatus, color, size }: VariantProps<typeof statusIndicatorVariants>) => {
-	return <div className={cn(statusIndicatorVariants({ onlineStatus, color, size }))}></div>
+export const Indicator = ({ onlineStatus, color, size, hover }: VariantProps<typeof statusIndicatorVariants>) => {
+	return <div className={cn(statusIndicatorVariants({ onlineStatus, color, size, hover }))}></div>
 }
 
 const statusIndicatorVariants = cva('absolute z-10 rounded-full group-hover:border-hover group-hover:before:bg-hover', {
@@ -42,9 +42,14 @@ const statusIndicatorVariants = cva('absolute z-10 rounded-full group-hover:bord
 			'profile-bg': 'border-profile-bg before:bg-profile-bg',
 		},
 		size: {
-			md: 'h-4 w-4 border-[0.2rem] -bottom-0.5 -right-0.5',
+			sm: 'h-4 w-4 border-[0.2rem] -bottom-0.5 -right-0.5',
+			md: 'h-3 w-3',
 			lg: 'h-7 w-7 border-[0.4rem] bottom-0 right-0',
+			xl: 'h-10 w-10 border-[0.5rem] bottom-0 right-0',
 		},
+		hover: {
+			option: 'group-hover:bg-[#dbdee1]'
+		}
 	},
 	defaultVariants: {
 		size: 'md',

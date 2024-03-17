@@ -20,6 +20,7 @@ export default {
 			boxShadow: {
 				select: '0 0 1rem 0.25rem rgba(0, 0, 0, 0.2)',
 				div: '0 0.125rem 0.625rem 0 rgba(0, 0, 0, 0.2)',
+				avatar: 'inset 0 0 120px hsl(0 calc( 1 * 0%) 0% /.75)',
 			},
 			backgroundImage: {
 				'auth-and-reg-background': "url('/src/assets/img/auth-and-reg-background.jpg')",
