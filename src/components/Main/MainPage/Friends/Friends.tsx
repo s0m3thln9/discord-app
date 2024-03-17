@@ -9,7 +9,7 @@ import { Friends } from '../../../../assets/svgs.tsx'
 export type Filter = 'all' | 'online' | 'pending' | 'blocked' | 'addFriends'
 
 const FriendsSection = () => {
-	const [filter, setFilter] = useState<Filter>('pending')
+	const [filter, setFilter] = useState<Filter>('online')
 	return (
 		<main className={'grow'}>
 			<section className={'flex h-12 items-center justify-between border-b-[1px] border-[#202225] p-2.5 pt-2.5'}>
