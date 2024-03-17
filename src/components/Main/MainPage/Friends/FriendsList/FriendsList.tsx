@@ -7,6 +7,9 @@ import { useEffect, useState } from 'react'
 import { addFriendRequest } from '../../../../../store/slices/friendRequestsSlice.ts'
 import { FriendRequestsWithUsers } from '../../../../../types/friends.ts'
 import FriendRequest from './FriendRequest/FriendRequest.tsx'
+import noFriends from './../../../../../assets/img/noFriends.svg'
+import noRequests from './../../../../../assets/img/noRequests.svg'
+import blocked from './../../../../../assets/img/blocked.svg'
 
 type Props = {
 	filter: Filter
@@ -89,9 +92,24 @@ const FriendsList = ({ filter }: Props) => {
 				{filter === 'all' || filter === 'online' ? filteredFriends.length : filteredFriendRequests.length}
 			</h2>
 			<ul className={'grow'}>
-				{(filter === 'all' || filter === 'online') &&
-					filteredFriends.map(friend => <FriendItem friend={friend} key={friend.id} />)}
-				{(filter === 'pending' || filter === 'blocked') &&
+				{(filter === 'all' || filter === 'online') && filteredFriends.length === 0 ? (
+					<div className={'flex h-full w-full flex-col items-center justify-center'}>
+						<img src={noFriends} alt="no friends" />
+						<p className={'mt-8 text-[#949ba4]'}>Wumpus looked, but couldn’t find anyone with that name.</p>
+					</div>
+				) : (
+					filteredFriends.map(friend => <FriendItem friend={friend} key={friend.id} />)
+				)}
+				{(filter === 'pending' || filter === 'blocked') && filteredFriendRequests.length === 0 ? (
+					<div className={'flex h-full w-full flex-col items-center justify-center'}>
+						<img src={filter === 'pending' ? noRequests : blocked} alt="no friends" />
+						<p className={'mt-8 text-[#949ba4]'}>
+							{filter === 'pending'
+								? "There are no pending friend requests. Here's Wumpus for now."
+								: "You can't unblock the Wumpus."}
+						</p>
+					</div>
+				) : (
 					filteredFriendRequests.map(request => (
 						<FriendRequest
 							user={
@@ -103,7 +121,9 @@ const FriendsList = ({ filter }: Props) => {
 							type={user.id === request.friendRequest.toId ? 'incoming' : 'outgoing'}
 							requestId={request.friendRequest.id}
 						/>
-					))}
+					))
+				)}
+				{filter.length === 0 && <img src={noFriends} alt="" />}
 			</ul>
 		</section>
 	)
