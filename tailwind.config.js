@@ -21,6 +21,10 @@ export default {
 				select: '0 0 1rem 0.25rem rgba(0, 0, 0, 0.2)',
 				div: '0 0.125rem 0.625rem 0 rgba(0, 0, 0, 0.2)',
 			},
+			backgroundImage: {
+				'auth-and-reg-background': "url('/src/assets/img/auth-and-reg-background.jpg')",
+				'checkbox-background': "url('/src/assets/img/checkbox.svg')",
+			},
 		},
 		colors: {
 			sidebar: '#2b2c31',
