@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 const Timer = () => {
 	const [time, setTime] = useState(0)
-	const intervalRef = useRef(0)
+	const intervalRef = useRef<NodeJS.Timeout>()
 
 	useEffect(() => {
 		setInterval(() => {
