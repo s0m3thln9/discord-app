@@ -47,7 +47,7 @@ const SettingsSidebar = ({ className, currentSetting, setCurrentSetting }: Props
 			{
 				id: 3,
 				page: 'Privacy & Safety',
-				title: 'Profiles,',
+				title: 'Privacy & Safety',
 			},
 			{
 				id: 4,
