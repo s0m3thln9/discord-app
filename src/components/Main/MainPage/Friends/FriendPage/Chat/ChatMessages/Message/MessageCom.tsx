@@ -42,7 +42,6 @@ const MessageCom = ({ message, previous }: Props) => {
 
 			<div className={clsx('', previous?.senderId !== message.senderId ? 'ml-4' : 'grid grid-cols-[4rem,1fr]')}>
 				{previous?.senderId === message.senderId && (
-					/*<Tooltip text={formatDateForMessagesTooltip(date)} vertical={'top'} horizontal={'center'} y={'xsm'}>*/
 					<span
 						className={
 							'flex w-full cursor-default justify-center text-[0.6875rem] text-[#b5bac1] opacity-0 group-hover:opacity-100'
@@ -50,7 +49,6 @@ const MessageCom = ({ message, previous }: Props) => {
 					>
 						{formattedDateForTime(date)}
 					</span>
-					/*</Tooltip>*/
 				)}
 				{previous?.senderId !== message.senderId && (
 					<span className={'flex select-text items-center text-sm leading-4 text-white'}>
