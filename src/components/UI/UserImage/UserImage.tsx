@@ -53,6 +53,7 @@ const userImageVariants = cva('relative inline-block shrink-0', {
 		size: {
 			md: 'h-8 w-8',
 			lg: 'h-[calc(5rem+0.8rem)] w-[calc(5rem+0.8rem)]',
+			sm: 'h-6 w-6',
 		},
 		border: {
 			none: '',
@@ -70,6 +71,7 @@ const ImageVariants = cva('rounded-full', {
 		size: {
 			md: 'h-8 w-8',
 			lg: 'h-[5rem] w-[calc(5rem+0.8rem)]',
+			sm: 'h-6 w-6',
 		},
 	},
 	defaultVariants: {
@@ -82,6 +84,7 @@ const UserImagePlaceholderVariants = cva('flex shrink-0 items-center justify-cen
 		size: {
 			md: 'h-8 w-8',
 			lg: 'h-[5rem] w-[5rem]',
+			sm: 'h-6 w-6',
 		},
 	},
 	defaultVariants: {

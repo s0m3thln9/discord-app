@@ -5,7 +5,7 @@ const Timer = () => {
 	const intervalRef = useRef(0)
 
 	useEffect(() => {
-		intervalRef.current = setInterval(() => {
+		setInterval(() => {
 			setTime(time + 1)
 		}, 1000)
 

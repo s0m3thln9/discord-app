@@ -1,10 +1,15 @@
-export type SuccessMessage<Messages, Payload> = {
-	success: true
-	message: Messages
-	payload?: Payload
+export type NewMessageBody = {
+	text: string
+	username: string
+	receiverId: number
+	jwt: string
 }
 
-export type ErrorMessage<Messages> = {
-	success: false
-	message: Messages | 'Server error'
+export type Message = {
+	id: number
+	text: string
+	senderId: number
+	receiverId: number
+	createdAt: Date
+	updatedAt: Date
 }

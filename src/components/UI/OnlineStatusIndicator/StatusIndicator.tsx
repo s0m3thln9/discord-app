@@ -44,6 +44,7 @@ const statusIndicatorVariants = cva('absolute z-10 rounded-full group-hover:bord
 		size: {
 			md: 'h-4 w-4 border-[0.2rem] -bottom-0.5 -right-0.5',
 			lg: 'h-7 w-7 border-[0.4rem] bottom-0 right-0',
+			sm: 'h-3 w-3 border-[0.125rem] -bottom-0.5 -right-0.5',
 		},
 	},
 	defaultVariants: {

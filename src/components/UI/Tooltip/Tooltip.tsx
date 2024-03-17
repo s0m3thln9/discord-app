@@ -2,13 +2,17 @@ import { cva, VariantProps } from 'class-variance-authority'
 import { cn } from '../../../utils/cn'
 import React from 'react'
 import { twMerge } from 'tailwind-merge'
+import { clsx } from 'clsx'
 
-interface Props extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof tooltipVariations> {
+interface Props
+	extends React.HTMLAttributes<HTMLDivElement>,
+		VariantProps<typeof tooltipVariations>,
+		VariantProps<typeof tooltipArrowVariations> {
 	text: string
 	children?: React.ReactNode
 }
 
-const Tooltip = ({ children, text, vertical, horizontal, x, y, className, ...props }: Props) => {
+const Tooltip = ({ children, text, vertical, horizontal, x, y, className, width, ...props }: Props) => {
 	return (
 		<div className={twMerge('', className)} {...props}>
 			<div className={twMerge('group/tooltip relative h-full w-full')}>
@@ -17,8 +21,8 @@ const Tooltip = ({ children, text, vertical, horizontal, x, y, className, ...pro
 					className={cn(tooltipVariations({ vertical, horizontal, x, y }))}
 					style={{ boxShadow: '0 1rem 1rem 0 rgba(0, 0, 0, 0.2)' }}
 				>
-					<div className={cn(tooltipArrowVariations({ vertical, horizontal }))}>
-						<p className={'whitespace-nowrap text-sm font-medium'}>{text}</p>
+					<div className={cn(tooltipArrowVariations({ vertical, horizontal, width }))}>
+						<p className={clsx(`text-sm font-medium`, !width && 'whitespace-nowrap')}>{text}</p>
 					</div>
 				</div>
 			</div>
@@ -84,6 +88,13 @@ const tooltipArrowVariations = cva(
 				center: 'before:left-1/2 before:translate-x-[-50%]',
 				right: 'before:left-0 before:translate-x-[-50%]',
 			},
+			width: {
+				auto: 'w-fit',
+				md: 'w-[15rem]',
+			},
+		},
+		defaultVariants: {
+			width: 'auto',
 		},
 	},
 )

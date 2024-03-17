@@ -16,7 +16,6 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const { data, isLoading } = useLoginUserWithJwtQuery()
 
 	const login = async (response: LoginWithCredentialsResponse) => {
-		console.log(response)
 		if (response.success && response.payload) {
 			navigate('/')
 			dispatch(authUser(response.payload.user))

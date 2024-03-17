@@ -20,7 +20,7 @@ const FriendsSection = () => {
 					</div>
 					<TabBar setFilter={setFilter} filter={filter} />
 				</div>
-				<ToolBar />
+				<ToolBar usage={'main'} />
 			</section>
 			<div className={'flex h-[calc(100svh-3rem)]'}>
 				{filter === 'addFriends' ? <AddingFriends /> : <FriendsList filter={filter} />}

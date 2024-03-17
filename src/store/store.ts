@@ -5,7 +5,8 @@ import chatsReducer from './slices/chatsSlice.ts'
 import groupsReducer from './slices/groupsSlice.ts'
 import { api } from '../api/api.ts'
 import { setupListeners } from '@reduxjs/toolkit/query/react'
-import friendRequests from './slices/friendRequestsSlice.ts'
+import friendRequestsReducer from './slices/friendRequestsSlice.ts'
+import messagesReducer from './slices/messagesSlice.ts'
 
 export const store = configureStore({
 	reducer: {
@@ -14,7 +15,8 @@ export const store = configureStore({
 		friends: friendsReducer,
 		chats: chatsReducer,
 		groups: groupsReducer,
-		friendRequests: friendRequests,
+		friendRequests: friendRequestsReducer,
+		messages: messagesReducer,
 	},
 	middleware: getDefaultMiddleware => getDefaultMiddleware().concat(api.middleware),
 })

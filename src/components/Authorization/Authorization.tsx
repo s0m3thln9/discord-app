@@ -2,7 +2,11 @@ import AuthorizationMain from './AuthorizationMain.tsx'
 
 const Authorization = () => {
 	return (
-		<div className={'w-full select-none h-svh bg-[url("/img/auth-background.jpg")] bg-no-repeat bg-cover grid place-content-center'}>
+		<div
+			className={
+				'grid h-svh w-full select-none place-content-center bg-[url("src/assets/img/auth-background.jpg")] bg-cover bg-no-repeat'
+			}
+		>
 			<AuthorizationMain />
 		</div>
 	)

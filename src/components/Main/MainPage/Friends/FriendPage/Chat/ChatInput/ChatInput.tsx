@@ -1,0 +1,51 @@
+import { GIF, PlusCircle, Present } from '../../../../../../../assets/svgs.tsx'
+import Button from '../../../../../../UI/Button/Button.tsx'
+import Tooltip from '../../../../../../UI/Tooltip/Tooltip.tsx'
+import { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import useGetFriend from '../../../../../../../hooks/useGetFriend.ts'
+
+type Props = {
+	handleSend: (newMessageText: string) => void
+}
+
+const ChatInput = ({ handleSend }: Props) => {
+	const { id } = useParams()
+	const friendDisplayName = useGetFriend(id)?.displayName
+	const [newMessageText, setNewMessageText] = useState('')
+	return (
+		<div className={'m-4 flex items-center rounded-lg bg-hover'}>
+			<Button
+				variant={'icon'}
+				className={'bg-transparent hover:bg-transparent'}
+				onClick={() => {
+					setNewMessageText('')
+					handleSend(newMessageText)
+				}}
+			>
+				<PlusCircle className={'fill-[#b0b8c0] group-hover/iconBtn:fill-[#dbdee1]'} />
+			</Button>
+			<input
+				type="text"
+				placeholder={`Message @${friendDisplayName}`}
+				className={'grow bg-[transparent] placeholder:text-[#5f6169]'}
+				value={newMessageText}
+				onChange={e => setNewMessageText(e.target.value)}
+			/>
+			<Tooltip
+				text={'Upgrade your friends! Gift them awesome chat perks with Nitro.'}
+				vertical={'top'}
+				horizontal={'center'}
+				width={'md'}
+			>
+				<Button variant={'icon'} className={'bg-transparent hover:bg-transparent'}>
+					<Present className={'mx-1 fill-[#b0b8c0] group-hover/iconBtn:fill-[#dbdee1]'} />
+				</Button>
+			</Tooltip>
+
+			<GIF className={'mx-1 fill-[#b0b8c0]'} />
+		</div>
+	)
+}
+
+export default ChatInput

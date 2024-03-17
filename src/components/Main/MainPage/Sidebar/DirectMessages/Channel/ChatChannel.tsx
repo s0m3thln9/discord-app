@@ -15,7 +15,7 @@ const ChatChannel = ({ channel }: Props) => {
 	return (
 		<li key={`${channel.id}${channel.type}`} className={'relative pt-0.5'}>
 			<Link
-				to={'/'}
+				to={`/${channel.id}`}
 				className={
 					'group flex h-[2.625rem] items-center justify-between rounded px-2 text-[#949ba4] hover:bg-[#35373c] hover:no-underline'
 				}

@@ -1,4 +1,4 @@
-import { ErrorMessage, SuccessMessage } from './messages.ts'
+import { ErrorMessage, SuccessMessage } from './responseMessages.ts'
 import { UserShowableData, UserWithoutPassword } from './user.ts'
 
 export type FriendRequest = {
