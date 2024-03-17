@@ -3,7 +3,7 @@ import FriendItem from './FriendItem/FriendItem.tsx'
 import { Filter } from '../Friends.tsx'
 import { UserWithoutPassword } from '../../../../../types/user.ts'
 import { useGetFriendRequestsMutation } from '../../../../../api/api.ts'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { addFriendRequest } from '../../../../../store/slices/friendRequestsSlice.ts'
 import { FriendRequestsWithUsers } from '../../../../../types/friends.ts'
 import FriendRequest from './FriendRequest/FriendRequest.tsx'
@@ -13,6 +13,8 @@ type Props = {
 }
 
 const FriendsList = ({ filter }: Props) => {
+	const [search, setSearch] = useState('')
+
 	const user = useAppSelector(state => state.auth.user)
 	const friends = useAppSelector(state => state.friends.friends)
 
@@ -49,6 +51,26 @@ const FriendsList = ({ filter }: Props) => {
 			break
 	}
 
+	filteredFriends = filteredFriends.filter(
+		friend =>
+			friend.displayName.toUpperCase().indexOf(search.toUpperCase()) != -1 ||
+			friend.displayName.toUpperCase().indexOf(search.toUpperCase()) != -1,
+	)
+
+	filteredFriendRequests = filteredFriendRequests.filter(request => {
+		if (request.toUser.id === user?.id) {
+			return (
+				request.fromUser.displayName.toUpperCase().indexOf(search.toUpperCase()) != -1 ||
+				request.fromUser.displayName.toUpperCase().indexOf(search.toUpperCase()) != -1
+			)
+		} else {
+			return (
+				request.toUser.displayName.toUpperCase().indexOf(search.toUpperCase()) != -1 ||
+				request.toUser.displayName.toUpperCase().indexOf(search.toUpperCase()) != -1
+			)
+		}
+	})
+
 	if (!user) {
 		return <p>Loading...</p>
 	}
@@ -59,6 +81,8 @@ const FriendsList = ({ filter }: Props) => {
 				type="text"
 				placeholder={'Search'}
 				className={'ml-[1.875rem] mr-5 mt-4 h-[1.875rem] rounded bg-[#1e1f22] px-2 text-white'}
+				value={search}
+				onChange={e => setSearch(e.target.value)}
 			/>
 			<h2 className={'mb-2 ml-[1.875rem] mr-5 mt-4 text-xs font-semibold uppercase text-[#b5bac1]'}>
 				{`${filter[0].toUpperCase()}${filter.substring(1)}`} -{' '}
