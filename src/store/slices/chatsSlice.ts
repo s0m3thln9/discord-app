@@ -56,9 +56,12 @@ export const chatsSlice = createSlice({
 				}
 			})
 		},
+		clearChannels: state => {
+			state.channels = []
+		},
 	},
 })
 
-export const { addFriendsToChannels, addGroupsToChannels } = chatsSlice.actions
+export const { addFriendsToChannels, addGroupsToChannels, clearChannels } = chatsSlice.actions
 
 export default chatsSlice.reducer
