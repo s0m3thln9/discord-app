@@ -70,7 +70,7 @@ const ImageVariants = cva('rounded-full', {
 	variants: {
 		size: {
 			md: 'h-8 w-8',
-			lg: 'h-[5rem] w-[calc(5rem+0.8rem)]',
+			lg: 'h-[5rem] w-[5rem]',
 			sm: 'h-6 w-6',
 		},
 	},

@@ -1,7 +1,7 @@
 import { GIF, PlusCircle, Present } from '../../../../../../../assets/svgs.tsx'
 import Button from '../../../../../../UI/Button/Button.tsx'
 import Tooltip from '../../../../../../UI/Tooltip/Tooltip.tsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import useGetFriend from '../../../../../../../hooks/useGetFriend.ts'
 
@@ -13,22 +13,33 @@ const ChatInput = ({ handleSend }: Props) => {
 	const { id } = useParams()
 	const friendDisplayName = useGetFriend(id)?.displayName
 	const [newMessageText, setNewMessageText] = useState('')
+
+	useEffect(() => {
+		const handleKeyDown = (e: KeyboardEvent) => {
+			if (e.key === 'Enter') {
+				handleSend(newMessageText)
+				setNewMessageText('')
+			}
+		}
+
+		const input = document.querySelector<HTMLInputElement>('#newMessageInput')
+
+		input?.addEventListener('keydown', handleKeyDown)
+
+		return () => {
+			input?.removeEventListener('keydown', handleKeyDown)
+		}
+	}, [newMessageText])
+
 	return (
-		<div className={'m-4 flex items-center rounded-lg bg-hover'}>
-			<Button
-				variant={'icon'}
-				className={'bg-transparent hover:bg-transparent'}
-				onClick={() => {
-					setNewMessageText('')
-					handleSend(newMessageText)
-				}}
-			>
+		<div id={'newMessageInput'} className={'mx-4 mb-4 flex items-center rounded-lg bg-hover'}>
+			<Button variant={'icon'} className={'bg-transparent hover:bg-transparent'}>
 				<PlusCircle className={'fill-[#b0b8c0] group-hover/iconBtn:fill-[#dbdee1]'} />
 			</Button>
 			<input
 				type="text"
 				placeholder={`Message @${friendDisplayName}`}
-				className={'grow bg-[transparent] placeholder:text-[#5f6169]'}
+				className={'grow bg-[transparent] text-white placeholder:text-[#5f6169]'}
 				value={newMessageText}
 				onChange={e => setNewMessageText(e.target.value)}
 			/>

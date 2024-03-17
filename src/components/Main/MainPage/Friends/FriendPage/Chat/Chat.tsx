@@ -33,11 +33,11 @@ const Chat = () => {
 	}, [socket])
 
 	const handleSend = (newMessageText: string) => {
-		if (!user || !jwt) return
+		if (!user || !jwt || newMessageText === '') return
 		const newMessageBody: NewMessageBody = {
 			jwt,
 			receiverId: +(id || '0'),
-			text: newMessageText,
+			text: newMessageText.trim(),
 			username: user.username,
 		}
 		socketSendMessage(newMessageBody)
