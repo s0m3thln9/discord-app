@@ -1,12 +1,20 @@
 import { Link } from 'react-router-dom'
 import Tooltip from '../../../UI/Tooltip/Tooltip.tsx'
 import { Compass, DSLogo, Plus } from '../../../../assets/svgs.tsx'
+import { clsx } from 'clsx'
 
 const Navigation = () => {
+	const pathname = window.location.href
 	return (
 		<nav className={'min-h-svh w-[4.5rem] shrink-0 bg-[#1e1f22]'}>
 			<ul className={'flex flex-col items-center justify-center pt-3'}>
-				<li className={'navbar-item group/tooltip group mt-0 hover:bg-[#5865f2]'}>
+				<li
+					className={clsx(
+						'navbar-item group/tooltip group mt-0 hover:bg-[#5865f2]',
+						pathname === 'http://localhost:5173/' &&
+							'rounded-2xl bg-[#5865f2] before:h-6 before:translate-x-0 before:bg-white',
+					)}
+				>
 					<Tooltip
 						text={'Direct Messages'}
 						vertical={'center'}
