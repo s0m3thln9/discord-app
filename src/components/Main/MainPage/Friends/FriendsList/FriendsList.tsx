@@ -112,11 +112,7 @@ const FriendsList = ({ filter }: Props) => {
 				) : (
 					filteredFriendRequests.map(request => (
 						<FriendRequest
-							user={
-								request.friendRequest.fromId === user.id
-									? { ...request.toUser, onlineStatus: false }
-									: { ...request.fromUser, onlineStatus: false }
-							}
+							user={request.friendRequest.fromId === user.id ? request.toUser : request.fromUser}
 							key={request.friendRequest.id}
 							type={user.id === request.friendRequest.toId ? 'incoming' : 'outgoing'}
 							requestId={request.friendRequest.id}

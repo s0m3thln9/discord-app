@@ -1,5 +1,5 @@
-import { ErrorMessage, SuccessMessage } from './messages.ts'
 import { UserWithoutPassword } from './user.ts'
+import { ErrorMessage, SuccessMessage } from './responseMessages.ts'
 
 export type LoginUserData = {
 	email: string

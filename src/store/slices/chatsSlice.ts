@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Group } from '../../types/groups.ts'
-import { UserWithoutPassword } from '../../types/user.ts'
+import { UserShowableData } from '../../types/user.ts'
 
 export type Channel = {
 	id: number
@@ -24,7 +24,21 @@ export const chatsSlice = createSlice({
 	name: 'chats',
 	initialState,
 	reducers: {
-		addFriendsToChannels: (state, action: PayloadAction<UserWithoutPassword[]>) => {
+		addFriendToChannels: (state, action: PayloadAction<UserShowableData>) => {
+			const friend = action.payload
+			if (!state.channels.find(channel => channel.id === friend.id && channel.type === 'user')) {
+				state.channels.push({
+					id: friend.id,
+					image: friend.userImage,
+					name: friend.displayName,
+					type: 'user',
+					color: friend.color,
+					onlineStatus: friend.onlineStatus,
+					members: null,
+				})
+			}
+		},
+		addFriendsToChannels: (state, action: PayloadAction<UserShowableData[]>) => {
 			const friends = action.payload
 			friends.forEach(friend => {
 				if (!state.channels.find(channel => channel.id === friend.id && channel.type === 'user')) {
@@ -62,6 +76,6 @@ export const chatsSlice = createSlice({
 	},
 })
 
-export const { addFriendsToChannels, addGroupsToChannels, clearChannels } = chatsSlice.actions
+export const { addFriendsToChannels, addGroupsToChannels, clearChannels, addFriendToChannels } = chatsSlice.actions
 
 export default chatsSlice.reducer

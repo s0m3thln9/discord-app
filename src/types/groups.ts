@@ -1,4 +1,4 @@
-import { ErrorMessage, SuccessMessage } from './messages.ts'
+import { ErrorMessage, SuccessMessage } from './responseMessages.ts'
 
 export type Group = {
 	id: number

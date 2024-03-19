@@ -6,15 +6,13 @@ import { useAcceptFriendRequestMutation, useDeleteFriendRequestMutation } from '
 import { useDispatch } from 'react-redux'
 import { deleteFriendRequestAC } from '../../../../../../store/slices/friendRequestsSlice.ts'
 import { Accept, Cross } from '../../../../../../assets/svgs.tsx'
+import { addFriendToChannels } from '../../../../../../store/slices/chatsSlice.ts'
 
 type Props = {
-	user: Omit<UserShowableData, 'onlineStatus'> & {
-		onlineStatus: false
-	}
+	user: UserShowableData
 	type: 'incoming' | 'outgoing'
 	requestId: number
 }
-
 const FriendRequest = ({ user, type, requestId }: Props) => {
 	const [acceptFriendRequest] = useAcceptFriendRequestMutation()
 	const [deleteFriendRequest] = useDeleteFriendRequestMutation()
@@ -70,6 +68,10 @@ const FriendRequest = ({ user, type, requestId }: Props) => {
 								className={'ml-2'}
 								onClick={async () => {
 									const response = await acceptFriendRequest({ requestId }).unwrap()
+									if (response.success) {
+										dispatch(deleteFriendRequestAC({ requestId }))
+										dispatch(addFriendToChannels(user))
+									}
 									console.log(response)
 								}}
 							>
