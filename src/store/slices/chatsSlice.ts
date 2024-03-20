@@ -8,7 +8,7 @@ export type Channel = {
 	name: string
 	type: 'user' | 'group'
 	color: 'orange' | 'red' | 'green' | 'blue' | 'yellow'
-	onlineStatus: 'offline' | 'online' | 'idle' | 'doNotDisturb' | 'group'
+	onlineStatus: 'offline' | 'online' | 'idle' | 'doNotDisturb' | false
 	members: number | null
 }
 
@@ -64,7 +64,7 @@ export const chatsSlice = createSlice({
 						name: group.name,
 						type: 'group',
 						color: group.color,
-						onlineStatus: 'group',
+						onlineStatus: false,
 						members: group.members,
 					})
 				}

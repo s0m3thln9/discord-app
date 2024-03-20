@@ -33,8 +33,8 @@ const MessageCom = ({ message, previous }: Props) => {
 			{previous?.senderId !== message.senderId && (
 				<UserImage
 					image={(user.id === message.senderId ? user.userImage : friend.userImage) || ''}
-					onlineStatus={'group'}
-					color={'orange'}
+					onlineStatus={false}
+					color={user.id === message.senderId ? user.color : friend.color}
 					bgColor={'content'}
 					size={'md'}
 				/>

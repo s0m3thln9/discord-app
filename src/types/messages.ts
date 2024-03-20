@@ -1,4 +1,4 @@
-import { ErrorMessage, SuccessMessage } from './responseMessages.ts'
+import { ErrorMessage, SuccessMessage } from './responseMessages'
 
 export type NewMessageBody = {
 	text: string

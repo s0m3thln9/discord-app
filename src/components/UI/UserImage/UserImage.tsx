@@ -6,7 +6,7 @@ import { DSLogo, Edit } from '../../../assets/svgs.tsx'
 
 interface Props extends VariantProps<typeof userImageVariants> {
 	image: string
-	onlineStatus: 'offline' | 'online' | 'idle' | 'doNotDisturb' | 'group'
+	onlineStatus: 'offline' | 'online' | 'idle' | 'doNotDisturb' | false
 	color: 'orange' | 'red' | 'green' | 'blue' | 'yellow'
 	tooltip?: boolean
 	className?: string
@@ -21,7 +21,10 @@ const UserImage = ({ image, onlineStatus, color, className, bgColor, tooltip, si
 				<img src={image} className={cn(ImageVariants({ size }))} alt={'user image'} />
 			) : (
 				<div className={cn(UserImagePlaceholderVariants({ size }))} style={{ background: color }}>
-					<DSLogo width={size === 'md' ? 20 : 48} height={size === 'md' ? 20 : 48} />
+					<DSLogo
+						width={size === 'sm' ? 16 : size === 'md' ? 20 : 48}
+						height={size === 'sm' ? 16 : size === 'md' ? 20 : 48}
+					/>
 				</div>
 			)}
 			{editable && (
@@ -36,7 +39,7 @@ const UserImage = ({ image, onlineStatus, color, className, bgColor, tooltip, si
 					<Edit />
 				</div>
 			)}
-			{onlineStatus !== 'group' && (
+			{onlineStatus && (
 				<StatusIndicator
 					onlineStatus={onlineStatus || 'offline'}
 					color={bgColor}

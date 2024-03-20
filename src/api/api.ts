@@ -17,7 +17,7 @@ import { RegisterCredentials, UpdateDisplayNameResponse, UpdateUsernameResponse 
 export const api = createApi({
 	reducerPath: 'api',
 	baseQuery: fetchBaseQuery({
-		baseUrl: 'http://93.177.124.188:5555/',
+		baseUrl: 'http://localhost:5555/',
 		credentials: 'include',
 	}),
 	endpoints: builder => ({

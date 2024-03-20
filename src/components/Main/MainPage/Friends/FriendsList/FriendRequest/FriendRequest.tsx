@@ -29,7 +29,7 @@ const FriendRequest = ({ user, type, requestId }: Props) => {
 					<UserImage
 						image={user.userImage || ''}
 						color={user.color}
-						onlineStatus={'group'}
+						onlineStatus={false}
 						tooltip={false}
 						bgColor={'content'}
 						size={'md'}

@@ -17,7 +17,7 @@ const ChatMessages = () => {
 					image={friend.userImage || ''}
 					color={friend.color}
 					bgColor={'content'}
-					onlineStatus={'group'}
+					onlineStatus={false}
 					size={'lg'}
 				/>
 				<h2 className={'text-3xl font-bold text-white'}>{friend.displayName}</h2>

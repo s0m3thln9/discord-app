@@ -1,7 +1,7 @@
 import { io } from 'socket.io-client'
 import { GetMessagesResponse, NewMessageBody, SendMessageResponse } from '../types/messages.ts'
 
-const socket = io('http://93.177.124.188:8080')
+const socket = io('http://localhost:8080')
 
 export const socketSendMessage = (newMessageBody: NewMessageBody) => {
 	socket.emit('sendMessage', newMessageBody)
