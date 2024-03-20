@@ -8,16 +8,16 @@ interface Props extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeo
 	children?: React.ReactNode
 }
 
-const Tooltip = ({ children, text, vertical, horizontal, x, y, className, ...props }: Props) => {
+const Tooltip = ({ children, text, vertical, horizontal, x, y, bg, className, ...props }: Props) => {
 	return (
 		<div className={twMerge('', className)} {...props}>
 			<div className={twMerge('group/tooltip relative h-full w-full')}>
 				{children}
 				<div
-					className={cn(tooltipVariations({ vertical, horizontal, x, y }))}
+					className={cn(tooltipVariations({ vertical, horizontal, x, y, bg }))}
 					style={{ boxShadow: '0 1rem 1rem 0 rgba(0, 0, 0, 0.2)' }}
 				>
-					<div className={cn(tooltipArrowVariations({ vertical, horizontal }))}>
+					<div className={cn(tooltipArrowVariations({ vertical, horizontal, bg }))}>
 						<p className={'whitespace-nowrap text-sm font-medium'}>{text}</p>
 					</div>
 				</div>
@@ -27,7 +27,7 @@ const Tooltip = ({ children, text, vertical, horizontal, x, y, className, ...pro
 }
 
 const tooltipVariations = cva(
-	'absolute pointer-events-none z-10 w-fit scale-95 rounded bg-[#111214] text-white opacity-0 shadow-lg transition-all group-hover/tooltip:scale-100 group-hover/tooltip:opacity-100',
+	'absolute pointer-events-none z-10 w-fit scale-95 rounded text-white opacity-0 shadow-lg transition-all group-hover/tooltip:scale-100 group-hover/tooltip:opacity-100',
 	{
 		variants: {
 			horizontal: {
@@ -51,7 +51,6 @@ const tooltipVariations = cva(
 				mdm: '-translate-x-4',
 				lgm: '-translate-x-5',
 				xlm: '-translate-x-6',
-
 				tooltip: 'translate-x-[-1.4rem]',
 			},
 			y: {
@@ -66,7 +65,15 @@ const tooltipVariations = cva(
 				lgm: '-translate-y-5',
 				xlm: '-translate-y-6',
 			},
+			bg: {
+				default: 'bg-[#111214]',
+				green: 'bg-[#23a559]',
+				red: 'bg-[#f23f42]',
+			},
 		},
+		defaultVariants: {
+			bg: 'default'
+		}
 	},
 )
 
@@ -84,7 +91,15 @@ const tooltipArrowVariations = cva(
 				center: 'before:left-1/2 before:translate-x-[-50%]',
 				right: 'before:left-0 before:translate-x-[-50%]',
 			},
+			bg: {
+				default: 'before:bg-[#111214]',
+				green: 'before:bg-[#23a559]',
+				red: 'before:bg-[#f23f42]',
+			},
 		},
+		defaultVariants: {
+			bg: 'default'
+		}
 	},
 )
 

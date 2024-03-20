@@ -1,16 +1,18 @@
 import UserImage from '../UserImage/UserImage.tsx'
-import { Edit } from '../../../assets/svgs.tsx'
+import { CopyUsername, Edit } from '../../../assets/svgs.tsx'
 import { useAppSelector } from '../../../hooks/typedHooks.ts'
 import hypeSquadBalance from '../../../assets/img/hype-squad-balance.png'
 import Divider from '../Divider/Divider.tsx'
 import UserProfileOption from './UserProfileOption/UserProfileOption.tsx'
 import Tooltip from '../Tooltip/Tooltip.tsx'
 import { cn } from '../../../utils/cn.ts'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const UserPopover = ({ isUserPopoverOpen, setIsUserPopoverOpen }) => {
 
 	const user = useAppSelector(state => state.auth.user)
+
+	const [copyTooltip, setCopyTooltip] = useState({text: 'Click to copy username', bg: 'default'})
 
 	const popoverRef = useRef(null)
 
@@ -25,19 +27,29 @@ const UserPopover = ({ isUserPopoverOpen, setIsUserPopoverOpen }) => {
 
 	useEffect(() => {
 		const handleClickAway = (e) => {
-			console.log(e.target, popoverRef.current)
 			if (!popoverRef.current.contains(e.target)) setIsUserPopoverOpen(false)
 		}
 
 		document.addEventListener('click', handleClickAway)
 
 		return () => document.removeEventListener('click', handleClickAway)
-	}, )
+	})
+
+	const copyUsername = () => {
+		if (user) navigator.clipboard.writeText(user.username).then()
+		setCopyTooltip({text: 'Copied!', bg: 'green'})
+		setTimeout(() => setCopyTooltip({text: 'Click to copy username', bg: 'default'}), 1000)
+	}
+
+	const copyUserId = () => {
+		if (user) navigator.clipboard.writeText(user.id.toString()).then()
+		setIsUserPopoverOpen(false)
+	}
 
 	if (!user) return null
 
 	return (
-		<div ref={popoverRef} className={cn('w-[21.25rem] rounded-lg shadow-div bg-user-info absolute -top-2 -left-6 -translate-y-full', isUserPopoverOpen ? 'opacity-100' : 'opacity-0')}>
+		<div ref={popoverRef} className={cn('w-[21.25rem] rounded-lg shadow-div bg-user-info absolute -top-2 -left-6 -translate-y-full z-10', isUserPopoverOpen ? 'opacity-100' : 'opacity-0')}>
 			<div className={'h-[3.75rem] rounded-tl-lg rounded-tr-lg bg-[#17181c] flex justify-end'}>
 				<div
 					className={'bg-[#101114] hover:bg-[#090a0b] rounded-full w-7 h-7 cursor-pointer p-[0.3125rem] mr-3 mt-3'}>
@@ -65,10 +77,17 @@ const UserPopover = ({ isUserPopoverOpen, setIsUserPopoverOpen }) => {
 				</div>
 			</div>
 			<div className={'-mt-8 mx-4 mb-4 bg-[#111214] rounded-lg'}>
-				<div className={'px-3 pt-3'}>
-					<h2 className={'break-words text-xl font-semibold text-white'}>{user.displayName}</h2>
-					<p className={'break-all text-clip text-white'}>{user.username}</p>
-				</div>
+				<Tooltip text={copyTooltip.text} horizontal={'center'} vertical={'top'} y={'xs'} className={'w-fit'} bg={copyTooltip.bg}>
+					<div className={'flex w-fit cursor-pointer group'} onClick={copyUsername}>
+						<div className={'pl-3 pt-3'}>
+							<h2 className={'break-words text-xl font-semibold text-white'}>{user.displayName}</h2>
+							<p className={'break-all text-clip text-white'}>{user.username}</p>
+						</div>
+						<div className={'pt-[1.125rem] pl-1'}>
+							<CopyUsername className={'opacity-0 group-hover:opacity-100'}/>
+						</div>
+					</div>
+				</Tooltip>
 				<Divider className={'mt-3 mx-3'} />
 				<div className={'px-3 pt-3'}>
 					<h3 className={'uppercase text-white text-xs font-bold'}>Discord member since</h3>
@@ -81,7 +100,7 @@ const UserPopover = ({ isUserPopoverOpen, setIsUserPopoverOpen }) => {
 					<Divider className={'my-2 mx-1'} />
 					<UserProfileOption type={'switch'} label={'Switch Accounts'} optionPopover={true} />
 					<Divider className={'my-2 mx-1'} />
-					<UserProfileOption type={'copy'} label={'Copy User ID'} />
+					<UserProfileOption type={'copy'} label={'Copy User ID'} onClick={copyUserId}/>
 				</div>
 			</div>
 		</div>
