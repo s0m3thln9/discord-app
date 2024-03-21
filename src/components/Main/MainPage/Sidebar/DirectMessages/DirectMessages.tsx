@@ -50,7 +50,7 @@ const DirectMessages = () => {
 						text={'Create DM'}
 						vertical={'center'}
 						horizontal={'left'}
-						x={'smm'}
+						x={'-sm'}
 						className={'flex items-center justify-center'}
 					>
 						<Plus className={'h-[0.625rem] w-[0.625rem] fill-[#949ba4] group-hover:fill-[#dbdee1]'} />

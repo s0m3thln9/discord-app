@@ -57,7 +57,7 @@ const MessageCom = ({ message, previous }: Props) => {
 							text={formatDateForMessagesTooltip(date)}
 							vertical={'top'}
 							horizontal={'center'}
-							y={'xsm'}
+							y={'-xs'}
 						>
 							<span className={'ml-4 cursor-default select-text text-xs text-[#b5bac1]'}>
 								{formatDateForMessages(date)}

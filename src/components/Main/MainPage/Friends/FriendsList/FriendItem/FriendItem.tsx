@@ -44,12 +44,12 @@ const FriendItem = ({ friend }: Props) => {
 						</div>
 					</div>
 					<div className={'flex'}>
-						<Tooltip text={'Message'} vertical={'top'} horizontal={'center'} y={'smm'}>
+						<Tooltip text={'Message'} vertical={'top'} horizontal={'center'} y={'-sm'}>
 							<Button variant={'icon'}>
 								<Message className={'h-5 w-5 fill-[#b5bac1] group-hover/iconBtn:fill-[#dbdee1]'} />
 							</Button>
 						</Tooltip>
-						<Tooltip text={'More'} vertical={'top'} horizontal={'center'} y={'smm'} className={'ml-2'}>
+						<Tooltip text={'More'} vertical={'top'} horizontal={'center'} y={'-sm'} className={'ml-2'}>
 							<Button variant={'icon'}>
 								<More className={'h-5 w-5 fill-[#b5bac1] group-hover/iconBtn:fill-[#dbdee1]'} />
 							</Button>

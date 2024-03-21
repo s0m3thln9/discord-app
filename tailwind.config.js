@@ -33,6 +33,7 @@ export default {
 			content: '#313338',
 			'profile-bg': '#1e1f22',
 			white: '#f2f3f5',
+			navigation: '#1e1f22',
 		},
 		fontFamily: {
 			code: "Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier, monospace",

@@ -4,7 +4,10 @@ import Button from '../../../../../UI/Button/Button.tsx'
 import { UserShowableData } from '../../../../../../types/user.ts'
 import { useAcceptFriendRequestMutation, useDeleteFriendRequestMutation } from '../../../../../../api/api.ts'
 import { useDispatch } from 'react-redux'
-import { deleteFriendRequestAC } from '../../../../../../store/slices/friendRequestsSlice.ts'
+import {
+	deleteFriendRequestAC,
+	updateFriendRequestNotifications,
+} from '../../../../../../store/slices/friendRequestsSlice.ts'
 import { Accept, Cross } from '../../../../../../assets/svgs.tsx'
 import { addFriendToChannels } from '../../../../../../store/slices/chatsSlice.ts'
 
@@ -46,12 +49,13 @@ const FriendRequest = ({ user, type, requestId }: Props) => {
 				</div>
 				<div className={'flex'}>
 					{type === 'outgoing' ? (
-						<Tooltip text={'Cancel'} vertical={'top'} horizontal={'center'} y={'smm'} className={'ml-2'}>
+						<Tooltip text={'Cancel'} vertical={'top'} horizontal={'center'} y={'-sm'} className={'ml-2'}>
 							<Button
 								variant={'icon'}
 								onClick={async () => {
 									const response = await deleteFriendRequest({ requestId }).unwrap()
 									dispatch(deleteFriendRequestAC({ requestId }))
+									dispatch(updateFriendRequestNotifications({ id: user?.id || 0 }))
 									console.log(response)
 								}}
 							>
@@ -64,18 +68,21 @@ const FriendRequest = ({ user, type, requestId }: Props) => {
 								text={'Accept'}
 								vertical={'top'}
 								horizontal={'center'}
-								y={'smm'}
+								y={'-sm'}
 								className={'ml-2'}
-								onClick={async () => {
-									const response = await acceptFriendRequest({ requestId }).unwrap()
-									if (response.success) {
-										dispatch(deleteFriendRequestAC({ requestId }))
-										dispatch(addFriendToChannels(user))
-									}
-									console.log(response)
-								}}
 							>
-								<Button variant={'icon'}>
+								<Button
+									variant={'icon'}
+									onClick={async () => {
+										const response = await acceptFriendRequest({ requestId }).unwrap()
+										if (response.success) {
+											dispatch(deleteFriendRequestAC({ requestId }))
+											dispatch(addFriendToChannels(user))
+											dispatch(updateFriendRequestNotifications({ id: user?.id || 0 }))
+										}
+										console.log(response)
+									}}
+								>
 									<Accept className={'h-5 w-5 fill-[#b5bac1] group-hover/iconBtn:fill-[#249e59]'} />
 								</Button>
 							</Tooltip>
@@ -83,15 +90,18 @@ const FriendRequest = ({ user, type, requestId }: Props) => {
 								text={'Ignore'}
 								vertical={'top'}
 								horizontal={'center'}
-								y={'smm'}
+								y={'-sm'}
 								className={'ml-2'}
-								onClick={async () => {
-									const response = await deleteFriendRequest({ requestId }).unwrap()
-									dispatch(deleteFriendRequestAC({ requestId }))
-									console.log(response)
-								}}
 							>
-								<Button variant={'icon'}>
+								<Button
+									variant={'icon'}
+									onClick={async () => {
+										const response = await deleteFriendRequest({ requestId }).unwrap()
+										dispatch(deleteFriendRequestAC({ requestId }))
+										dispatch(updateFriendRequestNotifications({ id: user?.id || 0 }))
+										console.log(response)
+									}}
+								>
 									<Cross className={'h-5 w-5 fill-[#b5bac1] group-hover/iconBtn:fill-[#e43a41]'} />
 								</Button>
 							</Tooltip>

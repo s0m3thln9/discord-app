@@ -2,6 +2,7 @@ import Button from '../../../../UI/Button/Button.tsx'
 import { Filter } from '../Friends.tsx'
 import { twMerge } from 'tailwind-merge'
 import { clsx } from 'clsx'
+import { useAppSelector } from '../../../../../hooks/typedHooks.ts'
 
 type Props = {
 	filter: Filter
@@ -9,6 +10,7 @@ type Props = {
 }
 
 const TabBar = ({ setFilter, filter }: Props) => {
+	const notifications = useAppSelector(state => state.friendRequests.notifications)
 	return (
 		<ul className={'flex h-6 before:ml-4 before:mr-2 before:w-[1px] before:bg-[#3f4147]'}>
 			<li className={'mx-2 flex'}>
@@ -36,12 +38,21 @@ const TabBar = ({ setFilter, filter }: Props) => {
 			<li className={'mx-2 flex'}>
 				<Button
 					variant={filter === 'pending' ? 'active' : 'text'}
-					className={'h-full'}
+					className={'relative flex h-full items-center'}
 					onClick={() => {
 						setFilter('pending')
 					}}
 				>
 					Pending
+					{notifications > 0 && (
+						<span
+							className={
+								'ml-2 flex h-4 w-4 items-center justify-center rounded-full bg-[#f23f43] text-[0.75rem] font-bold text-white'
+							}
+						>
+							{notifications}
+						</span>
+					)}
 				</Button>
 			</li>
 			<li className={'mx-2 flex'}>

@@ -2,9 +2,11 @@ import { Link } from 'react-router-dom'
 import Tooltip from '../../../UI/Tooltip/Tooltip.tsx'
 import { Compass, DSLogo, Plus } from '../../../../assets/svgs.tsx'
 import { clsx } from 'clsx'
+import { useAppSelector } from '../../../../hooks/typedHooks.ts'
 
 const Navigation = () => {
 	const pathname = window.location.href
+	const notifications = useAppSelector(state => state.friendRequests.notifications)
 	return (
 		<nav className={'min-h-svh w-[4.5rem] shrink-0 bg-[#1e1f22]'}>
 			<ul className={'flex flex-col items-center justify-center pt-3'}>
@@ -22,8 +24,17 @@ const Navigation = () => {
 						x={'xl'}
 						className={'flex h-full w-full items-center'}
 					>
-						<Link to={'/'} className={'flex h-full w-full items-center justify-center'}>
+						<Link to={'/'} className={'relative flex h-full w-full items-center justify-center'}>
 							<DSLogo height={24} width={24} />
+							{notifications > 0 && (
+								<span
+									className={
+										'border-navigation absolute bottom-[-0.25rem] right-[-0.25rem] flex h-6 w-6 items-center justify-center rounded-full border-[0.25rem] bg-[#f23f43] text-[0.75rem] font-bold text-white'
+									}
+								>
+									{notifications}
+								</span>
+							)}
 						</Link>
 					</Tooltip>
 				</li>

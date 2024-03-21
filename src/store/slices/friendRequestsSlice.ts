@@ -3,20 +3,22 @@ import { FriendRequestsWithUsers, GetFriendRequestsResponse } from '../../types/
 
 type InitialState = {
 	friendRequestsWithUsers: FriendRequestsWithUsers[]
+	notifications: number
 }
 
 const initialState: InitialState = {
 	friendRequestsWithUsers: [],
+	notifications: 0,
 }
 
 const friendRequestsSlice = createSlice({
 	name: 'friendRequests',
 	initialState: initialState,
 	reducers: {
-		addFriendRequest: (state, action: PayloadAction<GetFriendRequestsResponse>) => {
-			if (!action.payload.success) return
+		addFriendRequest: (state, action: PayloadAction<{ response: GetFriendRequestsResponse }>) => {
+			if (!action.payload.response.success) return
 
-			state.friendRequestsWithUsers = action.payload.payload?.friendRequestsWithUsers || []
+			state.friendRequestsWithUsers = action.payload.response.payload?.friendRequestsWithUsers || []
 		},
 
 		deleteFriendRequestAC: (state, action: PayloadAction<{ requestId: number }>) => {
@@ -26,9 +28,19 @@ const friendRequestsSlice = createSlice({
 				req => req.friendRequest.id !== action.payload.requestId,
 			)
 		},
+
+		updateFriendRequestNotifications: (state, action: PayloadAction<{ id: number }>) => {
+			let counter = 0
+			state.friendRequestsWithUsers.forEach(friendRequest => {
+				if (friendRequest.toUser.id === action.payload.id) {
+					counter++
+				}
+			})
+			state.notifications = counter || 0
+		},
 	},
 })
 
-export const { addFriendRequest, deleteFriendRequestAC } = friendRequestsSlice.actions
+export const { addFriendRequest, deleteFriendRequestAC, updateFriendRequestNotifications } = friendRequestsSlice.actions
 
 export default friendRequestsSlice.reducer

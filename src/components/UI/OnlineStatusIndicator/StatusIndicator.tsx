@@ -12,7 +12,7 @@ const StatusIndicator = ({ onlineStatus, color, tooltip = false, size }: Props) 
 			text={`${onlineStatus?.length && onlineStatus[0].toUpperCase()}${onlineStatus?.substring(1)}`}
 			vertical={'top'}
 			horizontal={'center'}
-			y={'lgm'}
+			y={'-lg'}
 			x={'tooltip'}
 		>
 			<Indicator onlineStatus={onlineStatus} color={color} size={size} />

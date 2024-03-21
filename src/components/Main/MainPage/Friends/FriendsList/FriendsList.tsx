@@ -4,7 +4,7 @@ import { Filter } from '../Friends.tsx'
 import { UserWithoutPassword } from '../../../../../types/user.ts'
 import { useGetFriendRequestsMutation } from '../../../../../api/api.ts'
 import { useEffect, useState } from 'react'
-import { addFriendRequest } from '../../../../../store/slices/friendRequestsSlice.ts'
+import { addFriendRequest, updateFriendRequestNotifications } from '../../../../../store/slices/friendRequestsSlice.ts'
 import { FriendRequestsWithUsers } from '../../../../../types/friends.ts'
 import FriendRequest from './FriendRequest/FriendRequest.tsx'
 import noFriends from './../../../../../assets/img/noFriends.svg'
@@ -27,10 +27,12 @@ const FriendsList = ({ filter }: Props) => {
 	useEffect(() => {
 		const fetchFriendRequest = async () => {
 			const getFriendRequestsResponse = await getFriendRequest().unwrap()
-			dispatch(addFriendRequest(getFriendRequestsResponse))
+			console.log(user)
+			dispatch(addFriendRequest({ response: getFriendRequestsResponse }))
+			dispatch(updateFriendRequestNotifications({ id: user?.id || 0 }))
 		}
 		fetchFriendRequest().then()
-	}, [dispatch, getFriendRequest])
+	}, [dispatch, getFriendRequest, user])
 
 	const friendRequestsWithUsers = useAppSelector(state => state.friendRequests.friendRequestsWithUsers)
 

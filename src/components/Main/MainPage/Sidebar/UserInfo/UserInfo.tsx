@@ -14,7 +14,6 @@ type Props = {
 }
 
 const UserInfo = ({ toggleSettings }: Props) => {
-
 	const user = useAppSelector(state => state.auth.user)
 
 	const [isMicEnabled, setIsMicEnabled] = useState(true)
@@ -24,18 +23,18 @@ const UserInfo = ({ toggleSettings }: Props) => {
 	const toggleMic = () => {
 		const sound = isMicEnabled ? new Audio(mute) : new Audio(unmute)
 		sound.volume = 0.2
-		setIsMicEnabled((isMicEnabledPrev) => !isMicEnabledPrev)
+		setIsMicEnabled(isMicEnabledPrev => !isMicEnabledPrev)
 		if (!isHeadphonesEnabled) {
 			toggleHeadphones()
 			return
 		}
-		sound.play().catch((error) => console.log(error))
+		sound.play().catch(error => console.log(error))
 	}
 
 	const toggleHeadphones = () => {
 		const sound = isHeadphonesEnabled ? new Audio(deafen) : new Audio(undeafen)
 		sound.volume = 0.2
-		setIsHeadphonesEnabled((isHeadphonesEnabledPrev) => !isHeadphonesEnabledPrev)
+		setIsHeadphonesEnabled(isHeadphonesEnabledPrev => !isHeadphonesEnabledPrev)
 		if (isMicDisabledWithHeadphones) {
 			setIsMicEnabled(true)
 			setIsMicDisabledWithHeadphones(false)
@@ -43,7 +42,7 @@ const UserInfo = ({ toggleSettings }: Props) => {
 			setIsMicEnabled(false)
 			setIsMicDisabledWithHeadphones(true)
 		}
-		sound.play().catch((error) => console.log(error))
+		sound.play().catch(error => console.log(error))
 	}
 
 	if (!user) {
@@ -85,25 +84,30 @@ const UserInfo = ({ toggleSettings }: Props) => {
 				</div>
 			</div>
 			<div className={'flex'}>
-				<Tooltip text={isMicEnabled ? 'Mute' : 'Unmute'} vertical={'top'} horizontal={'center'} y={'smm'}>
+				<Tooltip text={isMicEnabled ? 'Mute' : 'Unmute'} vertical={'top'} horizontal={'center'} y={'-sm'}>
 					<Button variant={'secondary'} className={'group'} onClick={toggleMic}>
-						{isMicEnabled ?
+						{isMicEnabled ? (
 							<Mic className={'fill-[#b0b6be] group-hover:fill-[#bbbfc5]'} />
-							:
+						) : (
 							<MicOff className={'fill-[#ec3e40] group-hover:fill-[#eb3d40]'} />
-						}
+						)}
 					</Button>
 				</Tooltip>
-				<Tooltip text={isHeadphonesEnabled ? 'Deafen' : 'Undeafen'} vertical={'top'} horizontal={'center'} y={'smm'}>
+				<Tooltip
+					text={isHeadphonesEnabled ? 'Deafen' : 'Undeafen'}
+					vertical={'top'}
+					horizontal={'center'}
+					y={'-sm'}
+				>
 					<Button variant={'secondary'} className={'group'} onClick={toggleHeadphones}>
-						{isHeadphonesEnabled ?
+						{isHeadphonesEnabled ? (
 							<Headphones className={'fill-[#b0b6be] group-hover:fill-[#bbbfc5]'} />
-							:
+						) : (
 							<HeadphonesOff className={'fill-[#ec3e40] group-hover:fill-[#eb3d40]'} />
-						}
+						)}
 					</Button>
 				</Tooltip>
-				<Tooltip text={'User Settings'} vertical={'top'} horizontal={'center'} y={'smm'}>
+				<Tooltip text={'User Settings'} vertical={'top'} horizontal={'center'} y={'-sm'}>
 					<Button variant={'secondary'} className={'group'} onClick={toggleSettings}>
 						<Settings className={'fill-[#b0b6be] group-hover:fill-[#bbbfc5]'} />
 					</Button>
@@ -111,7 +115,6 @@ const UserInfo = ({ toggleSettings }: Props) => {
 			</div>
 		</section>
 	)
-
 }
 
 export default UserInfo
