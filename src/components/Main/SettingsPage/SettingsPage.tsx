@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react'
-import SettingsSidebar from './Sidebar/SettingsSidebar.tsx'
+import React, { lazy, Suspense, useEffect } from 'react'
 import Content from './Content/Content.tsx'
+import SettingsSidebarSuspense from './Sidebar/SettingsSidebarSuspense.tsx'
+
+const SettingsSidebar = lazy(() => import('./Sidebar/SettingsSidebar.tsx'))
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
 	toggleSettings: () => void
@@ -26,11 +28,13 @@ const SettingsPage = ({ toggleSettings, closeSettings, className }: Props) => {
 
 	return (
 		<div className={`absolute flex w-full transition duration-300 ${className}`}>
-			<SettingsSidebar
-				className={'flex-[1_0_auto]'}
-				currentSetting={currentSetting}
-				setCurrentSetting={setCurrentSetting}
-			/>
+			<Suspense fallback={<SettingsSidebarSuspense />}>
+				<SettingsSidebar
+					className={'flex-[1_0_auto]'}
+					currentSetting={currentSetting}
+					setCurrentSetting={setCurrentSetting}
+				/>
+			</Suspense>
 			<Content
 				toggleSettings={toggleSettings}
 				currentSetting={currentSetting}

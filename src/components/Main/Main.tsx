@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { lazy, useState } from 'react'
 import MainPage from './MainPage/MainPage.tsx'
-import SettingsPage from './SettingsPage/SettingsPage.tsx'
 
-export const Main = () => {
+const SettingsPage = lazy(() => import('./SettingsPage/SettingsPage.tsx'))
+
+const Main = () => {
 	const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
 	const toggleSettings = () => {
@@ -27,3 +28,5 @@ export const Main = () => {
 		</main>
 	)
 }
+
+export default Main
