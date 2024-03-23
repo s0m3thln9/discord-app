@@ -48,7 +48,7 @@ const AuthorizationForm = () => {
 			<p className={'mt-2 text-sm font-medium text-[#949ba4]'}>
 				<Link to="/">Forgot your password?</Link>
 			</p>
-			<Button variant={'primary'} className={'mt-5'}>
+			<Button variant={'primary'} className={'mt-5 w-full'}>
 				{!isLoading ? 'Login' : <Loader />}
 			</Button>
 			<p className={'mt-2 text-sm font-medium text-[#949ba4]'}>

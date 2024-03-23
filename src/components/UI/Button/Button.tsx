@@ -18,7 +18,7 @@ const buttonVariants = cva('flex items-center justify-center hover:bg-[#393c41] 
 	variants: {
 		variant: {
 			primary:
-				'w-full h-11 px-4 font-medium rounded-[0.1875rem] bg-[#5865f2] text-[#fff] transition-[.4s] cursor-pointer py-0.5 hover:bg-[#505bdb]',
+				'w-fit h-11 px-4 font-medium rounded-[0.1875rem] bg-[#5865f2] text-[#fff] transition-[.4s] cursor-pointer py-0.5 hover:bg-[#505bdb]',
 			secondary: 'h-8 w-8',
 			text: 'px-2 text-[#949ba4] text-start leading-5 hover:text-[#dbdee1] w-fit h-fit',
 			danger: 'px-2 text-[#949ba4] text-start leading-5 hover:text-[#dbdee1] w-fit h-fit bg-[#da373c]',

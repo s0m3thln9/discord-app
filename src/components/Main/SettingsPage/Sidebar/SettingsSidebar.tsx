@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import Modal from '../../../UI/DiallogPopover/Modal.tsx'
-import { useAuth } from '../../../../providers/authProvider/AuthProvider.tsx'
 import Headline from '../../../UI/Headline/Headline.tsx'
 import { SettingList } from '../SettingsPage.tsx'
-import Button from '../../../UI/Button/Button.tsx'
+import LogoutModal from './LogoutModal.tsx'
 
 type Setting = {
 	id: number
@@ -23,12 +21,10 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const SettingsSidebar = ({ className, currentSetting, setCurrentSetting }: Props) => {
-	const { logout } = useAuth()
+	const [isLogoutPopoverOpen, setIsLogoutPopoverOpen] = useState(false)
 
-	const [isLogoutPopoverOpen, openLogoutPopover] = useState(false)
-
-	const openLogoutPopoverHandler = () => {
-		openLogoutPopover(true)
+	const openLogoutModal = () => {
+		setIsLogoutPopoverOpen(true)
 	}
 
 	const userSettings: Menu = {
@@ -200,7 +196,7 @@ const SettingsSidebar = ({ className, currentSetting, setCurrentSetting }: Props
 			{
 				id: 1,
 				title: 'Log Out',
-				onClick: openLogoutPopoverHandler,
+				onClick: openLogoutModal,
 			},
 		],
 	}
@@ -241,34 +237,7 @@ const SettingsSidebar = ({ className, currentSetting, setCurrentSetting }: Props
 					/>
 				</div>
 			</div>
-			<Modal isOpen={isLogoutPopoverOpen} setIsOpen={openLogoutPopover}>
-				<div
-					className={`flex min-h-[12.5rem] min-w-[28rem] flex-col justify-between rounded bg-content transition duration-300 ${isLogoutPopoverOpen ? 'scale-100' : 'scale-75'}`}
-				>
-					<div>
-						<h2 className={'text-md p-4 text-[white]'}>Log Out</h2>
-						<p className={'px-4 pb-4'}>Are you sure you want to Log Out?</p>
-					</div>
-					<div className={'mt-4 flex justify-end bg-sidebar p-4'}>
-						<Button
-							variant={'link'}
-							className={'px-6 py-2'}
-							onClick={() => {
-								openLogoutPopover(false)
-							}}
-						>
-							Cancel
-						</Button>
-						<Button
-							variant={'danger'}
-							className={'px-6 py-2 text-[white] transition hover:bg-[#a12828] hover:text-[white]'}
-							onClick={logout}
-						>
-							Log Out
-						</Button>
-					</div>
-				</div>
-			</Modal>
+			<LogoutModal isLogoutPopoverOpen={isLogoutPopoverOpen} setIsLogoutPopoverOpen={setIsLogoutPopoverOpen} />
 		</aside>
 	)
 }

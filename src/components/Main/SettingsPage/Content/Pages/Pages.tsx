@@ -1,5 +1,5 @@
 import { SettingList } from '../../SettingsPage.tsx'
-import MyAccount from '../Settings/MyAccount/MyAccount.tsx'
+import MyAccount from '../MyAccount/MyAccount.tsx'
 import Profiles from '../Profiles/Profiles.tsx'
 
 type Props = {

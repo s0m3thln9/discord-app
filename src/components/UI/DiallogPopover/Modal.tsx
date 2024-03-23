@@ -3,12 +3,12 @@ import { cn } from '../../../utils/cn.ts'
 
 type Props = {
 	isOpen: boolean
-	setIsOpen: (value: boolean) => void
+	handleClose: () => void
 	children: ReactNode
 	className?: string
 }
 
-const Modal = ({ isOpen, setIsOpen, children, className }: Props) => {
+const Modal = ({ isOpen, handleClose, children, className }: Props) => {
 	return (
 		<div
 			className={`absolute left-1/2 top-1/2 z-10 flex h-full w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-[rgba(0,0,0,0.7)] p-4 transition duration-300
@@ -16,7 +16,7 @@ const Modal = ({ isOpen, setIsOpen, children, className }: Props) => {
 				`}
 			onMouseDown={e => {
 				if (e.target === e.currentTarget) {
-					setIsOpen(false)
+					handleClose()
 				}
 			}}
 		>

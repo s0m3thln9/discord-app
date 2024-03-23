@@ -18,7 +18,7 @@ import {
 	UpdatePhoneNumberResponse,
 	UpdateUsernameResponse,
 } from '../types/user.ts'
-import { CountryForSelect } from '../components/Main/SettingsPage/Content/Settings/MyAccount/countriesForSelect.ts'
+import { CountryForSelect } from '../components/Main/SettingsPage/Content/MyAccount/countriesForSelect.ts'
 
 export const api = createApi({
 	reducerPath: 'api',

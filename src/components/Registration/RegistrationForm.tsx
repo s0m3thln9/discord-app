@@ -121,7 +121,7 @@ const RegistrationForm = () => {
 					"(Optional) It's okay to send me emails with Discord updates, tips, and special offers. You can opt out at any time."
 				}
 			/>
-			<Button variant={'primary'} className={'mt-5'}>
+			<Button variant={'primary'} className={'mt-5 w-full'}>
 				{!isLoading ? 'Continue' : <Loader />}
 			</Button>
 			<p className={'mt-4 text-xs text-[#949ba4]'}>
