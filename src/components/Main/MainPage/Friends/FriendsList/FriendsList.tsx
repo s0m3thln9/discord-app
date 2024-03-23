@@ -27,7 +27,6 @@ const FriendsList = ({ filter }: Props) => {
 	useEffect(() => {
 		const fetchFriendRequest = async () => {
 			const getFriendRequestsResponse = await getFriendRequest().unwrap()
-			console.log(user)
 			dispatch(addFriendRequest({ response: getFriendRequestsResponse }))
 			dispatch(updateFriendRequestNotifications({ id: user?.id || 0 }))
 		}

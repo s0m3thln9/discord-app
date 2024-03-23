@@ -27,6 +27,9 @@ const buttonVariants = cva('flex items-center justify-center hover:bg-[#393c41] 
 			active: 'px-2 text-[#949ba4] w-full text-start leading-5 bg-[#43444b] text-[#fff]',
 		},
 	},
+	defaultVariants: {
+		variant: 'secondary',
+	},
 })
 
 export default Button

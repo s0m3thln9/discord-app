@@ -1,15 +1,15 @@
 import Headline from '../../../../UI/Headline/Headline.tsx'
-import { useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 import Input from '../../../../UI/Input/Input.tsx'
 import { useAppDispatch, useAppSelector } from '../../../../../hooks/typedHooks.ts'
 import UserImage from '../../../../UI/UserImage/UserImage.tsx'
 import Timer from '../../../../UI/Timer/Timer.tsx'
 import Button from '../../../../UI/Button/Button.tsx'
 import { twMerge } from 'tailwind-merge'
-import DialogPopover from '../../../../UI/DiallogPopover/DialogPopover.tsx'
-import { useUpdateDisplayNameMutation } from '../../../../../api/api.ts'
+import Modal from '../../../../UI/DiallogPopover/Modal.tsx'
+import { useUpdateDisplayNameMutation, useUploadFileMutation } from '../../../../../api/api.ts'
 import { updateDisplayNameD } from '../../../../../store/slices/authUserSlice.ts'
-import { Cross } from '../../../../../assets/svgs.tsx'
+import { AddImage, Cross } from '../../../../../assets/svgs.tsx'
 import editingProfile from '../../../../../assets/img/editingProfile.png'
 
 const Profiles = () => {
@@ -21,6 +21,25 @@ const Profiles = () => {
 	const [changeAvatar, setChangeAvatar] = useState(false)
 	const [updateDisplayName] = useUpdateDisplayNameMutation()
 	const dispatch = useAppDispatch()
+	const [uploadFile] = useUploadFileMutation()
+
+	const inputRef = useRef<HTMLInputElement>(null)
+
+	const handleButtonClick = () => {
+		if (inputRef.current) {
+			inputRef.current.click()
+		}
+	}
+
+	const handleImageLoad = async (e: ChangeEvent<HTMLInputElement>) => {
+		e.preventDefault()
+
+		let file = e.target.files?.[0]
+		if (!file) return
+		const response = await uploadFile(file).unwrap()
+
+		console.log('response', response)
+	}
 
 	if (!user) {
 		return null
@@ -147,9 +166,9 @@ const Profiles = () => {
 					</Button>
 				</div>
 			</div>
-			<DialogPopover isOpen={changeAvatar} setIsOpen={setChangeAvatar}>
+			<Modal isOpen={changeAvatar} setIsOpen={setChangeAvatar}>
 				<div className={'flex items-center justify-between'}>
-					<h2 className={'text-md p-4 text-[white]'}>Select Image Avatar</h2>
+					<h2 className={'text-md p-4 font-bold text-[white]'}>Select Image Avatar</h2>
 					<Button
 						variant={'icon'}
 						className={'m-2 bg-[transparent] hover:bg-[transparent]'}
@@ -158,7 +177,30 @@ const Profiles = () => {
 						<Cross className="fill-white" />
 					</Button>
 				</div>
-			</DialogPopover>
+				<div className={'flex justify-center'}>
+					<label htmlFor={'imageUploader'}>
+						<input
+							type="file"
+							onChange={handleImageLoad}
+							accept="image/*"
+							alt={'avatar'}
+							id={'imageUploader'}
+							className={'hidden'}
+							ref={inputRef}
+						/>
+						<Button
+							variant={'text'}
+							className={'m-4 flex flex-col items-center bg-[#232428] p-4 transition hover:bg-[#232428]'}
+							onClick={handleButtonClick}
+						>
+							<div className={'flex h-32 w-32 items-center justify-center rounded-full bg-[#5865f2]'}>
+								<AddImage className={'fill-[white]'} />
+							</div>
+							<p className={'mt-4'}>Upload Image</p>
+						</Button>
+					</label>
+				</div>
+			</Modal>
 		</div>
 	)
 }

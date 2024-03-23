@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import DialogPopover from '../../../UI/DiallogPopover/DialogPopover.tsx'
+import Modal from '../../../UI/DiallogPopover/Modal.tsx'
 import { useAuth } from '../../../../providers/authProvider/AuthProvider.tsx'
 import Headline from '../../../UI/Headline/Headline.tsx'
 import { SettingList } from '../SettingsPage.tsx'
@@ -241,7 +241,7 @@ const SettingsSidebar = ({ className, currentSetting, setCurrentSetting }: Props
 					/>
 				</div>
 			</div>
-			<DialogPopover isOpen={isLogoutPopoverOpen} setIsOpen={openLogoutPopover}>
+			<Modal isOpen={isLogoutPopoverOpen} setIsOpen={openLogoutPopover}>
 				<div
 					className={`flex min-h-[12.5rem] min-w-[28rem] flex-col justify-between rounded bg-content transition duration-300 ${isLogoutPopoverOpen ? 'scale-100' : 'scale-75'}`}
 				>
@@ -268,7 +268,7 @@ const SettingsSidebar = ({ className, currentSetting, setCurrentSetting }: Props
 						</Button>
 					</div>
 				</div>
-			</DialogPopover>
+			</Modal>
 		</aside>
 	)
 }

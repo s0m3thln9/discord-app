@@ -1,17 +1,18 @@
 import UserImage from '../../../../../UI/UserImage/UserImage.tsx'
 import Button from '../../../../../UI/Button/Button.tsx'
 import Headline from '../../../../../UI/Headline/Headline.tsx'
-import { useEffect, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../../../../hooks/typedHooks.ts'
 import { getHiddenEmail, getHiddenPhoneNumber } from '../../../../../../utils/hideUserData.ts'
 import { SettingList } from '../../../SettingsPage.tsx'
-import DialogPopover from '../../../../../UI/DiallogPopover/DialogPopover.tsx'
+import Modal from '../../../../../UI/DiallogPopover/Modal.tsx'
 import Input from '../../../../../UI/Input/Input.tsx'
 import { useUpdateUsernameMutation } from '../../../../../../api/api.ts'
 import { updateUsernameD } from '../../../../../../store/slices/authUserSlice.ts'
 import Loader from '../../../../../UI/Loader/Loader.tsx'
 import { UpdateUsernameResponse } from '../../../../../../types/user.ts'
 import { Cross } from '../../../../../../assets/svgs.tsx'
+import changePhone from '../../../../../../assets/img/changePhone.svg'
 
 type Props = {
 	setCurrentSetting: (newSetting: SettingList) => void
@@ -22,7 +23,9 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 
 	const [showPhone, setShowPhone] = useState(false)
 	const [showEmail, setShowEmail] = useState(false)
-	const [showEditUsernamePopover, setShowEditUsernamePopover] = useState(false)
+	const [showEditUsernameModal, setShowEditUsernameModal] = useState(false)
+	const [showEditPhoneNumberModal, setShowEditPhoneNumberModal] = useState(false)
+	const [newMobilePhone, setNewMobilePhone] = useState('')
 	const [changeUsername, setChangeUsername] = useState('')
 	const [password, setPassword] = useState('')
 	const [updateUsername, { isLoading }] = useUpdateUsernameMutation()
@@ -88,7 +91,9 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 							onClick={() => {
 								setCurrentSetting('Profiles')
 							}}
-						/>
+						>
+							Edit
+						</EditBtn>
 					</div>
 					<div className={'mt-6 flex items-center justify-between'}>
 						<div>
@@ -97,9 +102,11 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 						</div>
 						<EditBtn
 							onClick={() => {
-								setShowEditUsernamePopover(true)
+								setShowEditUsernameModal(true)
 							}}
-						/>
+						>
+							Edit
+						</EditBtn>
 					</div>
 					<div className={'mt-6 flex items-center justify-between'}>
 						<div>
@@ -118,31 +125,39 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 							onClick={() => {
 								setCurrentSetting('Profiles')
 							}}
-						/>
+						>
+							Edit
+						</EditBtn>
 					</div>
-					{user.phoneNumber && (
-						<div className={'mt-6 flex items-center justify-between'}>
-							<div>
-								<Headline>Phone number</Headline>
-								<h2 className={'font-regular text-white'}>
-									{!showPhone ? number : `+${user.phoneNumber}`}
-									<span
-										className={'ml-1 text-sm text-[#00a8fc] hover:underline'}
-										onClick={toggleShowPhone}
-									>
-										{!showPhone ? 'Reveal' : 'Hide'}
-									</span>
-								</h2>
-							</div>
-							<EditBtn
-								onClick={() => {
-									setCurrentSetting('Profiles')
-								}}
-							/>
+					<div className={'mt-6 flex items-center justify-between'}>
+						<div>
+							<Headline>Phone number</Headline>
+							<h2 className={'font-regular text-white'}>
+								{user.phoneNumber ? (
+									<>
+										<p>{!showPhone ? number : `+${user.phoneNumber}`}</p>
+										<span
+											className={'ml-1 text-sm text-[#00a8fc] hover:underline'}
+											onClick={toggleShowPhone}
+										>
+											{!showPhone ? 'Reveal' : 'Hide'}
+										</span>
+									</>
+								) : (
+									"You haven't added a phone number yet."
+								)}
+							</h2>
 						</div>
-					)}
+						<EditBtn
+							onClick={() => {
+								user.phoneNumber ? setCurrentSetting('Profiles') : setShowEditPhoneNumberModal(true)
+							}}
+						>
+							{user.phoneNumber ? 'Edit' : 'Add'}
+						</EditBtn>
+					</div>
 				</div>
-				<DialogPopover isOpen={showEditUsernamePopover} setIsOpen={setShowEditUsernamePopover}>
+				<Modal isOpen={showEditUsernameModal} setIsOpen={setShowEditUsernameModal}>
 					<div className={'relative flex items-center justify-between'}>
 						<div className={'flex grow flex-col items-center justify-center px-4 py-6 pb-0'}>
 							<h2 className={'text-md text-center text-2xl font-bold text-[white]'}>
@@ -153,7 +168,7 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 						<Button
 							variant={'icon'}
 							className={'absolute right-2 top-2 m-2 bg-[transparent] hover:bg-[transparent]'}
-							onClick={() => setShowEditUsernamePopover(false)}
+							onClick={() => setShowEditUsernameModal(false)}
 						>
 							<Cross className="fill-white" />
 						</Button>
@@ -184,7 +199,7 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 						</div>
 					</div>
 					<div className={'flex justify-end bg-sidebar p-4'}>
-						<Button variant={'link'} onClick={() => setShowEditUsernamePopover(false)}>
+						<Button variant={'link'} onClick={() => setShowEditUsernameModal(false)}>
 							Cancel
 						</Button>
 						<Button
@@ -202,7 +217,7 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 								console.log(response)
 								if (response.success) {
 									dispatch(updateUsernameD(changeUsername))
-									setShowEditUsernamePopover(false)
+									setShowEditUsernameModal(false)
 								} else {
 									setUpdateUsernameServerResponse(response)
 								}
@@ -213,7 +228,40 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 							{/*<Loader />*/}
 						</Button>
 					</div>
-				</DialogPopover>
+				</Modal>
+
+				<Modal
+					isOpen={showEditPhoneNumberModal}
+					setIsOpen={setShowEditPhoneNumberModal}
+					className={'relative pt-16'}
+				>
+					<img src={changePhone} alt="changePhone" className={'absolute -top-40 left-1/2 -translate-x-1/2'} />
+					<div className={'relative flex items-center justify-between'}>
+						<div className={'flex grow flex-col items-center justify-center px-4 py-6 pb-0'}>
+							<h2 className={'text-md text-center text-2xl font-bold text-[white]'}>
+								Enter a Phone Number
+							</h2>
+							<p className={'mt-1'}>You will receive a text message with a verification code.</p>
+							<p className={'mt-4 text-center'}>
+								Your phone number can be used to verify <strong>one Discord account</strong> at <br /> a
+								time and is only used for verification and login.
+							</p>
+						</div>
+					</div>
+					<div className={'p-4'}>
+						<div className={'flex items-center rounded-[0.1875rem] bg-[#1e1f22] p-2'}>
+							<input
+								type="text"
+								value={newMobilePhone}
+								onChange={e => setNewMobilePhone(e.target.value)}
+								className={'mx-2 w-full grow bg-[transparent] font-medium text-[#dbdee1] outline-0'}
+							/>
+							<Button variant={'primary'} className={'h-8 w-fit'}>
+								Send
+							</Button>
+						</div>
+					</div>
+				</Modal>
 			</div>
 		</>
 	)
@@ -221,16 +269,17 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 
 type EditBtnProps = {
 	onClick: () => void
+	children: ReactNode
 }
 
-const EditBtn = ({ onClick }: EditBtnProps) => {
+const EditBtn = ({ onClick, children }: EditBtnProps) => {
 	return (
 		<Button
 			variant={'text'}
 			className={'h-8 bg-[#4e5058] px-4 text-white transition hover:bg-[#6d6f78] hover:text-[white]'}
 			onClick={onClick}
 		>
-			Edit
+			{children}
 		</Button>
 	)
 }

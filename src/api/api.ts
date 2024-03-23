@@ -103,6 +103,18 @@ export const api = createApi({
 				body: requestId,
 			}),
 		}),
+
+		uploadFile: builder.mutation({
+			query: (file: File) => {
+				const formData = new FormData()
+				formData.append('file', file)
+				return {
+					url: 'user/uploadUserImage',
+					method: 'POST',
+					body: formData,
+				}
+			},
+		}),
 	}),
 })
 
@@ -118,4 +130,5 @@ export const {
 	useSendFriendRequestMutation,
 	useAcceptFriendRequestMutation,
 	useDeleteFriendRequestMutation,
+	useUploadFileMutation,
 } = api

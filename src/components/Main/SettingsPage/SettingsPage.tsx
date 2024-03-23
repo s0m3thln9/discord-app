@@ -1,6 +1,5 @@
-import React, { lazy, Suspense, useEffect } from 'react'
+import React, { lazy, useEffect } from 'react'
 import Content from './Content/Content.tsx'
-import SettingsSidebarSuspense from './Sidebar/SettingsSidebarSuspense.tsx'
 
 const SettingsSidebar = lazy(() => import('./Sidebar/SettingsSidebar.tsx'))
 
@@ -28,13 +27,11 @@ const SettingsPage = ({ toggleSettings, closeSettings, className }: Props) => {
 
 	return (
 		<div className={`absolute flex w-full transition duration-300 ${className}`}>
-			<Suspense fallback={<SettingsSidebarSuspense />}>
-				<SettingsSidebar
-					className={'flex-[1_0_auto]'}
-					currentSetting={currentSetting}
-					setCurrentSetting={setCurrentSetting}
-				/>
-			</Suspense>
+			<SettingsSidebar
+				className={'flex-[1_0_auto]'}
+				currentSetting={currentSetting}
+				setCurrentSetting={setCurrentSetting}
+			/>
 			<Content
 				toggleSettings={toggleSettings}
 				currentSetting={currentSetting}
