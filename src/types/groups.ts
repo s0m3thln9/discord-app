@@ -1,10 +1,11 @@
 import { ErrorMessage, SuccessMessage } from './responseMessages'
+import { NoImageColors } from './user.ts'
 
 export type Group = {
-	id: number
+	id: string
 	name: string
 	image: string | null
-	color: 'orange' | 'red' | 'green' | 'blue' | 'yellow'
+	color: NoImageColors
 	createdAt: Date
 	updatedAt: Date
 	members: number

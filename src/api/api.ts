@@ -102,11 +102,10 @@ export const api = createApi({
 			}),
 		}),
 
-		deleteFriendRequest: builder.mutation<DeleteFriendRequestResponse, { requestId: number }>({
+		deleteFriendRequest: builder.mutation<DeleteFriendRequestResponse, void>({
 			query: requestId => ({
-				url: 'friendsRequest/delete',
-				method: 'POST',
-				body: requestId,
+				url: `friendsRequest/delete/${requestId}`,
+				method: 'DELETE',
 			}),
 		}),
 

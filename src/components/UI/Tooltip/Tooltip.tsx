@@ -56,7 +56,7 @@ const tooltipVariations = cva(
 				'-lg': '-translate-x-5',
 				'xl-': '-translate-x-6',
 
-				tooltip: 'translate-x-[-1.4rem]',
+				tooltip: 'translate-x-[-1.35rem]',
 			},
 			y: {
 				xs: 'translate-y-2',

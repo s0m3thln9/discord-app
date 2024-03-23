@@ -1,26 +1,21 @@
 import UserImage from '../../../../../../../UI/UserImage/UserImage.tsx'
-import { useAppSelector } from '../../../../../../../../hooks/typedHooks.ts'
-import { useParams } from 'react-router-dom'
 import { Message } from '../../../../../../../../types/messages.ts'
 import formatDateForMessages from '../../../../../../../../utils/formatDateForMessages.ts'
 import Tooltip from '../../../../../../../UI/Tooltip/Tooltip.tsx'
 import formatDateForMessagesTooltip from '../../../../../../../../utils/formatDateForMessagesTooltip.ts'
 import clsx from 'clsx'
 import formattedDateForTime from '../../../../../../../../utils/formattedDateForTime.ts'
+import { NoImageColors } from '../../../../../../../../types/user.ts'
 
 type Props = {
+	senderImage: string
+	senderColor: NoImageColors
+	senderDisplayName: string
 	message: Message
 	previous: Message | null
 }
 
-const MessageCom = ({ message, previous }: Props) => {
-	const user = useAppSelector(state => state.auth.user)
-	const { id } = useParams()
-	const users = useAppSelector(state => state.friends.friends)
-	const friend = users.find(f => f.id === +(id || '0'))
-	if (!user) return null
-	if (!friend) return null
-
+const MessageCom = ({ message, previous, senderImage, senderColor, senderDisplayName }: Props) => {
 	const date = new Date(message.createdAt)
 
 	return (
@@ -32,9 +27,9 @@ const MessageCom = ({ message, previous }: Props) => {
 		>
 			{previous?.senderId !== message.senderId && (
 				<UserImage
-					image={(user.id === message.senderId ? user.userImage : friend.userImage) || ''}
+					image={senderImage}
 					onlineStatus={false}
-					color={user.id === message.senderId ? user.color : friend.color}
+					color={senderColor}
 					bgColor={'content'}
 					size={'md'}
 				/>
@@ -52,7 +47,7 @@ const MessageCom = ({ message, previous }: Props) => {
 				)}
 				{previous?.senderId !== message.senderId && (
 					<span className={'flex select-text items-center text-sm leading-4 text-white'}>
-						{friend.id === message.senderId ? friend.displayName : user.displayName}
+						{senderDisplayName}
 						<Tooltip
 							text={formatDateForMessagesTooltip(date)}
 							vertical={'top'}

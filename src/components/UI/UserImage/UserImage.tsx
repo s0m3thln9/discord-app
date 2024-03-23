@@ -2,29 +2,51 @@ import StatusIndicator from '../OnlineStatusIndicator/StatusIndicator.tsx'
 import { cva, VariantProps } from 'class-variance-authority'
 import { cn } from '../../../utils/cn.ts'
 import { Dispatch, SetStateAction } from 'react'
-import { DSLogo, Edit } from '../../../assets/svgs.tsx'
+import { DSLogo, Edit, Group } from '../../../assets/svgs.tsx'
+import { NoImageColors } from '../../../types/user.ts'
+import getColor from '../../../utils/getColor.ts'
 
 interface Props extends VariantProps<typeof userImageVariants> {
 	image: string
 	onlineStatus: 'offline' | 'online' | 'idle' | 'doNotDisturb' | false
-	color: 'orange' | 'red' | 'green' | 'blue' | 'yellow'
+	color: NoImageColors
 	tooltip?: boolean
 	className?: string
 	bgColor: 'sidebar' | 'content' | 'userInfo' | 'profile-bg' | null | undefined
 	editable?: Dispatch<SetStateAction<boolean>>
+	isGroup?: boolean
 }
 
-const UserImage = ({ image, onlineStatus, color, className, bgColor, tooltip, size, border, editable }: Props) => {
+const UserImage = ({
+	image,
+	onlineStatus,
+	color,
+	className,
+	bgColor,
+	tooltip,
+	size,
+	border,
+	editable,
+	isGroup,
+}: Props) => {
 	return (
 		<div className={cn(userImageVariants({ size, border }), className)}>
 			{image ? (
 				<img src={image} className={cn(ImageVariants({ size }))} alt={'user image'} />
 			) : (
-				<div className={cn(UserImagePlaceholderVariants({ size }))} style={{ background: color }}>
-					<DSLogo
-						width={size === 'sm' ? 16 : size === 'md' ? 20 : 48}
-						height={size === 'sm' ? 16 : size === 'md' ? 20 : 48}
-					/>
+				<div className={cn(UserImagePlaceholderVariants({ size }))} style={{ background: getColor(color) }}>
+					{isGroup ? (
+						<Group
+							className={'fill-[white]'}
+							width={size === 'sm' ? 16 : size === 'md' ? 20 : 48}
+							height={size === 'sm' ? 16 : size === 'md' ? 20 : 48}
+						/>
+					) : (
+						<DSLogo
+							width={size === 'sm' ? 16 : size === 'md' ? 20 : 48}
+							height={size === 'sm' ? 16 : size === 'md' ? 20 : 48}
+						/>
+					)}
 				</div>
 			)}
 			{editable && (

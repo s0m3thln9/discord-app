@@ -15,7 +15,7 @@ const ChatChannel = ({ channel }: Props) => {
 	return (
 		<li key={`${channel.id}${channel.type}`} className={'relative pt-0.5'}>
 			<Link
-				to={`/${channel.id}`}
+				to={`/${channel.type === 'user' ? channel.id : `g/${channel.id}`}`}
 				className={
 					'group flex h-[2.625rem] items-center justify-between rounded px-2 text-[#949ba4] hover:bg-[#35373c] hover:no-underline'
 				}
@@ -28,6 +28,7 @@ const ChatChannel = ({ channel }: Props) => {
 						tooltip={true}
 						bgColor={'sidebar'}
 						size={'md'}
+						isGroup={channel.type === 'group'}
 					/>
 					<div className={'ml-3 flex w-full grow flex-col justify-center leading-none'}>
 						<p

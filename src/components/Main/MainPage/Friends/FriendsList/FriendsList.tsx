@@ -10,6 +10,9 @@ import FriendRequest from './FriendRequest/FriendRequest.tsx'
 import noFriends from './../../../../../assets/img/noFriends.svg'
 import noRequests from './../../../../../assets/img/noRequests.svg'
 import blocked from './../../../../../assets/img/blocked.svg'
+import Input from '../../../../UI/Input/Input.tsx'
+import { Cross, Search } from '../../../../../assets/svgs.tsx'
+import { cn } from '../../../../../utils/cn.ts'
 
 type Props = {
 	filter: Filter
@@ -81,13 +84,32 @@ const FriendsList = ({ filter }: Props) => {
 
 	return (
 		<section className={'flex grow flex-col'}>
-			<input
-				type="text"
-				placeholder={'Search'}
-				className={'ml-[1.875rem] mr-5 mt-4 h-[1.875rem] rounded bg-[#1e1f22] px-2 text-white'}
-				value={search}
-				onChange={e => setSearch(e.target.value)}
-			/>
+			<div className={'cu ml-[1.875rem] mr-5 mt-4 flex rounded bg-[#1e1f22]'}>
+				<div className={'grow'}>
+					<Input
+						id={'friendSearch'}
+						placeholder={'Search'}
+						className={'h-[1.875rem] bg-[transparent] px-2 text-white'}
+						value={search}
+						onChange={e => setSearch(e.target.value)}
+					/>
+				</div>
+				<div className={'h-агдд relative mr-2 flex w-4'}>
+					<Search
+						className={cn(
+							`absolute left-1/2 top-1/2 w-4 -translate-x-1/2 -translate-y-1/2 rotate-0 fill-[#B5C1B5] opacity-100 transition hover:fill-white`,
+							search && 'rotate-180 opacity-0',
+						)}
+					/>
+					<Cross
+						className={cn(
+							`absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rotate-180 cursor-pointer fill-[#B5C1B5] p-1 opacity-100 transition hover:scale-105 hover:fill-white`,
+							!search && 'rotate-0 opacity-0',
+						)}
+						onClick={() => setSearch('')}
+					/>
+				</div>
+			</div>
 			<h2 className={'mb-2 ml-[1.875rem] mr-5 mt-4 text-xs font-semibold uppercase text-[#b5bac1]'}>
 				{`${filter[0].toUpperCase()}${filter.substring(1)}`} -{' '}
 				{filter === 'all' || filter === 'online' ? filteredFriends.length : filteredFriendRequests.length}

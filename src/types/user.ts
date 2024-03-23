@@ -10,7 +10,7 @@ type PrismaUser = {
 	birthdayDay: number
 	password: string
 	userImage: string | null
-	color: 'orange' | 'red' | 'green' | 'blue' | 'yellow'
+	color: NoImageColors
 	textStatus: string
 	onlineStatus: 'offline' | 'online' | 'idle' | 'doNotDisturb'
 	phoneCode: number | null
@@ -52,3 +52,5 @@ export type UpdateUsernameResponse =
 export type UpdatePhoneNumberResponse =
 	| SuccessMessage<'Successfully updated phone number', { user: UserWithoutPassword }>
 	| ErrorMessage<UpdatePhoneNumberErrorMessages>
+
+export type NoImageColors = 'orange' | 'red' | 'green' | 'blue' | 'yellow' | 'purple' | 'lime' | 'pink' | 'crimson'

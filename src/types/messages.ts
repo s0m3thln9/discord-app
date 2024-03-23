@@ -3,7 +3,8 @@ import { ErrorMessage, SuccessMessage } from './responseMessages'
 export type NewMessageBody = {
 	text: string
 	username: string
-	receiverId: number
+	receiverId?: number
+	groupId?: string
 	jwt: string
 }
 

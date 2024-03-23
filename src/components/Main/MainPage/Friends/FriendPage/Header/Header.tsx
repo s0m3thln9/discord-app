@@ -1,24 +1,28 @@
 import UserImage from '../../../../../UI/UserImage/UserImage.tsx'
 import ToolBar from '../../ToolBar/ToolBar.tsx'
-import { UserWithoutPassword } from '../../../../../../types/user.ts'
+import { NoImageColors } from '../../../../../../types/user.ts'
 
 type Props = {
-	friend: UserWithoutPassword
+	image: string
+	color: NoImageColors
+	onlineStatus: 'offline' | 'online' | 'idle' | 'doNotDisturb' | false
+	displayName: string
 }
 
-const Header = ({ friend }: Props) => {
+const Header = ({ image, color, onlineStatus, displayName }: Props) => {
 	return (
 		<section className={'flex h-12 items-center justify-between border-b-[1px] border-[#202225] p-2.5 pt-2.5'}>
 			<div className={'flex items-center'}>
 				<div className={'flex items-center'}>
 					<UserImage
-						image={friend.userImage || ''}
-						color={friend.color}
+						image={image}
+						color={color}
 						bgColor={'content'}
-						onlineStatus={friend.onlineStatus}
+						onlineStatus={onlineStatus}
 						size={'sm'}
+						isGroup={!onlineStatus}
 					/>
-					<p className={'ml-2 font-bold text-white'}>{friend.displayName}</p>
+					<p className={'ml-2 font-bold text-white'}>{displayName}</p>
 				</div>
 			</div>
 			<ToolBar usage={'friend'} />

@@ -2,16 +2,13 @@ import { GIF, PlusCircle, Present } from '../../../../../../../assets/svgs.tsx'
 import Button from '../../../../../../UI/Button/Button.tsx'
 import Tooltip from '../../../../../../UI/Tooltip/Tooltip.tsx'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import useGetFriend from '../../../../../../../hooks/useGetFriend.ts'
 
 type Props = {
 	handleSend: (newMessageText: string) => void
+	displayName: string
 }
 
-const ChatInput = ({ handleSend }: Props) => {
-	const { id } = useParams()
-	const friendDisplayName = useGetFriend(id)?.displayName
+const ChatInput = ({ handleSend, displayName }: Props) => {
 	const [newMessageText, setNewMessageText] = useState('')
 
 	useEffect(() => {
@@ -36,7 +33,7 @@ const ChatInput = ({ handleSend }: Props) => {
 			</Button>
 			<input
 				type="text"
-				placeholder={`Message @${friendDisplayName}`}
+				placeholder={`Message @${displayName}`}
 				className={'grow bg-[transparent] text-white placeholder:text-[#5f6169]'}
 				value={newMessageText}
 				onChange={e => setNewMessageText(e.target.value)}

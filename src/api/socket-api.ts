@@ -7,8 +7,18 @@ export const socketSendMessage = (newMessageBody: NewMessageBody) => {
 	socket.emit('sendMessage', newMessageBody)
 }
 
-export const getAllMessages = (jwt: string, userId: number, callback: (response: GetMessagesResponse) => void) => {
-	socket.emit('getMessages', { jwt, userId })
+export const getAllMessages = (
+	jwt: string,
+	userId: number | undefined,
+	groupId: string | undefined,
+	callback: (response: GetMessagesResponse) => void,
+) => {
+	if (userId) {
+		socket.emit('getUserMessages', { jwt, userId })
+	}
+	if (groupId) {
+		socket.emit('getGroupMessages', { jwt, groupId })
+	}
 	socket.on('allMessages', callback)
 }
 

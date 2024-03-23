@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Group } from '../../types/groups.ts'
-import { UserShowableData } from '../../types/user.ts'
+import { NoImageColors, UserShowableData } from '../../types/user.ts'
 
 export type Channel = {
 	id: number
 	image: string | null
 	name: string
 	type: 'user' | 'group'
-	color: 'orange' | 'red' | 'green' | 'blue' | 'yellow'
+	color: NoImageColors
 	onlineStatus: 'offline' | 'online' | 'idle' | 'doNotDisturb' | false
 	members: number | null
 }

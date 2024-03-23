@@ -6,19 +6,31 @@ import { GetMessagesResponse, NewMessageBody, SendMessageResponse } from '../../
 import { useAppDispatch, useAppSelector } from '../../../../../../hooks/typedHooks.ts'
 import { getAllMessages, sendingMessageResponse, socketSendMessage } from '../../../../../../api/socket-api.ts'
 import { addMessageToArray, getMessages } from '../../../../../../store/slices/messagesSlice.ts'
-import { useParams } from 'react-router-dom'
+import { NoImageColors } from '../../../../../../types/user.ts'
 
-const Chat = () => {
+type Props = {
+	id: number | string
+	type: 'friend' | 'group'
+	displayName: string
+	color: NoImageColors
+	image: string
+	username: string
+}
+
+const Chat = ({ id, type, displayName, color, username, image }: Props) => {
 	const jwt = Cookies.get('jwt')
 	const user = useAppSelector(state => state.auth.user)
-	const params = useParams()
-	const id = +(params.id || '0')
 	const dispatch = useAppDispatch()
 	const chat = useAppSelector(state => state.messages.chats.find(chat => chat.id === id))
 
 	useEffect(() => {
 		if (!chat) {
-			getAllMessages(jwt || '', id, handleGetMessagesAdd)
+			getAllMessages(
+				jwt || '',
+				type === 'friend' ? +id : 0,
+				type === 'group' ? `${id}` : '0',
+				handleGetMessagesAdd,
+			)
 		}
 		sendingMessageResponse(handleNewMessageAdd)
 	}, [])
@@ -37,19 +49,34 @@ const Chat = () => {
 
 	const handleSend = (newMessageText: string) => {
 		if (!user || !jwt || newMessageText === '') return
-		const newMessageBody: NewMessageBody = {
-			jwt,
-			receiverId: id,
-			text: newMessageText.trim(),
-			username: user.username,
-		}
+		const newMessageBody: NewMessageBody =
+			type === 'friend'
+				? {
+						jwt,
+						receiverId: +id,
+						text: newMessageText.trim(),
+						username: user.username,
+					}
+				: {
+						jwt,
+						groupId: `${id}`,
+						text: newMessageText.trim(),
+						username: user.username,
+					}
 		socketSendMessage(newMessageBody)
 	}
 
 	return (
 		<section className={'flex grow flex-col'}>
-			<ChatMessages />
-			<ChatInput handleSend={handleSend} />
+			<ChatMessages
+				id={id}
+				displayName={displayName}
+				color={color}
+				image={image}
+				username={username}
+				type={type}
+			/>
+			<ChatInput handleSend={handleSend} displayName={displayName} />
 		</section>
 	)
 }
