@@ -5,15 +5,19 @@ const Timer = () => {
 	const intervalRef = useRef<NodeJS.Timeout>()
 
 	useEffect(() => {
-		setInterval(() => {
-			setTime(time + 1)
+		intervalRef.current = setInterval(() => {
+			setTime(prevTime => prevTime + 1)
 		}, 1000)
 
 		return () => {
 			clearInterval(intervalRef.current)
 		}
-	}, [time])
+	}, [])
 
+	return <PrintTimer time={time} />
+}
+
+const PrintTimer = ({ time }: { time: number }) => {
 	if (time < 3600) {
 		return (
 			<span>
