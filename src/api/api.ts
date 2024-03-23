@@ -12,7 +12,13 @@ import {
 	SendFriendRequestResponse,
 } from '../types/friends.ts'
 import { GetGroupsResponse } from '../types/groups.ts'
-import { RegisterCredentials, UpdateDisplayNameResponse, UpdateUsernameResponse } from '../types/user.ts'
+import {
+	RegisterCredentials,
+	UpdateDisplayNameResponse,
+	UpdatePhoneNumberResponse,
+	UpdateUsernameResponse,
+} from '../types/user.ts'
+import { CountryForSelect } from '../components/Main/SettingsPage/Content/Settings/MyAccount/countriesForSelect.ts'
 
 export const api = createApi({
 	reducerPath: 'api',
@@ -115,6 +121,17 @@ export const api = createApi({
 				}
 			},
 		}),
+
+		updatePhoneNumber: builder.mutation<UpdatePhoneNumberResponse, CountryForSelect & { phoneNum: string }>({
+			query: (country: CountryForSelect & { phoneNum: string }) => ({
+				url: 'user/updatePhoneNumber',
+				method: 'POST',
+				body: {
+					code: +country.code,
+					phoneNumber: country.phoneNum,
+				},
+			}),
+		}),
 	}),
 })
 
@@ -131,4 +148,5 @@ export const {
 	useAcceptFriendRequestMutation,
 	useDeleteFriendRequestMutation,
 	useUploadFileMutation,
+	useUpdatePhoneNumberMutation,
 } = api

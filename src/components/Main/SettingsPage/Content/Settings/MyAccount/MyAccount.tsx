@@ -7,12 +7,15 @@ import { getHiddenEmail, getHiddenPhoneNumber } from '../../../../../../utils/hi
 import { SettingList } from '../../../SettingsPage.tsx'
 import Modal from '../../../../../UI/DiallogPopover/Modal.tsx'
 import Input from '../../../../../UI/Input/Input.tsx'
-import { useUpdateUsernameMutation } from '../../../../../../api/api.ts'
-import { updateUsernameD } from '../../../../../../store/slices/authUserSlice.ts'
+import { useUpdatePhoneNumberMutation, useUpdateUsernameMutation } from '../../../../../../api/api.ts'
+import { updateUsernameD, updateUserPhoneNumber } from '../../../../../../store/slices/authUserSlice.ts'
 import Loader from '../../../../../UI/Loader/Loader.tsx'
 import { UpdateUsernameResponse } from '../../../../../../types/user.ts'
-import { Cross } from '../../../../../../assets/svgs.tsx'
+import { Arrow, Cross, Search } from '../../../../../../assets/svgs.tsx'
 import changePhone from '../../../../../../assets/img/changePhone.svg'
+import clsx from 'clsx'
+import countries, { CountryForSelect } from './countriesForSelect.ts'
+import { cn } from '../../../../../../utils/cn.ts'
 
 type Props = {
 	setCurrentSetting: (newSetting: SettingList) => void
@@ -25,14 +28,20 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 	const [showEmail, setShowEmail] = useState(false)
 	const [showEditUsernameModal, setShowEditUsernameModal] = useState(false)
 	const [showEditPhoneNumberModal, setShowEditPhoneNumberModal] = useState(false)
-	const [newMobilePhone, setNewMobilePhone] = useState('')
+	const [newMobilePhone, setNewMobilePhone] = useState(user?.phoneNumber || '')
 	const [changeUsername, setChangeUsername] = useState('')
+	const [countrySearch, setCountrySearch] = useState('')
+	const [chosenPhone, setChosenPhone] = useState<CountryForSelect>(
+		countries.find(country => country.code === `${user?.phoneCode}`) || countries[0],
+	)
+	const [isChoosePhonePopoverOpen, setIsChoosePhonePopoverOpen] = useState(false)
 	const [password, setPassword] = useState('')
 	const [updateUsername, { isLoading }] = useUpdateUsernameMutation()
 	const dispatch = useAppDispatch()
 	const [updateUsernameServerResponse, setUpdateUsernameServerResponse] = useState<UpdateUsernameResponse | null>(
 		null,
 	)
+	const updatePhoneNumberMutation = useUpdatePhoneNumberMutation()
 
 	useEffect(() => {
 		if (user?.username) {
@@ -40,14 +49,19 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 		}
 	}, [user])
 
+	const toggleChoosePhonePopover = () => {
+		setIsChoosePhonePopoverOpen(current => !current)
+	}
+
+	const filteredCountries = countries.filter(country => country.country.indexOf(countrySearch) != -1)
+
 	if (!user) {
 		return <p>Loading...</p>
 	}
 
-	let number = ''
-	if (user.phoneNumber) {
-		number = getHiddenPhoneNumber(user.phoneNumber)
-	}
+	const phoneNumber = `${user.phoneCode}${user.phoneNumber}`
+
+	const hiddenNumber = getHiddenPhoneNumber(`${user.phoneNumber}`)
 	const mail = getHiddenEmail(user.email)
 
 	const toggleShowPhone = () => {
@@ -134,15 +148,19 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 							<Headline>Phone number</Headline>
 							<h2 className={'font-regular text-white'}>
 								{user.phoneNumber ? (
-									<>
-										<p>{!showPhone ? number : `+${user.phoneNumber}`}</p>
+									<div className={'flex items-center'}>
+										<p>
+											{!showPhone
+												? `${'*'.repeat(user.phoneCode?.toString().length || 0)}${hiddenNumber}`
+												: `+${phoneNumber}`}
+										</p>
 										<span
 											className={'ml-1 text-sm text-[#00a8fc] hover:underline'}
 											onClick={toggleShowPhone}
 										>
 											{!showPhone ? 'Reveal' : 'Hide'}
 										</span>
-									</>
+									</div>
 								) : (
 									"You haven't added a phone number yet."
 								)}
@@ -150,7 +168,7 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 						</div>
 						<EditBtn
 							onClick={() => {
-								user.phoneNumber ? setCurrentSetting('Profiles') : setShowEditPhoneNumberModal(true)
+								setShowEditPhoneNumberModal(true)
 							}}
 						>
 							{user.phoneNumber ? 'Edit' : 'Add'}
@@ -249,16 +267,94 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 						</div>
 					</div>
 					<div className={'p-4'}>
-						<div className={'flex items-center rounded-[0.1875rem] bg-[#1e1f22] p-2'}>
+						<div className={'relative flex items-center rounded-[0.1875rem] bg-[#1e1f22] p-2'}>
+							<EditBtn onClick={toggleChoosePhonePopover} className={'pl-3 pr-2'}>
+								<span className={'pr-2'}>+{chosenPhone.code}</span>
+								<Arrow
+									className={clsx(
+										`stroke-white stroke-[3px]`,
+										!isChoosePhonePopoverOpen ? '-rotate-90' : 'rotate-0',
+									)}
+								/>
+							</EditBtn>
 							<input
 								type="text"
 								value={newMobilePhone}
 								onChange={e => setNewMobilePhone(e.target.value)}
 								className={'mx-2 w-full grow bg-[transparent] font-medium text-[#dbdee1] outline-0'}
 							/>
-							<Button variant={'primary'} className={'h-8 w-fit'}>
-								Send
+							<Button
+								variant={'primary'}
+								className={'h-8 w-fit'}
+								onClick={async () => {
+									const response = await updatePhoneNumberMutation[0]({
+										...chosenPhone,
+										phoneNum: newMobilePhone,
+									}).unwrap()
+									if (response.success && response.payload) {
+										dispatch(
+											updateUserPhoneNumber({
+												phoneNumber: response.payload.user.phoneNumber || '',
+												code: response.payload.user.phoneCode || 0,
+											}),
+										)
+										setShowEditPhoneNumberModal(false)
+									}
+									console.log(response)
+								}}
+							>
+								{!updatePhoneNumberMutation[1].isLoading ? 'Send' : <Loader />}
 							</Button>
+							<div
+								className={clsx(
+									'pointer-events-none absolute bottom-1 left-0 w-60 translate-y-[100%] rounded-[5px] bg-[#313338] px-2.5 pt-2.5 opacity-0',
+									isChoosePhonePopoverOpen && 'pointer-events-auto opacity-100',
+								)}
+							>
+								<div className={'flex items-center bg-[#1e1f22]'}>
+									<div className={'grow'}>
+										<Input
+											id={'countrySearch'}
+											placeholder={'Search a country'}
+											className={'h-5 px-1 py-0 text-sm leading-[1.25rem]'}
+											value={countrySearch}
+											onChange={e => setCountrySearch(e.target.value)}
+										/>
+									</div>
+									<div className={'relative mr-1 flex h-4 w-4'}>
+										<Search
+											className={cn(
+												`absolute left-1/2 top-1/2 w-4 -translate-x-1/2 -translate-y-1/2 rotate-0 fill-white opacity-100 transition`,
+												countrySearch && 'rotate-180 opacity-0',
+											)}
+										/>
+										<Cross
+											className={cn(
+												`absolute left-1/2 top-1/2 w-4 -translate-x-1/2 -translate-y-1/2 rotate-180 fill-white opacity-100 transition`,
+												!countrySearch && 'rotate-0 opacity-0',
+											)}
+										/>
+									</div>
+								</div>
+								<div className={'my-2 h-[1px] bg-[#3f4147]'}></div>
+								<ul className={'h-60 overflow-y-scroll pb-2.5'}>
+									{filteredCountries.map(country => (
+										<li
+											key={country.iso}
+											className={
+												'flex h-[2.125rem] cursor-pointer items-center justify-between rounded px-2 py-2.5 hover:bg-[#26272a]'
+											}
+											onClick={() => {
+												setChosenPhone(country)
+												setIsChoosePhonePopoverOpen(false)
+											}}
+										>
+											<p className={'text-[13px]'}>{country.country}</p>
+											<p className={'text-[13px] font-bold text-white'}>+{country.code}</p>
+										</li>
+									))}
+								</ul>
+							</div>
 						</div>
 					</div>
 				</Modal>
@@ -270,13 +366,17 @@ const MyAccount = ({ setCurrentSetting }: Props) => {
 type EditBtnProps = {
 	onClick: () => void
 	children: ReactNode
+	className?: string
 }
 
-const EditBtn = ({ onClick, children }: EditBtnProps) => {
+const EditBtn = ({ onClick, children, className }: EditBtnProps) => {
 	return (
 		<Button
 			variant={'text'}
-			className={'h-8 bg-[#4e5058] px-4 text-white transition hover:bg-[#6d6f78] hover:text-[white]'}
+			className={clsx(
+				'h-8 bg-[#4e5058] px-4 text-white transition hover:bg-[#6d6f78] hover:text-[white]',
+				className,
+			)}
 			onClick={onClick}
 		>
 			{children}

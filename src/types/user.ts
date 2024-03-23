@@ -13,6 +13,7 @@ type PrismaUser = {
 	color: 'orange' | 'red' | 'green' | 'blue' | 'yellow'
 	textStatus: string
 	onlineStatus: 'offline' | 'online' | 'idle' | 'doNotDisturb'
+	phoneCode: number | null
 	phoneNumber: string | null
 	createdAt: string
 	updatedAt: string
@@ -38,6 +39,8 @@ type UpdateUserErrorMessages = 'Unauthorized'
 
 type UpdateUsernameErrorMessages = 'Unauthorized' | 'Wrong password' | 'Password is required'
 
+type UpdatePhoneNumberErrorMessages = 'Unauthorized' | 'Error updating phone number'
+
 export type UpdateDisplayNameResponse =
 	| SuccessMessage<'DisplayName successfully updated', { user: UserWithoutPassword }>
 	| ErrorMessage<UpdateUserErrorMessages>
@@ -45,3 +48,7 @@ export type UpdateDisplayNameResponse =
 export type UpdateUsernameResponse =
 	| SuccessMessage<'Username successfully updated', { user: UserWithoutPassword }>
 	| ErrorMessage<UpdateUsernameErrorMessages>
+
+export type UpdatePhoneNumberResponse =
+	| SuccessMessage<'Successfully updated phone number', { user: UserWithoutPassword }>
+	| ErrorMessage<UpdatePhoneNumberErrorMessages>

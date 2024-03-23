@@ -32,7 +32,7 @@ export const DSLogo = ({ width = 27, height = 22, ...props }: { width?: number; 
 
 export const Arrow = ({ ...props }) => (
 	<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
-		<path d="M7 10L12 15L17 10" stroke="#b5bac1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+		<path d="M7 10L12 15L17 10" strokeLinecap="round" strokeLinejoin="round" />
 	</svg>
 )
 
@@ -169,7 +169,7 @@ export const More = ({ ...props }) => (
 )
 
 export const Cross = ({ ...props }) => (
-	<svg width="18" height="18" viewBox="0 0 24 24" {...props}>
+	<svg width="24" height="24" viewBox="0 0 24 24" {...props}>
 		<path d="M18.4 4L12 10.4L5.6 4L4 5.6L10.4 12L4 18.4L5.6 20L12 13.6L18.4 20L20 18.4L13.6 12L20 5.6L18.4 4Z"></path>
 	</svg>
 )
@@ -248,5 +248,15 @@ export const AddImage = ({ ...props }) => (
 			clipRule="evenodd"
 		></path>
 		<path d="M19 14a1 1 0 0 1 1 1v3h3a1 1 0 0 1 0 2h-3v3a1 1 0 0 1-2 0v-3h-3a1 1 0 1 1 0-2h3v-3a1 1 0 0 1 1-1Z"></path>
+	</svg>
+)
+
+export const Search = ({ ...props }) => (
+	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" {...props}>
+		<path
+			fillRule="evenodd"
+			d="M15.62 17.03a9 9 0 1 1 1.41-1.41l4.68 4.67a1 1 0 0 1-1.42 1.42l-4.67-4.68ZM17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"
+			clipRule="evenodd"
+		></path>
 	</svg>
 )

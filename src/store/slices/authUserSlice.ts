@@ -44,9 +44,21 @@ export const authUserSlice = createSlice({
 				username: action.payload,
 			}
 		},
+
+		updateUserPhoneNumber: (state, action: PayloadAction<{ phoneNumber: string; code: number }>) => {
+			if (!state.user) {
+				state.user = null
+				return
+			}
+			state.user = {
+				...state.user,
+				phoneNumber: action.payload.phoneNumber,
+				phoneCode: action.payload.code,
+			}
+		},
 	},
 })
 
-export const { authUser, logOut, updateUsernameD, updateDisplayNameD } = authUserSlice.actions
+export const { authUser, logOut, updateUsernameD, updateDisplayNameD, updateUserPhoneNumber } = authUserSlice.actions
 
 export default authUserSlice.reducer
