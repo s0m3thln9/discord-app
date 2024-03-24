@@ -1,4 +1,4 @@
-import MessageCom from './Message/MessageCom.tsx'
+import Message from './Message/Message.tsx'
 import { useAppSelector } from '../../../../../../../hooks/typedHooks.ts'
 import UserImage from '../../../../../../UI/UserImage/UserImage.tsx'
 import { NoImageColors } from '../../../../../../../types/user.ts'
@@ -46,7 +46,7 @@ const ChatMessages = ({ id, image, color, displayName, username, type }: Props) 
 					}
 					if (!sender) return null
 					return (
-						<MessageCom
+						<Message
 							key={message.id}
 							message={message}
 							previous={i > 0 ? messages[i - 1] : null}

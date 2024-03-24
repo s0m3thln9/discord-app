@@ -8,21 +8,21 @@ export type NewMessageBody = {
 	jwt: string
 }
 
-export type Message = {
+export type MessageType = {
 	id: number
 	text: string
 	senderId: number
-	receiverId: number
+	receiverId?: number
 	createdAt: Date
 	updatedAt: Date
 }
 
 type SendMessageErrorMessages = 'Unauthorized'
 export type SendMessageResponse =
-	| SuccessMessage<'Message sent successfully', { message: Message }>
+	| SuccessMessage<'Message sent successfully', { message: MessageType }>
 	| ErrorMessage<SendMessageErrorMessages>
 
 type GetMessagesErrorMessages = 'Unauthorized'
 export type GetMessagesResponse =
-	| SuccessMessage<'Successfully got message', { messages: Message[] }>
+	| SuccessMessage<'Successfully got message', { messages: MessageType[] }>
 	| ErrorMessage<GetMessagesErrorMessages>

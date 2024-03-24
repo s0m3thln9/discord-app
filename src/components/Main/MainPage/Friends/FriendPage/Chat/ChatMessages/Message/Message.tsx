@@ -1,5 +1,5 @@
 import UserImage from '../../../../../../../UI/UserImage/UserImage.tsx'
-import { Message } from '../../../../../../../../types/messages.ts'
+import { MessageType } from '../../../../../../../../types/messages.ts'
 import formatDateForMessages from '../../../../../../../../utils/formatDateForMessages.ts'
 import Tooltip from '../../../../../../../UI/Tooltip/Tooltip.tsx'
 import formatDateForMessagesTooltip from '../../../../../../../../utils/formatDateForMessagesTooltip.ts'
@@ -11,11 +11,11 @@ type Props = {
 	senderImage: string
 	senderColor: NoImageColors
 	senderDisplayName: string
-	message: Message
-	previous: Message | null
+	message: MessageType
+	previous: MessageType | null
 }
 
-const MessageCom = ({ message, previous, senderImage, senderColor, senderDisplayName }: Props) => {
+const Message = ({ message, previous, senderImage, senderColor, senderDisplayName }: Props) => {
 	const date = new Date(message.createdAt)
 
 	return (
@@ -66,4 +66,4 @@ const MessageCom = ({ message, previous, senderImage, senderColor, senderDisplay
 	)
 }
 
-export default MessageCom
+export default Message
