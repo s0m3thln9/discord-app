@@ -1,27 +1,27 @@
 import Header from './Header/Header.tsx'
-import Chat from './Chat/Chat.tsx'
+import Chat from '../../../../Chat/Chat.tsx'
 import { useAppSelector } from '../../../../../hooks/typedHooks.ts'
 import { useParams } from 'react-router-dom'
 import { NoImageColors } from '../../../../../types/user.ts'
 
-type HeaderProps = {
+export type HeaderProps = {
 	image: string
 	color: NoImageColors
 	onlineStatus: 'offline' | 'online' | 'idle' | 'doNotDisturb' | false
 	displayName: string
 	username: string
 }
-
-type Props = {
-	type: 'friend' | 'group'
-}
-
-const FriendPage = ({ type }: Props) => {
+const FriendPage = () => {
 	const { id } = useParams()
-	const users = useAppSelector(state => state.friends.friends)
 	const groups = useAppSelector(state => state.groups.groups)
-	const friend = users.find(f => f.id === +(id || '0'))
-	const group = groups.find(g => g.id === id)
+	const group = groups.find(g => g.chatId === +(id || '0'))
+	const chats = useAppSelector(state => state.chats.chats)
+	const user = useAppSelector(state => state.auth.user)
+	const chat = chats.find(f => f.id === +(id || '0'))
+	const type = group ? 'group' : 'friend'
+	if (!chat || !user) return null
+
+	const friend = chat.participants.find(participant => participant.id !== user.id)
 
 	const header: HeaderProps =
 		type === 'friend'
@@ -42,20 +42,8 @@ const FriendPage = ({ type }: Props) => {
 
 	return (
 		<div className={'flex grow flex-col'}>
-			<Header
-				image={header.image}
-				color={header.color}
-				onlineStatus={header.onlineStatus}
-				displayName={header.displayName}
-			/>
-			<Chat
-				id={id || '0'}
-				type={type}
-				displayName={header.displayName}
-				color={header.color}
-				username={header.username}
-				image={header.image}
-			/>
+			<Header header={header} />
+			<Chat type={type} chat={chat} header={header} />
 		</div>
 	)
 }

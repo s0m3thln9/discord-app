@@ -3,8 +3,7 @@ import { ErrorMessage, SuccessMessage } from './responseMessages'
 export type NewMessageBody = {
 	text: string
 	username: string
-	receiverId?: number
-	groupId?: string
+	chatId: number
 	jwt: string
 }
 
@@ -12,17 +11,12 @@ export type MessageType = {
 	id: number
 	text: string
 	senderId: number
-	receiverId?: number
-	createdAt: Date
-	updatedAt: Date
+	chatId: number
+	createdAt: string
+	updatedAt: string
 }
 
 type SendMessageErrorMessages = 'Unauthorized'
 export type SendMessageResponse =
 	| SuccessMessage<'Message sent successfully', { message: MessageType }>
 	| ErrorMessage<SendMessageErrorMessages>
-
-type GetMessagesErrorMessages = 'Unauthorized'
-export type GetMessagesResponse =
-	| SuccessMessage<'Successfully got message', { messages: MessageType[] }>
-	| ErrorMessage<GetMessagesErrorMessages>

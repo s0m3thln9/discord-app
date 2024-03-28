@@ -19,6 +19,7 @@ import {
 	UpdateUsernameResponse,
 } from '../types/user.ts'
 import { CountryForSelect } from '../components/Main/SettingsPage/Content/MyAccount/countriesForSelect.ts'
+import { getChatsResponse } from '../types/chat.ts'
 
 export const api = createApi({
 	reducerPath: 'api',
@@ -102,7 +103,7 @@ export const api = createApi({
 			}),
 		}),
 
-		deleteFriendRequest: builder.mutation<DeleteFriendRequestResponse, void>({
+		deleteFriendRequest: builder.mutation<DeleteFriendRequestResponse, { requestId: number }>({
 			query: requestId => ({
 				url: `friendsRequest/delete/${requestId}`,
 				method: 'DELETE',
@@ -131,6 +132,13 @@ export const api = createApi({
 				},
 			}),
 		}),
+
+		getChats: builder.mutation<getChatsResponse, void>({
+			query: () => ({
+				url: 'chats/get',
+				method: 'GET',
+			}),
+		}),
 	}),
 })
 
@@ -148,4 +156,5 @@ export const {
 	useDeleteFriendRequestMutation,
 	useUploadFileMutation,
 	useUpdatePhoneNumberMutation,
+	useGetChatsMutation,
 } = api

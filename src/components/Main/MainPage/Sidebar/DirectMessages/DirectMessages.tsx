@@ -1,39 +1,48 @@
 import Tooltip from '../../../../UI/Tooltip/Tooltip.tsx'
-import ChatChannel from './Channel/ChatChannel.tsx'
+import DirectMessage from './Channel/DirectMessage.tsx'
 import { useAppDispatch, useAppSelector } from '../../../../../hooks/typedHooks.ts'
-import { useGetFriendsMutation, useGetGroupsMutation } from '../../../../../api/api.ts'
-import { addFriendsToChannels, addGroupsToChannels } from '../../../../../store/slices/chatsSlice.ts'
+import { useGetChatsMutation, useGetFriendsMutation, useGetGroupsMutation } from '../../../../../api/api.ts'
+import {
+	addFriendsToDirectMessages,
+	addGroupsToDirectMessages,
+} from '../../../../../store/slices/directMessagesSlice.ts'
 import { useEffect } from 'react'
 import { addFriends } from '../../../../../store/slices/friendsSlice.ts'
 import { addGroups } from '../../../../../store/slices/groupsSlice.ts'
 import { Plus } from '../../../../../assets/svgs.tsx'
+import { addChats } from '../../../../../store/slices/chatsSlice.ts'
 
 const DirectMessages = () => {
 	const isAuth = useAppSelector(state => state.auth.isAuth)
 	const [friendsQuery] = useGetFriendsMutation()
 	const [groupsQuery] = useGetGroupsMutation()
+	const [getChats] = useGetChatsMutation()
 	const dispatch = useAppDispatch()
 
-	useEffect(() => {
-		const fetchData = async () => {
-			const friendsResponse = await friendsQuery().unwrap()
-			const groupsResponse = await groupsQuery().unwrap()
+	const fetchData = async () => {
+		const friendsResponse = await friendsQuery().unwrap()
+		const groupsResponse = await groupsQuery().unwrap()
+		const getChatsResponse = await getChats().unwrap()
 
-			if (!groupsResponse.success || !friendsResponse.success) {
-				return
-			}
+		//console.log('getChatsResponse', getChatsResponse)
 
-			dispatch(addFriends(friendsResponse))
-			dispatch(addGroups(groupsResponse))
-
-			dispatch(addFriendsToChannels(friendsResponse.payload?.friends || []))
-			dispatch(addGroupsToChannels(groupsResponse.payload?.groups || []))
+		if (!groupsResponse.success || !friendsResponse.success || !getChatsResponse.success) {
+			return
 		}
 
-		fetchData().then()
-	}, [friendsQuery, groupsQuery, dispatch])
+		dispatch(addFriends(friendsResponse))
+		dispatch(addGroups(groupsResponse))
 
-	const channels = useAppSelector(state => state.chats.channels)
+		dispatch(addFriendsToDirectMessages(friendsResponse.payload?.friends || []))
+		dispatch(addGroupsToDirectMessages(groupsResponse.payload?.groups || []))
+		dispatch(addChats(getChatsResponse.payload?.chats || []))
+	}
+
+	useEffect(() => {
+		fetchData().then()
+	}, [friendsQuery, groupsQuery, getChats, dispatch])
+
+	const directMessages = useAppSelector(state => state.directMessages.directMessages)
 
 	if (!isAuth) {
 		return <p>Loading...</p>
@@ -58,8 +67,12 @@ const DirectMessages = () => {
 				</div>
 			</div>
 			<ul className={'mt-1'}>
-				{channels.map(channel => (
-					<ChatChannel channel={channel} key={`${channel.id}${channel.type}`} />
+				{directMessages.map(directMessage => (
+					<DirectMessage
+						chatId={directMessage.chatId}
+						directMessage={directMessage}
+						key={`${directMessage.id}${directMessage.type}`}
+					/>
 				))}
 			</ul>
 		</section>

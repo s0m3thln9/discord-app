@@ -2,13 +2,14 @@ import { ErrorMessage, SuccessMessage } from './responseMessages'
 import { NoImageColors } from './user.ts'
 
 export type Group = {
-	id: string
+	id: number
 	name: string
 	image: string | null
 	color: NoImageColors
-	createdAt: Date
-	updatedAt: Date
 	members: number
+	chatId: number
+	createdAt: string
+	updatedAt: string
 }
 
 export type GetGroupsResponse =

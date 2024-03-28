@@ -6,14 +6,14 @@ import { Message, More } from '../../../../../../assets/svgs.tsx'
 import { Link } from 'react-router-dom'
 
 type Props = {
-	friend: UserShowableData
+	friend: UserShowableData & { chatId: number }
 }
 
 const FriendItem = ({ friend }: Props) => {
 	return (
 		<li key={friend.id}>
 			<Link
-				to={`/${friend.id}`}
+				to={`/${friend.chatId}`}
 				className={'group ml-5 mr-2.5 flex h-[3.875rem] rounded-lg hover:bg-hover hover:no-underline'}
 			>
 				<div

@@ -1,7 +1,7 @@
 import UserImage from '../../../../../UI/UserImage/UserImage.tsx'
 import Tooltip from '../../../../../UI/Tooltip/Tooltip.tsx'
 import Button from '../../../../../UI/Button/Button.tsx'
-import { UserShowableData } from '../../../../../../types/user.ts'
+import { UserWithoutPassword } from '../../../../../../types/user.ts'
 import { useAcceptFriendRequestMutation, useDeleteFriendRequestMutation } from '../../../../../../api/api.ts'
 import { useDispatch } from 'react-redux'
 import {
@@ -9,10 +9,10 @@ import {
 	updateFriendRequestNotifications,
 } from '../../../../../../store/slices/friendRequestsSlice.ts'
 import { Accept, Cross } from '../../../../../../assets/svgs.tsx'
-import { addFriendToChannels } from '../../../../../../store/slices/chatsSlice.ts'
+import { addFriendToDirectMessages } from '../../../../../../store/slices/directMessagesSlice.ts'
 
 type Props = {
-	user: UserShowableData
+	user: UserWithoutPassword & { chatId: number }
 	type: 'incoming' | 'outgoing'
 	requestId: number
 }
@@ -77,7 +77,7 @@ const FriendRequest = ({ user, type, requestId }: Props) => {
 										const response = await acceptFriendRequest({ requestId }).unwrap()
 										if (response.success) {
 											dispatch(deleteFriendRequestAC({ requestId }))
-											dispatch(addFriendToChannels(user))
+											dispatch(addFriendToDirectMessages(user))
 											dispatch(updateFriendRequestNotifications({ id: user?.id || 0 }))
 										}
 										console.log(response)

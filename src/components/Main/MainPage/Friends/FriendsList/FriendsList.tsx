@@ -23,6 +23,7 @@ const FriendsList = ({ filter }: Props) => {
 
 	const user = useAppSelector(state => state.auth.user)
 	const friends = useAppSelector(state => state.friends.friends)
+	const chats = useAppSelector(state => state.chats.chats)
 
 	const [getFriendRequest] = useGetFriendRequestsMutation()
 	const dispatch = useAppDispatch()
@@ -38,13 +39,27 @@ const FriendsList = ({ filter }: Props) => {
 
 	const friendRequestsWithUsers = useAppSelector(state => state.friendRequests.friendRequestsWithUsers)
 
-	let filteredFriends: UserWithoutPassword[] = []
+	let filteredFriends: (UserWithoutPassword & { chatId: number })[] = []
 	switch (filter) {
 		case 'all':
-			filteredFriends = friends
+			friends.forEach(friend => {
+				filteredFriends.push({
+					...friend,
+					chatId:
+						chats.find(chat => chat.participants.find(participant => participant.id === friend.id))?.id ||
+						0,
+				})
+			})
 			break
 		case 'online':
-			filteredFriends = friends.filter(friend => friend.onlineStatus === 'online')
+			friends.forEach(friend => {
+				filteredFriends.push({
+					...friend,
+					chatId:
+						chats.find(chat => chat.participants.find(participant => participant.id === friend.id))?.id ||
+						0,
+				})
+			})
 			break
 	}
 

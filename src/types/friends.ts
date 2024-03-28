@@ -1,4 +1,4 @@
-import { UserShowableData, UserWithoutPassword } from './user.ts'
+import { UserWithoutPassword } from './user.ts'
 import { ErrorMessage, SuccessMessage } from './responseMessages'
 
 export type FriendRequest = {
@@ -6,14 +6,14 @@ export type FriendRequest = {
 	status: 'pending' | 'blocked'
 	fromId: number
 	toId: number
-	createdAt: Date
+	createdAt: string
 }
 
 type GetFriendsErrorMessages = 'Unauthorized'
 
 export type GetFriendsResponse =
 	| ErrorMessage<GetFriendsErrorMessages>
-	| SuccessMessage<'Successfully got friends', { friends: UserWithoutPassword[] }>
+	| SuccessMessage<'Successfully got friends', { friends: (UserWithoutPassword & { chatId: number })[] }>
 
 type GetFriendsRequestsErrorMessages = 'Unauthorized'
 
@@ -23,8 +23,8 @@ export type GetFriendRequestsResponse =
 
 export type FriendRequestsWithUsers = {
 	friendRequest: FriendRequest
-	fromUser: UserShowableData
-	toUser: UserShowableData
+	fromUser: UserWithoutPassword & { chatId: number }
+	toUser: UserWithoutPassword & { chatId: number }
 }
 
 type SendRequestErrorMessages =
@@ -34,7 +34,7 @@ type SendRequestErrorMessages =
 	| "You can't yourself to friends"
 
 export type SendFriendRequestResponse =
-	| SuccessMessage<'Friend request send', { friend: UserShowableData }>
+	| SuccessMessage<'Friend request send', { friend: UserWithoutPassword & { chatId: number } }>
 	| ErrorMessage<SendRequestErrorMessages>
 
 type DeleteFriendRequestErrorMessages = 'Unauthorized' | 'Wrong request id provided'

@@ -1,11 +1,11 @@
-import UserImage from '../../../../../../../UI/UserImage/UserImage.tsx'
-import { MessageType } from '../../../../../../../../types/messages.ts'
-import formatDateForMessages from '../../../../../../../../utils/formatDateForMessages.ts'
-import Tooltip from '../../../../../../../UI/Tooltip/Tooltip.tsx'
-import formatDateForMessagesTooltip from '../../../../../../../../utils/formatDateForMessagesTooltip.ts'
+import UserImage from '../../../UI/UserImage/UserImage.tsx'
+import { MessageType } from '../../../../types/messages.ts'
+import formatDateForMessages from '../../../../utils/formatDateForMessages.ts'
+import Tooltip from '../../../UI/Tooltip/Tooltip.tsx'
+import formatDateForMessagesTooltip from '../../../../utils/formatDateForMessagesTooltip.ts'
 import clsx from 'clsx'
-import formattedDateForTime from '../../../../../../../../utils/formattedDateForTime.ts'
-import { NoImageColors } from '../../../../../../../../types/user.ts'
+import formattedDateForTime from '../../../../utils/formattedDateForTime.ts'
+import { NoImageColors } from '../../../../types/user.ts'
 
 type Props = {
 	senderImage: string

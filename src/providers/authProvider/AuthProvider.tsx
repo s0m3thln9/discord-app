@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../../hooks/typedHooks.ts'
 import { authUser, logOut } from '../../store/slices/authUserSlice.ts'
 import { useLoginUserWithJwtQuery } from '../../api/api.ts'
-import { clearChannels } from '../../store/slices/chatsSlice.ts'
+import { clearDirectMessages } from '../../store/slices/directMessagesSlice.ts'
 
 export let AuthContext: Context<TAuthProvider>
 
@@ -26,7 +26,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const logout = () => {
 		Cookies.remove('jwt')
 		dispatch(logOut())
-		dispatch(clearChannels())
+		dispatch(clearDirectMessages())
 		navigate('/login')
 	}
 

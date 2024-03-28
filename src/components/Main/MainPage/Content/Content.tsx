@@ -13,8 +13,7 @@ const Content = ({ toggleSettings }: Props) => {
 			<MainSidebar toggleSettings={toggleSettings} />
 			<Routes>
 				<Route path={'/'} element={<FriendsSection />} />
-				<Route path={'/:id'} element={<FriendPage type={'friend'} />} />
-				<Route path={'/g/:id'} element={<FriendPage type={'group'} />} />
+				<Route path={'/:id'} element={<FriendPage />} />
 			</Routes>
 		</>
 	)

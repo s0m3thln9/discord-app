@@ -1,6 +1,6 @@
-import { GIF, PlusCircle, Present } from '../../../../../../../assets/svgs.tsx'
-import Button from '../../../../../../UI/Button/Button.tsx'
-import Tooltip from '../../../../../../UI/Tooltip/Tooltip.tsx'
+import { GIF, PlusCircle, Present } from '../../../assets/svgs.tsx'
+import Button from '../../UI/Button/Button.tsx'
+import Tooltip from '../../UI/Tooltip/Tooltip.tsx'
 import { useEffect, useState } from 'react'
 
 type Props = {
