@@ -12,7 +12,7 @@ interface Props extends VariantProps<typeof userImageVariants> {
 	color: NoImageColors
 	tooltip?: boolean
 	className?: string
-	bgColor: 'sidebar' | 'content' | 'userInfo' | 'profile-bg' | null | undefined
+	bgColor: 'sidebar' | 'content' | 'userInfo' | 'profile-bg' | 'hover' | null | undefined
 	editable?: Dispatch<SetStateAction<boolean>>
 	isGroup?: boolean
 }

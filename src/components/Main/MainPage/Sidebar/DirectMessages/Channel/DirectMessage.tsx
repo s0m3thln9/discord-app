@@ -4,6 +4,7 @@ import UserImage from '../../../../../UI/UserImage/UserImage.tsx'
 import ContextMenu from '../../../../../UI/ContextMenu/ContextMenu.tsx'
 import { useState } from 'react'
 import { Close } from '../../../../../../assets/svgs.tsx'
+import { clsx } from 'clsx'
 
 type Props = {
 	directMessage: DirectMessageChannel
@@ -11,15 +12,17 @@ type Props = {
 }
 
 const DirectMessage = ({ directMessage, chatId }: Props) => {
+	const pathname = window.location.href
 	const [isContextMenuShon, setIsContextMenuShown] = useState(false)
 
 	return (
 		<li key={`${directMessage.id}${directMessage.type}`} className={'relative pt-0.5'}>
 			<Link
 				to={`/${chatId}`}
-				className={
-					'group flex h-[2.625rem] items-center justify-between rounded px-2 text-[#949ba4] hover:bg-[#35373c] hover:no-underline'
-				}
+				className={clsx(
+					'group flex h-[2.625rem] items-center justify-between rounded px-2 text-[#949ba4] hover:bg-[#35373c] hover:no-underline',
+					pathname === `http://localhost:5173/${chatId}` && 'bg-[#35373c]',
+				)}
 			>
 				<div className={'flex w-[12.75rem] items-center'}>
 					<UserImage
@@ -27,15 +30,16 @@ const DirectMessage = ({ directMessage, chatId }: Props) => {
 						color={directMessage.color}
 						onlineStatus={directMessage.onlineStatus}
 						tooltip={true}
-						bgColor={'sidebar'}
+						bgColor={pathname === `http://localhost:5173/${chatId}` ? 'hover' : 'sidebar'}
 						size={'md'}
 						isGroup={directMessage.type === 'group'}
 					/>
 					<div className={'ml-3 flex w-full grow flex-col justify-center leading-none'}>
 						<p
-							className={
-								'w-full overflow-hidden text-ellipsis whitespace-nowrap font-medium group-hover:w-[8.25rem] group-hover:text-[#dbdee1]'
-							}
+							className={clsx(
+								'w-[calc(100%-2.5rem)] overflow-hidden text-ellipsis whitespace-nowrap font-medium group-hover:w-[8.25rem] group-hover:text-[#dbdee1]',
+								pathname === `http://localhost:5173/${chatId}` && 'text-[#dbdee1]',
+							)}
 						>
 							{directMessage.name}
 						</p>

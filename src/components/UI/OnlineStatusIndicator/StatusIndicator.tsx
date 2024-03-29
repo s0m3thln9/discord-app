@@ -40,6 +40,7 @@ const statusIndicatorVariants = cva('absolute z-10 rounded-full group-hover:bord
 			userInfo: 'border-user-info before:bg-user-info',
 			content: 'border-content before:bg-content',
 			'profile-bg': 'border-profile-bg before:bg-profile-bg',
+			hover: 'border-hover before:bg-hover',
 		},
 		size: {
 			md: 'h-4 w-4 border-[0.2rem] -bottom-0.5 -right-0.5',
