@@ -21,7 +21,7 @@ const DirectMessage = ({ directMessage, chatId }: Props) => {
 				to={`/${chatId}`}
 				className={clsx(
 					'group flex h-[2.625rem] items-center justify-between rounded px-2 text-[#949ba4] hover:bg-[#35373c] hover:no-underline',
-					pathname === `http://localhost:5173/${chatId}` && 'bg-[#35373c]',
+					pathname === `http://localhost:5173/${chatId}` && 'bg-[#404249]',
 				)}
 			>
 				<div className={'flex w-[12.75rem] items-center'}>
@@ -43,7 +43,18 @@ const DirectMessage = ({ directMessage, chatId }: Props) => {
 						>
 							{directMessage.name}
 						</p>
-						{directMessage.members ? <p className={'text-xs'}>{directMessage.members} Members</p> : ''}
+						{directMessage.members ? (
+							<p
+								className={clsx(
+									'text-xs group-hover:text-[#dbdee1]',
+									pathname === `http://localhost:5173/${chatId}` && 'text-[#dbdee1]',
+								)}
+							>
+								{directMessage.members} Members
+							</p>
+						) : (
+							''
+						)}
 					</div>
 				</div>
 				<div className={'group hidden p-1 group-hover:flex'}>
