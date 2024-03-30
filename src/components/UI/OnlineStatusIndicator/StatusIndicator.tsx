@@ -1,7 +1,6 @@
 import { cn } from '../../../utils/cn.ts'
 import Tooltip from '../Tooltip/Tooltip.tsx'
 import { cva, VariantProps } from 'class-variance-authority'
-import { twMerge } from 'tailwind-merge'
 
 interface Props extends VariantProps<typeof statusIndicatorVariants> {
 	tooltip?: boolean
@@ -9,24 +8,21 @@ interface Props extends VariantProps<typeof statusIndicatorVariants> {
 }
 
 const StatusIndicator = ({ onlineStatus, color, tooltip = false, size, className }: Props) => {
-	return tooltip ? (
-		<Tooltip
-			text={`${onlineStatus?.length && onlineStatus[0].toUpperCase()}${onlineStatus?.substring(1)}`}
-			className={twMerge('absolute -bottom-0.5 -right-0.5', className)}
-		>
-			<Indicator onlineStatus={onlineStatus} color={color} size={size} />
-		</Tooltip>
-	) : (
-		<Indicator onlineStatus={onlineStatus} color={color} size={size} className={className} />
+	return (
+		<div className={cn(statusIndicatorContainerVariants({ size }), className)}>
+			{tooltip ? (
+				<Tooltip text={`${onlineStatus?.length && onlineStatus[0].toUpperCase()}${onlineStatus?.substring(1)}`}>
+					<Indicator onlineStatus={onlineStatus} color={color} size={size} />
+				</Tooltip>
+			) : (
+				<Indicator onlineStatus={onlineStatus} color={color} size={size} />
+			)}
+		</div>
 	)
 }
 
-interface IndicatorProps extends VariantProps<typeof statusIndicatorVariants> {
-	className?: string
-}
-
-export const Indicator = ({ onlineStatus, color, size, hover, className }: IndicatorProps) => {
-	return <div className={cn(statusIndicatorVariants({ onlineStatus, color, size, hover, className }))}></div>
+export const Indicator = ({ onlineStatus, color, size, hover }: VariantProps<typeof statusIndicatorVariants>) => {
+	return <div className={cn(statusIndicatorVariants({ onlineStatus, color, size, hover }))}></div>
 }
 
 const statusIndicatorVariants = cva('absolute z-10 rounded-full group-hover:border-hover group-hover:before:bg-hover', {
@@ -46,9 +42,7 @@ const statusIndicatorVariants = cva('absolute z-10 rounded-full group-hover:bord
 		},
 		size: {
 			sm: 'h-4 w-4 border-[0.2rem]',
-			md: 'h-3 w-3',
 			lg: 'h-7 w-7 border-[0.4rem]',
-			xl: 'h-10 w-10 border-[0.5rem]',
 		},
 		hover: {
 			option: 'group-hover:bg-[#dbdee1]',
@@ -56,6 +50,15 @@ const statusIndicatorVariants = cva('absolute z-10 rounded-full group-hover:bord
 	},
 	defaultVariants: {
 		size: 'md',
+	},
+})
+
+const statusIndicatorContainerVariants = cva('absolute', {
+	variants: {
+		size: {
+			sm: 'h-4 w-4 -bottom-0.5 -right-0.5',
+			lg: 'h-7 w-7 bottom-0 right-0',
+		},
 	},
 })
 

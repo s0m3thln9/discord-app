@@ -189,26 +189,24 @@ const Tooltip: React.FC<ITooltipProps> = ({
 	}
 
 	return (
-		<div className={twMerge('', className)}>
-			<div className={className}>
-				<div
-					className={twMerge('flex border-none', className)}
-					onMouseEnter={handleMouseEnter}
-					onMouseLeave={handleMouseLeave}
-					onClick={handleClick}
-				>
-					{children}
-				</div>
-				<div className={cn(tooltipContainerVariations({ placement, x, y, bg }))} ref={tooltipRef}>
-					<div className={cn(tooltipArrowVariations({ placement, bg }))}>
-						{content ? (
-							content
-						) : (
-							<p className={clsx('whitespace-nowrap text-sm font-medium', animation && 'shake-text')}>
-								{text}
-							</p>
-						)}
-					</div>
+		<div className={className}>
+			<div
+				className={twMerge('flex border-none', className)}
+				onMouseEnter={handleMouseEnter}
+				onMouseLeave={handleMouseLeave}
+				onClick={handleClick}
+			>
+				{children}
+			</div>
+			<div className={cn(tooltipContainerVariations({ placement, x, y, bg }))} ref={tooltipRef}>
+				<div className={cn(tooltipArrowVariations({ placement, bg }))}>
+					{content ? (
+						content
+					) : (
+						<p className={clsx('whitespace-nowrap text-sm font-medium', animation && 'shake-text')}>
+							{text}
+						</p>
+					)}
 				</div>
 			</div>
 		</div>
