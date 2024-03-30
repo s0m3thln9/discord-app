@@ -12,6 +12,8 @@ const Navigation = () => {
 						className={'h-full w-full justify-center'}
 						placement={'right'}
 						x={'lg'}
+						width={'full'}
+						height={'full'}
 					>
 						<Link to={'/'} className={'flex h-full w-full items-center justify-center'}>
 							<DSLogo height={24} width={24} />
@@ -25,6 +27,8 @@ const Navigation = () => {
 						className={'h-full w-full justify-center'}
 						x={'lg'}
 						placement={'right'}
+						width={'full'}
+						height={'full'}
 					>
 						<Link to={'/'} className={'flex h-full w-full items-center justify-center'}>
 							<Plus
@@ -43,6 +47,8 @@ const Navigation = () => {
 						className={'h-full w-full justify-center'}
 						x={'lg'}
 						placement={'right'}
+						width={'full'}
+						height={'full'}
 					>
 						<Link to={'/'} className={'flex h-full w-full items-center justify-center'}>
 							<Compass

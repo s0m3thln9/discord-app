@@ -141,6 +141,8 @@ interface ITooltipProps {
 	bg?: TooltipBackgroundType
 	click?: () => void
 	animation?: boolean
+	width?: string | 'full'
+	height?: string | 'full'
 }
 
 const Tooltip: React.FC<ITooltipProps> = ({
@@ -154,6 +156,8 @@ const Tooltip: React.FC<ITooltipProps> = ({
 	bg,
 	click,
 	animation,
+	width,
+	height,
 }) => {
 	const [isClicked, setIsClicked] = useState(false)
 
@@ -189,9 +193,13 @@ const Tooltip: React.FC<ITooltipProps> = ({
 	}
 
 	return (
-		<div className={className}>
+		<div className={twMerge('relative', className)}>
 			<div
-				className={twMerge('flex border-none', className)}
+				className={cn(
+					'flex border-none',
+					width === 'full' ? 'w-full' : width ? `w-[${width}]` : '',
+					height === 'full' ? 'h-full' : height ? `h-[${height}]` : '',
+				)}
 				onMouseEnter={handleMouseEnter}
 				onMouseLeave={handleMouseLeave}
 				onClick={handleClick}

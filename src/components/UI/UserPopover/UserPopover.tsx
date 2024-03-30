@@ -133,18 +133,17 @@ const UserPopover = ({ isUserPopoverOpen, setIsUserPopoverOpen }) => {
 				<Tooltip
 					text={copyTooltip.text}
 					bg={copyTooltip.bg}
-					className={'w-fit'}
+					className={'w-fit pl-3 pt-3'}
 					click={copyUsername}
 					animation={copyTooltip.animation}
+					y={'0'}
 				>
-					<div className={'group flex w-fit cursor-pointer'}>
-						<div className={'pl-3 pt-3'}>
+					<div className={'group flex w-fit cursor-pointer items-start'}>
+						<div>
 							<h2 className={'break-words text-xl font-semibold text-white'}>{user.displayName}</h2>
 							<p className={'text-clip break-all text-white'}>{user.username}</p>
 						</div>
-						<div className={'pl-1 pt-[1.125rem]'}>
-							<CopyUsername className={'opacity-0 group-hover:opacity-100'} />
-						</div>
+						<CopyUsername className={'ml-1 mt-2 opacity-0 group-hover:opacity-100'} />
 					</div>
 				</Tooltip>
 				<Divider className={'mx-3 mt-3'} />
