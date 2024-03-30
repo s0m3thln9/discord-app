@@ -13,6 +13,7 @@ import {
 } from '../types/friends.ts'
 import { GetGroupsResponse } from '../types/groups.ts'
 import {
+	GetUserWithIdResponse,
 	RegisterCredentials,
 	UpdateDisplayNameResponse,
 	UpdatePhoneNumberResponse,
@@ -139,6 +140,12 @@ export const api = createApi({
 				method: 'GET',
 			}),
 		}),
+
+		getUserWithId: builder.mutation<GetUserWithIdResponse, number>({
+			query: userId => ({
+				url: `user/getWithId/${userId}`,
+			}),
+		}),
 	}),
 })
 
@@ -157,4 +164,5 @@ export const {
 	useUploadFileMutation,
 	useUpdatePhoneNumberMutation,
 	useGetChatsMutation,
+	useGetUserWithIdMutation,
 } = api

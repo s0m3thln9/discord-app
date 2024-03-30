@@ -53,4 +53,8 @@ export type UpdatePhoneNumberResponse =
 	| SuccessMessage<'Successfully updated phone number', { user: UserWithoutPassword }>
 	| ErrorMessage<UpdatePhoneNumberErrorMessages>
 
+export type GetUserWithIdResponse =
+	| SuccessMessage<'Successfully got user', { user: UserShowableData }>
+	| ErrorMessage<'Error getting user'>
+
 export type NoImageColors = 'orange' | 'red' | 'green' | 'blue' | 'yellow' | 'purple' | 'lime' | 'pink' | 'crimson'

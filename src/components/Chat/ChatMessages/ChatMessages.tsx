@@ -3,6 +3,12 @@ import { useAppSelector } from '../../../hooks/typedHooks.ts'
 import UserImage from '../../UI/UserImage/UserImage.tsx'
 import { ChatPrisma } from '../../../types/chat.ts'
 import { HeaderProps } from '../../Main/MainPage/Friends/FriendPage/FriendPage.tsx'
+import { useGetUserWithIdMutation } from '../../../api/api.ts'
+import { useDispatch } from 'react-redux'
+import { addUser } from '../../../store/slices/usersSlice.ts'
+import { MessageType } from '../../../types/messages.ts'
+import { UserShowableData, UserWithoutPassword } from '../../../types/user.ts'
+import { useEffect } from 'react'
 
 type Props = {
 	type: 'friend' | 'group'
@@ -13,8 +19,43 @@ type Props = {
 const ChatMessages = ({ chat, header, type }: Props) => {
 	const user = useAppSelector(state => state.auth.user)
 	const friends = useAppSelector(state => state.friends.friends)
+	const users = useAppSelector(state => state.users)
+	const dispatch = useDispatch()
+	const [getUser] = useGetUserWithIdMutation()
 
 	if (!user) return null
+
+	const getUserWithId = async (id: number) => {
+		const response = await getUser(id).unwrap()
+		if (response.success && response.payload) {
+			dispatch(addUser(response.payload))
+		}
+	}
+
+	useEffect(() => {
+		chat.messages.forEach(message => {
+			const sender = findSender(message)
+			if (!sender) {
+				const getUserHandler = async (id: number) => {
+					await getUserWithId(id)
+				}
+				getUserHandler(message.senderId).then()
+			}
+		})
+	}, [users])
+
+	const findSender = (message: MessageType): UserShowableData | UserWithoutPassword | undefined => {
+		let sender
+		if (message.senderId === user.id) {
+			sender = user
+		} else {
+			sender = friends.find(friend => friend.id === message.senderId)
+		}
+		if (!sender) {
+			sender = users.find(user => user.id === message.senderId)
+		}
+		return sender
+	}
 
 	return (
 		<div className={'flex h-[calc(100svh-10rem)] grow flex-col overflow-y-scroll pt-6'}>
@@ -35,13 +76,8 @@ const ChatMessages = ({ chat, header, type }: Props) => {
 			</p>
 			<div className={'mt-4 pb-4'}>
 				{chat.messages.map((message, i) => {
-					let sender
-					if (message.senderId === user.id) {
-						sender = user
-					} else {
-						sender = friends.find(friend => friend.id === message.senderId)
-					}
-					if (!sender) return null
+					const sender = findSender(message)
+					if (!sender) return 'No sender found...'
 					return (
 						<Message
 							key={message.id}
