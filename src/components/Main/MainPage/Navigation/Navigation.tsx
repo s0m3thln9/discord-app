@@ -9,7 +9,7 @@ const Navigation = () => {
 				<li className={'navbar-item group/tooltip group mt-0 hover:bg-[#5865f2]'}>
 					<Tooltip
 						text={'Direct Messages'}
-						className={'flex justify-center'}
+						className={'h-full w-full justify-center'}
 						placement={'right'}
 						x={'lg'}
 					>
@@ -22,7 +22,7 @@ const Navigation = () => {
 				<li className={'action-btn navbar-item group/tooltip group'}>
 					<Tooltip
 						text={'Add a Server'}
-						className={'flex justify-center'}
+						className={'h-full w-full justify-center'}
 						x={'lg'}
 						placement={'right'}
 					>
@@ -40,7 +40,7 @@ const Navigation = () => {
 				<li className={'action-btn navbar-item group/tooltip group'}>
 					<Tooltip
 						text={'Explore Discoverable Servers'}
-						className={'flex justify-center'}
+						className={'h-full w-full justify-center'}
 						x={'lg'}
 						placement={'right'}
 					>

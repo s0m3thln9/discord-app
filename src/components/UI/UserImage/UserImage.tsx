@@ -15,39 +15,62 @@ interface Props extends VariantProps<typeof userImageVariants> {
 	hover?: string
 }
 
-const UserImage = ({ image, onlineStatus, color, className, bgColor, tooltip, size, border, editable, hover }: Props) => {
+const UserImage = ({
+	image,
+	onlineStatus,
+	color,
+	className,
+	bgColor,
+	tooltip,
+	size,
+	border,
+	editable,
+	hover,
+}: Props) => {
 	return (
 		<div className={cn(userImageVariants({ size, border }), className)}>
-			{image ? (
-				<img src={image} className={cn(ImageVariants({ size }))} alt={'user image'} />
-			) : (
-				<div className={cn(UserImagePlaceholderVariants({ size }))} style={{ background: color }}>
-					<DSLogo width={size === 'sm' ? 20 : 48} height={size === 'sm' ? 20 : 48} />
-				</div>
-			)}
-			{editable && (
+			<div className={'relative'}>
+				{image ? (
+					<img src={image} className={cn(ImageVariants({ size }))} alt={'user image'} />
+				) : (
+					<div className={cn(UserImagePlaceholderVariants({ size }))} style={{ background: color }}>
+						<DSLogo width={size === 'sm' ? 20 : 48} height={size === 'sm' ? 20 : 48} />
+					</div>
+				)}
+				{editable && (
+					<div
+						className={
+							'absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center rounded-full opacity-0 backdrop-brightness-50 hover:opacity-100'
+						}
+						onClick={() => {
+							editable(true)
+						}}
+					>
+						<Edit />
+					</div>
+				)}
+				{onlineStatus !== 'group' && (
+					<StatusIndicator
+						onlineStatus={onlineStatus || 'offline'}
+						color={bgColor}
+						tooltip={tooltip}
+						size={size}
+					/>
+				)}
+			</div>
+			{hover && (
 				<div
 					className={
-						'absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center rounded-full opacity-0 backdrop-brightness-50 hover:opacity-100'
+						'shadow-avatar absolute left-0 top-0 flex h-full w-full cursor-pointer items-center justify-center rounded-full opacity-0 hover:opacity-100'
 					}
-					onClick={() => {
-						editable(true)
-					}}
 				>
-					<Edit />
-				</div>
-			)}
-			{onlineStatus !== 'group' && (
-				<StatusIndicator
-					onlineStatus={onlineStatus || 'offline'}
-					color={bgColor}
-					tooltip={tooltip}
-					size={size}
-				/>
-			)}
-			{hover && (
-				<div className={'absolute left-0 top-0 flex h-full w-full cursor-pointer items-center justify-center rounded-full opacity-0 shadow-avatar hover:opacity-100'}>
-					<p className={'text-[0.625rem] font-bold uppercase text-[#fff] overflow-ellipsis whitespace-nowrap'}>{hover}</p>
+					<p
+						className={
+							'overflow-ellipsis whitespace-nowrap text-[0.625rem] font-bold uppercase text-[#fff]'
+						}
+					>
+						{hover}
+					</p>
 				</div>
 			)}
 		</div>
