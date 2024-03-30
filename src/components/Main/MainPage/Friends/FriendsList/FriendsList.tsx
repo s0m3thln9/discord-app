@@ -22,7 +22,7 @@ const FriendsList = ({ filter }: Props) => {
 	const [search, setSearch] = useState('')
 
 	const user = useAppSelector(state => state.auth.user)
-	const friends = useAppSelector(state => state.friends.friends)
+	const friends = useAppSelector(state => state.friends)
 	const chats = useAppSelector(state => state.chats.chats)
 
 	const [getFriendRequest] = useGetFriendRequestsMutation()

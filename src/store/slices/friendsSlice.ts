@@ -1,14 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { GetFriendsResponse } from '../../types/friends.ts'
-import { UserWithoutPassword } from '../../types/user.ts'
+import { UserShowableData } from '../../types/user.ts'
 
-type InitialState = {
-	friends: UserWithoutPassword[]
-}
-
-const initialState: InitialState = {
-	friends: [],
-}
+const initialState: UserShowableData[] = []
 
 export const friendsSlice = createSlice({
 	name: 'friends',
@@ -18,7 +12,7 @@ export const friendsSlice = createSlice({
 			if (!action.payload.success) {
 				return state
 			}
-			state.friends = action.payload.payload?.friends || []
+			return action.payload.payload?.friends || []
 		},
 	},
 })

@@ -1,15 +1,15 @@
 import { MessageType } from './messages.ts'
 import { ErrorMessage, SuccessMessage } from './responseMessages.ts'
-import { UserWithoutPassword } from './user.ts'
+import { UserShowableData } from './user.ts'
 
 export type ChatPrisma = {
 	id: number
 	messages: MessageType[]
 	createdAt: string
 	updatedAt: string
-	participants: UserWithoutPassword[]
+	participants: UserShowableData[]
 }
 
 export type getChatsResponse =
-	| SuccessMessage<'Successfully got chats', { chats: (ChatPrisma & { messages: MessageType[] })[] }>
+	| SuccessMessage<'Successfully got chats', { chats: ChatPrisma[] }>
 	| ErrorMessage<'Unauthorized'>
