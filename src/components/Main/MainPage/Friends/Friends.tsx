@@ -12,8 +12,10 @@ const FriendsSection = () => {
 	const [filter, setFilter] = useState<Filter>('online')
 	return (
 		<main className={'grow'}>
-			<section className={'flex h-12 items-center justify-between border-b-[1px] border-[#202225] p-2.5 pt-2.5'}>
-				<div className={'flex items-center'}>
+			<section
+				className={'flex h-12 shrink items-center justify-between border-b-[1px] border-[#202225] p-2.5 pt-2.5'}
+			>
+				<div className={'flex shrink items-center'}>
 					<div className={'flex items-center'}>
 						<Friends fill={'#80848e'} className={'mx-2'} />
 						<h2 className={'cursor-default font-semibold text-white'}>Friends</h2>

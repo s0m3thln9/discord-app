@@ -70,7 +70,7 @@ const TabBar = ({ setFilter, filter }: Props) => {
 				<Button
 					variant={'text'}
 					className={twMerge(
-						clsx('h-full bg-[#248046] text-[#fff] hover:bg-[#248046] hover:text-[#fff]'),
+						clsx('h-full text-nowrap bg-[#248046] text-[#fff] hover:bg-[#248046] hover:text-[#fff]'),
 						filter === 'addFriends' && 'bg-content text-[#2dc770] hover:bg-content hover:text-[#2dc770]',
 					)}
 					onClick={() => {

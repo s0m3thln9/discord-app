@@ -1,19 +1,21 @@
 import { cn } from '../../../utils/cn.ts'
 import Tooltip from '../Tooltip/Tooltip.tsx'
 import { cva, VariantProps } from 'class-variance-authority'
+import { twMerge } from 'tailwind-merge'
 
 interface Props extends VariantProps<typeof statusIndicatorVariants> {
 	tooltip: boolean | undefined
+	className?: string
 }
 
-const StatusIndicator = ({ onlineStatus, color, tooltip = false, size }: Props) => {
+const StatusIndicator = ({ onlineStatus, color, tooltip = false, size, className }: Props) => {
 	return tooltip ? (
 		<Tooltip
 			text={`${onlineStatus?.length && onlineStatus[0].toUpperCase()}${onlineStatus?.substring(1)}`}
 			vertical={'top'}
 			horizontal={'center'}
-			y={'-lg'}
-			x={'tooltip'}
+			y={'-xs'}
+			className={twMerge('absolute -bottom-0.5 -right-0.5 h-4 w-4', className)}
 		>
 			<Indicator onlineStatus={onlineStatus} color={color} size={size} />
 		</Tooltip>
@@ -41,11 +43,12 @@ const statusIndicatorVariants = cva('absolute z-10 rounded-full group-hover:bord
 			content: 'border-content before:bg-content',
 			'profile-bg': 'border-profile-bg before:bg-profile-bg',
 			hover: 'border-hover before:bg-hover',
+			choosed: 'border-choosed before:bg-choosed',
 		},
 		size: {
-			md: 'h-4 w-4 border-[0.2rem] -bottom-0.5 -right-0.5',
-			lg: 'h-7 w-7 border-[0.4rem] bottom-0 right-0',
-			sm: 'h-3 w-3 border-[0.125rem] -bottom-0.5 -right-0.5',
+			md: 'h-4 w-4 border-[0.2rem]',
+			lg: 'h-7 w-7 border-[0.4rem]',
+			sm: 'h-3 w-3 border-[0.125rem]',
 		},
 	},
 	defaultVariants: {

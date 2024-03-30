@@ -71,7 +71,7 @@ const DirectMessages = () => {
 					<DirectMessage
 						chatId={directMessage.chatId}
 						directMessage={directMessage}
-						key={`${directMessage.id}${directMessage.type}`}
+						key={directMessage.chatId}
 					/>
 				))}
 			</ul>

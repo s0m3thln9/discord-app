@@ -8,13 +8,20 @@ type Props = {
 
 const ToolBar = ({ usage }: Props) => {
 	return (
-		<div className={'flex items-center'}>
+		<div
+			className={
+				'relative flex items-center before:absolute before:-left-2 before:top-0 before:h-10 before:w-2 before:bg-[linear-gradient(90deg,rgba(49,51,56,1),rgba(49,51,56,0))]'
+			}
+		>
 			{usage === 'main' ? (
-				<Tooltip text={'New Group DM'} vertical={'bottom'} horizontal={'center'} y={'xs'} className={'mr-4'}>
-					<Button variant={'icon'} className={'bg-transparent hover:bg-transparent'}>
-						<NewDMGroup fill={'#b5bac1'} className={'group-hover/iconBtn:fill-[#dbdee1]'} />
-					</Button>
-				</Tooltip>
+				<>
+					<Tooltip text={'New Group DM'} vertical={'bottom'} horizontal={'center'} y={'xs'}>
+						<Button variant={'icon'} className={'bg-transparent hover:bg-transparent'}>
+							<NewDMGroup fill={'#b5bac1'} className={'group-hover/iconBtn:fill-[#dbdee1]'} />
+						</Button>
+					</Tooltip>
+					<div className={'bg- mx-2 h-6 w-[1px] bg-[#3f4147]'}></div>
+				</>
 			) : (
 				<>
 					<Tooltip text={'Start voice call'} vertical={'bottom'} horizontal={'center'} y={'xs'}>
@@ -35,21 +42,13 @@ const ToolBar = ({ usage }: Props) => {
 				</>
 			)}
 
-			<Tooltip
-				text={'Inbox'}
-				vertical={'bottom'}
-				horizontal={'center'}
-				y={'xs'}
-				className={
-					'ml-4 flex before:absolute before:-left-[1rem] before:top-1/2 before:h-6 before:w-[1px] before:translate-y-[-50%] before:bg-[#3f4147]'
-				}
-			>
+			<Tooltip text={'Inbox'} vertical={'bottom'} horizontal={'center'} y={'xs'} className={'flex'}>
 				<Button variant={'icon'} className={'bg-transparent hover:bg-transparent'}>
 					<Inbox fill={'#b5bac1'} className={'group-hover/iconBtn:fill-[#dbdee1]'} />
 				</Button>
 			</Tooltip>
-			<Tooltip text={'Help'} vertical={'bottom'} horizontal={'center'} y={'xs'} className={'ml-4 mr-2'}>
-				<Button variant={'icon'} className={'bg-transparent hover:bg-transparent'}>
+			<Tooltip text={'Help'} vertical={'bottom'} horizontal={'center'} y={'xs'}>
+				<Button variant={'icon'} className={'bg-transparent hover:bg-transparent h-10 w-10'}>
 					<Help fill={'#b5bac1'} className={'group-hover/iconBtn:fill-[#dbdee1]'} />
 				</Button>
 			</Tooltip>

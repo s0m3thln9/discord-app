@@ -30,7 +30,7 @@ const DirectMessage = ({ directMessage, chatId }: Props) => {
 						color={directMessage.color}
 						onlineStatus={directMessage.onlineStatus}
 						tooltip={true}
-						bgColor={pathname === `http://localhost:5173/${chatId}` ? 'hover' : 'sidebar'}
+						bgColor={pathname === `http://localhost:5173/${chatId}` ? 'choosed' : 'sidebar'}
 						size={'md'}
 						isGroup={directMessage.type === 'group'}
 					/>

@@ -14,7 +14,7 @@ interface Props
 
 const Tooltip = ({ children, text, vertical, horizontal, x, y, className, width, ...props }: Props) => {
 	return (
-		<div className={twMerge('', className)} {...props}>
+		<div className={twMerge('w-fit', className)} {...props}>
 			<div className={twMerge('group/tooltip relative h-full w-full')}>
 				{children}
 				<div
@@ -55,8 +55,6 @@ const tooltipVariations = cva(
 				'-md': '-translate-x-4',
 				'-lg': '-translate-x-5',
 				'xl-': '-translate-x-6',
-
-				tooltip: 'translate-x-[-1.35rem]',
 			},
 			y: {
 				xs: 'translate-y-2',
