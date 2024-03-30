@@ -20,12 +20,16 @@ const StatusIndicator = ({ onlineStatus, color, tooltip = false, size, className
 			<Indicator onlineStatus={onlineStatus} color={color} size={size} />
 		</Tooltip>
 	) : (
-		<Indicator onlineStatus={onlineStatus} color={color} size={size} />
+		<Indicator onlineStatus={onlineStatus} color={color} size={size} className={className} />
 	)
 }
 
-const Indicator = ({ onlineStatus, color, size }: VariantProps<typeof statusIndicatorVariants>) => {
-	return <div className={cn(statusIndicatorVariants({ onlineStatus, color, size }))}></div>
+interface IndicatorProps extends VariantProps<typeof statusIndicatorVariants> {
+	className?: string
+}
+
+const Indicator = ({ onlineStatus, color, size, className }: IndicatorProps) => {
+	return <div className={cn(statusIndicatorVariants({ onlineStatus, color, size, className }))}></div>
 }
 
 const statusIndicatorVariants = cva('absolute z-10 rounded-full group-hover:border-hover group-hover:before:bg-hover', {

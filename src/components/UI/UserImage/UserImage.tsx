@@ -67,6 +67,7 @@ const UserImage = ({
 					color={bgColor}
 					tooltip={tooltip}
 					size={size}
+					className={!tooltip ? 'absolute -bottom-0.5 -right-0.5' : ''}
 				/>
 			)}
 		</div>
