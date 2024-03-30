@@ -9,24 +9,22 @@ const Navigation = () => {
 				<li className={'navbar-item group/tooltip group mt-0 hover:bg-[#5865f2]'}>
 					<Tooltip
 						text={'Direct Messages'}
-						vertical={'center'}
-						horizontal={'right'}
-						x={'xl'}
-						className={'flex h-full w-full items-center'}
+						className={'flex justify-center'}
+						placement={'right'}
+						x={'lg'}
 					>
 						<Link to={'/'} className={'flex h-full w-full items-center justify-center'}>
 							<DSLogo height={24} width={24} />
 						</Link>
 					</Tooltip>
 				</li>
-				<li className={'separator mt-2 h-1 w-8 rounded-full bg-[#2d2f32]'}></li>
+				<li className={'separator mt-2 h-0.5 w-8 rounded-full bg-[#2d2f32]'}></li>
 				<li className={'action-btn navbar-item group/tooltip group'}>
 					<Tooltip
 						text={'Add a Server'}
-						vertical={'center'}
-						horizontal={'right'}
-						x={'xl'}
-						className={'flex h-full w-full items-center'}
+						className={'flex justify-center'}
+						x={'lg'}
+						placement={'right'}
 					>
 						<Link to={'/'} className={'flex h-full w-full items-center justify-center'}>
 							<Plus
@@ -42,10 +40,9 @@ const Navigation = () => {
 				<li className={'action-btn navbar-item group/tooltip group'}>
 					<Tooltip
 						text={'Explore Discoverable Servers'}
-						vertical={'center'}
-						horizontal={'right'}
-						x={'xl'}
-						className={'flex h-full w-full items-center'}
+						className={'flex justify-center'}
+						x={'lg'}
+						placement={'right'}
 					>
 						<Link to={'/'} className={'flex h-full w-full items-center justify-center'}>
 							<Compass

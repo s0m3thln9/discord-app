@@ -2,7 +2,7 @@ import Tooltip from '../../../../UI/Tooltip/Tooltip.tsx'
 import { useAppSelector } from '../../../../../hooks/typedHooks.ts'
 import UserImage from '../../../../UI/UserImage/UserImage.tsx'
 import Button from '../../../../UI/Button/Button.tsx'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Headphones, HeadphonesOff, Mic, MicOff, Settings } from '../../../../../assets/svgs.tsx'
 import mute from '../../../../../assets/audio/mute.mp3'
 import unmute from '../../../../../assets/audio/unmute.mp3'
@@ -93,7 +93,7 @@ const UserInfo = ({ toggleSettings }: Props) => {
 				</div>
 			</div>
 			<div className={'flex'}>
-				<Tooltip text={isMicEnabled ? 'Mute' : 'Unmute'} vertical={'top'} horizontal={'center'} y={'smm'}>
+				<Tooltip text={isMicEnabled ? 'Turn Off Microphone' : 'Turn On Microphone'}>
 					<Button variant={'secondary'} className={'group'} onClick={toggleMic}>
 						{isMicEnabled ?
 							<Mic className={'fill-[#b0b6be] group-hover:fill-[#bbbfc5]'} />
@@ -102,7 +102,7 @@ const UserInfo = ({ toggleSettings }: Props) => {
 						}
 					</Button>
 				</Tooltip>
-				<Tooltip text={isHeadphonesEnabled ? 'Deafen' : 'Undeafen'} vertical={'top'} horizontal={'center'} y={'smm'}>
+				<Tooltip text={isHeadphonesEnabled ? 'Deafen' : 'Undeafen'}>
 					<Button variant={'secondary'} className={'group'} onClick={toggleHeadphones}>
 						{isHeadphonesEnabled ?
 							<Headphones className={'fill-[#b0b6be] group-hover:fill-[#bbbfc5]'} />
@@ -111,7 +111,7 @@ const UserInfo = ({ toggleSettings }: Props) => {
 						}
 					</Button>
 				</Tooltip>
-				<Tooltip text={'User Settings'} vertical={'top'} horizontal={'center'} y={'smm'}>
+				<Tooltip text={'User Settings'}>
 					<Button variant={'secondary'} className={'group'} onClick={toggleSettings}>
 						<Settings className={'fill-[#b0b6be] group-hover:fill-[#bbbfc5]'} />
 					</Button>

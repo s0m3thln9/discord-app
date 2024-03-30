@@ -10,10 +10,8 @@ const StatusIndicator = ({ onlineStatus, color, tooltip = false, size }: Props) 
 	return tooltip ? (
 		<Tooltip
 			text={`${onlineStatus?.length && onlineStatus[0].toUpperCase()}${onlineStatus?.substring(1)}`}
-			vertical={'top'}
-			horizontal={'center'}
-			y={'lgm'}
-			x={'tooltip'}
+			className={'absolute'}
+
 		>
 			<Indicator onlineStatus={onlineStatus} color={color} size={size} />
 		</Tooltip>
