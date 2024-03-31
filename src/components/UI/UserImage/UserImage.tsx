@@ -14,6 +14,7 @@ interface Props extends VariantProps<typeof userImageVariants> {
 	className?: string
 	bgColor: 'sidebar' | 'content' | 'userInfo' | 'profile-bg' | 'hover' | 'choosed' | null | undefined
 	editable?: Dispatch<SetStateAction<boolean>>
+	hover?: string
 	isGroup?: boolean
 }
 
@@ -28,6 +29,7 @@ const UserImage = ({
 	border,
 	editable,
 	isGroup,
+	hover,
 }: Props) => {
 	return (
 		<div className={cn('box-content', userImageVariants({ size, border }), className)}>
@@ -74,11 +76,11 @@ const UserImage = ({
 	)
 }
 
-const userImageVariants = cva('relative shrink-0', {
+const userImageVariants = cva('relative inline-block shrink-0', {
 	variants: {
 		size: {
 			md: 'h-8 w-8',
-			lg: 'h-20 w-20',
+			lg: 'h-[calc(5rem+0.8rem)] w-[calc(5rem+0.8rem)]',
 			sm: 'h-6 w-6',
 		},
 		border: {
@@ -87,7 +89,7 @@ const userImageVariants = cva('relative shrink-0', {
 		},
 	},
 	defaultVariants: {
-		size: 'md',
+		size: 'sm',
 		border: 'none',
 	},
 })
@@ -101,7 +103,7 @@ const ImageVariants = cva('rounded-full', {
 		},
 	},
 	defaultVariants: {
-		size: 'md',
+		size: 'sm',
 	},
 })
 
@@ -114,7 +116,7 @@ const UserImagePlaceholderVariants = cva('flex shrink-0 items-center justify-cen
 		},
 	},
 	defaultVariants: {
-		size: 'md',
+		size: 'sm',
 	},
 })
 export default UserImage

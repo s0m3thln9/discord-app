@@ -57,10 +57,8 @@ const DirectMessages = () => {
 				<div className="group flex h-4 w-4 cursor-pointer items-center justify-center">
 					<Tooltip
 						text={'Create DM'}
-						vertical={'center'}
-						horizontal={'left'}
-						x={'-sm'}
 						className={'flex items-center justify-center'}
+						placement={'left'}
 					>
 						<Plus className={'h-[0.625rem] w-[0.625rem] fill-[#949ba4] group-hover:fill-[#dbdee1]'} />
 					</Tooltip>
