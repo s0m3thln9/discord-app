@@ -6,8 +6,8 @@ import Divider from '../Divider/Divider.tsx'
 import UserProfileOption from './UserProfileOption/UserProfileOption.tsx'
 import Tooltip, { TooltipBackgroundType } from '../Tooltip/Tooltip.tsx'
 import { useEffect, useRef, useState } from 'react'
-import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types'
 import { clsx } from 'clsx'
+import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types'
 
 interface ICopyTooltip {
 	text: string
@@ -16,22 +16,21 @@ interface ICopyTooltip {
 }
 
 const copyTooltipVariations: ICopyTooltip[] = [
-	{text: 'Click to copy username', bg: 'default', animation: false},
-	{text: 'Copied!', bg: 'green', animation: false},
-	{text: 'Double Copy!', bg: 'green', animation: false},
-	{text: 'Triple Copy!', bg: 'green', animation: false},
-	{text: 'Dominating!!', bg: 'green', animation: false},
-	{text: 'Rampage!!', bg: 'green', animation: false},
-	{text: 'Mega Copy!!', bg: 'green', animation: false},
-	{text: 'Unstoppable!!', bg: 'green', animation: false},
-	{text: 'Wicked Sick!!', bg: 'green', animation: false},
-	{text: 'Monster Copy!!!', bg: 'green', animation: false},
-	{text: 'GODLIKE!!!', bg: 'red', animation: true},
-	{text: 'BEYOND GODLIKE!!!!', bg: 'red', animation: true},
+	{ text: 'Click to copy username', bg: 'default', animation: false },
+	{ text: 'Copied!', bg: 'green', animation: false },
+	{ text: 'Double Copy!', bg: 'green', animation: false },
+	{ text: 'Triple Copy!', bg: 'green', animation: false },
+	{ text: 'Dominating!!', bg: 'green', animation: false },
+	{ text: 'Rampage!!', bg: 'green', animation: false },
+	{ text: 'Mega Copy!!', bg: 'green', animation: false },
+	{ text: 'Unstoppable!!', bg: 'green', animation: false },
+	{ text: 'Wicked Sick!!', bg: 'green', animation: false },
+	{ text: 'Monster Copy!!!', bg: 'green', animation: false },
+	{ text: 'GODLIKE!!!', bg: 'red', animation: true },
+	{ text: 'BEYOND GODLIKE!!!!', bg: 'red', animation: true },
 ]
 
 const UserPopover = ({ isUserPopoverOpen, setIsUserPopoverOpen }) => {
-
 	const user = useAppSelector(state => state.auth.user)
 
 	const [countOfClicks, setCountOfClicks] = useState(1)
@@ -41,17 +40,16 @@ const UserPopover = ({ isUserPopoverOpen, setIsUserPopoverOpen }) => {
 	const returnTooltipTimeoutRef = useRef<TimeoutId>(null)
 	const closeTooltipTimeoutRef = useRef<TimeoutId>(null)
 
-	const regDate = user?.createdAt ? new Date(user.createdAt).toLocaleDateString(
-		'en-US',
-		{
-			year: 'numeric',
-			month: 'short',
-			day: 'numeric',
-		},
-	) : null
+	const regDate = user?.createdAt
+		? new Date(user.createdAt).toLocaleDateString('en-US', {
+				year: 'numeric',
+				month: 'short',
+				day: 'numeric',
+			})
+		: null
 
 	useEffect(() => {
-		const handleClickAway = (e) => {
+		const handleClickAway = e => {
 			if (!popoverRef.current.contains(e.target)) setIsUserPopoverOpen(false)
 		}
 
@@ -71,7 +69,9 @@ const UserPopover = ({ isUserPopoverOpen, setIsUserPopoverOpen }) => {
 			closeTooltipTimeoutRef.current = null
 		}
 
-		setCountOfClicks(countOfClicks < copyTooltipVariations.length - 1 ? countOfClicks + 1 : copyTooltipVariations.length - 1)
+		setCountOfClicks(
+			countOfClicks < copyTooltipVariations.length - 1 ? countOfClicks + 1 : copyTooltipVariations.length - 1,
+		)
 		setCopyTooltip(copyTooltipVariations[countOfClicks])
 
 		show()
@@ -93,16 +93,25 @@ const UserPopover = ({ isUserPopoverOpen, setIsUserPopoverOpen }) => {
 	if (!user) return null
 
 	return (
-		<div ref={popoverRef} className={clsx('w-[21.25rem] rounded-lg shadow-div bg-user-info absolute -top-2 -left-6 -translate-y-full z-10', isUserPopoverOpen ? 'opacity-100' : 'opacity-0')}>
-			<div className={'h-[3.75rem] rounded-tl-lg rounded-tr-lg bg-[#17181c] flex justify-end'}>
+		<div
+			ref={popoverRef}
+			className={clsx(
+				'absolute -left-6 -top-2 z-10 w-[21.25rem] -translate-y-full rounded-lg bg-user-info shadow-div',
+				isUserPopoverOpen ? 'opacity-100' : 'pointer-events-none opacity-0',
+			)}
+		>
+			<div className={'flex h-[3.75rem] justify-end rounded-tl-lg rounded-tr-lg bg-[#17181c]'}>
 				<div
-					className={'bg-[#101114] hover:bg-[#090a0b] rounded-full w-7 h-7 cursor-pointer p-[0.3125rem] mr-3 mt-3'}>
+					className={
+						'mr-3 mt-3 h-7 w-7 cursor-pointer rounded-full bg-[#101114] p-[0.3125rem] hover:bg-[#090a0b]'
+					}
+				>
 					<Tooltip text={'Edit Profile'}>
 						<Edit width={18} height={18} />
 					</Tooltip>
 				</div>
 			</div>
-			<div className={'flex bg-user-info justify-between'}>
+			<div className={'flex justify-between bg-user-info'}>
 				<UserImage
 					image={user.userImage || ''}
 					color={user.color}
@@ -114,37 +123,42 @@ const UserPopover = ({ isUserPopoverOpen, setIsUserPopoverOpen }) => {
 					tooltip={true}
 					hover={'View Profile'}
 				/>
-				<div className={'w-[1.875rem] h-[1.875rem] bg-[#111214] rounded-lg p-1 cursor-pointer mr-4 mt-3'}>
+				<div className={'mr-4 mt-3 h-[1.875rem] w-[1.875rem] cursor-pointer rounded-lg bg-[#111214] p-1'}>
 					<Tooltip text={'HypeSquad Balance'}>
-						<img className={'w-[1.375rem] h-[1.375rem]'} src={hypeSquadBalance} alt="" />
+						<img className={'h-[1.375rem] w-[1.375rem]'} src={hypeSquadBalance} alt="" />
 					</Tooltip>
 				</div>
 			</div>
-			<div className={'-mt-8 mx-4 mb-4 bg-[#111214] rounded-lg'}>
-				<Tooltip text={copyTooltip.text} bg={copyTooltip.bg} className={'w-fit'} click={copyUsername} animation={copyTooltip.animation}>
-					<div className={'flex w-fit cursor-pointer group'}>
-						<div className={'pl-3 pt-3'}>
+			<div className={'mx-4 -mt-8 mb-4 rounded-lg bg-[#111214]'}>
+				<Tooltip
+					text={copyTooltip.text}
+					bg={copyTooltip.bg}
+					className={'w-fit pl-3 pt-3'}
+					click={copyUsername}
+					animation={copyTooltip.animation}
+					y={'0'}
+				>
+					<div className={'group flex w-fit cursor-pointer items-start'}>
+						<div>
 							<h2 className={'break-words text-xl font-semibold text-white'}>{user.displayName}</h2>
-							<p className={'break-all text-clip text-white'}>{user.username}</p>
+							<p className={'text-clip break-all text-white'}>{user.username}</p>
 						</div>
-						<div className={'pt-[1.125rem] pl-1'}>
-							<CopyUsername className={'opacity-0 group-hover:opacity-100'}/>
-						</div>
+						<CopyUsername className={'ml-1 mt-2 opacity-0 group-hover:opacity-100'} />
 					</div>
 				</Tooltip>
-				<Divider className={'mt-3 mx-3'} />
+				<Divider className={'mx-3 mt-3'} />
 				<div className={'px-3 pt-3'}>
-					<h3 className={'uppercase text-white text-xs font-bold'}>Discord member since</h3>
-					<p className={'text-[#dbdee1] mt-1'}>{regDate}</p>
+					<h3 className={'text-xs font-bold uppercase text-white'}>Discord member since</h3>
+					<p className={'mt-1 text-[#dbdee1]'}>{regDate}</p>
 				</div>
-				<Divider className={'mt-3 mx-3'} />
-				<div className={'py-1.5 px-2'}>
+				<Divider className={'mx-3 mt-3'} />
+				<div className={'px-2 py-1.5'}>
 					<UserProfileOption type={'status'} label={'Online'} extraIcon={true} optionPopover={true} />
 					<UserProfileOption type={'customStatus'} label={'Set Custom Status'} />
-					<Divider className={'my-2 mx-1'} />
+					<Divider className={'mx-1 my-2'} />
 					<UserProfileOption type={'switch'} label={'Switch Accounts'} optionPopover={true} />
-					<Divider className={'my-2 mx-1'} />
-					<UserProfileOption type={'copy'} label={'Copy User ID'} onClick={copyUserId}/>
+					<Divider className={'mx-1 my-2'} />
+					<UserProfileOption type={'copy'} label={'Copy User ID'} onClick={copyUserId} />
 				</div>
 			</div>
 		</div>

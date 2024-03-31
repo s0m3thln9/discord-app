@@ -4,19 +4,20 @@ import { cva, VariantProps } from 'class-variance-authority'
 
 interface Props extends VariantProps<typeof statusIndicatorVariants> {
 	tooltip?: boolean
+	className?: string
 }
 
-const StatusIndicator = ({ onlineStatus, color, tooltip = false, size }: Props) => {
-	return tooltip ? (
-		<Tooltip
-			text={`${onlineStatus?.length && onlineStatus[0].toUpperCase()}${onlineStatus?.substring(1)}`}
-			className={'absolute'}
-
-		>
-			<Indicator onlineStatus={onlineStatus} color={color} size={size} />
-		</Tooltip>
-	) : (
-		<Indicator onlineStatus={onlineStatus} color={color} size={size} />
+const StatusIndicator = ({ onlineStatus, color, tooltip = false, size, className }: Props) => {
+	return (
+		<div className={cn(statusIndicatorContainerVariants({ size }), className)}>
+			{tooltip ? (
+				<Tooltip text={`${onlineStatus?.length && onlineStatus[0].toUpperCase()}${onlineStatus?.substring(1)}`}>
+					<Indicator onlineStatus={onlineStatus} color={color} size={size} />
+				</Tooltip>
+			) : (
+				<Indicator onlineStatus={onlineStatus} color={color} size={size} />
+			)}
+		</div>
 	)
 }
 
@@ -40,17 +41,24 @@ const statusIndicatorVariants = cva('absolute z-10 rounded-full group-hover:bord
 			'profile-bg': 'border-profile-bg before:bg-profile-bg',
 		},
 		size: {
-			sm: 'h-4 w-4 border-[0.2rem] -bottom-0.5 -right-0.5',
-			md: 'h-3 w-3',
-			lg: 'h-7 w-7 border-[0.4rem] bottom-0 right-0',
-			xl: 'h-10 w-10 border-[0.5rem] bottom-0 right-0',
+			sm: 'h-4 w-4 border-[0.2rem]',
+			lg: 'h-7 w-7 border-[0.4rem]',
 		},
 		hover: {
-			option: 'group-hover:bg-[#dbdee1]'
-		}
+			option: 'group-hover:bg-[#dbdee1]',
+		},
 	},
 	defaultVariants: {
 		size: 'md',
+	},
+})
+
+const statusIndicatorContainerVariants = cva('absolute', {
+	variants: {
+		size: {
+			sm: 'h-4 w-4 -bottom-0.5 -right-0.5',
+			lg: 'h-7 w-7 bottom-0 right-0',
+		},
 	},
 })
 

@@ -15,7 +15,6 @@ type Props = {
 }
 
 const UserInfo = ({ toggleSettings }: Props) => {
-
 	const user = useAppSelector(state => state.auth.user)
 
 	const [isMicEnabled, setIsMicEnabled] = useState(true)
@@ -26,18 +25,18 @@ const UserInfo = ({ toggleSettings }: Props) => {
 	const toggleMic = () => {
 		const sound = isMicEnabled ? new Audio(mute) : new Audio(unmute)
 		sound.volume = 0.2
-		setIsMicEnabled((isMicEnabledPrev) => !isMicEnabledPrev)
+		setIsMicEnabled(isMicEnabledPrev => !isMicEnabledPrev)
 		if (!isHeadphonesEnabled) {
 			toggleHeadphones()
 			return
 		}
-		sound.play().catch((error) => console.log(error))
+		sound.play().catch(error => console.log(error))
 	}
 
 	const toggleHeadphones = () => {
 		const sound = isHeadphonesEnabled ? new Audio(deafen) : new Audio(undeafen)
 		sound.volume = 0.2
-		setIsHeadphonesEnabled((isHeadphonesEnabledPrev) => !isHeadphonesEnabledPrev)
+		setIsHeadphonesEnabled(isHeadphonesEnabledPrev => !isHeadphonesEnabledPrev)
 		if (isMicDisabledWithHeadphones) {
 			setIsMicEnabled(true)
 			setIsMicDisabledWithHeadphones(false)
@@ -45,10 +44,10 @@ const UserInfo = ({ toggleSettings }: Props) => {
 			setIsMicEnabled(false)
 			setIsMicDisabledWithHeadphones(true)
 		}
-		sound.play().catch((error) => console.log(error))
+		sound.play().catch(error => console.log(error))
 	}
 
-	const handleClick = (e) => {
+	const handleClick = e => {
 		e.stopPropagation()
 		setIsUserPopoverOpen(isUserPopoverOpenPrev => !isUserPopoverOpenPrev)
 	}
@@ -64,7 +63,10 @@ const UserInfo = ({ toggleSettings }: Props) => {
 			}
 		>
 			<UserPopover isUserPopoverOpen={isUserPopoverOpen} setIsUserPopoverOpen={setIsUserPopoverOpen} />
-			<div className="group flex h-full w-[55%] items-center rounded px-0.5 py-0 hover:bg-[#35373c] cursor-pointer" onClick={handleClick}>
+			<div
+				className="group flex h-full w-[55%] cursor-pointer items-center rounded px-0.5 py-0 hover:bg-[#35373c]"
+				onClick={handleClick}
+			>
 				<UserImage
 					image={user?.userImage || ''}
 					color={user?.color}
@@ -95,20 +97,20 @@ const UserInfo = ({ toggleSettings }: Props) => {
 			<div className={'flex'}>
 				<Tooltip text={isMicEnabled ? 'Turn Off Microphone' : 'Turn On Microphone'}>
 					<Button variant={'secondary'} className={'group'} onClick={toggleMic}>
-						{isMicEnabled ?
+						{isMicEnabled ? (
 							<Mic className={'fill-[#b0b6be] group-hover:fill-[#bbbfc5]'} />
-							:
+						) : (
 							<MicOff className={'fill-[#ec3e40] group-hover:fill-[#eb3d40]'} />
-						}
+						)}
 					</Button>
 				</Tooltip>
 				<Tooltip text={isHeadphonesEnabled ? 'Deafen' : 'Undeafen'}>
 					<Button variant={'secondary'} className={'group'} onClick={toggleHeadphones}>
-						{isHeadphonesEnabled ?
+						{isHeadphonesEnabled ? (
 							<Headphones className={'fill-[#b0b6be] group-hover:fill-[#bbbfc5]'} />
-							:
+						) : (
 							<HeadphonesOff className={'fill-[#ec3e40] group-hover:fill-[#eb3d40]'} />
-						}
+						)}
 					</Button>
 				</Tooltip>
 				<Tooltip text={'User Settings'}>
@@ -119,7 +121,6 @@ const UserInfo = ({ toggleSettings }: Props) => {
 			</div>
 		</section>
 	)
-
 }
 
 export default UserInfo

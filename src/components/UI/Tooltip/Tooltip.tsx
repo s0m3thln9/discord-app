@@ -112,7 +112,22 @@ import { cva } from 'class-variance-authority'
 import { clsx } from 'clsx'
 
 type TooltipPlacementType = 'top' | 'bottom' | 'left' | 'right'
-type TooltipXYType = '-2xl' | '-xl' | '-lg' | '-md' | '-sm' | '-xs' | '-2xs' | '0' | '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+type TooltipXYType =
+	| '-2xl'
+	| '-xl'
+	| '-lg'
+	| '-md'
+	| '-sm'
+	| '-xs'
+	| '-2xs'
+	| '0'
+	| '2xs'
+	| 'xs'
+	| 'sm'
+	| 'md'
+	| 'lg'
+	| 'xl'
+	| '2xl'
 export type TooltipBackgroundType = 'default' | 'green' | 'red'
 
 interface ITooltipProps {
@@ -126,10 +141,24 @@ interface ITooltipProps {
 	bg?: TooltipBackgroundType
 	click?: () => void
 	animation?: boolean
+	width?: string | 'full'
+	height?: string | 'full'
 }
 
-const Tooltip: React.FC<ITooltipProps> = ({ children, content, text, className, placement, x, y, bg, click, animation }) => {
-
+const Tooltip: React.FC<ITooltipProps> = ({
+	children,
+	content,
+	text,
+	className,
+	placement,
+	x,
+	y,
+	bg,
+	click,
+	animation,
+	width,
+	height,
+}) => {
 	const [isClicked, setIsClicked] = useState(false)
 
 	const tooltipRef = useRef<HTMLDivElement>(null)
@@ -164,9 +193,13 @@ const Tooltip: React.FC<ITooltipProps> = ({ children, content, text, className, 
 	}
 
 	return (
-		<div className={twMerge('relative w-full h-full left-0 top-0', className)}>
+		<div className={twMerge('relative', className)}>
 			<div
-				className={'flex border-none'}
+				className={cn(
+					'flex border-none',
+					width === 'full' ? 'w-full' : width ? `w-[${width}]` : '',
+					height === 'full' ? 'h-full' : height ? `h-[${height}]` : '',
+				)}
 				onMouseEnter={handleMouseEnter}
 				onMouseLeave={handleMouseLeave}
 				onClick={handleClick}
@@ -175,7 +208,13 @@ const Tooltip: React.FC<ITooltipProps> = ({ children, content, text, className, 
 			</div>
 			<div className={cn(tooltipContainerVariations({ placement, x, y, bg }))} ref={tooltipRef}>
 				<div className={cn(tooltipArrowVariations({ placement, bg }))}>
-					{content ? content : <p className={clsx('whitespace-nowrap text-sm font-medium', animation && 'shake-text')}>{text}</p>}
+					{content ? (
+						content
+					) : (
+						<p className={clsx('whitespace-nowrap text-sm font-medium', animation && 'shake-text')}>
+							{text}
+						</p>
+					)}
 				</div>
 			</div>
 		</div>
@@ -202,11 +241,11 @@ const tooltipContainerVariations = cva(
 				'-2xs': '-translate-x-1',
 				'0': 'translate-x-0',
 				'2xs': 'translate-x-1',
-				'xs': 'translate-x-2',
-				'sm': 'translate-x-3',
-				'md': 'translate-x-4',
-				'lg': 'translate-x-5',
-				'xl': 'translate-x-6',
+				xs: 'translate-x-2',
+				sm: 'translate-x-3',
+				md: 'translate-x-4',
+				lg: 'translate-x-5',
+				xl: 'translate-x-6',
 				'2xl': 'translate-x-7',
 			},
 			y: {
@@ -219,11 +258,11 @@ const tooltipContainerVariations = cva(
 				'-2xs': '-translate-y-1',
 				'0': 'translate-y-0',
 				'2xs': 'translate-y-1',
-				'xs': 'translate-y-2',
-				'sm': 'translate-y-3',
-				'md': 'translate-y-4',
-				'lg': 'translate-y-5',
-				'xl': 'translate-y-6',
+				xs: 'translate-y-2',
+				sm: 'translate-y-3',
+				md: 'translate-y-4',
+				lg: 'translate-y-5',
+				xl: 'translate-y-6',
 				'2xl': 'translate-y-7',
 			},
 			bg: {
@@ -236,33 +275,27 @@ const tooltipContainerVariations = cva(
 			placement: 'top',
 			bg: 'default',
 		},
-
 	},
 )
 
-const tooltipArrowVariations = cva(
-	'relative px-3 py-2 before:absolute before:h-2 before:w-2 before:rotate-45',
-	{
-		variants: {
-			placement: {
-				top: 'before:left-1/2 before:translate-x-[-50%] before:bottom-0 before:translate-y-[50%]',
-				bottom: 'before:left-1/2 before:translate-x-[-50%] before:top-0 before:-translate-y-[50%]',
-				left: 'before:right-0 before:translate-x-[50%] before:top-1/2 before:-translate-y-[50%]',
-				right: 'before:left-0 before:translate-x-[-50%] before:top-1/2 before:-translate-y-[50%]',
-			},
-			bg: {
-				default: 'before:bg-[#111214]',
-				green: 'before:bg-[#23a559]',
-				red: 'before:bg-[#f23f42]',
-			},
+const tooltipArrowVariations = cva('relative px-3 py-2 before:absolute before:h-2 before:w-2 before:rotate-45', {
+	variants: {
+		placement: {
+			top: 'before:left-1/2 before:translate-x-[-50%] before:bottom-0 before:translate-y-[50%]',
+			bottom: 'before:left-1/2 before:translate-x-[-50%] before:top-0 before:-translate-y-[50%]',
+			left: 'before:right-0 before:translate-x-[50%] before:top-1/2 before:-translate-y-[50%]',
+			right: 'before:left-0 before:translate-x-[-50%] before:top-1/2 before:-translate-y-[50%]',
 		},
-		defaultVariants: {
-			placement: 'top',
-			bg: 'default',
+		bg: {
+			default: 'before:bg-[#111214]',
+			green: 'before:bg-[#23a559]',
+			red: 'before:bg-[#f23f42]',
 		},
-
 	},
-)
+	defaultVariants: {
+		placement: 'top',
+		bg: 'default',
+	},
+})
 
 export default Tooltip
-
