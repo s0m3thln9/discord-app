@@ -29,7 +29,6 @@ const UserImage = ({
 	border,
 	editable,
 	isGroup,
-	hover,
 }: Props) => {
 	return (
 		<div className={cn('box-content', userImageVariants({ size, border }), className)}>

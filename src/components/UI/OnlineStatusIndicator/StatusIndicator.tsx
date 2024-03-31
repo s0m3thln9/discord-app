@@ -1,7 +1,6 @@
 import { cn } from '../../../utils/cn.ts'
 import Tooltip from '../Tooltip/Tooltip.tsx'
 import { cva, VariantProps } from 'class-variance-authority'
-import { twMerge } from 'tailwind-merge'
 
 interface Props extends VariantProps<typeof statusIndicatorVariants> {
 	tooltip?: boolean
