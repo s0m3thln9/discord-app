@@ -34,10 +34,10 @@ const DirectMessage = ({ directMessage, chatId }: Props) => {
 						size={'md'}
 						isGroup={directMessage.type === 'group'}
 					/>
-					<div className={'ml-3 flex w-full grow flex-col justify-center leading-none'}>
+					<div className={'ml-3 flex w-[calc(100%-2.5rem)] grow flex-col justify-center leading-none'}>
 						<p
 							className={clsx(
-								'w-[calc(100%-2.5rem)] overflow-hidden text-ellipsis whitespace-nowrap font-medium group-hover:w-[8.25rem] group-hover:text-[#dbdee1]',
+								'w-full overflow-hidden text-ellipsis whitespace-nowrap font-medium group-hover:w-[8.25rem] group-hover:text-[#dbdee1]',
 								pathname === `http://localhost:5173/${chatId}` && 'text-[#dbdee1]',
 							)}
 						>
@@ -46,7 +46,7 @@ const DirectMessage = ({ directMessage, chatId }: Props) => {
 						{directMessage.members ? (
 							<p
 								className={clsx(
-									'text-xs group-hover:text-[#dbdee1]',
+									'w-full text-xs group-hover:text-[#dbdee1]',
 									pathname === `http://localhost:5173/${chatId}` && 'text-[#dbdee1]',
 								)}
 							>

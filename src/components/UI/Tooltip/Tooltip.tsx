@@ -39,19 +39,19 @@ interface ITooltipProps {
 }
 
 const Tooltip: React.FC<ITooltipProps> = ({
-											  children,
-											  content,
-											  text,
-											  className,
-											  placement,
-											  x,
-											  y,
-											  bg,
-											  click,
-											  animation,
-											  width,
-											  height,
-										  }) => {
+	children,
+	content,
+	text,
+	className,
+	placement,
+	x,
+	y,
+	bg,
+	click,
+	animation,
+	width,
+	height,
+}) => {
 	const [isClicked, setIsClicked] = useState(false)
 
 	const tooltipRef = useRef<HTMLDivElement>(null)
@@ -81,6 +81,7 @@ const Tooltip: React.FC<ITooltipProps> = ({
 		setIsClicked(true)
 		closeTooltip()
 		if (click) {
+			// @ts-ignore
 			click(showTooltip, closeTooltip)
 		}
 	}
@@ -88,11 +89,7 @@ const Tooltip: React.FC<ITooltipProps> = ({
 	return (
 		<div className={twMerge('relative', className)}>
 			<div
-				className={cn(
-					'flex border-none',
-					width === 'full' ? 'w-full' : '',
-					height === 'full' ? 'h-full' : '',
-				)}
+				className={cn('flex border-none', width === 'full' ? 'w-full' : '', height === 'full' ? 'h-full' : '')}
 				onMouseEnter={handleMouseEnter}
 				onMouseLeave={handleMouseLeave}
 				onClick={handleClick}

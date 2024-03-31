@@ -21,15 +21,17 @@ const StatusIndicator = ({ onlineStatus, color, tooltip = false, size, className
 	)
 }
 
-export const Indicator = ({ onlineStatus, color, size, hover }: VariantProps<typeof statusIndicatorVariants>) => {
-	return <div className={cn(statusIndicatorVariants({ onlineStatus, color, size, hover }))}></div>
+type IndicatorVars = VariantProps<typeof statusIndicatorVariants>
+
+export const Indicator = ({ onlineStatus, color, size }: IndicatorVars) => {
+	return <div className={cn(statusIndicatorVariants({ onlineStatus, color, size }))}></div>
 }
 
-const statusIndicatorVariants = cva('absolute z-10 rounded-full group-hover:border-hover group-hover:before:bg-hover', {
+const statusIndicatorVariants = cva('z-10 rounded-full group-hover:border-hover group-hover:before:bg-hover', {
 	variants: {
 		onlineStatus: {
 			offline:
-				'bg-[#80848e] before:w-1/2 before:h-1/2 before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-full',
+				'bg-[#80848e] before:w-1.5 before:h-1.5 before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-full',
 			online: 'bg-[#23a55a]',
 			idle: '',
 			doNotDisturb: '',
@@ -43,10 +45,9 @@ const statusIndicatorVariants = cva('absolute z-10 rounded-full group-hover:bord
 			choosed: 'border-choosed before:bg-choosed',
 		},
 		size: {
-			sm: 'h-[0.8rem] w-[0.8rem] border-[0.175rem]',
-			md: 'h-4 w-4 border-[0.2rem]',
+			sm: 'h-3 w-3 border-[0.125rem] before:w-1 before:h-1',
+			md: 'h-4 w-4 border-[0.2rem] before:w-1.5 before:h-1.5',
 			lg: 'h-7 w-7 border-[0.4rem]',
-			sm: 'h-3 w-3 border-[0.125rem]',
 		},
 	},
 	defaultVariants: {
@@ -57,7 +58,8 @@ const statusIndicatorVariants = cva('absolute z-10 rounded-full group-hover:bord
 const statusIndicatorContainerVariants = cva('absolute', {
 	variants: {
 		size: {
-			sm: 'h-4 w-4 -bottom-0.5 -right-0.5',
+			sm: 'h-3 w-3 -bottom-0.5 -right-0.5',
+			md: 'h-4 w-4 -bottom-0.5 -right-0.5',
 			lg: 'h-7 w-7 bottom-0 right-0',
 		},
 	},

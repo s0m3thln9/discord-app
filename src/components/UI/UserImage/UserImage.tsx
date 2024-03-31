@@ -75,11 +75,11 @@ const UserImage = ({
 	)
 }
 
-const userImageVariants = cva('relative inline-block shrink-0', {
+const userImageVariants = cva('relative content-box shrink-0', {
 	variants: {
 		size: {
 			md: 'h-8 w-8',
-			lg: 'h-[calc(5rem+0.8rem)] w-[calc(5rem+0.8rem)]',
+			lg: 'h-20 w-20',
 			sm: 'h-6 w-6',
 		},
 		border: {

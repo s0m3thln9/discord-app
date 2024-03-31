@@ -2,7 +2,7 @@ import Tooltip from '../../../../UI/Tooltip/Tooltip.tsx'
 import { useAppSelector } from '../../../../../hooks/typedHooks.ts'
 import UserImage from '../../../../UI/UserImage/UserImage.tsx'
 import Button from '../../../../UI/Button/Button.tsx'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Headphones, HeadphonesOff, Mic, MicOff, Settings } from '../../../../../assets/svgs.tsx'
 import mute from '../../../../../assets/audio/mute.mp3'
 import unmute from '../../../../../assets/audio/unmute.mp3'
@@ -73,7 +73,7 @@ const UserInfo = ({ toggleSettings }: Props) => {
 					color={user?.color}
 					onlineStatus={user?.onlineStatus}
 					bgColor={'userInfo'}
-					size={'sm'}
+					size={'md'}
 				/>
 				<div className="title ml-2 flex w-0 grow flex-col justify-between leading-4">
 					<p className={'w-full cursor-default overflow-hidden text-ellipsis whitespace-nowrap text-white'}>

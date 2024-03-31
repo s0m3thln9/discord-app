@@ -57,6 +57,7 @@ const FriendPage = () => {
 									onlineStatus={participant.onlineStatus}
 									bgColor={'sidebar'}
 									tooltip={true}
+									size={'sm'}
 								/>
 							</li>
 						))}
