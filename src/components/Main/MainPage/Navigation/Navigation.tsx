@@ -19,10 +19,11 @@ const Navigation = () => {
 				>
 					<Tooltip
 						text={'Direct Messages'}
-						vertical={'center'}
-						horizontal={'right'}
-						x={'xl'}
-						className={'flex h-full w-full items-center'}
+						className={'h-full w-full justify-center'}
+						placement={'right'}
+						x={'lg'}
+						width={'full'}
+						height={'full'}
 					>
 						<Link to={'/'} className={'relative flex h-full w-full items-center justify-center'}>
 							<DSLogo height={24} width={24} />
@@ -38,14 +39,15 @@ const Navigation = () => {
 						</Link>
 					</Tooltip>
 				</li>
-				<li className={'separator mt-2 h-1 w-8 rounded-full bg-[#2d2f32]'}></li>
+				<li className={'separator mt-2 h-0.5 w-8 rounded-full bg-[#2d2f32]'}></li>
 				<li className={'action-btn navbar-item group/tooltip group'}>
 					<Tooltip
 						text={'Add a Server'}
-						vertical={'center'}
-						horizontal={'right'}
-						x={'xl'}
-						className={'flex h-full w-full items-center'}
+						className={'h-full w-full justify-center'}
+						x={'lg'}
+						placement={'right'}
+						width={'full'}
+						height={'full'}
 					>
 						<Link to={'/'} className={'flex h-full w-full items-center justify-center'}>
 							<Plus
@@ -61,10 +63,11 @@ const Navigation = () => {
 				<li className={'action-btn navbar-item group/tooltip group'}>
 					<Tooltip
 						text={'Explore Discoverable Servers'}
-						vertical={'center'}
-						horizontal={'right'}
-						x={'xl'}
-						className={'flex h-full w-full items-center'}
+						className={'h-full w-full justify-center'}
+						x={'lg'}
+						placement={'right'}
+						width={'full'}
+						height={'full'}
 					>
 						<Link to={'/'} className={'flex h-full w-full items-center justify-center'}>
 							<Compass
