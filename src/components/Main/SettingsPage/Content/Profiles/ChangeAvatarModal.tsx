@@ -2,7 +2,9 @@ import Button from '../../../../UI/Button/Button.tsx'
 import { AddImage, Cross } from '../../../../../assets/svgs.tsx'
 import Modal from '../../../../UI/DiallogPopover/Modal.tsx'
 import { ChangeEvent, useRef } from 'react'
-import { useUploadFileMutation } from '../../../../../api/api.ts'
+import { useUploadUserImageMutation } from '../../../../../api/api.ts'
+import { updateUserImage } from '../../../../../store/slices/authUserSlice.ts'
+import { useDispatch } from 'react-redux'
 
 type Props = {
 	changeAvatar: boolean
@@ -11,7 +13,8 @@ type Props = {
 
 const ChangeAvatarModal = ({ changeAvatar, setChangeAvatar }: Props) => {
 	const inputRef = useRef<HTMLInputElement>(null)
-	const [uploadFile] = useUploadFileMutation()
+	const [uploadFile] = useUploadUserImageMutation()
+	const dispatch = useDispatch()
 	const handleClose = () => {
 		setChangeAvatar(false)
 	}
@@ -22,6 +25,9 @@ const ChangeAvatarModal = ({ changeAvatar, setChangeAvatar }: Props) => {
 		let file = e.target.files?.[0]
 		if (!file) return
 		const response = await uploadFile(file).unwrap()
+		if (response.success) {
+			dispatch(updateUserImage(response.payload.user.userImage as string))
+		}
 
 		console.log('response', response)
 	}

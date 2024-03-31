@@ -27,7 +27,6 @@ const ChatMessages = ({ chat, header, type, user }: Props) => {
 	const getUserWithId = async (id: number) => {
 		const response = await getUser(id).unwrap()
 		if (response.success && response.payload) {
-			console.log(response)
 			requestedUsers.push(id)
 			dispatch(addUser(response.payload))
 		}
@@ -38,7 +37,6 @@ const ChatMessages = ({ chat, header, type, user }: Props) => {
 			for (const message of chat.messages) {
 				const sender = findSender(message)
 				if (!sender) {
-					console.log(message, sender)
 					await getUserWithId(message.senderId)
 				}
 			}

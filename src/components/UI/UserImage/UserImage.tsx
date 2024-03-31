@@ -7,7 +7,7 @@ import { NoImageColors } from '../../../types/user.ts'
 import getColor from '../../../utils/getColor.ts'
 
 interface Props extends VariantProps<typeof userImageVariants> {
-	image: string
+	image: string | null
 	onlineStatus: 'offline' | 'online' | 'idle' | 'doNotDisturb' | false
 	color: NoImageColors
 	tooltip?: boolean

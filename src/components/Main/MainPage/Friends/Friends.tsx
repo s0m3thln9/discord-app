@@ -13,12 +13,18 @@ const FriendsSection = () => {
 	return (
 		<main className={'grow'}>
 			<section
-				className={'flex h-12 shrink items-center justify-between border-b-[1px] border-[#202225] p-2.5 pt-2.5'}
+				className={'flex h-12 w-full items-center justify-between border-b-[1px] border-[#202225] p-2.5 pt-2.5'}
 			>
-				<div className={'flex shrink items-center'}>
-					<div className={'flex items-center'}>
+				<div className={'flex grow items-center overflow-x-hidden'}>
+					<div className={'flex flex-shrink-0 items-center'}>
 						<Friends fill={'#80848e'} className={'mx-2'} />
-						<h2 className={'cursor-default font-semibold text-white'}>Friends</h2>
+						<h2
+							className={
+								'w-fit shrink cursor-default overflow-hidden text-ellipsis font-semibold text-white'
+							}
+						>
+							Friends
+						</h2>
 					</div>
 					<TabBar setFilter={setFilter} filter={filter} />
 				</div>

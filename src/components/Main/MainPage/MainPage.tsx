@@ -8,7 +8,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 const MainPage = ({ toggleSettings, className }: Props) => {
 	return (
-		<div className={`absolute flex w-full transition duration-300 ${className}`}>
+		<div className={`absolute flex w-[100vw] transition duration-300 ${className}`}>
 			<Navigation />
 			<Content toggleSettings={toggleSettings} />
 		</div>

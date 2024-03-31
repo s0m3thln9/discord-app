@@ -3,6 +3,7 @@ import Chat from '../../../../Chat/Chat.tsx'
 import { useAppSelector } from '../../../../../hooks/typedHooks.ts'
 import { useParams } from 'react-router-dom'
 import { NoImageColors } from '../../../../../types/user.ts'
+import UserImage from '../../../../UI/UserImage/UserImage.tsx'
 
 export type HeaderProps = {
 	image: string
@@ -43,7 +44,25 @@ const FriendPage = () => {
 	return (
 		<div className={'flex grow flex-col'}>
 			<Header header={header} />
-			<Chat type={type} chat={chat} header={header} user={user} />
+			<div className={'flex grow'}>
+				<Chat type={type} chat={chat} header={header} user={user} />
+				<div className={'w-[15rem] bg-sidebar pl-4 pr-2 pt-6 text-xs font-semibold uppercase text-[#949ba4]'}>
+					<h4>members—{chat.participants.length}</h4>
+					<ul>
+						{chat.participants.map(participant => (
+							<li key={participant.id}>
+								<UserImage
+									image={participant.userImage}
+									color={participant.color}
+									onlineStatus={participant.onlineStatus}
+									bgColor={'sidebar'}
+									tooltip={true}
+								/>
+							</li>
+						))}
+					</ul>
+				</div>
+			</div>
 		</div>
 	)
 }

@@ -10,7 +10,7 @@ const ToolBar = ({ usage }: Props) => {
 	return (
 		<div
 			className={
-				'relative flex items-center before:absolute before:-left-2 before:top-0 before:h-10 before:w-2 before:bg-[linear-gradient(90deg,rgba(49,51,56,1),rgba(49,51,56,0))]'
+				'relative flex items-center before:absolute before:-left-2 before:top-0 before:h-10 before:w-2 before:bg-[linear-gradient(90deg,rgba(49,51,56,0),rgba(49,51,56,1))]'
 			}
 		>
 			{usage === 'main' ? (

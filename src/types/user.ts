@@ -41,6 +41,8 @@ type UpdateUsernameErrorMessages = 'Unauthorized' | 'Wrong password' | 'Password
 
 type UpdatePhoneNumberErrorMessages = 'Unauthorized' | 'Error updating phone number'
 
+type UploadUserImageErrorMessages = 'Unauthorized' | 'Error parsing image' | 'Failed to update user'
+
 export type UpdateDisplayNameResponse =
 	| SuccessMessage<'DisplayName successfully updated', { user: UserWithoutPassword }>
 	| ErrorMessage<UpdateUserErrorMessages>
@@ -58,3 +60,7 @@ export type GetUserWithIdResponse =
 	| ErrorMessage<'Error getting user'>
 
 export type NoImageColors = 'orange' | 'red' | 'green' | 'blue' | 'yellow' | 'purple' | 'lime' | 'pink' | 'crimson'
+
+export type UploadUserImageResponse =
+	| SuccessMessage<'Successfully uploaded', { user: UserWithoutPassword }>
+	| ErrorMessage<UploadUserImageErrorMessages>

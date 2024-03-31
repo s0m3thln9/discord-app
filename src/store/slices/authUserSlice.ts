@@ -56,9 +56,15 @@ export const authUserSlice = createSlice({
 				phoneCode: action.payload.code,
 			}
 		},
+
+		updateUserImage: (state, action: PayloadAction<string>) => {
+			if (!state.user) return state
+			state.user.userImage = action.payload
+		},
 	},
 })
 
-export const { authUser, logOut, updateUsernameD, updateDisplayNameD, updateUserPhoneNumber } = authUserSlice.actions
+export const { authUser, logOut, updateUsernameD, updateDisplayNameD, updateUserPhoneNumber, updateUserImage } =
+	authUserSlice.actions
 
 export default authUserSlice.reducer

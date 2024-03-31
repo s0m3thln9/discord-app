@@ -18,6 +18,7 @@ import {
 	UpdateDisplayNameResponse,
 	UpdatePhoneNumberResponse,
 	UpdateUsernameResponse,
+	UploadUserImageResponse,
 } from '../types/user.ts'
 import { CountryForSelect } from '../components/Main/SettingsPage/Content/MyAccount/countriesForSelect.ts'
 import { getChatsResponse } from '../types/chat.ts'
@@ -111,7 +112,7 @@ export const api = createApi({
 			}),
 		}),
 
-		uploadFile: builder.mutation({
+		uploadUserImage: builder.mutation<UploadUserImageResponse, File>({
 			query: (file: File) => {
 				const formData = new FormData()
 				formData.append('file', file)
@@ -161,7 +162,7 @@ export const {
 	useSendFriendRequestMutation,
 	useAcceptFriendRequestMutation,
 	useDeleteFriendRequestMutation,
-	useUploadFileMutation,
+	useUploadUserImageMutation,
 	useUpdatePhoneNumberMutation,
 	useGetChatsMutation,
 	useGetUserWithIdMutation,

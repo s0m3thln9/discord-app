@@ -1,5 +1,5 @@
 import Tooltip from '../../../../UI/Tooltip/Tooltip.tsx'
-import DirectMessage from './Channel/DirectMessage.tsx'
+import DirectMessage from './DirectMessage/DirectMessage.tsx'
 import { useAppDispatch, useAppSelector } from '../../../../../hooks/typedHooks.ts'
 import { useGetChatsMutation, useGetFriendsMutation, useGetGroupsMutation } from '../../../../../api/api.ts'
 import {

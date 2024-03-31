@@ -19,7 +19,9 @@ const Header = ({ header }: Props) => {
 						size={'sm'}
 						isGroup={!header.onlineStatus}
 					/>
-					<p className={'ml-3 font-semibold text-white'}>{header.displayName}</p>
+					<div className={'shrink'}>
+						<p className={'ml-3 text-nowrap font-semibold text-white'}>{header.displayName}</p>
+					</div>
 				</div>
 			</div>
 			<ToolBar usage={'friend'} />
