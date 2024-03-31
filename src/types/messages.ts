@@ -2,7 +2,6 @@ import { ErrorMessage, SuccessMessage } from './responseMessages'
 
 export type NewMessageBody = {
 	text: string
-	username: string
 	chatId: number
 	jwt: string
 }

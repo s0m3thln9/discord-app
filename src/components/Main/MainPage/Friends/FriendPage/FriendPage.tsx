@@ -43,7 +43,7 @@ const FriendPage = () => {
 	return (
 		<div className={'flex grow flex-col'}>
 			<Header header={header} />
-			<Chat type={type} chat={chat} header={header} />
+			<Chat type={type} chat={chat} header={header} user={user} />
 		</div>
 	)
 }

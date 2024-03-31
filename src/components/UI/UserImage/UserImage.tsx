@@ -30,7 +30,7 @@ const UserImage = ({
 	isGroup,
 }: Props) => {
 	return (
-		<div className={cn(userImageVariants({ size, border }), className)}>
+		<div className={cn('box-content', userImageVariants({ size, border }), className)}>
 			{image ? (
 				<img src={image} className={cn(ImageVariants({ size }))} alt={'user image'} />
 			) : (
@@ -74,11 +74,11 @@ const UserImage = ({
 	)
 }
 
-const userImageVariants = cva('relative inline-block shrink-0', {
+const userImageVariants = cva('relative shrink-0', {
 	variants: {
 		size: {
 			md: 'h-8 w-8',
-			lg: 'h-[calc(5rem+0.8rem)] w-[calc(5rem+0.8rem)]',
+			lg: 'h-20 w-20',
 			sm: 'h-6 w-6',
 		},
 		border: {
@@ -96,7 +96,7 @@ const ImageVariants = cva('rounded-full', {
 	variants: {
 		size: {
 			md: 'h-8 w-8',
-			lg: 'h-[5rem] w-[5rem]',
+			lg: 'h-20 w-20',
 			sm: 'h-6 w-6',
 		},
 	},
@@ -109,7 +109,7 @@ const UserImagePlaceholderVariants = cva('flex shrink-0 items-center justify-cen
 	variants: {
 		size: {
 			md: 'h-8 w-8',
-			lg: 'h-[5rem] w-[5rem]',
+			lg: 'h-20 w-20',
 			sm: 'h-6 w-6',
 		},
 	},

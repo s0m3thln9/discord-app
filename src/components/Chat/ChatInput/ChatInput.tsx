@@ -24,7 +24,7 @@ const ChatInput = ({ handleSend, displayName }: Props) => {
 		return () => {
 			input?.removeEventListener('keydown', handleKeyDown)
 		}
-	}, [newMessageText])
+	}, [newMessageText, handleSend])
 
 	return (
 		<div id={'newMessageInput'} className={'mx-4 mb-4 flex items-center rounded-lg bg-hover'}>

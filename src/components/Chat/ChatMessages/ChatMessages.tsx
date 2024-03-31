@@ -14,16 +14,14 @@ type Props = {
 	type: 'friend' | 'group'
 	header: HeaderProps
 	chat: ChatPrisma
+	user: UserWithoutPassword
 }
 
-const ChatMessages = ({ chat, header, type }: Props) => {
-	const user = useAppSelector(state => state.auth.user)
+const ChatMessages = ({ chat, header, type, user }: Props) => {
 	const friends = useAppSelector(state => state.friends)
 	const users = useAppSelector(state => state.users)
 	const dispatch = useDispatch()
 	const [getUser] = useGetUserWithIdMutation()
-
-	if (!user) return null
 
 	let requestedUsers: number[] = []
 	const getUserWithId = async (id: number) => {
@@ -47,16 +45,14 @@ const ChatMessages = ({ chat, header, type }: Props) => {
 		}
 
 		fetchUsers().then()
-	}, [])
+	}, [chat.messages])
 
 	const findSender = useCallback(
 		(message: MessageType): UserShowableData | UserWithoutPassword | 'requested' | undefined => {
 			if (message.senderId === user.id) {
 				return user
 			}
-			let sender: UserWithoutPassword | number | undefined = friends.find(
-				friend => friend.id === message.senderId,
-			)
+			let sender: UserShowableData | number | undefined = friends.find(friend => friend.id === message.senderId)
 			if (sender) {
 				return sender
 			}
@@ -70,7 +66,7 @@ const ChatMessages = ({ chat, header, type }: Props) => {
 	)
 
 	return (
-		<div className={'flex h-[calc(100svh-10rem)] grow flex-col overflow-y-scroll pt-6'}>
+		<div className={'flex h-[calc(100svh-10rem)] grow flex-col overflow-y-scroll pt-4'}>
 			<div className={'ml-4'}>
 				<UserImage
 					image={header.image}
@@ -80,13 +76,13 @@ const ChatMessages = ({ chat, header, type }: Props) => {
 					size={'lg'}
 					isGroup={type === 'group'}
 				/>
-				<h2 className={'text-3xl font-bold text-white'}>{header.displayName}</h2>
-				<h2 className={'text-lg font-bold text-white'}>{header.username}</h2>
+				<h2 className={'my-2 text-[2rem] font-bold leading-10 text-white'}>{header.displayName}</h2>
+				<h2 className={'text-2xl font-medium leading-[1.875rem] text-white'}>{header.username}</h2>
 			</div>
-			<p className={'ml-4 mt-2 text-sm'}>
+			<p className={'ml-4 mt-5 text-[1rem] leading-5'}>
 				This is the beginning of your direct message history with <strong>{header.displayName}</strong>
 			</p>
-			<div className={'mt-4 pb-4'}>
+			<div className={'pb-4'}>
 				{chat.messages.map((message, i) => {
 					const sender = findSender(message)
 					if (!sender || sender === 'requested') return 'No sender found...'

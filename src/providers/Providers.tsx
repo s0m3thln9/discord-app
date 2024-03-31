@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { store } from '../store/store.ts'
 import { BrowserRouter } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
+import SocketProvider from './socketProvider/SocketProvider.tsx'
 
 function Providers({ children }: { children: ReactNode }) {
 	const methods = useForm()
@@ -12,7 +13,9 @@ function Providers({ children }: { children: ReactNode }) {
 		<BrowserRouter>
 			<Provider store={store}>
 				<AuthProvider>
-					<FormProvider {...methods}>{children}</FormProvider>
+					<SocketProvider>
+						<FormProvider {...methods}>{children}</FormProvider>
+					</SocketProvider>
 				</AuthProvider>
 			</Provider>
 		</BrowserRouter>

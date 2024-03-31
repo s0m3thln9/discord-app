@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Group } from '../../types/groups.ts'
-import { NoImageColors, UserWithoutPassword } from '../../types/user.ts'
+import { NoImageColors, UserShowableData, UserWithoutPassword } from '../../types/user.ts'
 
 export type DirectMessageChannel = {
 	id: number
@@ -40,7 +40,7 @@ export const directMessagesSlice = createSlice({
 				})
 			}
 		},
-		addFriendsToDirectMessages: (state, action: PayloadAction<(UserWithoutPassword & { chatId: number })[]>) => {
+		addFriendsToDirectMessages: (state, action: PayloadAction<(UserShowableData & { chatId: number })[]>) => {
 			const friends = action.payload
 			friends.forEach(friend => {
 				if (!state.directMessages.find(channel => channel.id === friend.id && channel.type === 'user')) {

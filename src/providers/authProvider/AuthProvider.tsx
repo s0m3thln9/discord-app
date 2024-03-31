@@ -9,7 +9,7 @@ import { authUser, logOut } from '../../store/slices/authUserSlice.ts'
 import { useLoginUserWithJwtQuery } from '../../api/api.ts'
 import { clearDirectMessages } from '../../store/slices/directMessagesSlice.ts'
 
-export let AuthContext: Context<TAuthProvider>
+let AuthContext: Context<TAuthProvider>
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const navigate = useNavigate()

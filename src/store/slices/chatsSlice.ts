@@ -22,14 +22,14 @@ export const chatsSlice = createSlice({
 			})
 		},
 
-		addMessage: (state, action: PayloadAction<{ chatId: number; response: SendMessageResponse }>) => {
+		addMessage: (state, action: PayloadAction<{ response: SendMessageResponse }>) => {
+			if (!action.payload.response.success) return state
 			const response = action.payload.response
-			const chat = state.chats.find(chat => chat.id === action.payload.chatId)
-			if (!chat || !response.success || !response.payload) return state
-			const message = chat.messages.find(message => message.id === response.payload?.message.id)
-			if (!message) {
-				chat.messages.push(response.payload.message)
-			}
+			const chat = state.chats.find(chat => chat.id === response.payload.message.chatId)
+			if (!chat) return state
+			const message = chat.messages.find(message => message.id === response.payload.message.id)
+			if (message) return state
+			chat.messages.push(response.payload.message)
 		},
 	},
 })

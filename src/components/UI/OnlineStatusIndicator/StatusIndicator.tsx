@@ -36,7 +36,7 @@ const statusIndicatorVariants = cva('absolute z-10 rounded-full group-hover:bord
 	variants: {
 		onlineStatus: {
 			offline:
-				'bg-[#80848e] before:w-[0.325rem] before:h-[0.325rem] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-full',
+				'bg-[#80848e] before:w-1/2 before:h-1/2 before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-full',
 			online: 'bg-[#23a55a]',
 			idle: '',
 			doNotDisturb: '',
@@ -50,9 +50,9 @@ const statusIndicatorVariants = cva('absolute z-10 rounded-full group-hover:bord
 			choosed: 'border-choosed before:bg-choosed',
 		},
 		size: {
+			sm: 'h-[0.8rem] w-[0.8rem] border-[0.175rem]',
 			md: 'h-4 w-4 border-[0.2rem]',
 			lg: 'h-7 w-7 border-[0.4rem]',
-			sm: 'h-3 w-3 border-[0.125rem]',
 		},
 	},
 	defaultVariants: {

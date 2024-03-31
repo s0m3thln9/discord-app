@@ -35,7 +35,7 @@ const Message = ({ message, previous, senderImage, senderColor, senderDisplayNam
 				/>
 			)}
 
-			<div className={clsx('', previous?.senderId !== message.senderId ? 'ml-4' : 'grid grid-cols-[4rem,1fr]')}>
+			<div className={previous?.senderId !== message.senderId ? 'ml-4' : 'grid grid-cols-[4rem,1fr]'}>
 				{previous?.senderId === message.senderId && (
 					<span
 						className={

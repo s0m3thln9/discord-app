@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../../../../../hooks/typedHooks.ts'
 import FriendItem from './FriendItem/FriendItem.tsx'
 import { Filter } from '../Friends.tsx'
-import { UserWithoutPassword } from '../../../../../types/user.ts'
+import { UserShowableData } from '../../../../../types/user.ts'
 import { useGetFriendRequestsMutation } from '../../../../../api/api.ts'
 import { useEffect, useState } from 'react'
 import { addFriendRequest, updateFriendRequestNotifications } from '../../../../../store/slices/friendRequestsSlice.ts'
@@ -39,7 +39,7 @@ const FriendsList = ({ filter }: Props) => {
 
 	const friendRequestsWithUsers = useAppSelector(state => state.friendRequests.friendRequestsWithUsers)
 
-	let filteredFriends: (UserWithoutPassword & { chatId: number })[] = []
+	let filteredFriends: (UserShowableData & { chatId: number })[] = []
 	switch (filter) {
 		case 'all':
 			friends.forEach(friend => {
