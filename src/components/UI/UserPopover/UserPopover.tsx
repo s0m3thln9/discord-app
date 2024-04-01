@@ -8,6 +8,7 @@ import Tooltip, { TooltipBackgroundType } from '../Tooltip/Tooltip.tsx'
 import { useEffect, useRef, useState } from 'react'
 import { clsx } from 'clsx'
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types'
+import PopUpMenu from '../PopUpMenu/PopUpMenu.tsx'
 
 interface ICopyTooltip {
 	text: string
@@ -124,7 +125,7 @@ const UserPopover = ({ isUserPopoverOpen, setIsUserPopoverOpen }) => {
 					hover={'View Profile'}
 				/>
 				<div className={'mr-4 mt-3 h-[1.875rem] w-[1.875rem] cursor-pointer rounded-lg bg-[#111214] p-1'}>
-					<Tooltip text={'HypeSquad Balance'}>
+					<Tooltip text={'HypeSquad Balance'} y={'-sm'}>
 						<img className={'h-[1.375rem] w-[1.375rem]'} src={hypeSquadBalance} alt="" />
 					</Tooltip>
 				</div>
@@ -153,10 +154,10 @@ const UserPopover = ({ isUserPopoverOpen, setIsUserPopoverOpen }) => {
 				</div>
 				<Divider className={'mx-3 mt-3'} />
 				<div className={'px-2 py-1.5'}>
-					<UserProfileOption type={'status'} label={'Online'} extraIcon={true} optionPopover={true} />
+					<UserProfileOption type={'status'} label={'Online'} extraIcon={true} popUpMenu={'status'} />
 					<UserProfileOption type={'customStatus'} label={'Set Custom Status'} />
 					<Divider className={'mx-1 my-2'} />
-					<UserProfileOption type={'switch'} label={'Switch Accounts'} optionPopover={true} />
+					<UserProfileOption type={'switch'} label={'Switch Accounts'} popUpMenu={''} />
 					<Divider className={'mx-1 my-2'} />
 					<UserProfileOption type={'copy'} label={'Copy User ID'} onClick={copyUserId} />
 				</div>
