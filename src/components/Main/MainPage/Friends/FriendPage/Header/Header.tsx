@@ -4,11 +4,12 @@ import { HeaderProps } from '../FriendPage.tsx'
 
 type Props = {
 	header: HeaderProps
-	toggleMembersShow: () => void
-	isShowMembers: boolean
+	toggleShowSideMenu: () => void
+	isShowSideMenu: boolean
+	type: 'group' | 'friend'
 }
 
-const Header = ({ header, toggleMembersShow, isShowMembers }: Props) => {
+const Header = ({ header, toggleShowSideMenu, isShowSideMenu, type }: Props) => {
 	return (
 		<section className={'flex h-12 items-center justify-between border-b-[1px] border-[#202225] p-2.5 pl-4 pt-2.5'}>
 			<div className={'flex items-center'}>
@@ -26,7 +27,7 @@ const Header = ({ header, toggleMembersShow, isShowMembers }: Props) => {
 					</div>
 				</div>
 			</div>
-			<ToolBar usage={'friend'} toggleMembersShow={toggleMembersShow} isShowMembers={isShowMembers} />
+			<ToolBar usage={type} toggleShowSideMenu={toggleShowSideMenu} isShowSideMenu={isShowSideMenu} />
 		</section>
 	)
 }

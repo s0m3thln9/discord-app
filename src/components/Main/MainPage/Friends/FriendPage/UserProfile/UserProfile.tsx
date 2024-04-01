@@ -29,7 +29,7 @@ const UserProfile = ({ friend }: Props) => {
 					className={'ml-4 translate-y-[4rem]'}
 				/>
 			</div>
-			<div className={'m-4 mt-[3.375rem] rounded bg-[#111214] p-3'}>
+			<div className={'m-4 mt-[3.375rem] rounded-lg bg-[#111214] p-3'}>
 				<div>
 					<p className={'text-xl font-semibold leading-6 text-white'}>{friend.displayName}</p>
 					<p className={'text-sm font-medium leading-[1.125rem] text-white'}>{friend.username}</p>

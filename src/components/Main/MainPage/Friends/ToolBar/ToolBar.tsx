@@ -1,14 +1,23 @@
 import Tooltip from '../../../../UI/Tooltip/Tooltip.tsx'
 import Button from '../../../../UI/Button/Button.tsx'
-import { Camera, Help, Inbox, MemberListIcon, NewDMGroup, Pin, RingingPhone } from '../../../../../assets/svgs.tsx'
+import {
+	Camera,
+	Help,
+	Inbox,
+	MemberListIcon,
+	NewDMGroup,
+	Pin,
+	RingingPhone,
+	UserProfileIcon,
+} from '../../../../../assets/svgs.tsx'
 
 type Props = {
-	usage: 'main' | 'friend'
-	toggleMembersShow: () => void
-	isShowMembers: boolean
+	usage: 'main' | 'friend' | 'group'
+	toggleShowSideMenu: () => void
+	isShowSideMenu: boolean
 }
 
-const ToolBar = ({ usage, toggleMembersShow, isShowMembers }: Props) => {
+const ToolBar = ({ usage, toggleShowSideMenu, isShowSideMenu }: Props) => {
 	return (
 		<div
 			className={
@@ -42,7 +51,15 @@ const ToolBar = ({ usage, toggleMembersShow, isShowMembers }: Props) => {
 						</Button>
 					</Tooltip>
 					<Tooltip
-						text={isShowMembers ? 'Hide Member List' : 'Show Member List'}
+						text={
+							isShowSideMenu
+								? usage === 'group'
+									? 'Hide Member List'
+									: 'Hide User Profile'
+								: usage === 'group'
+									? 'Show Member List'
+									: 'Show User Profile'
+						}
 						placement={'bottom'}
 						y={'0'}
 						shouldTooltipClose={false}
@@ -50,12 +67,19 @@ const ToolBar = ({ usage, toggleMembersShow, isShowMembers }: Props) => {
 						<Button
 							variant={'icon'}
 							className={'bg-transparent hover:bg-transparent'}
-							onClick={toggleMembersShow}
+							onClick={toggleShowSideMenu}
 						>
-							<MemberListIcon
-								fill={isShowMembers ? 'white' : '#b5bac1'}
-								className={'group-hover/iconBtn:fill-[#dbdee1]'}
-							/>
+							{usage === 'group' ? (
+								<MemberListIcon
+									fill={isShowSideMenu ? 'white' : '#b5bac1'}
+									className={'group-hover/iconBtn:fill-[#dbdee1]'}
+								/>
+							) : (
+								<UserProfileIcon
+									fill={isShowSideMenu ? 'white' : '#b5bac1'}
+									className={'group-hover/iconBtn:fill-[#dbdee1]'}
+								/>
+							)}
 						</Button>
 					</Tooltip>
 				</>

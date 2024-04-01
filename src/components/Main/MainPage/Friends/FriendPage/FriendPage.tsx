@@ -22,13 +22,13 @@ const FriendPage = () => {
 	const user = useAppSelector(state => state.auth.user)
 	const chat = chats.find(f => f.id === +(id || '0'))
 	const type = group ? 'group' : 'friend'
-	const [isShowMembers, setIsShowMembers] = useState(true)
+	const [isShowSideMenu, setIsShowSideMenu] = useState(true)
 	if (!chat || !user) return null
 
 	const friend = chat.participants.find(participant => participant.id !== user.id)
 
-	const toggleMembersShow = () => {
-		setIsShowMembers(prev => !prev)
+	const toggleShowSideMenu = () => {
+		setIsShowSideMenu(prev => !prev)
 	}
 
 	const header: HeaderProps =
@@ -50,14 +50,20 @@ const FriendPage = () => {
 
 	return (
 		<div className={'flex grow flex-col'}>
-			<Header header={header} toggleMembersShow={toggleMembersShow} isShowMembers={isShowMembers} />
+			<Header
+				header={header}
+				toggleShowSideMenu={toggleShowSideMenu}
+				isShowSideMenu={isShowSideMenu}
+				type={type}
+			/>
 			<div className={'flex grow'}>
 				<Chat type={type} chat={chat} header={header} user={user} />
-				{isShowMembers && type === 'group' ? (
-					<MemberList participants={chat.participants} ownerId={group?.ownerId || 0} />
-				) : (
-					<UserProfile friend={friend} />
-				)}
+				{isShowSideMenu &&
+					(type === 'group' ? (
+						<MemberList participants={chat.participants} ownerId={group?.ownerId || 0} />
+					) : (
+						<UserProfile friend={friend} />
+					))}
 			</div>
 		</div>
 	)
