@@ -85,6 +85,7 @@ const userImageVariants = cva('relative content-box shrink-0', {
 		border: {
 			none: '',
 			profile: 'inline-table border-[0.4rem] rounded-full border-profile-bg',
+			'user-info': 'inline-table border-[0.4rem] rounded-full border-[#232428]',
 		},
 	},
 	defaultVariants: {

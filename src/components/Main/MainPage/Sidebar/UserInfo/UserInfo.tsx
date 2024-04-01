@@ -2,7 +2,7 @@ import Tooltip from '../../../../UI/Tooltip/Tooltip.tsx'
 import { useAppSelector } from '../../../../../hooks/typedHooks.ts'
 import UserImage from '../../../../UI/UserImage/UserImage.tsx'
 import Button from '../../../../UI/Button/Button.tsx'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Headphones, HeadphonesOff, Mic, MicOff, Settings } from '../../../../../assets/svgs.tsx'
 import mute from '../../../../../assets/audio/mute.mp3'
 import unmute from '../../../../../assets/audio/unmute.mp3'
@@ -47,10 +47,9 @@ const UserInfo = ({ toggleSettings }: Props) => {
 		sound.play().catch(error => console.log(error))
 	}
 
-	const handleClick = e => {
+	const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		e.stopPropagation()
 		setIsUserPopoverOpen(isUserPopoverOpenPrev => !isUserPopoverOpenPrev)
-		sound.play().catch(error => console.log(error))
 	}
 
 	if (!user) {
