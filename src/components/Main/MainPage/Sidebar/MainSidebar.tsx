@@ -1,4 +1,4 @@
-import UserInfo from './UserInfo/UserInfo.tsx'
+import UserPanel from './UserPanel/UserPanel.tsx'
 import FindDialog from './FindDialog/FindDialog.tsx'
 import DirectMessages from './DirectMessages/DirectMessages.tsx'
 import HomeNavigation from './HomeNavigation/HomeNavigation.tsx'
@@ -15,7 +15,7 @@ const MainSidebar = ({ toggleSettings }: Props) => {
 				<HomeNavigation />
 				<DirectMessages />
 			</div>
-			<UserInfo toggleSettings={toggleSettings} />
+			<UserPanel toggleSettings={toggleSettings} />
 		</aside>
 	)
 }

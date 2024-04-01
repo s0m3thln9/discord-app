@@ -14,7 +14,7 @@ type Props = {
 	toggleSettings: () => void
 }
 
-const UserInfo = ({ toggleSettings }: Props) => {
+const UserPanel = ({ toggleSettings }: Props) => {
 	const user = useAppSelector(state => state.auth.user)
 
 	const [isMicEnabled, setIsMicEnabled] = useState(true)
@@ -125,4 +125,4 @@ const UserInfo = ({ toggleSettings }: Props) => {
 	)
 }
 
-export default UserInfo
+export default UserPanel

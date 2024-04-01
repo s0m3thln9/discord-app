@@ -159,3 +159,24 @@ ul::-webkit-scrollbar-thumb {
 	animation: shake 0.5s;
 	animation-iteration-count: infinite;
 }
+
+.invisible-placeholder::-webkit-input-placeholder {
+    color: #999;
+}
+.invisible-placeholder:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+/* Firefox < 19 */
+.invisible-placeholder:-moz-placeholder {
+    color: #999;
+}
+.invisible-placeholder:focus:-moz-placeholder {
+    color: transparent;
+}
+/* Firefox > 19 */
+.invisible-placeholder::-moz-placeholder {
+    color: #999;
+}
+.invisible-placeholder:focus::-moz-placeholder {
+    color: transparent;
+}

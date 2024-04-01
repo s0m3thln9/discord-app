@@ -33,6 +33,7 @@ interface ITooltipProps {
 	y?: TooltipXYType
 	bg?: TooltipBackgroundType
 	click?: () => void
+	shouldTooltipClose?: boolean
 	animation?: boolean
 	width?: string | 'full'
 	height?: string | 'full'
@@ -48,6 +49,7 @@ const Tooltip: React.FC<ITooltipProps> = ({
 	y,
 	bg,
 	click,
+	shouldTooltipClose = true,
 	animation,
 	width,
 	height,
@@ -79,9 +81,8 @@ const Tooltip: React.FC<ITooltipProps> = ({
 
 	const handleClick = () => {
 		setIsClicked(true)
-		closeTooltip()
+		shouldTooltipClose ? closeTooltip() : null
 		if (click) {
-			// @ts-ignore
 			click(showTooltip, closeTooltip)
 		}
 	}

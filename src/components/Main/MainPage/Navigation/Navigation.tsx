@@ -12,7 +12,7 @@ const Navigation = () => {
 			<ul className={'flex flex-col items-center justify-center pt-3'}>
 				<li
 					className={clsx(
-						'navbar-item group/tooltip group mt-0 hover:bg-[#5865f2]',
+						'navbar-item group mt-0 hover:bg-[#5865f2]',
 						pathname === 'http://localhost:5173/' &&
 							'rounded-2xl bg-[#5865f2] before:h-6 before:translate-x-0 before:bg-white',
 					)}
@@ -30,7 +30,7 @@ const Navigation = () => {
 							{notifications > 0 && (
 								<span
 									className={
-										'border-navigation absolute bottom-[-0.25rem] right-[-0.25rem] flex h-6 w-6 items-center justify-center rounded-full border-[0.25rem] bg-[#f23f43] text-[0.75rem] font-bold text-white'
+										'absolute bottom-[-0.25rem] right-[-0.25rem] flex h-6 w-6 items-center justify-center rounded-full border-[0.25rem] border-navigation bg-[#f23f43] text-[0.75rem] font-bold text-white'
 									}
 								>
 									{notifications}
@@ -40,7 +40,7 @@ const Navigation = () => {
 					</Tooltip>
 				</li>
 				<li className={'separator mt-2 h-0.5 w-8 rounded-full bg-[#2d2f32]'}></li>
-				<li className={'action-btn navbar-item group/tooltip group'}>
+				<li className={'action-btn navbar-item group'}>
 					<Tooltip
 						text={'Add a Server'}
 						className={'h-full w-full justify-center'}
@@ -60,7 +60,7 @@ const Navigation = () => {
 						</Link>
 					</Tooltip>
 				</li>
-				<li className={'action-btn navbar-item group/tooltip group'}>
+				<li className={'action-btn navbar-item group'}>
 					<Tooltip
 						text={'Explore Discoverable Servers'}
 						className={'h-full w-full justify-center'}

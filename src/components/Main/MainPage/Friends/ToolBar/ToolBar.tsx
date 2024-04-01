@@ -45,6 +45,7 @@ const ToolBar = ({ usage, toggleMembersShow, isShowMembers }: Props) => {
 						text={isShowMembers ? 'Hide Member List' : 'Show Member List'}
 						placement={'bottom'}
 						y={'0'}
+						shouldTooltipClose={false}
 					>
 						<Button
 							variant={'icon'}
