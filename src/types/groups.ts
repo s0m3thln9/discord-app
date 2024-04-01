@@ -8,6 +8,7 @@ export type Group = {
 	color: NoImageColors
 	members: number
 	chatId: number
+	ownerId: number
 	createdAt: string
 	updatedAt: string
 }

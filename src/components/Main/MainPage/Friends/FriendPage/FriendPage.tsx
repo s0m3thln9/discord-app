@@ -6,6 +6,8 @@ import { NoImageColors } from '../../../../../types/user.ts'
 import UserImage from '../../../../UI/UserImage/UserImage.tsx'
 import { clsx } from 'clsx'
 import { useState } from 'react'
+import { Crown } from '../../../../../assets/svgs.tsx'
+import Tooltip from '../../../../UI/Tooltip/Tooltip.tsx'
 
 export type HeaderProps = {
 	image: string
@@ -53,7 +55,7 @@ const FriendPage = () => {
 			<Header header={header} toggleMembersShow={toggleMembersShow} isShowMembers={isShowMembers} />
 			<div className={'flex grow'}>
 				<Chat type={type} chat={chat} header={header} user={user} />
-				{isShowMembers && (
+				{isShowMembers && type === 'group' && (
 					<div className={'w-[15rem] bg-sidebar'}>
 						<h4 className={'pl-4 pr-2 pt-6 text-xs font-semibold uppercase text-[#949ba4]'}>
 							members—{chat.participants.length}
@@ -78,9 +80,16 @@ const FriendPage = () => {
 										size={'md'}
 									/>
 									<div className={'ml-3 text-[#949ba4]'}>
-										<p className={'text-base leading-5 group-hover:text-white'}>
-											{participant.displayName}
-										</p>
+										<div className={'flex items-center'}>
+											<p className={'text-base leading-5 group-hover:text-white'}>
+												{participant.displayName}
+											</p>
+											{group?.ownerId === participant.id && (
+												<Tooltip text={'Group Owner'} className={'ml-1'}>
+													<Crown fill={'#f0b132'} className={'h-[0.875rem] w-[0.875rem]'} />
+												</Tooltip>
+											)}
+										</div>
 										<p className={'text-xs leading-4'}>{participant.textStatus}</p>
 									</div>
 								</li>

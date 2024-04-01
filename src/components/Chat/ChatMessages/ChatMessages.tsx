@@ -75,11 +75,21 @@ const ChatMessages = ({ chat, header, type, user }: Props) => {
 					isGroup={type === 'group'}
 				/>
 				<h2 className={'my-2 text-[2rem] font-bold leading-10 text-white'}>{header.displayName}</h2>
-				<h2 className={'text-2xl font-medium leading-[1.875rem] text-white'}>{header.username}</h2>
+				{type !== 'group' && (
+					<h2 className={'text-2xl font-medium leading-[1.875rem] text-white'}>{header.username}</h2>
+				)}
 			</div>
-			<p className={'ml-4 mt-5 text-[1rem] leading-5'}>
-				This is the beginning of your direct message history with <strong>{header.displayName}</strong>
-			</p>
+
+			{type === 'friend' ? (
+				<p className={'ml-4 mt-5 text-[1rem] leading-5'}>
+					This is the beginning of your direct message history with <strong>{header.displayName}</strong>
+				</p>
+			) : (
+				<p className={'ml-4 text-[1rem] leading-5'}>
+					Welcome to the beginning of the <strong>{header.displayName}</strong>
+				</p>
+			)}
+
 			<div className={'pb-4'}>
 				{chat.messages.map((message, i) => {
 					const sender = findSender(message)
