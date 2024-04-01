@@ -1,12 +1,14 @@
 import Tooltip from '../../../../UI/Tooltip/Tooltip.tsx'
 import Button from '../../../../UI/Button/Button.tsx'
-import { Camera, Help, Inbox, NewDMGroup, Pin, RingingPhone } from '../../../../../assets/svgs.tsx'
+import { Camera, Help, Inbox, MemberListIcon, NewDMGroup, Pin, RingingPhone } from '../../../../../assets/svgs.tsx'
 
 type Props = {
 	usage: 'main' | 'friend'
+	toggleMembersShow: () => void
+	isShowMembers: boolean
 }
 
-const ToolBar = ({ usage }: Props) => {
+const ToolBar = ({ usage, toggleMembersShow, isShowMembers }: Props) => {
 	return (
 		<div
 			className={
@@ -15,7 +17,7 @@ const ToolBar = ({ usage }: Props) => {
 		>
 			{usage === 'main' ? (
 				<>
-					<Tooltip text={'New Group DM'} vertical={'bottom'} horizontal={'center'} y={'xs'}>
+					<Tooltip text={'New Group DM'} placement={'bottom'} y={'0'}>
 						<Button variant={'icon'} className={'bg-transparent hover:bg-transparent'}>
 							<NewDMGroup fill={'#b5bac1'} className={'group-hover/iconBtn:fill-[#dbdee1]'} />
 						</Button>
@@ -24,30 +26,46 @@ const ToolBar = ({ usage }: Props) => {
 				</>
 			) : (
 				<>
-					<Tooltip text={'Start voice call'} vertical={'bottom'} horizontal={'center'} y={'xs'}>
+					<Tooltip text={'Start voice call'} placement={'bottom'} y={'0'}>
 						<Button variant={'icon'} className={'bg-transparent hover:bg-transparent'}>
 							<RingingPhone fill={'#b5bac1'} className={'group-hover/iconBtn:fill-[#dbdee1]'} />
 						</Button>
 					</Tooltip>
-					<Tooltip text={'Start voice call'} vertical={'bottom'} horizontal={'center'} y={'xs'}>
+					<Tooltip text={'Start voice call'} placement={'bottom'} y={'0'}>
 						<Button variant={'icon'} className={'bg-transparent hover:bg-transparent'}>
 							<Camera fill={'#b5bac1'} className={'group-hover/iconBtn:fill-[#dbdee1]'} />
 						</Button>
 					</Tooltip>
-					<Tooltip text={'Start voice call'} vertical={'bottom'} horizontal={'center'} y={'xs'}>
+					<Tooltip text={'Start voice call'} placement={'bottom'} y={'0'}>
 						<Button variant={'icon'} className={'bg-transparent hover:bg-transparent'}>
 							<Pin fill={'#b5bac1'} className={'group-hover/iconBtn:fill-[#dbdee1]'} />
+						</Button>
+					</Tooltip>
+					<Tooltip
+						text={isShowMembers ? 'Hide Member List' : 'Show Member List'}
+						placement={'bottom'}
+						y={'0'}
+					>
+						<Button
+							variant={'icon'}
+							className={'bg-transparent hover:bg-transparent'}
+							onClick={toggleMembersShow}
+						>
+							<MemberListIcon
+								fill={isShowMembers ? 'white' : '#b5bac1'}
+								className={'group-hover/iconBtn:fill-[#dbdee1]'}
+							/>
 						</Button>
 					</Tooltip>
 				</>
 			)}
 
-			<Tooltip text={'Inbox'} vertical={'bottom'} horizontal={'center'} y={'xs'} className={'flex'}>
+			<Tooltip text={'Inbox'} placement={'bottom'} y={'0'} className={'flex'}>
 				<Button variant={'icon'} className={'bg-transparent hover:bg-transparent'}>
 					<Inbox fill={'#b5bac1'} className={'group-hover/iconBtn:fill-[#dbdee1]'} />
 				</Button>
 			</Tooltip>
-			<Tooltip text={'Help'} vertical={'bottom'} horizontal={'center'} y={'xs'}>
+			<Tooltip text={'Help'} placement={'bottom'} y={'0'}>
 				<Button variant={'icon'} className={'bg-transparent hover:bg-transparent h-10 w-10'}>
 					<Help fill={'#b5bac1'} className={'group-hover/iconBtn:fill-[#dbdee1]'} />
 				</Button>
