@@ -83,6 +83,7 @@ const Tooltip: React.FC<ITooltipProps> = ({
 		setIsClicked(true)
 		shouldTooltipClose ? closeTooltip() : null
 		if (click) {
+			// @ts-ignore
 			click(showTooltip, closeTooltip)
 		}
 	}

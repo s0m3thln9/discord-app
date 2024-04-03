@@ -29,6 +29,7 @@ const UserImage = ({
 	border,
 	editable,
 	isGroup,
+	hover
 }: Props) => {
 	return (
 		<div className={cn('box-content', userImageVariants({ size, border }), className)}>
@@ -50,16 +51,16 @@ const UserImage = ({
 					)}
 				</div>
 			)}
-			{editable && (
+			{(editable || hover) && (
 				<div
 					className={
-						'absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center rounded-full opacity-0 backdrop-brightness-50 hover:opacity-100'
+						'absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center rounded-full opacity-0 shadow-avatar hover:opacity-100'
 					}
 					onClick={() => {
 						editable(true)
 					}}
 				>
-					<Edit />
+					{editable ? <Edit /> : <p className={'text-[0.625rem] font-bold whitespace-nowrap text-[#fff] text-ellipsis uppercase'}>{hover}</p>}
 				</div>
 			)}
 			{onlineStatus && (
