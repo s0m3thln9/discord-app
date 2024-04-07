@@ -27,7 +27,7 @@ export const Indicator = ({ onlineStatus, color, size }: IndicatorVars) => {
 	return <div className={cn(statusIndicatorVariants({ onlineStatus, color, size }))}></div>
 }
 
-const statusIndicatorVariants = cva('z-10 rounded-full', {
+const statusIndicatorVariants = cva('z-10 rounded-full group-hover:border-hover', {
 	variants: {
 		onlineStatus: {
 			offline:
@@ -47,8 +47,8 @@ const statusIndicatorVariants = cva('z-10 rounded-full', {
 			popup: 'border-[#111214] before:bg-[#111214] group-hover/popup:before:bg-[#232528] group-hover/popup:border-[#232528] group-hover/popup:bg-[#fff]',
 		},
 		size: {
-			sm: 'h-3 w-3 border-[0.125rem] before:w-[0.25rem] before:h-[0.25rem]',
-			md: 'h-4 w-4 border-[0.2rem] before:w-[0.35rem] before:h-[0.35rem]',
+			sm: 'h-3 w-3 border-[0.15rem] before:w-[0.25rem] before:h-[0.25rem]',
+			md: 'h-4 w-4 border-[0.1875rem] before:w-[0.35rem] before:h-[0.35rem]',
 			lg: 'h-7 w-7 border-[0.4rem] before:w-[0.5rem] before:h-[0.5rem]',
 		},
 	},
