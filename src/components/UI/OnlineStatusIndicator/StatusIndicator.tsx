@@ -43,13 +43,13 @@ const statusIndicatorVariants = cva('z-10 rounded-full', {
 			'profile-bg': 'border-profile-bg before:bg-profile-bg',
 			hover: 'border-hover before:bg-hover',
 			choosed: 'border-choosed before:bg-choosed',
-			'option': 'border-[#111214] before:bg-[#111214] group-hover/option:before:bg-[#232528] group-hover/option:border-[#232528] group-hover/option:bg-[#dbdee1]',
-			'popup': 'border-[#111214] before:bg-[#111214] group-hover/popup:before:bg-[#232528] group-hover/popup:border-[#232528] group-hover/popup:bg-[#fff]',
+			option: 'border-[#111214] before:bg-[#111214] group-hover/option:before:bg-[#232528] group-hover/option:border-[#232528] group-hover/option:bg-[#dbdee1]',
+			popup: 'border-[#111214] before:bg-[#111214] group-hover/popup:before:bg-[#232528] group-hover/popup:border-[#232528] group-hover/popup:bg-[#fff]',
 		},
 		size: {
-			sm: 'h-3 w-3 border-[0.125rem] before:w-1 before:h-1',
-			md: 'h-4 w-4 border-[0.2rem] before:w-1.5 before:h-1.5',
-			lg: 'h-7 w-7 border-[0.4rem]',
+			sm: 'h-3 w-3 border-[0.125rem] before:w-[0.25rem] before:h-[0.25rem]',
+			md: 'h-4 w-4 border-[0.2rem] before:w-[0.35rem] before:h-[0.35rem]',
+			lg: 'h-7 w-7 border-[0.4rem] before:w-[0.5rem] before:h-[0.5rem]',
 		},
 	},
 	defaultVariants: {

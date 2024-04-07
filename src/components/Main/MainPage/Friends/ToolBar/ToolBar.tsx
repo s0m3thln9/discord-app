@@ -13,8 +13,8 @@ import {
 
 type Props = {
 	usage: 'main' | 'friend' | 'group'
-	toggleShowSideMenu: () => void
-	isShowSideMenu: boolean
+	toggleShowSideMenu?: () => void
+	isShowSideMenu?: boolean
 }
 
 const ToolBar = ({ usage, toggleShowSideMenu, isShowSideMenu }: Props) => {

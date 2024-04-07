@@ -64,47 +64,52 @@ const ChatMessages = ({ chat, header, type, user }: Props) => {
 	)
 
 	return (
-		<div className={'flex h-[calc(100svh-10rem)] grow flex-col overflow-y-scroll pt-4'}>
-			<div className={'ml-4'}>
-				<UserImage
-					image={header.image}
-					color={header.color}
-					bgColor={'content'}
-					onlineStatus={false}
-					size={'lg'}
-					isGroup={type === 'group'}
-				/>
-				<h2 className={'my-2 text-[2rem] font-bold leading-10 text-white'}>{header.displayName}</h2>
-				{type !== 'group' && (
-					<h2 className={'text-2xl font-medium leading-[1.875rem] text-white'}>{header.username}</h2>
-				)}
-			</div>
-
-			{type === 'friend' ? (
-				<p className={'ml-4 mt-5 text-[1rem] leading-5'}>
-					This is the beginning of your direct message history with <strong>{header.displayName}</strong>
-				</p>
-			) : (
-				<p className={'ml-4 text-[1rem] leading-5'}>
-					Welcome to the beginning of the <strong>{header.displayName}</strong>
-				</p>
-			)}
-
-			<div className={'pb-4'}>
-				{chat.messages.map((message, i) => {
-					const sender = findSender(message)
-					if (!sender || sender === 'requested') return 'No sender found...'
-					return (
-						<Message
-							key={message.id}
-							message={message}
-							previous={i > 0 ? chat.messages[i - 1] : null}
-							senderImage={sender.userImage || ''}
-							senderColor={sender.color}
-							senderDisplayName={sender.displayName}
+		<div className={'h-[calc(100svh-6.25rem)] scroll-mb-0 justify-end overflow-y-scroll pt-4'}>
+			<div className={'flex grow flex-col justify-end'}>
+				<div className={''}>
+					<div className={'ml-4'}>
+						<UserImage
+							image={header.image}
+							color={header.color}
+							bgColor={'content'}
+							onlineStatus={false}
+							size={'lg'}
+							isGroup={type === 'group'}
 						/>
-					)
-				})}
+						<h2 className={'my-2 text-[2rem] font-bold leading-10 text-white'}>{header.displayName}</h2>
+						{type !== 'group' && (
+							<h2 className={'text-2xl font-medium leading-[1.875rem] text-white'}>{header.username}</h2>
+						)}
+					</div>
+
+					{type === 'friend' ? (
+						<p className={'ml-4 mt-5 text-[1rem] leading-5'}>
+							This is the beginning of your direct message history with{' '}
+							<strong>{header.displayName}</strong>
+						</p>
+					) : (
+						<p className={'ml-4 text-[1rem] leading-5'}>
+							Welcome to the beginning of the <strong>{header.displayName}</strong>
+						</p>
+					)}
+
+					<div className={'pb-4'}>
+						{chat.messages.map((message, i) => {
+							const sender = findSender(message)
+							if (!sender || sender === 'requested') return 'No sender found...'
+							return (
+								<Message
+									key={message.id}
+									message={message}
+									previous={i > 0 ? chat.messages[i - 1] : null}
+									senderImage={sender.userImage || ''}
+									senderColor={sender.color}
+									senderDisplayName={sender.displayName}
+								/>
+							)
+						})}
+					</div>
+				</div>
 			</div>
 		</div>
 	)
